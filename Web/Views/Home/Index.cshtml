@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
+}
+
+<!-- Preloader -->
+<div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="~/Content/dist/img/logo naza musical note full azul.png" alt="logo" height="100">
+    <h5 class="mt-5"><b>NAZA</b> Musical Note</h5>
+</div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Presentación</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+
+
+<div class="row">
+    <section class="col-lg-8">
+
+        <div class="jumbotron row">
+            <center class="col-md-4">
+                <img src="~/Content/dist/img/logo naza musical note full azul.png" style="max-width: 200px; height:auto" />
+            </center>
+            <div class="col-md-8 text-justify">
+                <h1 class="text-center"><b style="color: #0069D9">Naza</b> Musical Note</h1>
+                <p class="lead">Tu herramienta para gestionar tus canciones y agendas al alcance de tus manos. No te pierdas de los beneficios que te brindamos con nuestra aplicación en línea.</p>
+                
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <section class="col-lg-4">
+        <!-- Calendar -->
+        <div class="card bg-gradient-success">
+            <div class="card-header border-0">
+
+                <h3 class="card-title">
+                    <i class="far fa-calendar-alt"></i>
+                    Calendario
+                </h3>
+                <!-- tools card -->
+                <div class="card-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                            <a href="#" class="dropdown-item">Ir a agenda</a>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <!-- /. tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body pt-0">
+                <!--The calendar -->
+                <div id="calendar" style="width: 100%"></div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+@section scripts {
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/plugins/moment/moment.min.js"></script>
+    <script src="~/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script>
+            $('#calendar').datetimepicker({
+                format: 'L',
+                inline: true
+            })
+
+
+    </script>
+
+}

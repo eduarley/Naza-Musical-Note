@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Naza Musical Note</title>
+
+
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+
+    @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/adminlte")
+    @Styles.Render("~/Content/sweetalert")
+</head>
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+
+    <div class="wrapper">
+        @Html.Partial("_Navigation")
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </section>
+
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
+    @Scripts.Render("~/bundles/adminlte")
+    @Scripts.Render("~/bundles/sweetalert")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

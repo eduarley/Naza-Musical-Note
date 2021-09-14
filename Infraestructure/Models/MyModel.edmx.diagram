@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22a3e25602e04249889ead11b341d5f9" Name="Diagram1">
+        <EntityTypeShape EntityType="NazaDBModel.Cancion" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.Categoria" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.CorreoEmisor" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.Puesto" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.Rol" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.RolServicio" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NazaDBModel.Usuario_RolServicio" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="NazaDBModel.FK_Puesto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="NazaDBModel.FK_Usuario_RolServicio_Puesto" ManuallyRouted="false" />
+        <AssociationConnector Association="NazaDBModel.FK_Usuario_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="NazaDBModel.FK_RolServicio_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="NazaDBModel.FK_Usuario_RolServicio_RolServicio" ManuallyRouted="false" />
+        <AssociationConnector Association="NazaDBModel.FK_Usuario_RolServicio_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="NazaDBModel.Cancion_RolServicio" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

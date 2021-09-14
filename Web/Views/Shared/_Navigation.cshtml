@@ -1,0 +1,204 @@
+﻿<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
+
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            @Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })
+        </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item dropdown user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
+                <span class="d-none d-md-inline">Nombre Usuario</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <!-- User image -->
+                <li class="user-header bg-primary">
+                    <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+
+                    <p>
+                        Nombre - Rol
+                        <small>Miembro desde 23 de Julio, 2021</small>
+                    </p>
+                </li>
+              
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                    <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                    <a href="#" class="btn btn-default btn-flat float-right">Salir</a>
+                </li>
+            </ul>
+        </li>
+
+
+    </ul>
+</nav>
+<!-- /.navbar -->
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="@Url.Action("Index","Home")" class="brand-link">
+        <img src="~/Content/dist/img/logo nazareno blanco.png" alt="logo" class="brand-image img-circle" style="opacity: .8">
+        <span class="brand-text font-weight-light"><b>NAZA </b>Musical Note</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+       
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-4">
+            <ul class="nav nav-pills nav-sidebar flex-column open" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                <li class="nav-item ">
+                    
+
+                    <a href="#" class="nav-link" id="mantenimientos">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Mantenimientos
+                            <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","RolServicio")" class="nav-link" id="rolServicio">
+                                <i class="far fa-calendar-plus nav-icon"></i>
+                                <p>Rol de Servicio</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-file-audio nav-icon"></i>
+                                <p>Canciones</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-guitar nav-icon"></i>
+                                <p>Puestos de instrumentos</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-header">PROCESOS</li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Calendar","Agenda")" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Gestión Agenda
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-music"></i>
+
+                        <p>
+                            Gestión Canciones
+                        </p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-header">REPORTES</li>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link" id="informes">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>
+                            Lista de informes
+                            <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link pacientes">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Reporte de accesos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Reporte de usuarios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Reporte fechas de servicio</p>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+                <li class="nav-header">SEGURIDAD</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Usuarios
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            Base de datos
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-envelope nav-icon"></i>
+                        <p>Correo electrónico</p>
+                    </a>
+                </li>
+                <li class="nav-header">SUB-PROCESOS</li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-clock"></i>
+                        <p>
+                            Segundo plano
+                        </p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+
+
+@section scripts {
+
+
+
+}

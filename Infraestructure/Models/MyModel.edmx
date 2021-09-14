@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NazaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cancion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Autor" Type="varchar" MaxLength="50" />
+          <Property Name="Genero" Type="varchar" MaxLength="15" />
+          <Property Name="Url_version" Type="varchar(max)" />
+          <Property Name="Tonalidad" Type="varchar" MaxLength="15" />
+          <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancion_RolServicio">
+          <Key>
+            <PropertyRef Name="IdRolServicio" />
+            <PropertyRef Name="IdCancion" />
+          </Key>
+          <Property Name="IdRolServicio" Type="int" Nullable="false" />
+          <Property Name="IdCancion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CorreoEmisor">
+          <Key>
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Puesto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolServicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" />
+          <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido_paterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido_materno" Type="varchar" MaxLength="50" />
+          <Property Name="Clave" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="8" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="Token_recovery" Type="varchar" MaxLength="200" />
+          <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="Primer_ingreso" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario_RolServicio">
+          <Key>
+            <PropertyRef Name="IdRolServicio" />
+            <PropertyRef Name="IdPuesto" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="15" />
+          <Property Name="IdRolServicio" Type="int" Nullable="false" />
+          <Property Name="IdPuesto" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cancion_RolServicio_Cancion">
+          <End Role="Cancion" Type="Self.Cancion" Multiplicity="1" />
+          <End Role="Cancion_RolServicio" Type="Self.Cancion_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cancion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancion_RolServicio">
+              <PropertyRef Name="IdCancion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cancion_RolServicio_RolServicio">
+          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="1" />
+          <End Role="Cancion_RolServicio" Type="Self.Cancion_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolServicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancion_RolServicio">
+              <PropertyRef Name="IdRolServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Puesto_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Puesto">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolServicio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolServicio">
+              <PropertyRef Name="IdUsuario_Propietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_RolServicio_Puesto">
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="1" />
+          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puesto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_RolServicio">
+              <PropertyRef Name="IdPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_RolServicio_RolServicio">
+          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="1" />
+          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolServicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_RolServicio">
+              <PropertyRef Name="IdRolServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_RolServicio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_RolServicio">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NazaDBModelStoreContainer">
+          <EntitySet Name="Cancion" EntityType="Self.Cancion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cancion_RolServicio" EntityType="Self.Cancion_RolServicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CorreoEmisor" EntityType="Self.CorreoEmisor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolServicio" EntityType="Self.RolServicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario_RolServicio" EntityType="Self.Usuario_RolServicio" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cancion_RolServicio_Cancion" Association="Self.FK_Cancion_RolServicio_Cancion">
+            <End Role="Cancion" EntitySet="Cancion" />
+            <End Role="Cancion_RolServicio" EntitySet="Cancion_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cancion_RolServicio_RolServicio" Association="Self.FK_Cancion_RolServicio_RolServicio">
+            <End Role="RolServicio" EntitySet="RolServicio" />
+            <End Role="Cancion_RolServicio" EntitySet="Cancion_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Puesto_Categoria" Association="Self.FK_Puesto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Puesto" EntitySet="Puesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolServicio_Usuario" Association="Self.FK_RolServicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="RolServicio" EntitySet="RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_Puesto" Association="Self.FK_Usuario_RolServicio_Puesto">
+            <End Role="Puesto" EntitySet="Puesto" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_RolServicio" Association="Self.FK_Usuario_RolServicio_RolServicio">
+            <End Role="RolServicio" EntitySet="RolServicio" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_Usuario" Association="Self.FK_Usuario_RolServicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NazaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cancion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Autor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Genero" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Url_version" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Tonalidad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RolServicio" Relationship="Self.Cancion_RolServicio" FromRole="Cancion" ToRole="RolServicio" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Puesto" Relationship="Self.FK_Puesto_Categoria" FromRole="Categoria" ToRole="Puesto" />
+        </EntityType>
+        <EntityType Name="CorreoEmisor">
+          <Key>
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Puesto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_Puesto_Categoria" FromRole="Puesto" ToRole="Categoria" />
+          <NavigationProperty Name="Usuario_RolServicio" Relationship="Self.FK_Usuario_RolServicio_Puesto" FromRole="Puesto" ToRole="Usuario_RolServicio" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="RolServicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario_Propietario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_RolServicio_Usuario" FromRole="RolServicio" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario_RolServicio" Relationship="Self.FK_Usuario_RolServicio_RolServicio" FromRole="RolServicio" ToRole="Usuario_RolServicio" />
+          <NavigationProperty Name="Cancion" Relationship="Self.Cancion_RolServicio" FromRole="RolServicio" ToRole="Cancion" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido_paterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido_materno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Token_recovery" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Primer_ingreso" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="RolServicio" Relationship="Self.FK_RolServicio_Usuario" FromRole="Usuario" ToRole="RolServicio" />
+          <NavigationProperty Name="Usuario_RolServicio" Relationship="Self.FK_Usuario_RolServicio_Usuario" FromRole="Usuario" ToRole="Usuario_RolServicio" />
+        </EntityType>
+        <EntityType Name="Usuario_RolServicio">
+          <Key>
+            <PropertyRef Name="IdRolServicio" />
+            <PropertyRef Name="IdPuesto" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdRolServicio" Type="Int32" Nullable="false" />
+          <Property Name="IdPuesto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Puesto" Relationship="Self.FK_Usuario_RolServicio_Puesto" FromRole="Usuario_RolServicio" ToRole="Puesto" />
+          <NavigationProperty Name="RolServicio" Relationship="Self.FK_Usuario_RolServicio_RolServicio" FromRole="Usuario_RolServicio" ToRole="RolServicio" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_RolServicio_Usuario" FromRole="Usuario_RolServicio" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Puesto_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Puesto">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_RolServicio_Puesto">
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="1" />
+          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puesto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_RolServicio">
+              <PropertyRef Name="IdPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolServicio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolServicio">
+              <PropertyRef Name="IdUsuario_Propietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_RolServicio_RolServicio">
+          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="1" />
+          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolServicio">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_RolServicio">
+              <PropertyRef Name="IdRolServicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_RolServicio_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_RolServicio">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Cancion_RolServicio">
+          <End Role="Cancion" Type="Self.Cancion" Multiplicity="*" />
+          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cancion" EntityType="Self.Cancion" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="CorreoEmisor" EntityType="Self.CorreoEmisor" />
+          <EntitySet Name="Puesto" EntityType="Self.Puesto" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="RolServicio" EntityType="Self.RolServicio" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Usuario_RolServicio" EntityType="Self.Usuario_RolServicio" />
+          <AssociationSet Name="FK_Puesto_Categoria" Association="Self.FK_Puesto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Puesto" EntitySet="Puesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_Puesto" Association="Self.FK_Usuario_RolServicio_Puesto">
+            <End Role="Puesto" EntitySet="Puesto" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolServicio_Usuario" Association="Self.FK_RolServicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="RolServicio" EntitySet="RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_RolServicio" Association="Self.FK_Usuario_RolServicio_RolServicio">
+            <End Role="RolServicio" EntitySet="RolServicio" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_Usuario" Association="Self.FK_Usuario_RolServicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="Cancion_RolServicio" Association="Self.Cancion_RolServicio">
+            <End Role="Cancion" EntitySet="Cancion" />
+            <End Role="RolServicio" EntitySet="RolServicio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NazaDBModelStoreContainer" CdmEntityContainer="MyContext">
+          <EntitySetMapping Name="Cancion">
+            <EntityTypeMapping TypeName="NazaDBModel.Cancion">
+              <MappingFragment StoreEntitySet="Cancion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Url_version" ColumnName="Url_version" />
+                <ScalarProperty Name="Tonalidad" ColumnName="Tonalidad" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="NazaDBModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CorreoEmisor">
+            <EntityTypeMapping TypeName="NazaDBModel.CorreoEmisor">
+              <MappingFragment StoreEntitySet="CorreoEmisor">
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Puesto">
+            <EntityTypeMapping TypeName="NazaDBModel.Puesto">
+              <MappingFragment StoreEntitySet="Puesto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="NazaDBModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolServicio">
+            <EntityTypeMapping TypeName="NazaDBModel.RolServicio">
+              <MappingFragment StoreEntitySet="RolServicio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NazaDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="NazaDBModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido_paterno" ColumnName="Apellido_paterno" />
+                <ScalarProperty Name="Apellido_materno" ColumnName="Apellido_materno" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Token_recovery" ColumnName="Token_recovery" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="Primer_ingreso" ColumnName="Primer_ingreso" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario_RolServicio">
+            <EntityTypeMapping TypeName="NazaDBModel.Usuario_RolServicio">
+              <MappingFragment StoreEntitySet="Usuario_RolServicio">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdRolServicio" ColumnName="IdRolServicio" />
+                <ScalarProperty Name="IdPuesto" ColumnName="IdPuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Cancion_RolServicio" TypeName="NazaDBModel.Cancion_RolServicio" StoreEntitySet="Cancion_RolServicio">
+            <EndProperty Name="Cancion">
+              <ScalarProperty Name="Id" ColumnName="IdCancion" />
+            </EndProperty>
+            <EndProperty Name="RolServicio">
+              <ScalarProperty Name="Id" ColumnName="IdRolServicio" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
