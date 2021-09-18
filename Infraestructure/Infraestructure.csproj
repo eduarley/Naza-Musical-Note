@@ -67,6 +67,7 @@
     <Compile Include="Models\CorreoEmisor.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,11 +102,13 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepositoryAgenda.cs" />
+    <Compile Include="Repository\IRepositoryRolServicio.cs" />
+    <Compile Include="Repository\RepositoryAgenda.cs" />
+    <Compile Include="Repository\RepositoryRolServicio.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <EntityDeploy Include="Models\MyModel.edmx">
