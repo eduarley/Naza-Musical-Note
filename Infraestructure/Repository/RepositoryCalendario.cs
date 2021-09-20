@@ -1,4 +1,5 @@
 ﻿using Infraestructure.Models;
+using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repository
 {
-    public class RepositoryAgenda : IRepositoryAgenda
+    public class RepositoryCalendario : IRepositoryCalendario
     {
         public List<RolServicio> GetEvents()
         {
@@ -25,7 +26,7 @@ namespace Infraestructure.Repository
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
-                Web.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
 
@@ -101,7 +102,7 @@ namespace Infraestructure.Repository
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
-                Web.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
         }

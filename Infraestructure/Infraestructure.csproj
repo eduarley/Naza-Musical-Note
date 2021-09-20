@@ -102,10 +102,18 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IRepositoryAgenda.cs" />
+    <Compile Include="Repository\IRepositoryCalendario.cs" />
+    <Compile Include="Repository\IRepositoryCancion.cs" />
+    <Compile Include="Repository\IRepositoryCategoria.cs" />
+    <Compile Include="Repository\IRepositoryPuesto.cs" />
     <Compile Include="Repository\IRepositoryRolServicio.cs" />
-    <Compile Include="Repository\RepositoryAgenda.cs" />
+    <Compile Include="Repository\IRepositoryUsuario.cs" />
+    <Compile Include="Repository\RepositoryCalendario.cs" />
+    <Compile Include="Repository\RepositoryCancion.cs" />
+    <Compile Include="Repository\RepositoryCategoria.cs" />
+    <Compile Include="Repository\RepositoryPuesto.cs" />
     <Compile Include="Repository\RepositoryRolServicio.cs" />
+    <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup />

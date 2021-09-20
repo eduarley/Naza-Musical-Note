@@ -34,7 +34,10 @@ namespace Infraestructure.Models
         public System.DateTime Fecha_creacion { get; set; }
         public bool Primer_ingreso { get; set; }
         public bool Estado { get; set; }
-    
+        public string NombreCompleto
+        {
+            get { return Nombre + " " + Apellido_paterno; }
+        }
         public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RolServicio> RolServicio { get; set; }

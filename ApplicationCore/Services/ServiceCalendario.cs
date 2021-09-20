@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public class ServiceAgenda : IServiceAgenda
+    public class ServiceCalendario : IServiceCalendario
     {
 
         public List<Usuario_RolServicio> Generar_Lista_Usuario_RolServicio(List<int> IdPuestos, List<string> IdUsuarios)
@@ -28,31 +28,31 @@ namespace ApplicationCore.Services
         }
         public bool DeleteEvent(int id)
         {
-            IRepositoryAgenda repository = new RepositoryAgenda();
+            IRepositoryCalendario repository = new RepositoryCalendario();
             return repository.DeleteEvent(id);
         }
 
         public List<RolServicio> GetEvents()
         {
-            IRepositoryAgenda repository = new RepositoryAgenda();
+            IRepositoryCalendario repository = new RepositoryCalendario();
             return repository.GetEvents();
         }
 
         public int GetPrimerIDCategoria()
         {
-            IRepositoryAgenda repository = new RepositoryAgenda();
+            IRepositoryCalendario repository = new RepositoryCalendario();
             return repository.GetPrimerIDCategoria();
         }
 
         public List<Puesto> GetPuestosPorCategoria(int id)
         {
-            IRepositoryAgenda repository = new RepositoryAgenda();
+            IRepositoryCalendario repository = new RepositoryCalendario();
             return repository.GetPuestosPorCategoria(id);
         }
 
         public RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados)
         {
-            IRepositoryAgenda repository = new RepositoryAgenda();
+            IRepositoryCalendario repository = new RepositoryCalendario();
             return repository.SaveEvent(rs, puestosAsignados);
         }
     }

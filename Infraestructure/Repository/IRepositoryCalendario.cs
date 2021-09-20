@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repository
 {
-    public interface IRepositoryAgenda
+    public interface IRepositoryCalendario
     {
         List<RolServicio> GetEvents();
         RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados);

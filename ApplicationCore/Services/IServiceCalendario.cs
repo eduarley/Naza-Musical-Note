@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IServiceAgenda
+    public interface IServiceCalendario
     {
         List<Usuario_RolServicio> Generar_Lista_Usuario_RolServicio(List<int> IdPuestos, List<string> IdUsuarios);
         List<RolServicio> GetEvents();
