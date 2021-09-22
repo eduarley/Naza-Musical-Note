@@ -353,14 +353,26 @@
             $('input').each(function () {
                 $(this).removeClass('is-invalid');
             })
-            $('#txtSubject').removeClass('is-invalid');
+            $('#txtDescription').removeClass('is-invalid');
             if ($('#txtSubject').val().trim() == "") {
-                mensaje('warning', 'Debe ingresar un tema', true);
+                mensaje('warning', 'Debe ingresar un título', true);
+                $('#txtSubject').addClass('is-invalid');
+                $('#txtSubject').focus();
+                return;
+            }
+            if ($('#txtSubject').val().length > 200) {
+                mensaje('warning', 'El título debe ser menor a 200 caracteres', true);
                 $('#txtSubject').addClass('is-invalid');
                 $('#txtSubject').focus();
                 return;
             }
 
+            if ($('#txtDescription').val().length > 600) {
+                mensaje('warning', 'La descripción debe ser menor a 600 caracteres', true);
+                $('#txtDescription').addClass('is-invalid');
+                $('#txtDescription').focus();
+                return;
+            }
             if ($('#canciones').select2("val") == "") {
                 mensaje('warning', 'Debe ingresar al menos una canción', true);
                 $('#canciones').focus();

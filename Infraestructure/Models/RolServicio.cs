@@ -33,7 +33,7 @@ namespace Infraestructure.Models
         public string Color { get; set; }
         public bool IsFullDay { get; set; }
         public bool Estado { get; set; }
-    
+
         public String HoraInicioSt
         {
             get { return FechaInicio.ToString("hh:mm tt"); }

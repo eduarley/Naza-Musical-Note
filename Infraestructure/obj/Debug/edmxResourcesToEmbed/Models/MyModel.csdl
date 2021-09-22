@@ -54,8 +54,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdUsuario_Propietario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
     <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FechaFin" Type="DateTime" Precision="3" />
     <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />

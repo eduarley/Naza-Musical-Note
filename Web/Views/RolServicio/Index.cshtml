@@ -55,11 +55,9 @@
                                         @Html.DisplayNameFor(model => model.Titulo)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                            @Html.DisplayNameFor(model => model.Descripcion)
                                     </th>
-                                    <th>
-                                        @Html.DisplayName("Propietario")
-                                    </th>
+                                   
                                     <th class="notexport" style="text-align:center"></th>
                                 </tr>
                             </thead>
@@ -76,14 +74,17 @@
                                     </td>
                                     
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Titulo)
+                                        <div style="max-height: 100px; overflow: hidden;">
+                                            @Html.DisplayFor(modelItem => item.Titulo)
+                                        </div>
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    <td class="text-justify">
+                                        <div style="max-height: 100px; overflow: hidden;">
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </div>
+                                        
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Usuario.NombreCompleto)
-                                    </td>
+                                    
                                     <td class="text-center ">
                                         <ul style="display:flex; list-style:none">
                                             <li>
@@ -253,7 +254,12 @@
                 ],
 
                 "responsive": true, "lengthChange": false, "autoWidth": false,
-
+                //aqui se ajusta la anchura de las columnas con el indice indicado en el target
+                'columnDefs': [
+                    { 'width': '100px', 'targets': 1 },
+                    { 'width': '500px', 'targets': 2 }
+                ],
+                "order": [[0, "desc"]] //orden de fechas descendiente
 
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 

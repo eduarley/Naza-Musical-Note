@@ -13,16 +13,21 @@ namespace Infraestructure.Models
         [Display(Name = "Propietario ID")]
         public string IdUsuario_Propietario { get; set; }
         [Display(Name = "Título")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "Título debe ser menor a 200 caracteres")]
         public string Titulo { get; set; }
         [Display(Name = "Descripción")]
+        [StringLength(600, MinimumLength = 0, ErrorMessage = "Descripción debe ser menor a 600 caracteres")]
         [DataType(DataType.MultilineText)]
         public string Descripcion { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida")]
         [Display(Name = "Fecha de inicio")]
         public System.DateTime FechaInicio { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida")]
         [Display(Name = "Fecha de cierre")]
         public Nullable<System.DateTime> FechaFin { get; set; }
         [Display(Name = "Fecha de creación")]
@@ -30,6 +35,7 @@ namespace Infraestructure.Models
         public string Color { get; set; }
         public bool IsFullDay { get; set; }
         public bool Estado { get; set; }
+
         [Display(Name = "Propietario")]
         public virtual Usuario Usuario { get; set; }
 

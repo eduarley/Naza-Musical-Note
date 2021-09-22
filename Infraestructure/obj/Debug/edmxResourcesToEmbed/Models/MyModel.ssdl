@@ -57,8 +57,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="Titulo" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="600" />
     <Property Name="FechaInicio" Type="datetime" Nullable="false" />
     <Property Name="FechaFin" Type="datetime" />
     <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
