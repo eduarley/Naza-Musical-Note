@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infraestructure.Repository
+namespace ApplicationCore.Services
 {
-    public interface IRepositoryRolServicio
+    public interface IServiceRolServicio
     {
         List<RolServicio> GetRolServicios();
         RolServicio GetRolServicioPorID(int id);
-        
+
     }
 }

@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolServicioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2166,6 +2167,10 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Calendario\Index.cshtml" />
+    <Content Include="Views\RolServicio\Index.cshtml" />
+    <Content Include="Views\RolServicio\Create.cshtml" />
+    <Content Include="Views\RolServicio\Details.cshtml" />
+    <Content Include="Views\RolServicio\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

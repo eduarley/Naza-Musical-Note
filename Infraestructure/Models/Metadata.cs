@@ -33,6 +33,14 @@ namespace Infraestructure.Models
         [Display(Name = "Propietario")]
         public virtual Usuario Usuario { get; set; }
 
+        [Display(Name = "Hora inicial")]
+        public String HoraInicioSt { get; }
+
+        [Display(Name = "Hora final")]
+        public String HoraFinSt { get; }
+
+        [Display(Name = "Fecha")]
+        public String FechaSt { get; }
 
         [Display(Name = "Puestos")]
         public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }

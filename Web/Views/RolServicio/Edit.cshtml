@@ -1,0 +1,609 @@
+﻿@model Infraestructure.Models.RolServicio
+@{
+    ViewBag.Title = "Editar";
+    List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
+
+    List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos;
+
+}
+@section Styles{
+    <link rel="stylesheet" href="~/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/Content/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/Content/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="~/Content/plugins/bs-stepper/css/bs-stepper.min.css" />
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","RolServicio")">Roles de servicio</a></li>
+                    <li class="breadcrumb-item active">Editar</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+<div class="card card-default mt-3">
+    <div class="card-body p-3">
+        <div class="bs-stepper">
+            <div class="bs-stepper-header modal-header" style="border-bottom:hidden" role="tablist" hidden>
+
+                <!-- your steps here -->
+                <div class="step" data-target="#logins-part">
+                    <button type="button"
+                            class="step-trigger"
+                            role="tab"
+                            aria-controls="logins-part"
+                            id="logins-part-trigger"
+                            disabled>
+                        <span class="bs-stepper-circle"><i class="fa fa-info"></i></span>
+                        <span class="bs-stepper-label">Información</span>
+                    </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#information-part">
+                    <button type="button"
+                            class="step-trigger"
+                            role="tab"
+                            aria-controls="information-part"
+                            onclick="siguiente()"
+                            id="information-part-trigger"
+                            disabled>
+                        <span class="bs-stepper-circle"><i class="fa fa-users"></i></span>
+                        <span class="bs-stepper-label">Músicos</span>
+                    </button>
+                </div>
+            </div>
+            <form id="formularioSave" class="bs-stepper-content">
+                <!-- your steps content here -->
+                <div id="logins-part"
+                     class="content fade"
+                     role="tabpanel"
+                     aria-labelledby="logins-part-trigger">
+
+                    <div class="col-md-12 ">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="hidden" id="hdEventID" value="0" />
+                                        <div class="form-group">
+                                            <label>Título</label>
+                                            <input type="text" id="txtSubject" class="form-control" name="titulo" />
+                                            <!--
+                                                <p id="errorTitulo" hidden class="text-danger">Debe ingresar el título.</p>
+                                            -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- Date -->
+                                        <div class="form-group">
+                                            <label>Fecha:</label>
+                                            <div class="input-group date" id="fecha" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#fecha" id="txtStart" />
+                                                <div class="input-group-append" data-target="#fecha" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+
+                                    <!-- HORA INICIO -->
+                                    <div class="bootstrap-timepicker col-md-6">
+                                        <div class="form-group">
+                                            <label>Hora inicio:</label>
+
+                                            <div class="input-group date" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#horainicio" id="horainicio" />
+                                                <div class="input-group-append" data-target="#horainicio" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                </div>
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <!-- /.form group -->
+                                    </div>
+                                    <!-- HORA FIN -->
+                                    <div class="bootstrap-timepicker col-md-6">
+                                        <div class="form-group">
+                                            <label>Hora fin:</label>
+
+                                            <div class="input-group date" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#horafin" id="horafin" />
+                                                <div class="input-group-append" data-target="#horafin" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                                </div>
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+                                        <!-- /.form group -->
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Canciones</label>
+
+                                            @if (ViewBag.Canciones != null)
+                                            {
+                                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" })
+                                            }
+                                            else
+                                            {
+                                                <br />
+                                                <span class="right badge badge-danger">Aún no hay canciones.</span>
+                                            }
+                                            <br />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer justify-content-end">
+                        <button type="button" class="btn btn-primary"
+                                onclick="siguiente()">
+                            Siguiente
+                        </button>
+                    </div>
+
+                </div>
+                <div id="information-part"
+                     class="content"
+                     role="tabpanel"
+                     aria-labelledby="information-part-trigger">
+
+                    <div class="col-md-12">
+                        <div class="row">
+
+
+
+                            <div class="col-12">
+                                <!-- Custom Tabs -->
+
+
+                                <div class=" d-flex p-0">
+                                    <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
+                                        @if (categorias != null)
+                                        {
+                                            foreach (var cat in categorias)
+                                            {
+
+                                                <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <span class="right badge badge-danger">Aún no hay categorías.</span>
+                                            </li>
+                                        }
+
+
+                                    </ul>
+                                </div>
+
+
+
+                                <ul class="tab-content" style="height: 13em; overflow-y:scroll">
+
+
+                                    @foreach (var item in puestos)
+                                    {
+                                        var idP = puestos;
+                                        <li id='puesto_@item.IdCategoria' hidden>
+                                            <label>@item.Descripcion</label>
+                                            @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
+                                            <input id="hiddenID" type="hidden" value="@item.Id" />
+                                            <br />
+                                        </li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-primary"
+                                onclick="stepper.previous()">
+                            Anterior
+                        </button>
+                        <button type="button" class="btn btn-success" id="btnSave">
+                            Guardar
+                        </button>
+
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+    <!-- JQuery UI -->
+    <script src="~/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/Content/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Moment -->
+    <script src="~/Content/plugins/moment/moment.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="~/Content/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+
+
+
+
+    <!-- AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA -->
+    <script>
+
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#rolServicio").addClass('active');
+
+        });
+
+
+    </script>
+
+
+    <!-- INICIALIZACION -->
+    <script>
+
+        $(function () {
+            //Timepicker
+            $('#horainicio').datetimepicker({
+                format: 'LT',
+            })
+            $('#horafin').datetimepicker({
+                format: 'LT'
+            })
+
+            //Date picker
+            $('#fecha').datetimepicker({
+                format: 'DD/MM/YYYY',
+            });
+
+            $('.canciones').select2({
+                multiple: true,
+                placeholder: 'Selecciona una o varias canciones...'
+            })
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+        });
+    </script>
+
+
+
+
+    <!-- BS-STEPPER PARA LAS PESTAÑAS -->
+    <script>
+        // BS-Stepper Init
+        document.addEventListener("DOMContentLoaded", function () {
+
+            window.stepper = new Stepper(document.querySelector(".bs-stepper"), {
+                linear: false,
+                animation: true,
+            });
+        });
+
+        //HACE LAS VALIDACIONES Y MUESTRA EL SIGUIENTE TAB
+        function siguiente() {
+
+            //VALIDACION/
+            $('input').each(function () {
+                $(this).removeClass('is-invalid');
+            })
+            $('#txtSubject').removeClass('is-invalid');
+            if ($('#txtSubject').val().trim() == "") {
+                mensaje('warning', 'Debe ingresar un tema', true);
+                $('#txtSubject').addClass('is-invalid');
+                $('#txtSubject').focus();
+                return;
+            }
+
+            if ($('#canciones').select2("val") == "") {
+                mensaje('warning', 'Debe ingresar al menos una canción', true);
+                $('#canciones').focus();
+                return;
+            }
+
+            if ($('#txtStart').val().trim() == "") {
+                mensaje('warning', 'Debe seleccionar una fecha', true);
+                $('#txtStart').addClass('is-invalid');
+                $('#txtStart').focus();
+                return;
+            }
+
+            if ($('#horafin').val().trim() == "") {
+                mensaje('warning', 'Debe seleccionar hora final', true);
+                $('#horafin').addClass('is-invalid');
+                $('#horafin').focus();
+                return;
+            }
+
+            if ($('#horainicio').val().trim() == "") {
+                mensaje('warning', 'Debe seleccionar hora de inicio', true);
+                $('#horainicio').addClass('is-invalid');
+                $('#horainicio').focus();
+                return;
+            }
+            else {
+                var startHour = moment($('#horainicio').val(), "HH:mm A").toDate();
+                var endHour = moment($('#horafin').val(), "HH:mm A").toDate();
+
+                if (endHour <= startHour) {
+                    mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
+                    $('#horafin').addClass('is-invalid');
+                    $('#horafin').focus();
+                    return;
+                }
+            }
+            //FIN VALIDACION
+
+            stepper.next(); //MUESTRA EL SIGUIENTE TAB
+            $('#nav-puestos li a').each(function () { //PARA QUE NO HAYAN 2 'LI' ACTIVOS
+                $(this).removeClass("active");
+            });
+
+            $('#nav-puestos li a').eq(0).addClass('active');
+
+        }
+
+
+        //PARA MOSTRAR LOS PUESTOS LA PRIMERA VEZ AUTOMATICAMENTE
+        window.onload = function () {
+            $.ajax({
+                type: "GET",
+                url: "/Calendario/GetPrimeraCategoria",
+                success: function (data) {
+
+                    mostrarPuestos(data);
+
+                }
+            });
+        }
+
+
+
+
+        //MUESTRA LOS PUESTOS AL HACER CLICK A CADA PESTAÑA
+        function mostrarPuestos(id) {
+            $.ajax({
+                type: "GET",
+                url: "/Calendario/GetPuestosPorCategoria",
+                dataType: "json",
+                data:
+                    { id: id },
+                success: function (data) {
+                    $(".tab-content li").each(function () {
+                        if ($(this).attr('id') == "puesto_" + id) {
+                            $(this).removeAttr('hidden');
+                        } else {
+                            $(this).attr('hidden', 'hidden');
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+
+
+    <!--  -->
+    <script>
+
+
+        function Cargar() {
+            var id = '@Model.Id';
+            $.ajax({
+                type: "GET",
+                url: "/RolServicio/CargarRolServicio",
+                dataType: "json",
+                data:
+                    { id: id },
+                success: function (selectedEvent) {
+                    debugger;
+                    $('#hdEventID').val(selectedEvent.Id);
+                    $('#txtSubject').val(selectedEvent.Titulo);
+                    var fecha = moment(selectedEvent.FechaInicio).format('DD/MM/YYYY');
+                    var horaInicial = moment(selectedEvent.FechaInicio).format('hh:mm A');
+                    var horaFinal = moment(selectedEvent.FechaFin).format('hh:mm A');
+                    $('#txtStart').val(fecha);
+                    $('#horainicio').val(horaInicial);
+                    $('#horafin').val(horaFinal);
+                    $('#txtDescription').val(selectedEvent.Descripcion);
+
+                    stepper.previous();
+
+                    //cargar las canciones del evento
+                    $("#canciones").each(function () {
+                        $('#canciones').val($.map(selectedEvent.Cancion, function (data) {
+                            return data.Id;
+                        })).trigger("change");
+
+                    });
+                    //cargar los puestos seleccionados del puesto
+                    for (x of selectedEvent.Usuario_RolServicio) {
+                        $('.tab-content li > select').each(function (i, item) {
+                            //IMPORTANTE AGREGAR UN ATRIBUTO PUESTO AL SELECT CON RAZOR
+                            if ($(this).attr('puesto') == x.IdPuesto) {
+                                $(this).val(x.IdUsuario);
+                            }
+                        });
+                    }
+                },
+                error: function () {
+
+                }
+            });
+
+
+
+
+            
+
+
+        }
+
+
+
+        //OBTIENE LOS EVENTOS
+        $(document).ready(function () {
+
+
+            
+           
+            Cargar();
+            
+
+
+
+            $('#btnSave').click(function () {
+
+                //aqui se agregan los elementos seleccionados de los dropdown a las listas correspondientes
+                var listausuarios = [];
+                var listapuestos = [];
+                $(".tab-content li #hiddenID").each(function (i, item) {
+
+                    listapuestos.splice(i, 1, $(this).val());
+
+                });
+
+                $('.puestoId').each(function (i) {
+
+                    listausuarios.splice(i, 1, $(this).val());
+                });
+
+
+                var data = {
+                    Id: $('#hdEventID').val(),
+                    Titulo: $('#txtSubject').val().trim(),
+                    FechaInicio: $('#txtStart').val().trim(),
+                    FechaFin: $('#txtStart').val().trim(),
+                    Descripcion: $('#txtDescription').val(),
+                    ThColoremeColor: $('#ddThemeColor').val(),
+                    IsFullDay: $('#chkIsFullDay').is(':checked'),
+                    Cancion: $('#canciones').select2("val"),
+                    HoraInicio: $('#horainicio').val(),
+                    HoraFin: $('#horafin').val(),
+                    IdPuestos: listapuestos,
+                    IdUsuarios: listausuarios,
+
+                }
+                
+                SaveEvent(data);
+                //llama la funcion para enviar la data al servidor
+            })
+
+
+
+            function SaveEvent(data) {
+                $.ajax({
+                    type: "POST",
+                    url: '/RolServicio/Save',
+
+                    data: data,
+                    success: function (data) {
+                        window.location.href = "../Index";
+                    },
+
+                    error: function (xhr, status, error) {
+                        window.location.href = "../Index";
+                    }
+                })
+            }
+        })
+
+
+        function mensaje(tipo, texto, toast) {
+
+            if (toast) {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                });
+            } else {
+                var Toast = Swal.mixin({
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+            }
+
+
+            Toast.fire({
+                icon: tipo,
+                title: texto
+            })
+        }
+
+
+    </script>
+
+}

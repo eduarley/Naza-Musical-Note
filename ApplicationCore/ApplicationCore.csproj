@@ -46,11 +46,13 @@
     <Compile Include="Services\IServiceCancion.cs" />
     <Compile Include="Services\IServiceCategoria.cs" />
     <Compile Include="Services\IServicePuesto.cs" />
+    <Compile Include="Services\IServiceRolServicio.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServiceCalendario.cs" />
     <Compile Include="Services\ServiceCancion.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
     <Compile Include="Services\ServicePuesto.cs" />
+    <Compile Include="Services\ServiceRolServicio.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
   </ItemGroup>
   <ItemGroup>

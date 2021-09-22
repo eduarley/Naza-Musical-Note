@@ -463,6 +463,7 @@
                 }
             });
         }
+
     </script>
 
 
@@ -547,6 +548,7 @@
                         else
                             $description.append($('<p/>').html('<b>Descripción:</b> Sin descripción'));
                         $description.append($('<p/>').html('<b>Canciones:</b>' + calEvent.canciones.map(function (data) { return data.Nombre })));
+                        $description.append('<a href='+"../RolServicio/Details/"+calEvent.eventID+'>Más detalles</a>');
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
@@ -623,7 +625,7 @@
 
 
             function openAddEditForm() {
-                debugger;
+                //debugger;
                 if (selectedEvent != null) {
                     $('#hdEventID').val(selectedEvent.eventID);
                     $('#txtSubject').val(selectedEvent.title);

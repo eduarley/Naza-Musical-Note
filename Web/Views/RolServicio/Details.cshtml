@@ -1,0 +1,156 @@
+﻿@model Infraestructure.Models.RolServicio
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","RolServicio")">Roles de servicio</a></li>
+                    <li class="breadcrumb-item active">Detalles</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@Html.DisplayNameFor(model => model.Titulo)</h3>
+            <br />
+            <h3> @Html.DisplayFor(model => model.Titulo)</h3>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.FechaSt)</span>
+                                    <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.FechaSt)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.HoraInicioSt)</span>
+                                    <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.HoraInicioSt)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-center text-muted">@Html.DisplayNameFor(model => model.HoraFinSt)</span>
+                                    <span class="info-box-number text-center text-muted mb-0">@Html.DisplayFor(model => model.HoraFinSt)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="post" style="height: 200px; overflow-y: scroll">
+                                <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Usuario_RolServicio)</h3>
+                                @foreach (var item in Model.Usuario_RolServicio)
+                                {
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            @if (item.Usuario != null)
+                                            {
+                                                <p>@item.Puesto.Descripcion : <b>@item.Usuario.NombreCompleto</b></p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.Puesto.Descripcion : <span class="right badge badge-danger">Sin asignar</span></p>
+
+                                            }
+
+                                        </li>
+                                    </ul>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="post" style="height: 200px; overflow-y: scroll">
+                                <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Cancion)</h3>
+                                @foreach (var item in Model.Cancion)
+                                {
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <p><b>@item.Nombre</b></p>
+                                        </li>
+                                    </ul>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                    <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Descripcion)</h3>
+                    <p class="text-muted"> @Html.DisplayFor(model => model.Descripcion)</p>
+                    <br>
+                    <div class="text-muted">
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Fecha_creacion)
+                            <b class="d-block">@Html.DisplayFor(model => model.Fecha_creacion)</b>
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Usuario)
+                            <b class="d-block">@Html.DisplayFor(model => model.Usuario.NombreCompleto)</b>
+                        </p>
+
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Estado)
+                            @if (Model.Estado)
+                            {
+                                <b class="d-block">Activo</b>
+                            }
+                            else
+                            {
+                                <b class="d-block">Inactivo</b>
+                            }
+
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = Model.Id })">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

@@ -34,6 +34,19 @@ namespace Infraestructure.Models
         public bool IsFullDay { get; set; }
         public bool Estado { get; set; }
     
+        public String HoraInicioSt
+        {
+            get { return FechaInicio.ToString("hh:mm tt"); }
+        }
+        public String HoraFinSt
+        {
+            get { return FechaFin?.ToString("hh:mm tt"); }
+        }
+        public String FechaSt
+        {
+            get { return FechaInicio.ToString("dd/MM/yyyy"); }
+        }
+
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
