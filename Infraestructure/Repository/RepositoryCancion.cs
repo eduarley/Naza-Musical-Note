@@ -32,7 +32,27 @@ namespace Infraestructure.Repository
             return canciones;
         }
 
-        public List<Cancion> GetListaCancionesPorID(int [] cancionesID)
+        public List<Cancion> GetCanciones()
+        {
+            List<Cancion> canciones = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    canciones = ctx.Cancion.ToList();
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+            return canciones;
+        }
+
+        public List<Cancion> GetListaCancionesByID(int[] cancionesID)
         {
             List<Cancion> canciones = new List<Cancion>();
             try
@@ -45,7 +65,7 @@ namespace Infraestructure.Repository
                         Cancion c = ctx.Cancion.Where(p => p.Id == id).FirstOrDefault();
                         canciones.Add(c);
                     }
-                    
+
                 }
             }
             catch (DbUpdateException dbEx)
@@ -56,6 +76,61 @@ namespace Infraestructure.Repository
             }
 
             return canciones;
+        }
+
+        public Cancion GetCancionByID(int id)
+        {
+            Cancion oCancion = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oCancion = ctx.Cancion.
+                        Where(p => p.Id == id)
+                        .FirstOrDefault<Cancion>();
+                }
+
+                return oCancion;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
+
+        public Cancion Save(Cancion cancion)
+        {
+            Cancion oCancion = null;
+            int retorno = 0;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oCancion = GetCancionByID(cancion.Id);
+                    if (cancion == null)
+                        ctx.Entry(cancion).State = System.Data.Entity.EntityState.Modified;
+                    else
+                        ctx.Cancion.Add(cancion);
+
+
+                    retorno = ctx.SaveChanges();
+                }
+
+
+                if (retorno >= 0)
+                    oCancion = GetCancionByID(cancion.Id);
+
+                return oCancion;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -17,7 +17,22 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             IServiceRolServicio serviceRolServicio = new ServiceRolServicio();
-            return View(serviceRolServicio.GetRolServicios());
+            try
+            {
+                return View(serviceRolServicio.GetRolServicios());
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+            }
+            return View();
+
         }
 
 

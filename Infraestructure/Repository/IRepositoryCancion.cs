@@ -10,6 +10,8 @@ namespace Infraestructure.Repository
     public interface IRepositoryCancion
     {
         List<Cancion> GetCancionesActivas();
-        List<Cancion> GetListaCancionesPorID(int[] cancionesID);
+        List<Cancion> GetCanciones();
+        List<Cancion> GetListaCancionesByID(int[] cancionesID);
+        Cancion Save(Cancion cancion);
     }
 }

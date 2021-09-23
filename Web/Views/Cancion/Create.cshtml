@@ -1,0 +1,130 @@
+﻿@model Infraestructure.Models.Cancion
+
+@{
+    ViewBag.Title = "Nueva Canción";
+}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Cancion")">Canciones</a></li>
+                    <li class="breadcrumb-item active">Nuevo</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+@using (Html.BeginForm("Save", "Cancion",  FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card card-default mt-3">
+        <div class="card-body p-3 col-md-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Autor, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Tonalidad, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Tonalidad, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Tonalidad, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+
+     
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @*
+                            <div class="col-md-10">
+                            <div class="checkbox">
+                                <select class="form-control col-md-5" name="estado">
+                                    <option value="1">Activo</option>
+                                    <option value="0">Inactivo</option>
+                                </select>
+                            </div>
+                        </div>
+                        *@
+                        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.Estado, new SelectList(ViewBag.Estado, "Valor", "Descripcion"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Url_version, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Url_version, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#menucancion").addClass('active');
+
+        });
+
+    </script>
+}

@@ -15,10 +15,21 @@ namespace ApplicationCore.Services
             IRepositoryCancion repository = new RepositoryCancion();
             return repository.GetCancionesActivas();
         }
+        public List<Cancion> GetCanciones()
+        {
+            IRepositoryCancion repository = new RepositoryCancion();
+            return repository.GetCanciones();
+        }
         public List<Cancion> GetListaCancionesPorID(int[] cancionesID)
         {
             IRepositoryCancion repository = new RepositoryCancion();
-            return repository.GetListaCancionesPorID(cancionesID);
+            return repository.GetListaCancionesByID(cancionesID);
+        }
+
+        public Cancion Save(Cancion cancion)
+        {
+            IRepositoryCancion repository = new RepositoryCancion();
+            return repository.Save(cancion);
         }
     }
 }

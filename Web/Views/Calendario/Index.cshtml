@@ -557,10 +557,10 @@
                         $description.append($('<p/>').html('<b>Finaliza:</b>    ' + calEvent.end.format("DD MMMM YYYY, HH:mm a")));
 
                         if (calEvent.description != null)
-                            $description.append($('<p/ class="text-justify" style="height: 100px; overflow-y: scroll">').html('<b>Descripción:</b>' + calEvent.description));
+                            $description.append($('<p/ class="text-justify" style="height: 100px; overflow-y: scroll">').html('<b>Descripción:  </b>' + calEvent.description));
                         else
-                            $description.append($('<p/>').html('<b>Descripción:</b> Sin descripción'));
-                        $description.append($('<p/>').html('<b>Canciones:</b>' + calEvent.canciones.map(function (data) { return data.Nombre })));
+                            $description.append($('<p/>').html('<b>Descripción: </b> Sin descripción'));
+                        $description.append($('<p/>').html('<b>Canciones:   </b>' + calEvent.canciones.map(function (data) { return data.Nombre })));
                         $description.append('<a href='+"../RolServicio/Details/"+calEvent.eventID+'>Más detalles</a>');
                         $('#myModal #pDetails').empty().html($description);
 

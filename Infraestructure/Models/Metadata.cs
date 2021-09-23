@@ -53,4 +53,18 @@ namespace Infraestructure.Models
         [Display(Name = "Canciones")]
         public virtual ICollection<Cancion> Cancion { get; set; }
     }
+
+
+
+
+
+
+    internal partial class CancionMetadata
+    {
+        [DataType(DataType.Date)]
+        public System.DateTime Fecha_creacion { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
+        public string Nombre { get; set; }
+    }
 }

@@ -10,6 +10,8 @@ namespace ApplicationCore.Services
     public interface IServiceCancion
     {
         List<Cancion> GetCancionesActivas();
+        List<Cancion> GetCanciones();
         List<Cancion> GetListaCancionesPorID(int[] cancionesID);
+        Cancion Save(Cancion cancion);
     }
 }
