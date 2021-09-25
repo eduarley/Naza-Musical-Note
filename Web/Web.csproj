@@ -2179,6 +2179,7 @@
     <Content Include="Views\Borrar\Details.cshtml" />
     <Content Include="Views\Borrar\Edit.cshtml" />
     <Content Include="Views\Borrar\Index.cshtml" />
+    <Content Include="Views\Cancion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -67,7 +67,6 @@
     <Compile Include="Models\CorreoEmisor.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MyModel.Context.cs">
       <AutoGen>True</AutoGen>

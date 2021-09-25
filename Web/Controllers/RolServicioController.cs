@@ -268,7 +268,7 @@ namespace Web.Controllers
                 DateTime end = new DateTime(rs.FechaInicio.Year, rs.FechaInicio.Month, rs.FechaInicio.Day, HoraFin.Hour, HoraFin.Minute, 0);
                 rs.FechaInicio = start;
                 rs.FechaFin = end;
-                rs.Cancion = serviceCancion.GetListaCancionesPorID(cancion);
+                rs.Cancion = serviceCancion.GetListaCancionesByID(cancion);
                 List<Usuario_RolServicio> PuestosAsignados = serviceCalendario.Generar_Lista_Usuario_RolServicio(IdPuestos, IdUsuarios);
 
 

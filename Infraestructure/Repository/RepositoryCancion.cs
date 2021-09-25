@@ -2,6 +2,7 @@
 using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -111,11 +112,10 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oCancion = GetCancionByID(cancion.Id);
-                    if (cancion == null)
-                        ctx.Entry(cancion).State = System.Data.Entity.EntityState.Modified;
-                    else
+                    if (oCancion == null)
                         ctx.Cancion.Add(cancion);
-
+                    else
+                        ctx.Entry(cancion).State = EntityState.Modified;
 
                     retorno = ctx.SaveChanges();
                 }

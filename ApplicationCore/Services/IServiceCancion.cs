@@ -9,9 +9,10 @@ namespace ApplicationCore.Services
 {
     public interface IServiceCancion
     {
+        Cancion GetCancionByID(int id);
         List<Cancion> GetCancionesActivas();
         List<Cancion> GetCanciones();
-        List<Cancion> GetListaCancionesPorID(int[] cancionesID);
+        List<Cancion> GetListaCancionesByID(int[] cancionesID);
         Cancion Save(Cancion cancion);
     }
 }

@@ -41,17 +41,49 @@ namespace Web.Controllers
 
         public ActionResult Create()
         {
-
-            List<Estado> listaEstado = new List<Estado>()
+            //Para que el toggle del estado se ponga en activo por defecto
+            Cancion cancion = new Cancion()
             {
-                new Estado(){ Descripcion= "Activo", Valor = true},
-                new Estado(){ Descripcion= "Inactivo", Valor = false}
+                Estado = true
             };
-            ViewBag.Estado = listaEstado;
+
+            return View(cancion);
+        }
+
+        public ActionResult Edit(int id)
+        {
+
+            Cancion cancion = null;
+            IServiceCancion serviceCancion = new ServiceCancion();
+    
+            try
+            {
+                cancion = serviceCancion.GetCancionByID(id);
+                if (cancion != null)
+                    return View(cancion);
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "No existe esa canción";
+                    TempData.Keep();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+            }
 
             return View();
         }
-
 
 
         [HttpPost]
@@ -72,9 +104,11 @@ namespace Web.Controllers
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
                     TempData["Message"] = "Error al procesar los datos! ";
                     TempData.Keep();
-                    return RedirectToAction("Create", cancion);
+                    //return RedirectToAction("Create", cancion);
+                    return RedirectToAction("Index");
                 }
                 return RedirectToAction("Index");
             }

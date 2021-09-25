@@ -9,6 +9,7 @@ namespace Infraestructure.Repository
 {
     public interface IRepositoryCancion
     {
+        Cancion GetCancionByID(int id);
         List<Cancion> GetCancionesActivas();
         List<Cancion> GetCanciones();
         List<Cancion> GetListaCancionesByID(int[] cancionesID);

@@ -20,7 +20,7 @@ namespace ApplicationCore.Services
             IRepositoryCancion repository = new RepositoryCancion();
             return repository.GetCanciones();
         }
-        public List<Cancion> GetListaCancionesPorID(int[] cancionesID)
+        public List<Cancion> GetListaCancionesByID(int[] cancionesID)
         {
             IRepositoryCancion repository = new RepositoryCancion();
             return repository.GetListaCancionesByID(cancionesID);
@@ -30,6 +30,11 @@ namespace ApplicationCore.Services
         {
             IRepositoryCancion repository = new RepositoryCancion();
             return repository.Save(cancion);
+        }
+        public Cancion GetCancionByID(int id)
+        {
+            IRepositoryCancion repository = new RepositoryCancion();
+            return repository.GetCancionByID(id);
         }
     }
 }
