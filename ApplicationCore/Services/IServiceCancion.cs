@@ -14,5 +14,6 @@ namespace ApplicationCore.Services
         List<Cancion> GetCanciones();
         List<Cancion> GetListaCancionesByID(int[] cancionesID);
         Cancion Save(Cancion cancion);
+        bool DeteteCancion(int id);
     }
 }

@@ -142,9 +142,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BorrarController.cs" />
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CancionController.cs" />
+    <Compile Include="Controllers\GestionCancionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RolServicioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2174,12 +2174,10 @@
     <Content Include="Views\RolServicio\Edit.cshtml" />
     <Content Include="Views\Cancion\Index.cshtml" />
     <Content Include="Views\Cancion\Create.cshtml" />
-    <Content Include="Views\Borrar\Create.cshtml" />
-    <Content Include="Views\Borrar\Delete.cshtml" />
-    <Content Include="Views\Borrar\Details.cshtml" />
-    <Content Include="Views\Borrar\Edit.cshtml" />
-    <Content Include="Views\Borrar\Index.cshtml" />
     <Content Include="Views\Cancion\Edit.cshtml" />
+    <Content Include="Views\GestionCancion\Index.cshtml" />
+    <Content Include="Views\GestionCancion\Gestion.cshtml" />
+    <Content Include="Views\Cancion\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -66,5 +66,11 @@ namespace Infraestructure.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
         public string Nombre { get; set; }
+
+        [Display(Name = "Género")]
+        public string Genero { get; set; }
+
+        [Display(Name = "Enlace para la versión")]
+        public string Url_version { get; set; }
     }
 }

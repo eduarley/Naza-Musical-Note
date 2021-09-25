@@ -219,7 +219,7 @@ namespace Web.Controllers
                 if (serviceCalendario.DeleteEvent(eventID))
                 {
                     status = true;
-                    TempData["Action"] = "S";
+                    TempData["Action"] = "D";
                     TempData.Keep();
 
                 }

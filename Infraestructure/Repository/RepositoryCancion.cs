@@ -60,6 +60,7 @@ namespace Infraestructure.Repository
             {
                 using (MyContext ctx = new MyContext())
                 {
+
                     foreach (var id in cancionesID)
                     {
                         //Permite traer las canciones que de una lista de Id
@@ -131,6 +132,24 @@ namespace Infraestructure.Repository
 
                 throw;
             }
+        }
+
+        public bool DeteteCancion(int id)
+        {
+            bool estado = false;
+            using (MyContext ctx = new MyContext())
+            {
+                var cancion = ctx.Cancion.Where(a => a.Id == id).FirstOrDefault();
+                if (cancion != null)
+                {
+                    ctx.Database.ExecuteSqlCommand("delete from cancion_rolservicio where IdCancion =" + cancion.Id);
+                    ctx.Cancion.Remove(cancion);
+
+                    if (ctx.SaveChanges() >= 0)
+                        estado = true;
+                }
+            }
+            return estado;
         }
     }
 }

@@ -1,0 +1,189 @@
+﻿@model IEnumerable<Infraestructure.Models.Cancion>
+
+@{
+    ViewBag.Title = "Gestión de canciones";
+}
+
+@section Styles{
+    @Styles.Render("~/Content/datatable")
+
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Gestión de canciones</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Autor)
+                                    </th>
+                             
+                                    <th>
+                                        @Html.DisplayName("Video versión")
+                                    </th>
+                                    <th class="notexport" style="text-align:center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Autor)
+                                        </td>
+                                   
+                                        <td class="text-center">
+                                            @if (item.Url_version != null)
+                                            {
+                                                <a href="@item.Url_version" style="width:720px;height:450px" target="_blank">Ver video <i class="fas fa-external-link-alt"></i></a>
+                                            }
+                                        </td>
+                                        <td class="text-center ">
+                                            <ul style="display:flex; list-style:none">
+                                                <li>
+                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Gestion","GestionCancion", new { id = item.Id })">
+                                                        <i class="fas fa-code-branch">
+                                                        </i>
+                                                        Versión
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatable")
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+
+                // Recibe los parámetros del Controller
+                var option = '@TempData["Action"]'
+                var message = '@TempData["Message"]'
+
+
+
+                if (option == 'S') {
+                    Swal.fire('Éxito!',
+                        'El registro fue salvado correctamente.',
+                        'success');
+                }
+
+
+                 if (option == 'D') {
+                     Swal.fire('Éxito!',
+                         'El registro fue borrado correctamente.',
+                         'success');
+                }
+
+
+                 if (option == 'U') {
+                     Swal.fire('Éxito!',
+                         'El registro fue actualizado correctamente.',
+                         'success');
+                }
+
+            if (option == 'E') {
+                Swal.fire('Error!',
+                    'Se ha producido un error: '+message,
+                    'error');
+            }
+        });
+
+
+
+    </script>
+
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                
+
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            //$("#mantenimientos").addClass('active');
+            //$("#menucancion").addClass('active');
+
+        });
+
+    </script>
+}
+
+
+

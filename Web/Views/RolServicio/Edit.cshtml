@@ -156,7 +156,7 @@
                                             else
                                             {
                                                 <br />
-                                                <span class="right badge badge-danger">Aún no hay canciones.</span>
+                                                <span class="right badge badge-danger" id="alertaCancion" data-info="error">Aún no hay canciones.</span>
                                             }
                                             <br />
 
@@ -376,6 +376,11 @@
             if ($('#canciones').select2("val") == "") {
                 mensaje('warning', 'Debe ingresar al menos una canción', true);
                 $('#canciones').focus();
+                return;
+            }
+
+            if ($('#alertaCancion').attr("data-info") == "error") {
+                mensaje('warning', 'No hay canciones, por favor agregue al menos una canción antes de continuar', true);
                 return;
             }
 

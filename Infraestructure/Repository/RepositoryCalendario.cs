@@ -111,19 +111,30 @@ namespace Infraestructure.Repository
         public bool DeleteEvent(int id)
         {
             bool estado = false;
-            using (MyContext ctx = new MyContext())
-            {
-                var rs = ctx.RolServicio.Where(a => a.Id == id).FirstOrDefault();
-                if (rs != null)
+            try
+            {                
+                using (MyContext ctx = new MyContext())
                 {
-                    ctx.Database.ExecuteSqlCommand("delete from usuario_rolservicio where IdRolServicio =" + rs.Id);
-                    ctx.Database.ExecuteSqlCommand("delete from cancion_rolservicio where IdRolServicio =" + rs.Id);
-                    ctx.RolServicio.Remove(rs);
+                    var rs = ctx.RolServicio.Where(a => a.Id == id).FirstOrDefault();
+                    if (rs != null)
+                    {
+                        ctx.Database.ExecuteSqlCommand("delete from usuario_rolservicio where IdRolServicio =" + rs.Id);
+                        ctx.Database.ExecuteSqlCommand("delete from cancion_rolservicio where IdRolServicio =" + rs.Id);
+                        ctx.RolServicio.Remove(rs);
 
-                    if (ctx.SaveChanges() >= 0)
-                        estado = true;
+                        if (ctx.SaveChanges() >= 0)
+                            estado = true;
+                    }
                 }
             }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+
             return estado;
         }
 
@@ -131,10 +142,19 @@ namespace Infraestructure.Repository
         public List<Puesto> GetPuestosPorCategoria(int id)
         {
             List<Puesto> lista = new List<Puesto>();
-            using (MyContext ctx = new MyContext())
+            try
             {
-                List<Puesto> puestos = ctx.Puesto.Include("Categoria").Where(p => p.IdCategoria == id).ToList();
-                lista = puestos;
+                using (MyContext ctx = new MyContext())
+                {
+                    List<Puesto> puestos = ctx.Puesto.Include("Categoria").Where(p => p.IdCategoria == id).ToList();
+                    lista = puestos;
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
             }
             return lista;
         }
@@ -142,14 +162,23 @@ namespace Infraestructure.Repository
         public int GetPrimerIDCategoria()
         {
             Categoria cat = null;
-            using (MyContext ctx = new MyContext())
+            try
             {
-                cat = ctx.Categoria.FirstOrDefault();
+                using (MyContext ctx = new MyContext())
+                {
+                    cat = ctx.Categoria.FirstOrDefault();
+                }
+                if (cat != null)
+                    return cat.Id;
+                else
+                    return -1;
             }
-            if (cat != null)
-                return cat.Id;
-            else
-                return -1;
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
         }
 
 

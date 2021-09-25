@@ -13,6 +13,7 @@ namespace Infraestructure.Repository
         List<Cancion> GetCancionesActivas();
         List<Cancion> GetCanciones();
         List<Cancion> GetListaCancionesByID(int[] cancionesID);
+        bool DeteteCancion(int id);
         Cancion Save(Cancion cancion);
     }
 }

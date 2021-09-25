@@ -36,5 +36,11 @@ namespace ApplicationCore.Services
             IRepositoryCancion repository = new RepositoryCancion();
             return repository.GetCancionByID(id);
         }
+
+        public bool DeteteCancion(int id)
+        {
+            IRepositoryCancion repository = new RepositoryCancion();
+            return repository.DeteteCancion(id);
+        }
     }
 }

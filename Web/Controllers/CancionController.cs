@@ -50,6 +50,36 @@ namespace Web.Controllers
             return View(cancion);
         }
 
+        public ActionResult Details(int id)
+        {
+            IServiceCancion serviceCancion = new ServiceCancion();
+            Cancion cancion = null;
+            try
+            {
+                cancion = serviceCancion.GetCancionByID(id);
+                if(cancion == null)
+                {
+                    TempData["Message"] = "No existe la canción";
+                    @TempData["Action"] = "E";
+                    TempData.Keep();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Index");
+            }
+            return View(cancion);
+        }
+
+
         public ActionResult Edit(int id)
         {
 
@@ -80,9 +110,45 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
+                return RedirectToAction("Index");
+            }
+        }
+
+
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            var status = false;
+            try
+            {
+                IServiceCancion serviceCancion = new ServiceCancion();
+                if (serviceCancion.DeteteCancion(id))
+                {
+                    status = true;
+                    TempData["Action"] = "D";
+                    TempData.Keep();
+                } 
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "No existe esa canción";
+                    TempData.Keep();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
             }
 
-            return View();
+            return new JsonResult { Data = new { status = status } };
         }
 
 
