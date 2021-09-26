@@ -9,6 +9,24 @@
 
 }
 
+
+<style>
+    .iframe-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        height: 0;
+    }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+</style>
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -35,7 +53,15 @@
     </a>
 </p>
 
-
+<div class="iframe-container">
+    <iframe width="560"
+            height="315"
+            src="https://youtube.com/embed/W7FF5CZ8L58"
+            frameborder="0">
+        Hubo un problema al cargar el video.
+    </iframe>
+    <p>Video de la versión.</p>
+</div>
 
 
 <!-- Main content -->
@@ -67,55 +93,55 @@
                                 @foreach (var item in Model)
                                 {
 
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Autor)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Tonalidad)
-                                    </td>
-                                    <td class="text-center">
-                                        @if (item.Estado)
-                                        {
-                                            <h5><span class="right badge badge-success">Activo</span></h5>
-                                        }
-                                        else
-                                        {
-                                            <h5><span class="right badge badge-danger">Inactivo</span></h5>
-                                        }
-                                    </td>
-                                    <td class="text-center ">
-                                        <ul style="display:flex; list-style:none">
-                                            <li>
-                                                <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Cancion", new { id = item.Id })">
-                                                    <i class="fas fa-eye">
-                                                    </i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = item.Id })">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                </a>
-                                            </li>
-                                            <li>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Autor)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tonalidad)
+                                        </td>
+                                        <td class="text-center">
+                                            @if (item.Estado)
+                                            {
+                                                <h5><span class="right badge badge-success">Activo</span></h5>
+                                            }
+                                            else
+                                            {
+                                                <h5><span class="right badge badge-danger">Inactivo</span></h5>
+                                            }
+                                        </td>
+                                        <td class="text-center ">
+                                            <ul style="display:flex; list-style:none">
+                                                <li>
+                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Cancion", new { id = item.Id })">
+                                                        <i class="fas fa-eye">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = item.Id })">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                                <li>
 
-                                                <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                </a>
-
-
-                                            </li>
+                                                    <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                    </a>
 
 
-                                        </ul>
-                                    </td>
-                                </tr>
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
