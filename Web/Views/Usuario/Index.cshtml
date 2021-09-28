@@ -1,0 +1,314 @@
+﻿@model IEnumerable<Infraestructure.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<head>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+</head>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Usuarios</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Usuarios</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create","Usuario")">
+        <i class="fa fa-plus"></i>
+        Nuevo Usuario
+    </a>
+</p>
+
+
+<div id="#mensaje"></div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Apellido_paterno)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Apellido_materno)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Estado)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Rol.Descripcion)
+                                    </th>
+                                    <th class="notexport" style="text-align:center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Apellido_paterno)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Apellido_materno)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Rol.Descripcion)
+                                        </td>
+                                        <td class="text-center ">
+                                            <ul style="display:flex; list-style:none">
+                                                <li>
+                                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details", "Usuario", new { id = item.Id })">
+                                                        <i class="fas fa-eye">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit", "Usuario", new { id = item.Id })">
+                                                        <i class="fas fa-user-edit">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn btn-danger btn-sm" onclick="abrirModal(@item.Id)" href="#">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+
+                        <input type="hidden" id="campoOculto" />
+
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<input type="hidden" id="campoOculto" />
+
+<!--MODAL-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar usuario</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el usuario?</p>
+
+
+            </div>
+            <div class="modal-footer justify-content-end">
+
+                <a id="btnDelete" class="btn btn-danger btn-sm " onclick="eliminarElemento()" href="#">
+                    <i class="fas fa-trash"></i> Eliminar
+                </a>
+                <button type="button" class="btn btn-warning btn-sm " data-dismiss="modal" style="margin-right:5px;">
+                    <span aria-hidden="true">&times;</span> Cancelar
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+@section scripts {
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+    // Habilita los tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    $(document).ready(function () {
+
+        var option = '@TempData["Action"]'
+
+        if (option == 'S') {
+            //alert("Hola")
+            Swal.fire("Éxito", "¡Usuario creado correctamente!", "success");
+            }
+
+        if (option == 'E') {
+            Swal.fire("Disculpe", "Hubo un error al crear el Usuario", "error");
+        }
+
+        if (option == 'X') {
+            Swal.fire("Disculpe", "Hubo un error al editar el Usuario", "error");
+        }
+
+        if (option == 'V') {
+            Swal.fire("Éxito", "¡Usuario editado correctamente!", "success");
+        }
+
+        if (option == 'T') {
+            Swal.fire("Éxito", "¡Usuario eliminar correctamente!", "success");
+        }
+
+        if (option == 'N') {
+            Swal.fire("Disculpe", "Hubo un error al eliminar el Usuario", "error");
+        }
+
+        if (option == 'C') {
+            Swal.fire("Disculpe", "Hubo un error al enviar el correo electrónico de primer ingreso al Usuario creado, por ende, el Usuario no se guardará en la base de datos del sistema", "error");
+        }
+    });
+    </script>
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                dom: 'Bfrtip',
+                //poner clase notexport a la columnas que no queremos en las exportaciones
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copiar',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'CSV',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Excel',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Imprimir',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    }
+
+                ],
+
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+
+    <script>
+        function abrirModal(id) {
+            //Guardar variable
+            $("#campoOculto").val(id);
+
+            //Abrir el modal
+            $('#myModal').modal();
+        }
+
+        function eliminarElemento() {
+            var idElemento = $("#campoOculto").val();
+            /**/
+            $.ajax({
+                type: "GET",
+                url: "/Usuario/DeleteConfirmed/",
+                // parametro por JSON
+                data: { id: idElemento },
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //$("#myModal").hide();
+                    //$(".modal-dialog").hide();
+                    //$(".modal-content").hide();
+                    location.reload();
+                },
+                // Capturar errores y mostrar un mensaje de error
+                error: function (xhr, status, error) {
+                    var mensaje = "<div class='alert alert-danger' role='alert'> Result: " +
+                        status + " " + error + " " + xhr.status + " " + xhr.statusText + "</div>";
+                    //debugger;
+                    $("#mensaje").html(mensaje).show("slow").delay(1000).hide("slow");
+                }
+            });
+            /**/
+        }
+
+
+
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $(".pacientes").addClass('active');
+            $(".desplegable").addClass('active');
+            $(document).removeClass('dtr-title');
+            //$(".desplegable").addClass('menu-is-opening menu-open');
+        });
+
+    </script>
+}

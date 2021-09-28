@@ -1,0 +1,121 @@
+﻿@model Web.Models.Usuario
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido_paterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido_paterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido_materno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido_materno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Token_recovery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Token_recovery)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Primer_ingreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Primer_ingreso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rol.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rol.Descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

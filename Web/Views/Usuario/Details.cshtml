@@ -1,0 +1,135 @@
+﻿@model Infraestructure.Models.Usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Usuarios</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Usuarios</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<h4>Consulta de usuario</h4>
+
+<div class="content">
+    <!--<h4>Usuario</h4>-->
+    <hr />
+    <div class="row justify-content-md-centers">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Nombre)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Apellido_paterno)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Apellido_paterno)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Apellido_materno)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Apellido_materno)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Telefono)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Correo)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Correo)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Foto)
+        </div>
+
+        @{
+            if (Model.Foto != null)
+            {
+                <div class="col-md-8">
+                    <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" id="ImagenUsuario" style="height:75px;width:75px" />
+                </div>
+            }
+            else
+            {
+                <img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:75px;width:75px" />
+            }
+        }
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Fecha_creacion)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Fecha_creacion)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Estado)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Estado)
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Rol.Descripcion)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Rol.Descripcion)
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<hr />
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Edit", "Usuario", new { id = Model.Id })" role="button"><i class="fas fa-user-edit"></i>  Editar</a> |
+    <a class="btn btn-warning" href="@Url.Action("Index", "Usuario")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
+</p>

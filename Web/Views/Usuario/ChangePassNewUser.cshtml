@@ -1,0 +1,80 @@
+﻿@model Web.Viewmodels.ViewModelPassNewUser
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "ChangePassNewUser";
+}
+
+
+@using (Html.BeginForm("CambioClave", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cambio de contraseña</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link href="~/Content/dist/css/cambio/cambiostyle.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- partial:index.partial.html -->
+        <!-- NORMALIZED CSS INSTALLED-->
+        <!-- View settings for more info.-->
+        <div id="container">
+            <div id="inviteContainer">
+                <div class="acceptContainer">
+                    <form>
+                        <h1>Cambio de contraseña</h1>
+                        <div class="formContainer">
+                            <div class="formDiv" style="transition-delay: 0.2s">
+                                <p style="margin-bottom:15px">Recuerde que la contraseña debe coincidir en ambos campos.</p>
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.4s">
+                                @Html.HiddenFor(model => model.IdUsuario)
+                                <p>INGRESE SU NUEVA CONTRASEÑA</p>
+                                <!--<input type="text" />-->
+                                @Html.PasswordFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.4s">
+                                <p>CONFIRME SU NUEVA CONTRASEÑA</p>
+                                <!--<input type="text" />-->
+                                @Html.PasswordFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmNewClave, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.6s">
+                                <!--
+                                <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
+                                -->
+                                <button class="acceptBtn" type="submit">
+                                    Guardar cambio
+                                </button>
+                                <!--<span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>-->
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.8s">
+                                @if (TempData["Message"] != null)
+                                {
+                                    string mensaje = @"<div class='alert alert-danger al-dismissertible' role='alert' ><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                                                                                                                                                                                             </button><strong></strong> " + TempData["Message"] + " </div>";
+                                    @Html.Raw(mensaje);
+                                }
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- partial -->
+        <script src="~/Content/dist/js/cambio/script.js"></script>
+    </body>
+</html>
+}

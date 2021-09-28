@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "ChangeComplet";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="~/Content/dist/css/changecomplet/changecompletstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- partial:index.partial.html -->
+    <!-- NORMALIZED CSS INSTALLED-->
+    <!-- View settings for more info.-->
+    <div id="container">
+        <div id="inviteContainer">
+            <div class="acceptContainer">
+                <form>
+                    <h1>¡La contraseña se ha cambiado exitosamente!</h1>
+                    <div class="formDiv" style="transition-delay: 0.2s">
+                        <p style="color: white">Ya puedes iniciar sesión con tu nueva contraseña.</p>
+                    </div>
+                    <div class="formDiv" style="transition-delay: 0.4s">
+                        <a id="etiquetaA" href="~/Login/Index">Iniciar sesión</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src="~/Content/dist/js/recupera/script.js"></script>
+    <script>
+            function redireccionar() {
+                window.location.href = "../login/index";
+            }
+    </script>
+</body>
+</html>

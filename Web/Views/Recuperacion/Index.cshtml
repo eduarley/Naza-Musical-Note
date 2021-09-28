@@ -1,0 +1,134 @@
+﻿@model Web.Viewmodels.ViewModelEnviarCorreo
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Recuperacion";
+}
+
+@using (Html.BeginForm("Send", "Recuperacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Recuperación</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link href="~/Content/dist/css/recupera2/recuperastyle.css" rel="stylesheet" />
+        
+
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    </head>
+    <body>
+        <!-- partial:index.partial.html -->
+        <!-- NORMALIZED CSS INSTALLED-->
+        <!-- View settings for more info.-->
+        <div id="container">
+            <div id="inviteContainer">
+                <div class="acceptContainer">
+                    <div class="form-horizontal">
+                        <h1>Recuperación de contraseña</h1>
+                        <div class="formContainer">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="formDiv" style="transition-delay: 0.2s">
+                                <p style="margin-bottom:15px">Por favor ingrese su número de cédula y el correo electrónico asociado a su cuenta para enviarle el enlace de recuperación.</p>
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.4s">
+                                <p>CÉDULA</p>
+                                <!--<input type="text" />-->
+                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.4s">
+                                <p>CORREO</p>
+                                <!--<input type="text" />-->
+                                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.6s">
+                                <!--
+                            <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
+                            -->
+                                <button class="acceptBtn" type="submit" data-toggle="tooltip" data-placement="top">
+                                    Enviar
+                                </button>
+
+                                <!--<span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>-->
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.8s">
+                                <a style="margin-top:15px" href="~/Login/Index">VOLVER</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- partial -->
+        <script src="~/Content/dist/js/recupera/script.js"></script>
+        <script>
+            function redireccionar() {
+                window.location.href = "../home/index";
+            }
+        </script>
+    </body>
+</html>
+}
+
+
+
+<script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+<script>
+    // Habilita los tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    $(document).ready(function () {
+
+        var option = '@TempData["Action"]'
+        var mensaje= '@TempData["Mensaje"]'
+
+        if (option == 'S') {
+            Swal.fire("¡Éxito!", "El correo de recuperación fue enviado correctamente. Recuerda revisar la bandeja de correo no deseado  en caso de no encontrar el correo de recuperación en la bandeja principal.", "success");
+
+            //Swal.fire({
+            //    title: "¡Éxito!",
+            //    text: "El correo de recuperación fue enviado correctamente. Recuerda revisar la bandeja de correo no deseado  en caso de no encontrar el correo de recuperación en la bandeja principal.",
+            //    type: "danger",
+            //    showCancelButton: false,
+            //    confirmButtonClass: "btn-danger",
+            //    confirmButtonText: "Ok",
+            //    closeOnConfirm: true,
+            //},
+            //    function (isConfirm) {
+            //        alert("Prueba")
+
+            //    });
+        }
+
+
+
+        if (option == 'N') {
+            Swal.fire("Disculpe", "Los datos ingresados no corresponden a ningún usuario del sistema.", "warning");
+        }
+
+        if (option == 'E') {
+            Swal.fire("Error", mensaje, "error");
+        }
+    });
+</script>
+
+@Scripts.Render("~/bundles/jqueryval")

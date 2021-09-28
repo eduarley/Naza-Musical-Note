@@ -1,4 +1,6 @@
-﻿<!-- Navbar -->
+﻿@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
+
+<!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -20,23 +22,61 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline">Nombre Usuario</span>
+                <span class="d-none d-md-inline">
+                    @{ string nombre = "";
+                        Infraestructure.Models.Usuario oUsuario1;
+                        // Validar si vienen datos en la session
+                        if (Session["User"] != null)
+                        {
+                            // Casting
+                            oUsuario1 = Session["User"] as Infraestructure.Models.Usuario;
+
+                            if (oUsuario1 != null)
+                            {
+                                nombre = $"{oUsuario1.Nombre} {oUsuario1.Apellido_materno} {oUsuario1.Apellido_paterno}";
+                            }
+                        }
+
+                @nombre}
+                </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                    <!--<img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">-->
+                    @{ if (UsuarioLogueado.Foto == null)
+                        {
+                <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> }
+            else
+            {
+                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image"> } }
 
                     <p>
-                        Nombre - Rol
-                        <small>Miembro desde 23 de Julio, 2021</small>
+
+                        @{ string rol = "";
+                            Infraestructure.Models.Usuario oUsuario;
+                            // Validar si vienen datos en la session
+                            if (Session["User"] != null)
+                            {
+                                // Casting
+                                oUsuario = Session["User"] as Infraestructure.Models.Usuario;
+
+                                if (oUsuario != null)
+                                {
+                                    nombre = $"{oUsuario.Nombre} {oUsuario.Apellido_materno} {oUsuario.Apellido_paterno} - ";
+                                    rol = $"{oUsuario.Rol.Descripcion}";
+                                }
+                            }
+
+                @rol }
+                        <!--<small>Miembro desde 23 de Julio, 2021</small>-->
                     </p>
                 </li>
-              
+
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                    <a href="#" class="btn btn-default btn-flat float-right">Salir</a>
+                    <a href="../Login/Logout" class="btn btn-default btn-flat float-right">Salir</a>
                 </li>
             </ul>
         </li>
@@ -56,15 +96,15 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
-       
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-4">
             <ul class="nav nav-pills nav-sidebar flex-column open" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                with font-awesome or any other icon font library -->
                 <li class="nav-item ">
-                    
+
 
                     <a href="#" class="nav-link" id="mantenimientos">
                         <i class="nav-icon fas fa-cogs"></i>
@@ -157,7 +197,7 @@
                 </li>
                 <li class="nav-header">SEGURIDAD</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="@Url.Action("Index","Usuario")" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Usuarios

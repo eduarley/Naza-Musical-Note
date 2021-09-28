@@ -146,13 +146,21 @@
     <Compile Include="Controllers\CancionController.cs" />
     <Compile Include="Controllers\GestionCancionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RecuperacionController.cs" />
     <Compile Include="Controllers\RolServicioController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="Viewmodels\ViewModelChangePass.cs" />
+    <Compile Include="Viewmodels\ViewModelEnviarCorreo.cs" />
+    <Compile Include="Viewmodels\ViewModelLogin.cs" />
+    <Compile Include="Viewmodels\ViewModelPassNewUser.cs" />
+    <Compile Include="Viewmodels\ViewModelRolServicio.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -171,7 +179,16 @@
     <Content Include="Content\dist\css\alt\adminlte.pages.min.css" />
     <Content Include="Content\dist\css\alt\adminlte.plugins.css" />
     <Content Include="Content\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Content\dist\css\cambio\cambiostyle.css" />
+    <Content Include="Content\dist\css\changecomplet\changecompletstyle.css" />
+    <Content Include="Content\dist\css\login\loginstyle.css" />
+    <Content Include="Content\dist\css\recupera2\recuperastyle.css" />
     <Content Include="Content\dist\img\avatar.png" />
+    <Content Include="Content\dist\img\login\fondologin.jpg" />
+    <Content Include="Content\dist\img\login\fondologin2.jpg" />
+    <Content Include="Content\dist\img\login\fondologin2blur.png" />
+    <Content Include="Content\dist\img\login\fondologinblur.png" />
+    <Content Include="Content\dist\img\logo Naza music note full primary.png" />
     <Content Include="Content\dist\img\logo naza musical note full azul.png" />
     <Content Include="Content\dist\img\logo naza musical note full blanco.png" />
     <Content Include="Content\dist\img\logo nazareno blanco.png" />
@@ -180,10 +197,13 @@
     <Content Include="Content\dist\img\logo nazareno primary.png" />
     <Content Include="Content\dist\js\adminlte.js" />
     <Content Include="Content\dist\js\adminlte.min.js" />
+    <Content Include="Content\dist\js\cambio\script.js" />
     <Content Include="Content\dist\js\demo.js" />
+    <Content Include="Content\dist\js\login\script.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\dist\js\pages\dashboard3.js" />
+    <Content Include="Content\dist\js\recupera\script.js" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -2178,6 +2198,17 @@
     <Content Include="Views\GestionCancion\Index.cshtml" />
     <Content Include="Views\GestionCancion\Gestion.cshtml" />
     <Content Include="Views\Cancion\Details.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Usuario\ChangeComplet.cshtml" />
+    <Content Include="Views\Usuario\ChangePassNewUser.cshtml" />
+    <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Recuperacion\ChangeComplet.cshtml" />
+    <Content Include="Views\Recuperacion\Index.cshtml" />
+    <Content Include="Views\Recuperacion\Recovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

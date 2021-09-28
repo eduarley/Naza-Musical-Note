@@ -1,0 +1,120 @@
+﻿@model Web.Viewmodels.ViewModelLogin
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Iniciar sesión</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link href="~/Content/dist/css/login/loginstyle.css" rel="stylesheet" />
+
+
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+
+    </head>
+    <body>
+        <!-- partial:index.partial.html -->
+        <!-- NORMALIZED CSS INSTALLED-->
+        <!-- View settings for more info.-->
+        <div id="container">
+            <div id="inviteContainer">
+                <div class="logoContainer">
+                    <img src="~/Content/dist/img/logo nazareno full primary.png" />
+                    <img style="margin-top: 25px" class="logo" src="~/Content/dist/img/logo Naza music note full primary.png" />
+                    <!--
+                        <img class="text" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Discord_Color_Text_Logo_%282015-2021%29.svg/492px-Discord_Color_Text_Logo_%282015-2021%29.svg.png" />
+
+                    -->
+                </div>
+                <div class="acceptContainer">
+                    <form>
+                        <h1>¡Bienvenido a Naza Musical Note!</h1>
+                        <div class="formContainer">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="formDiv" style="transition-delay: 0.2s">
+                                <p>CÉDULA</p>
+                                <!--<input type="text" />-->
+                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.4s">
+                                <!--required=""-->
+                                <p>CONTRASEÑA</p>
+                                <!--<input type="password" /><a class="forgotPas" href="#">¿OLVIDÓ SU CONTRASEÑA?</a>-->
+                                @Html.PasswordFor(model => model.Clave, new { @class = "disennoinputs" })
+                                @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                                <a class="forgotPas" href="../Recuperacion/Index">¿OLVIDÓ SU CONTRASEÑA?</a>
+
+
+                            </div>
+                            <div class="formDiv" style="transition-delay: 0.6s">
+                                <!--
+                                <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
+                                -->
+                                <button class="acceptBtn" type="submit">
+                                    Ingresar
+                                </button>
+
+                                <!--<span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- partial -->
+        <script src="~/Content/dist/js/login/script.js"></script>
+        <script>
+            function redireccionar() {
+                window.location.href = "../home/index";
+            }
+        </script>
+    </body>
+</html>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+<script>
+    // Habilita los tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    $(document).ready(function () {
+
+        var option = '@TempData["Action"]'
+
+        if (option == 'I') {
+            //alert("Hola")
+            Swal.fire("Disculpe", "¡Datos incorrectos!", "error");
+            }
+
+        if (option == 'E') {
+            Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "error");
+            }
+    });
+</script>
+
+
+
