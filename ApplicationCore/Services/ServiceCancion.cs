@@ -42,5 +42,27 @@ namespace ApplicationCore.Services
             IRepositoryCancion repository = new RepositoryCancion();
             return repository.DeteteCancion(id);
         }
+
+        public string FormatURL(string url)
+        {
+            string UrlFormat = "";
+            try
+            {
+                if (url != null)
+                {
+                    if (url.Contains("youtu.be"))
+                        UrlFormat = url.Replace("youtu.be", "youtube.com/embed");
+                    else
+                        return url;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return UrlFormat;
+        }
     }
 }

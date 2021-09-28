@@ -54,10 +54,14 @@ namespace Web.Controllers
         {
             IServiceCancion serviceCancion = new ServiceCancion();
             Cancion cancion = null;
+            ViewBag.UrlFormat = null;
             try
             {
                 cancion = serviceCancion.GetCancionByID(id);
-                if(cancion == null)
+                ViewBag.UrlFormat = serviceCancion.FormatURL(cancion.Url_version);
+
+                string prueba = ViewBag.UrlFormat;
+                if (cancion == null)
                 {
                     TempData["Message"] = "No existe la canción";
                     @TempData["Action"] = "E";
