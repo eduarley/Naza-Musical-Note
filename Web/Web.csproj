@@ -147,6 +147,7 @@
     <Compile Include="Controllers\GestionCancionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PuestoController.cs" />
     <Compile Include="Controllers\RecuperacionController.cs" />
     <Compile Include="Controllers\RolServicioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -2213,6 +2214,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Puesto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

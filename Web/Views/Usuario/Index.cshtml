@@ -79,8 +79,15 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Apellido_materno)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        <td class="text-center">
+                                            @if (item.Estado)
+                                            {
+                                                <h5 onload="activarBotonEliminar()"><span class="right badge badge-success">Activo</span></h5>
+                                            }
+                                            else
+                                            {
+                                                <h5 onload="desactivarBotonEliminar()"><span class="right badge badge-danger">Inactivo</span></h5>
+                                            }
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Rol.Descripcion)
@@ -100,7 +107,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="btn btn-danger btn-sm" onclick="abrirModal(@item.Id)" href="#">
+                                                    <a id="botonEliminar" class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)" href="#">
                                                         <i class="fas fa-trash">
                                                         </i>
                                                     </a>
@@ -132,33 +139,6 @@
 <!-- /.content -->
 
 <input type="hidden" id="campoOculto" />
-
-<!--MODAL-->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Eliminar usuario</h4>
-            </div>
-            <div class="modal-body">
-                <p>¿Está seguro que desea eliminar el usuario?</p>
-
-
-            </div>
-            <div class="modal-footer justify-content-end">
-
-                <a id="btnDelete" class="btn btn-danger btn-sm " onclick="eliminarElemento()" href="#">
-                    <i class="fas fa-trash"></i> Eliminar
-                </a>
-                <button type="button" class="btn btn-warning btn-sm " data-dismiss="modal" style="margin-right:5px;">
-                    <span aria-hidden="true">&times;</span> Cancelar
-                </button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 
 
 @section scripts {
@@ -192,11 +172,15 @@
         }
 
         if (option == 'T') {
-            Swal.fire("Éxito", "¡Usuario eliminar correctamente!", "success");
+            Swal.fire("Éxito", "¡Usuario eliminado correctamente!", "success");
         }
 
         if (option == 'N') {
             Swal.fire("Disculpe", "Hubo un error al eliminar el Usuario", "error");
+        }
+
+        if (option == 'J') {
+            Swal.fire("Disculpe", "No se puede eliminar el usuario debido a que la sesión se encuentra activa actualmente", "warning");
         }
 
         if (option == 'C') {
@@ -310,5 +294,48 @@
             //$(".desplegable").addClass('menu-is-opening menu-open');
         });
 
+    </script>
+
+    <script>
+        function eliminar(id) {
+            Swal.fire({
+                title: 'Estás seguro?',
+                text: "No podrás revertirlo!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Usuario/Delete',
+                        data: { 'id': id },
+                        success: function (data) {
+
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            location.reload();
+                        }
+                    })
+
+
+                }
+            })
+        }
+
+    </script>
+
+    <script>
+        function desactivarBotonEliminar() {
+            document.getElementById("botonEliminar").setAttribute("disabled", "false");
+        }
+
+        function activarBotonEliminar() {
+            document.getElementById("botonEliminar").setAttribute("disabled", "true");
+        }
     </script>
 }

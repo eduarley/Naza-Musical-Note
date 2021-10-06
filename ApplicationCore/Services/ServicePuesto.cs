@@ -10,10 +10,26 @@ namespace ApplicationCore.Services
 {
     public class ServicePuesto : IServicePuesto
     {
+        IRepositoryPuesto repository = new RepositoryPuesto();
+        public bool BorrarPuesto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Puesto GetPuestoById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Puesto> GetPuestos()
         {
-            IRepositoryPuesto repository = new RepositoryPuesto();
+            
             return repository.GetPuestos();
+        }
+
+        public Puesto Save(Puesto puesto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

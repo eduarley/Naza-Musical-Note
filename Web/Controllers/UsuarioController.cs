@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -218,19 +219,41 @@ namespace Web.Controllers
             //return RedirectToAction("Edit");
         }
 
-        // GET: Usuario/Delete/5
-        public ActionResult Delete(string id)
+        [HttpPost]
+        public JsonResult Delete(string id)
         {
-            if (id == null)
+            var status = false;
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                Usuario oUser = (Usuario)Session["User"];
+                Usuario usuario = serviceUsuario.GetUsuarioByID(id);
+                if (oUser.Id != usuario.Id)
+                {
+                    usuario.Estado = false;
+                    serviceUsuario.Save(usuario);
+
+                    @TempData["Action"] = "T";
+                    TempData.Keep();
+                }
+                else
+                {
+                    @TempData["Action"] = "J";
+                    TempData.Keep();
+                }
             }
-            Usuario usuario = serviceUsuario.GetUsuarioByID(id);
-            if (usuario == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "N";
+                TempData.Keep();
             }
-            return View(usuario);
+
+            return new JsonResult { Data = new { status = status } };
         }
 
         // POST: Usuario/Delete/5
