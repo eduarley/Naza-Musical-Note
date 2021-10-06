@@ -96,7 +96,12 @@
                                 {
                                     <ul class="list-unstyled">
                                         <li>
-                                            <p><b>@item.Nombre</b></p>
+                                            <p><b>@item.Nombre</b>
+                                                <a href="#" onclick="enlaceCancion(@item.Id)">
+                                                    <i class="fas fa-external-link-alt ml-3"></i>
+                                                </a>
+                                            </p>
+
                                         </li>
                                     </ul>
                                 }
@@ -154,3 +159,15 @@
 
 </section>
 <!-- /.content -->
+
+
+
+@section scripts {
+
+    <script>
+        function enlaceCancion(id) {
+            window.location.href = "../../Cancion/Details/" + id;
+        }
+    </script>
+}
+    

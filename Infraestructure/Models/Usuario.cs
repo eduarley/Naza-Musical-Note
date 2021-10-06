@@ -37,7 +37,7 @@ namespace Infraestructure.Models
 
         public string NombreCompleto
         {
-            get { return Nombre + " " + Apellido_paterno; }
+            get { return Nombre + " " + Apellido_paterno + " " + Apellido_materno; }
         }
 
         public virtual Rol Rol { get; set; }

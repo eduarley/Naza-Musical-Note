@@ -259,7 +259,12 @@ namespace Web.Controllers
             {
                 IServiceCancion serviceCancion = new ServiceCancion();
                 IServiceCalendario serviceCalendario = new ServiceCalendario();
-                rs.IdUsuario_Propietario = "207910029";
+                Usuario usuario = null;
+                if (Session["User"] != null)
+                {
+                    usuario = Session["User"] as Usuario;
+                    rs.IdUsuario_Propietario = usuario.Id;
+                }
                 rs.Fecha_creacion = DateTime.Now;
                 rs.Color = "green";
                 rs.Estado = true;

@@ -23,52 +23,55 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline">
-                    @{ string nombre = "";
-                        Infraestructure.Models.Usuario oUsuario1;
+                    @{
+                        Infraestructure.Models.Usuario oUsuario1 = null;
                         // Validar si vienen datos en la session
                         if (Session["User"] != null)
                         {
                             // Casting
                             oUsuario1 = Session["User"] as Infraestructure.Models.Usuario;
-
-                            if (oUsuario1 != null)
-                            {
-                                nombre = $"{oUsuario1.Nombre} {oUsuario1.Apellido_materno} {oUsuario1.Apellido_paterno}";
-                            }
                         }
 
-                @nombre}
+                        if (oUsuario1 != null)
+                        {
+                            @oUsuario1.NombreCompleto
+                        }
+                    }
                 </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
                     <!--<img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">-->
-                    @{ if (UsuarioLogueado.Foto == null)
+                    @if (UsuarioLogueado != null)
+                    {
+                        if (UsuarioLogueado.Foto == null)
                         {
-                <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> }
-            else
-            {
-                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image"> } }
+                            <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                        }
+                        else
+                        {
+                            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image">
+                        }
+                    }
+
+
+
 
                     <p>
 
-                        @{ string rol = "";
-                            Infraestructure.Models.Usuario oUsuario;
+                        @{
+                            string rol = "";
                             // Validar si vienen datos en la session
                             if (Session["User"] != null)
                             {
-                                // Casting
-                                oUsuario = Session["User"] as Infraestructure.Models.Usuario;
-
-                                if (oUsuario != null)
+                                if (oUsuario1 != null)
                                 {
-                                    nombre = $"{oUsuario.Nombre} {oUsuario.Apellido_materno} {oUsuario.Apellido_paterno} - ";
-                                    rol = $"{oUsuario.Rol.Descripcion}";
+                                    rol = $"{oUsuario1.Rol.Descripcion}";
                                 }
                             }
-
-                @rol }
+                            @rol
+                        }
                         <!--<small>Miembro desde 23 de Julio, 2021</small>-->
                     </p>
                 </li>

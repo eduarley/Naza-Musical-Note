@@ -142,7 +142,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BorrarEstaClase.cs" />
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CancionController.cs" />
     <Compile Include="Controllers\GestionCancionController.cs" />
@@ -162,7 +161,6 @@
     <Compile Include="Viewmodels\ViewModelEnviarCorreo.cs" />
     <Compile Include="Viewmodels\ViewModelLogin.cs" />
     <Compile Include="Viewmodels\ViewModelPassNewUser.cs" />
-    <Compile Include="Viewmodels\ViewModelRolServicio.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
