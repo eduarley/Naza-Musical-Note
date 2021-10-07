@@ -73,7 +73,7 @@
                                         <td>
                                             @if (item.Foto != null)
                                             {
-                                                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle elevation-2" alt="User Image">
+                                                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle elevation-2" alt="User Image" style="height: 34px; width:auto">
                                             }
                                             else
                                             {
@@ -193,6 +193,7 @@
         if (option == 'C') {
             Swal.fire("Disculpe", "Hubo un error al enviar el correo electrónico de primer ingreso al Usuario creado, por ende, el Usuario no se guardará en la base de datos del sistema", "error");
         }
+
     });
     </script>
 
@@ -257,48 +258,10 @@
     </script>
 
     <script>
-        function abrirModal(id) {
-            //Guardar variable
-            $("#campoOculto").val(id);
-
-            //Abrir el modal
-            $('#myModal').modal();
-        }
-
-        function eliminarElemento() {
-            var idElemento = $("#campoOculto").val();
-            /**/
-            $.ajax({
-                type: "GET",
-                url: "/Usuario/DeleteConfirmed/",
-                // parametro por JSON
-                data: { id: idElemento },
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    //$("#myModal").hide();
-                    //$(".modal-dialog").hide();
-                    //$(".modal-content").hide();
-                    location.reload();
-                },
-                // Capturar errores y mostrar un mensaje de error
-                error: function (xhr, status, error) {
-                    var mensaje = "<div class='alert alert-danger' role='alert'> Result: " +
-                        status + " " + error + " " + xhr.status + " " + xhr.statusText + "</div>";
-                    //debugger;
-                    $("#mensaje").html(mensaje).show("slow").delay(1000).hide("slow");
-                }
-            });
-            /**/
-        }
-
-
-
+     
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
-            $(".pacientes").addClass('active');
-            $(".desplegable").addClass('active');
-            $(document).removeClass('dtr-title');
-            //$(".desplegable").addClass('menu-is-opening menu-open');
+            $("#menuusuarios").addClass('active');
         });
 
     </script>

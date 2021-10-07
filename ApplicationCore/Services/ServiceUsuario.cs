@@ -19,20 +19,21 @@ namespace ApplicationCore.Services
 
         public Usuario Save(Usuario usuario)
         {
-            string clave = "";
+            if (usuario.Primer_ingreso)
+            {
+                string clave = Cryptography.EncrypthAES(usuario.Clave);
+                usuario.Clave = clave;
+            }
+
             IRepositoryUsuario repository = new RepositoryUsuario();
-            clave = Cryptography.EncrypthAES(usuario.Clave);
-            usuario.Clave = clave;
             return repository.Save(usuario);
         }
 
         public Usuario GetUsuario(string id, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-
             // Se encripta el valor que viene y se compara con el valor encriptado en al BD.
             string crytpPasswd = Cryptography.EncrypthAES(password);
-
             return repository.GetUsuario(id, crytpPasswd);
 
         }

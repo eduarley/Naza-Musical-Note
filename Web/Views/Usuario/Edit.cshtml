@@ -22,7 +22,7 @@
 </div>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "Usuario", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -98,13 +98,10 @@
                 }
 
                 @*Hay que colocarlo como oculto para que se pueda volver a enviar!*@
-                <br />
-                <input type="file" name="ImageFile" style="margin-top:4px" accept=".jpg,.jpeg,.png" />
-                @Html.HiddenFor(model => model.Foto)
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @Html.HiddenFor(model => model.Clave)
+        
         <div class="form-group row">
             @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-8">
