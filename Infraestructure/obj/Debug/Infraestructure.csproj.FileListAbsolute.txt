@@ -26,3 +26,17 @@ C:\PROYECTO GRADUA\OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestr
 C:\PROYECTO GRADUA\OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\PROYECTO GRADUA\OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.dll
 C:\PROYECTO GRADUA\OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.pdb
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\Infraestructure.dll.config
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\Infraestructure.dll
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\Infraestructure.pdb
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\EntityFramework.dll
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\log4net.dll
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\EntityFramework.xml
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\bin\Debug\log4net.xml
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.dll
+C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.pdb
