@@ -23,7 +23,7 @@ namespace Infraestructure.Repository
                     if (puesto != null)
                     {
                         ctx.Database.ExecuteSqlCommand("delete from Puesto where Id =" + puesto.Id);
-                        ctx.Puesto.Remove(puesto);
+                        //ctx.Puesto.Remove(puesto);
 
                         if (ctx.SaveChanges() >= 0)
                             estado = true;

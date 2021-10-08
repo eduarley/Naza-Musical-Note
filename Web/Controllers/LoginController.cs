@@ -3,6 +3,7 @@ using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -88,12 +89,12 @@ namespace Web.Controllers
         {
             try
             {
-                ViewBag.Message = "Un Authorized Page!";
+                ViewBag.Message = "Página no autorizada!";
 
                 if (Session["User"] != null)
                 {
                     Usuario oUsuario = Session["User"] as Usuario;
-                    //Log.Warn($"El usuario {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}, intentó acceder una página sin derechos  ");
+                    Log.Warn($"El usuario {oUsuario.Nombre} {oUsuario.Apellido_materno} {oUsuario.Apellido_paterno} con el rol {oUsuario.Rol.Id}-{oUsuario.Rol.Descripcion}, intentó acceder una página sin derechos  ");
                 }
 
                 return View();
@@ -101,7 +102,7 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                //Log.Error(ex, MethodBase.GetCurrentMethod());
+                Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData.Keep();

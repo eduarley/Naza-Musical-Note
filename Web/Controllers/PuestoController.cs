@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ApplicationCore.Services;
 using Infraestructure.Models;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -18,7 +19,7 @@ namespace Web.Controllers
         IServiceCategoria serviceCategoria = new ServiceCategoria();
         IServicePuesto servicePuesto = new ServicePuesto();
 
-        private MyContext db = new MyContext();
+        //private MyContext db = new MyContext();
 
         private static String Action;
         private static String Message;
@@ -31,13 +32,13 @@ namespace Web.Controllers
 
                 if (!String.IsNullOrEmpty(Action))
                 {
-                    ViewBag.Action = Action;
-                    ViewBag.Message = Message;
+                    //ViewBag.Action = Action;
+                    //ViewBag.Message = Message;
                 }
 
-                // Forzar un error 
+                //Forzar un error
                 // int c = 0;
-                // int x = c / 0;
+                //int x = c / 0;
                 List<Puesto> listaPuestos = servicePuesto.GetPuestos();
                 return View(listaPuestos);
             }
@@ -45,7 +46,7 @@ namespace Web.Controllers
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
-                TempData["Message"] = ex.Message;
+                @TempData["Message"] = ex.Message;
                 TempData.Keep();
                 return RedirectToAction("Default", "Error");
             }
@@ -58,11 +59,12 @@ namespace Web.Controllers
             return View(puesto);
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
         // GET: Puesto/Create
         public ActionResult Create()
         {
-            //ViewBag.IdCategoria = (SelectListItem)serviceCategoria.LlenarCombo();
-            ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
+            ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
+            //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
             return View();
         }
 
@@ -71,6 +73,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
         public ActionResult Create(Puesto puesto)
         {
             Action = "S";
@@ -81,13 +84,14 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     servicePuesto.Save(puesto);
+                    TempData["Action"] = Action;
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
 
-                    TempData["Message"] = "Error al procesar los datos! " + errores;
+                    TempData["Message"] = "Error al procesar los datos!";
                     TempData.Keep();
 
                     return View("Create", puesto);
@@ -101,18 +105,20 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! ";
+                TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
                 // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
+                return RedirectToAction("Index", "Puesto");
             }
         }
 
         // GET: Puesto/Edit/5
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
         public ActionResult Edit(int? id)
         {
-            Puesto puesto = servicePuesto.GetPuestoById(id);
-            //ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
-            ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
+            ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
+            Puesto puesto = servicePuesto.GetPuestoById(id.Value);
+            //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
             return View(puesto);
         }
 
@@ -121,6 +127,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
         public ActionResult Edit(Puesto puesto)
         {
             Action = "U";
@@ -132,10 +139,11 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     servicePuesto.Save(puesto);
+                    TempData["Action"] = Action;
                     return RedirectToAction("Index");
                 }
-                //ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
-                ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
+                ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
+                //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
                 return View(puesto);
             }
             catch (Exception ex)
@@ -143,31 +151,35 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos!";
+                TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
                 // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
+                return RedirectToAction("Index", "Puesto");
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
         public ActionResult Delete(int id)
         {
+            Action = "D";
             try
             {
                 Puesto puesto = servicePuesto.GetPuestoById(id);
                 servicePuesto.BorrarPuesto(id);
 
-                @TempData["Action"] = "T";
+                @TempData["Action"] = Action;
                 TempData.Keep();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Puesto");
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos!";
+                TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
                 // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
+                return RedirectToAction("Index", "Puesto");
             }
         }
     }

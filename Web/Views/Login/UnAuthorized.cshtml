@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "UnAuthorized";
+}
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml"; ;
+}
+
+<h2>No se encuentra autorizado para acceder a esta página!</h2>
+<br>
+
+<input type="button" value="Volver" class="btn btn-default" onclick="goBack()" />
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+

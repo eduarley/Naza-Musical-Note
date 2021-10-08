@@ -73,4 +73,19 @@ namespace Infraestructure.Models
         [Display(Name = "Enlace para la versión")]
         public string Url_version { get; set; }
     }
+
+    internal partial class PuestoMetadata
+    {
+
+        [Required(ErrorMessage = "{0} es requerido")]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} es requerido")]
+        [Display(Name = "Categoría")]
+        public int IdCategoria { get; set; }
+
+        [Required(ErrorMessage = "{0} es requerido")]
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+    }
 }

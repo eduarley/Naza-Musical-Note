@@ -4,6 +4,8 @@
     ViewBag.Title = "Details";
 }
 
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -129,6 +131,11 @@
 <br />
 <hr />
 <p>
-    <a class="btn btn-primary" href="@Url.Action("Edit", "Usuario", new { id = Model.Id })" role="button"><i class="fas fa-user-edit"></i>  Editar</a> |
+    @{
+        if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+        {
+            <a class="btn btn-primary" href="@Url.Action("Edit", "Puesto", new { id = Model.Id })" role="button"><i class="fas fa-user-edit"></i>  Editar</a> <strong> | </strong>
+        }
+    }
     <a class="btn btn-warning" href="@Url.Action("Index", "Usuario")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
 </p>
