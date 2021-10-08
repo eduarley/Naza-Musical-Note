@@ -2209,11 +2209,14 @@
     <Content Include="Views\Recuperacion\ChangeComplet.cshtml" />
     <Content Include="Views\Recuperacion\Index.cshtml" />
     <Content Include="Views\Recuperacion\Recovery.cshtml" />
+    <Content Include="Views\Puesto\Create.cshtml" />
+    <Content Include="Views\Puesto\Details.cshtml" />
+    <Content Include="Views\Puesto\Edit.cshtml" />
+    <Content Include="Views\Puesto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Puesto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

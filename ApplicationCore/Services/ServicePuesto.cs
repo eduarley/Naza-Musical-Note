@@ -13,23 +13,23 @@ namespace ApplicationCore.Services
         IRepositoryPuesto repository = new RepositoryPuesto();
         public bool BorrarPuesto(int id)
         {
-            throw new NotImplementedException();
+            return repository.BorrarPuesto(id);
         }
 
-        public Puesto GetPuestoById(int id)
+        public Puesto GetPuestoById(int? id)
         {
-            throw new NotImplementedException();
+            return repository.GetPuestoById(id);
         }
 
         public List<Puesto> GetPuestos()
         {
-            
+
             return repository.GetPuestos();
         }
 
         public Puesto Save(Puesto puesto)
         {
-            throw new NotImplementedException();
+            return repository.Save(puesto);
         }
     }
 }

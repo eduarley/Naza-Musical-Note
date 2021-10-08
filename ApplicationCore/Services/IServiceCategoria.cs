@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
     public interface IServiceCategoria
     {
         List<Categoria> GetCategorias();
+        IEnumerable<Categoria> LlenarCombo();
     }
 }

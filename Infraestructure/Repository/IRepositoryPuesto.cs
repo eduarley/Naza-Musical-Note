@@ -10,5 +10,8 @@ namespace Infraestructure.Repository
     public interface IRepositoryPuesto
     {
         List<Puesto> GetPuestos();
+        Puesto GetPuestoById(int? id);
+        Puesto Save(Puesto puesto);
+        bool BorrarPuesto(int id);
     }
 }

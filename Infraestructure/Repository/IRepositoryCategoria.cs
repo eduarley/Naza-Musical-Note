@@ -10,5 +10,6 @@ namespace Infraestructure.Repository
     public interface IRepositoryCategoria
     {
         List<Categoria> GetCategorias();
+        IEnumerable<Categoria> LlenarCombo();
     }
 }

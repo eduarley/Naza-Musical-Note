@@ -30,5 +30,37 @@ namespace Infraestructure.Repository
 
             return categorias;
         }
+
+        public IEnumerable<Categoria> LlenarCombo()
+        {
+            try
+            {
+                // Forzar error
+                // int x = 0;
+                // x = 25 / x;
+
+
+                IEnumerable<Categoria> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Categoria.Include("Puesto").ToList<Categoria>();
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
     }
 }

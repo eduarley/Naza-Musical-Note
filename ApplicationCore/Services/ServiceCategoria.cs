@@ -10,10 +10,15 @@ namespace ApplicationCore.Services
 {
     public class ServiceCategoria : IServiceCategoria
     {
+        IRepositoryCategoria repository = new RepositoryCategoria();
         public List<Categoria> GetCategorias()
         {
-            IRepositoryCategoria repository = new RepositoryCategoria();
             return repository.GetCategorias();
+        }
+
+        public IEnumerable<Categoria> LlenarCombo()
+        {
+            return repository.LlenarCombo();
         }
     }
 }
