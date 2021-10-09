@@ -20,5 +20,7 @@ namespace ApplicationCore.Services
         IEnumerable<Usuario> ListaUsuarios();
         Usuario GetUsuarioByID(string id);
         void NoGuardarUsuario(string id);
+        Usuario SaveClavePrimerIngreso(Usuario usuario);
+        Usuario SaveClaveCambio(Usuario usuario);
     }
 }

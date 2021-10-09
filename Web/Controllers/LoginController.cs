@@ -11,7 +11,7 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
-        string urlDomain = "http://localhost:63782/";
+        string urlDomain = "http://localhost:";
         // GET: Login
         public ActionResult Index()
         {
@@ -45,8 +45,11 @@ namespace Web.Controllers
                             //Log.Info($"Accede {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}");
                             if (oUsuario.Primer_ingreso)
                             {
+                                var request = HttpContext.Request;
+                                //string url = request.Url.Scheme + "://" + request.UserHostAddress + ":" +request.Url.Port+ "/Recuperacion/Recovery?token=" + token;
+                                //string url = urlDomain + request.Url.Port + "/" + "Login/Index";
                                 string IdTemp = oUsuario.Id;
-                                string urlParaRedirigir = urlDomain + "Usuario/ChangePassNewUser?id=" + IdTemp;
+                                string urlParaRedirigir = urlDomain + request.Url.Port + "/" + "Usuario/ChangePassNewUser?id=" + IdTemp;
                                 //return RedirectToAction("ChangePassNewUser", "Usuario", new { id= IdTemp });
                                 //return RedirectToRoute(urlParaRedirigir);
                                 return Redirect(urlParaRedirigir);

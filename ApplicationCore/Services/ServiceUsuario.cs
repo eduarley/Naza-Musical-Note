@@ -29,6 +29,28 @@ namespace ApplicationCore.Services
             return repository.Save(usuario);
         }
 
+        public Usuario SaveClavePrimerIngreso(Usuario usuario)
+        {
+            if (usuario.Primer_ingreso)
+            {
+                string clave = Cryptography.EncrypthAES(usuario.Clave);
+                usuario.Clave = clave;
+                usuario.Primer_ingreso = false;
+            }
+
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.Save(usuario);
+        }
+
+        public Usuario SaveClaveCambio(Usuario usuario)
+        {
+                string clave = Cryptography.EncrypthAES(usuario.Clave);
+                usuario.Clave = clave;
+
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.Save(usuario);
+        }
+
         public Usuario GetUsuario(string id, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();

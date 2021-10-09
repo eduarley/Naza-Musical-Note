@@ -25,7 +25,7 @@ namespace Web.Controllers
             Usuario oUsuario = null;
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     IServiceUsuario service = new ServiceUsuario();
                     string token = service.GetSha256(Guid.NewGuid().ToString());
@@ -46,7 +46,7 @@ namespace Web.Controllers
 
                         mmsg.Subject = "Recuperación de contraseña - Naza Musical Note";
                         mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
-                        mmsg.Body = "<p>Saludos!</p><br><br><p>Adjuntamos su enlace de recuperación de contraseña:</p><br><br><a href='" + url + "'>Ingrese aquí para recuperar su contraseña</a><br><br><p>¡Gracias por usar nuestro sistema!</p><br><br><img src=\"~/Content/dist/img/logo Naza music note full primary.png\" width =\"40%\" height=\"10%\"/>";
+                        mmsg.Body = "<p>Saludos!</p><br><br><p>Adjuntamos su enlace de recuperación de contraseña:</p><br><br><a href='" + url + "'>Ingrese aquí para recuperar su contraseña</a><br><br><p>¡Gracias por usar nuestro sistema!</p><br><br><img src=\"https://www.whdl.org/sites/default/files/ES_logotipo.jpg\" width =\"40%\" height=\"10%\"/>";
                         mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                         mmsg.IsBodyHtml = true;
                         mmsg.From = new System.Net.Mail.MailAddress("nazamusicalnote@gmail.com");
@@ -123,7 +123,7 @@ namespace Web.Controllers
                 if (oUser != null)
                 {
                     oUser.Clave = model.NewClave;
-                    service.Save(oUser);
+                    service.SaveClaveCambio(oUser);
                     return View("ChangeComplet");
                 }
             }
