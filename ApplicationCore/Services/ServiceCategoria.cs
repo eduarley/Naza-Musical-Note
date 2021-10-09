@@ -11,14 +11,25 @@ namespace ApplicationCore.Services
     public class ServiceCategoria : IServiceCategoria
     {
         IRepositoryCategoria repository = new RepositoryCategoria();
+
+        public bool DeteteCategoria(int id)
+        {
+            return repository.DeteteCategoria(id);
+        }
+
+        public Categoria GetCategoriaByID(int id)
+        {
+            return repository.GetCategoriaByID(id);
+        }
+
         public List<Categoria> GetCategorias()
         {
             return repository.GetCategorias();
         }
 
-        public IEnumerable<Categoria> LlenarCombo()
+        public Categoria Save(Categoria categoria)
         {
-            return repository.LlenarCombo();
+            return repository.Save(categoria);
         }
     }
 }

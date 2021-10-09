@@ -15,12 +15,8 @@ namespace Web.Controllers
 {
     public class PuestoController : Controller
     {
-        //private MyContext db = new MyContext();
         IServiceCategoria serviceCategoria = new ServiceCategoria();
         IServicePuesto servicePuesto = new ServicePuesto();
-
-        //private MyContext db = new MyContext();
-
         private static String Action;
         private static String Message;
 
@@ -29,16 +25,6 @@ namespace Web.Controllers
         {
             try
             {
-
-                if (!String.IsNullOrEmpty(Action))
-                {
-                    //ViewBag.Action = Action;
-                    //ViewBag.Message = Message;
-                }
-
-                //Forzar un error
-                // int c = 0;
-                //int x = c / 0;
                 List<Puesto> listaPuestos = servicePuesto.GetPuestos();
                 return View(listaPuestos);
             }
@@ -63,7 +49,7 @@ namespace Web.Controllers
         // GET: Puesto/Create
         public ActionResult Create()
         {
-            ViewBag.Categoria = serviceCategoria.LlenarCombo();
+            ViewBag.Categoria = serviceCategoria.GetCategorias();
             return View();
         }
 
@@ -76,7 +62,7 @@ namespace Web.Controllers
         public ActionResult Create(Puesto puesto)
         {
             Action = "S";
-            string errores = "";
+
             try
             {
                 // Es valido
@@ -146,7 +132,7 @@ namespace Web.Controllers
                     TempData["Action"] = Action;
                     return RedirectToAction("Index");
                 }
-                ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
+                ViewBag.IdCategoria = serviceCategoria.GetCategorias();
                 //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
                 return View(puesto);
             }

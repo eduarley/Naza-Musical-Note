@@ -144,6 +144,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CancionController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GestionCancionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2222,6 +2223,7 @@
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\Shared\_MenuLider.cshtml" />
     <Content Include="Views\Shared\_MenuIntegrante.cshtml" />
+    <Content Include="Views\Categoria\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

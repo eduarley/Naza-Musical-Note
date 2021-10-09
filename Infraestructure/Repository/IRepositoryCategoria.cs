@@ -10,6 +10,8 @@ namespace Infraestructure.Repository
     public interface IRepositoryCategoria
     {
         List<Categoria> GetCategorias();
-        IEnumerable<Categoria> LlenarCombo();
+        Categoria GetCategoriaByID(int id);
+        bool DeteteCategoria(int id);
+        Categoria Save(Categoria categoria);
     }
 }

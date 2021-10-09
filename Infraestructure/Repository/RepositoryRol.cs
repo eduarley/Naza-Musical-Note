@@ -11,6 +11,8 @@ namespace Infraestructure.Repository
 {
     public class RepositoryRol : IRepositoryRol
     {
+
+
         public List<Rol> GetRoles()
         {
             List<Rol> roles = null;
@@ -30,5 +32,7 @@ namespace Infraestructure.Repository
 
             return roles;
         }
+
+        
     }
 }

@@ -102,7 +102,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
             
-            return View();
+
         }
 
 
@@ -353,10 +353,10 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 serviceUsuario.NoGuardarUsuario(usuario.Id);
-                TempData["Action"] = "C";
+                TempData["Action"] = "E";
+                TempData["Message"] = "Hubo un error al enviar el correo electrónico de primer ingreso al Usuario creado, por ende, el Usuario no se guardará en la base de datos del sistema";
                 TempData.Keep();
                 return false;
-                //RedirectToAction("Index");
             }
         }
 

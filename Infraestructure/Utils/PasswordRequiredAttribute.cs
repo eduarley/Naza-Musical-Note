@@ -9,19 +9,19 @@ using System.Web.Configuration;
 namespace Infraestructure.Utils
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-    public class MembershipPasswordRequiredAttribute : ValidationAttribute
+    public class PasswordRequiredAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
 
-            int minimo = 9;
+            //int minimo = 9;
 
             if (value == null || !(value is string) || string.IsNullOrEmpty(value.ToString()))
             {
                 return false;
             }
 
-
+            //Validar Regex
 
             return true;
         }

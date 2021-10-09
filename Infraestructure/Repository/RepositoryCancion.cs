@@ -127,28 +127,39 @@ namespace Infraestructure.Repository
 
                 return oCancion;
             }
-            catch (Exception)
+            catch (DbUpdateException dbEx)
             {
-
-                throw;
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
             }
         }
 
         public bool DeteteCancion(int id)
         {
             bool estado = false;
-            using (MyContext ctx = new MyContext())
+            try
             {
-                var cancion = ctx.Cancion.Where(a => a.Id == id).FirstOrDefault();
-                if (cancion != null)
+                using (MyContext ctx = new MyContext())
                 {
-                    ctx.Database.ExecuteSqlCommand("delete from cancion_rolservicio where IdCancion =" + cancion.Id);
-                    ctx.Cancion.Remove(cancion);
+                    var cancion = ctx.Cancion.Where(a => a.Id == id).FirstOrDefault();
+                    if (cancion != null)
+                    {
+                        ctx.Database.ExecuteSqlCommand("delete from cancion_rolservicio where IdCancion =" + cancion.Id);
+                        ctx.Cancion.Remove(cancion);
 
-                    if (ctx.SaveChanges() >= 0)
-                        estado = true;
+                        if (ctx.SaveChanges() >= 0)
+                            estado = true;
+                    }
                 }
             }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
             return estado;
         }
     }
