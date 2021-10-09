@@ -60,10 +60,10 @@ namespace ApplicationCore.Services
 
         }
 
-        public Rol RolDelUsuario(int idRolUsuario)
+        public Rol GetRolByUsuario(int idRolUsuario)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-            return repository.RolDelUsuario(idRolUsuario);
+            return repository.GetRolByUsuario(idRolUsuario);
         }
 
         public string GetSha256(string str)
@@ -97,10 +97,10 @@ namespace ApplicationCore.Services
             return repository.AsignarClaveNewUser();
         }
 
-        public IEnumerable<Usuario> ListaUsuarios()
+        public List<Usuario> GetUsuarios()
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-            return repository.ListaUsuarios();
+            return repository.GetUsuarios();
         }
 
         public Usuario GetUsuarioByID(string id)

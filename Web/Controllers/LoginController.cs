@@ -33,7 +33,7 @@ namespace Web.Controllers
 
                     if (oUsuario != null)
                     {
-                        oRol = service.RolDelUsuario(oUsuario.IdRol);
+                        oRol = service.GetRolByUsuario(oUsuario.IdRol);
                     }
 
                     if (oUsuario != null)

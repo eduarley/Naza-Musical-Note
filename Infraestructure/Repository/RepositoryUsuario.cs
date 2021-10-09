@@ -140,7 +140,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public Rol RolDelUsuario(int idRolUsuario)
+        public Rol GetRolByUsuario(int idRolUsuario)
         {
             try
             {
@@ -249,7 +249,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<Usuario> ListaUsuarios()
+        public List<Usuario> GetUsuarios()
         {
             try
             {

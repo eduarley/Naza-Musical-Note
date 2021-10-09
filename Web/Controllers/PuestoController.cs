@@ -63,8 +63,7 @@ namespace Web.Controllers
         // GET: Puesto/Create
         public ActionResult Create()
         {
-            ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
-            //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
+            ViewBag.Categoria = serviceCategoria.LlenarCombo();
             return View();
         }
 
@@ -119,7 +118,7 @@ namespace Web.Controllers
             List<Categoria> categorias = null;
             categorias = serviceCategoria.GetCategorias();
             //ViewBag.IdCategoria = serviceCategoria.LlenarCombo().ToList();
-            ViewBag.IdCategoria = categorias;
+            ViewBag.Categoria = categorias;
             Puesto puesto = servicePuesto.GetPuestoById(id.Value);
             //ViewBag.ElId = (puesto.IdCategoria);
             

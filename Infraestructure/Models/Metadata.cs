@@ -126,6 +126,7 @@ namespace Infraestructure.Models
         [Display(Name = "Correo electrónico")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
         [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene un formato válido.")]
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
         public string Correo { get; set; }
 
 
@@ -139,4 +140,7 @@ namespace Infraestructure.Models
         public string NombreCompleto { get; }
     }
 
+
+
+    
 }

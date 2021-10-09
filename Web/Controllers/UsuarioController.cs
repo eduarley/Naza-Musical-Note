@@ -16,16 +16,16 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
         IServiceUsuario serviceUsuario = new ServiceUsuario();
+        IServiceRol serviceRol = new ServiceRol();
         string urlDomain = "http://localhost:";
-        private MyContext db = new MyContext();
 
         // GET: Usuario
         public ActionResult Index()
         {
-            IEnumerable<Usuario> lista = null;
+            List<Usuario> lista = null;
             try
             {
-                lista = serviceUsuario.ListaUsuarios();
+                lista = serviceUsuario.GetUsuarios();
             }
             catch (Exception ex)
             {
@@ -57,8 +57,9 @@ namespace Web.Controllers
                     TempData["Message"] = "No existe el usuario";
                     @TempData["Action"] = "E";
                     TempData.Keep();
-                    //return HttpNotFound();
-                }else
+                    return RedirectToAction("Index");
+                }
+                else
                     return View(usuario);
             }
             catch (Exception ex)
@@ -81,7 +82,13 @@ namespace Web.Controllers
         {
             try
             {
-                ViewBag.Rol = db.Rol.ToList();
+                //Para que el toggle del estado se ponga en activo por defecto
+                Usuario usuario = new Usuario()
+                {
+                    Estado = true
+                };
+                ViewBag.Rol = serviceRol.GetRoles();
+                return View(usuario);
             }
             catch (Exception ex)
             {
@@ -92,6 +99,7 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
+                return RedirectToAction("Index");
             }
             
             return View();
@@ -119,8 +127,10 @@ namespace Web.Controllers
                         }
                         else
                         {
-                            @TempData["Action"] = "C";
+                            @TempData["Action"] = "E";
+                            TempData["Message"] = "Hubo un error al enviar el correo electrónico de primer ingreso al Usuario creado, por ende, el Usuario no se guardará en la base de datos del sistema";
                             TempData.Keep();
+                            return RedirectToAction("Index");
                         }
                     }
                     else
@@ -128,11 +138,12 @@ namespace Web.Controllers
                         TempData["Action"] = "E";
                         TempData["Message"] = "Error al procesar los datos! ";
                         TempData.Keep();
+                        return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index");
                 }
                 else
                 {
+                    //MOSTRAR TEMPDATA EN LA PAGINA CREAR
                     return RedirectToAction("Create", usuario);
                 }
             }
@@ -145,9 +156,8 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
-                return RedirectToAction("Index");
             }
-
+            return RedirectToAction("Index");
         }
 
 
@@ -164,7 +174,7 @@ namespace Web.Controllers
                 {
                     if (serviceUsuario.Save(usuario) != null)
                     {
-                        @TempData["Action"] = "S";
+                        @TempData["Action"] = "U";
                         TempData.Keep();
                     }
                     else
@@ -172,11 +182,14 @@ namespace Web.Controllers
                         TempData["Action"] = "E";
                         TempData["Message"] = "Error al procesar los datos! ";
                         TempData.Keep();
-                    }
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }   
                 }
                 else
                 {
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "Error al procesar los datos! ";
+                    TempData.Keep();
                     return RedirectToAction("Create");
                 }
             }
@@ -189,9 +202,8 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
-                return RedirectToAction("Index");
             }
-
+            return RedirectToAction("Index");
         }
 
 
@@ -213,7 +225,7 @@ namespace Web.Controllers
             }
             try
             {
-                ViewBag.Rol = db.Rol.ToList();
+                ViewBag.Rol = serviceRol.GetRoles();
                 return View(usuario);
             }
             catch (Exception ex)
@@ -233,8 +245,9 @@ namespace Web.Controllers
 
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
-        public ActionResult Delete(string id)
+        public JsonResult Delete(string id)
         {
+            var status = false;
             try
             {
                 Usuario oUser = (Usuario)Session["User"];
@@ -243,16 +256,15 @@ namespace Web.Controllers
                 {
                     usuario.Estado = false;
                     serviceUsuario.Save(usuario);
-
-                    @TempData["Action"] = "T";
+                    @TempData["Action"] = "D";
                     TempData.Keep();
-                    return RedirectToAction("Index");
+                    status = true;
                 }
                 else
                 {
-                    @TempData["Action"] = "N";
+                    @TempData["Action"] = "E";
+                    TempData["Message"] = "No puedes desactivar tu propio usuario!";
                     TempData.Keep();
-                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -264,9 +276,8 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
-                return RedirectToAction("Index");
             }
-            
+            return new JsonResult { Data = new { status = status } };
         }
 
         public ActionResult ChangePassNewUser(string id)
@@ -349,13 +360,6 @@ namespace Web.Controllers
             }
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+   
     }
 }

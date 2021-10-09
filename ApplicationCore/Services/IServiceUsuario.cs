@@ -12,12 +12,12 @@ namespace ApplicationCore.Services
         List<Usuario> GetIntegrantesActivos();
         Usuario GetUsuario(string id, string password);
         Usuario Save(Usuario usuario);
-        Rol RolDelUsuario(int idRolUsuario);
+        Rol GetRolByUsuario(int idRolUsuario);
         string GetSha256(string str);
         Usuario UsuarioARecuperar(string id, string correo);
         Usuario ConsultarPorToken(string token);
         string AsignarClaveNewUser();
-        IEnumerable<Usuario> ListaUsuarios();
+        List<Usuario> GetUsuarios();
         Usuario GetUsuarioByID(string id);
         void NoGuardarUsuario(string id);
         Usuario SaveClavePrimerIngreso(Usuario usuario);

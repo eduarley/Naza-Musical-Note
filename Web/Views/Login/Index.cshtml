@@ -41,8 +41,10 @@
                     <form>
                         <h1>¡Bienvenido a Naza Musical Note!</h1>
                         <div class="formContainer">
+                           
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="formDiv" style="transition-delay: 0.2s">
+
                                 <p>CÉDULA</p>
                                 <!--<input type="text" />-->
                                 @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "disennoinputs" } })
@@ -60,8 +62,8 @@
                             </div>
                             <div class="formDiv" style="transition-delay: 0.6s">
                                 <!--
-                                <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
-                                -->
+        <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
+        -->
                                 <button class="acceptBtn" type="submit">
                                     Ingresar
                                 </button>

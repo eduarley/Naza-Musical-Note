@@ -22,124 +22,85 @@
 </div>
 
 
-<div class="content">
-    <!--<h4>Usuario</h4>-->
-    <hr />
-    <div class="row justify-content-md-centers">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Nombre)
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@Html.DisplayNameFor(model => model.NombreCompleto)</h3>
+            <br />
+            <h3> @Html.DisplayFor(model => model.NombreCompleto)</h3>
         </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Nombre)
-        </div>
-    </div>
-    <hr />
-    <div class="row justify-content-md-centers">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Id)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Id)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Apellido_paterno)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Apellido_paterno)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Apellido_materno)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Apellido_materno)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Telefono)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Correo)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Correo)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Foto)
-        </div>
-
-        @{ if (Model.Foto != null)
-            {
-<div class="col-md-8">
-    <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" id="ImagenUsuario" style="height:75px;width:75px" />
-</div> }
-else
-{
-<img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:75px;width:75px" /> } }
-
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Fecha_creacion)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Fecha_creacion)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Estado)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Estado)
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Rol.Descripcion)
-        </div>
-
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Rol.Descripcion)
-        </div>
-    </div>
-</div>
-<br />
-<br />
-<hr />
-<p>
-    @{ if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                    @if (Model.Foto != null)
                     {
-        <a class="btn btn-primary" href="@Url.Action("Edit", "Usuario", new { id = Model.Id })" role="button"><i class="fas fa-user-edit"></i>  Editar</a> <strong> | </strong> } }
-    <a class="btn btn-warning" href="@Url.Action("Index", "Usuario")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
-</p>
+                        <div class="col-md-8">
+                            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" id="ImagenUsuario" style="height:100%; width: auto" />
+                        </div>
+                    }
+                    else
+                    {
+                        <img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:200px; width: 200px"/>
+                    }
+
+
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
+                    
+
+                    <div class="text-muted">
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Id)
+                            <b class="d-block">@Html.DisplayFor(model => model.Id)</b>
+                        </p>
+                        <p class="text-sm">
+                            @if (Model.Telefono != null)
+                            {
+                    @Html.DisplayNameFor(model => model.Telefono)
+                                    <b class="d-block">@Html.DisplayFor(model => model.Telefono)</b>}
+
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Correo)
+                            <b class="d-block">@Html.DisplayFor(model => model.Correo)</b>
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Fecha_creacion)
+                            <b class="d-block">@Html.DisplayFor(model => model.Fecha_creacion)</b>
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Estado)
+                            @if (Model.Estado)
+                            {
+                                <b class="d-block">Activo</b>
+                            }
+                            else
+                            {
+                                <b class="d-block">Inactivo</b>
+                            }
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayName("Rol")
+                            <b class="d-block">@Html.DisplayFor(model => model.Rol.Descripcion)</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Usuario", new { id = Model.Id })">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
 @section scripts {
     <script>//AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {

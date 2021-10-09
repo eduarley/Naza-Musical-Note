@@ -34,15 +34,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Autor, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Autor, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Autor, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Autor, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,15 +56,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Tonalidad, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Tonalidad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Tonalidad, "", new { @class = "text-danger" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Tonalidad, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tonalidad, "", new { @class = "text-danger" })
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -74,9 +82,10 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Url_version, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Url_version, "", new { @class = "text-danger" })
-
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Url_version, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
 
