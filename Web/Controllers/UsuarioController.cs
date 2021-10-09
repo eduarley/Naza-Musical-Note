@@ -16,7 +16,7 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
         IServiceUsuario serviceUsuario = new ServiceUsuario();
-        string urlDomain = "http://localhost:63782/";
+        string urlDomain = "http://localhost:";
         private MyContext db = new MyContext();
 
         // GET: Usuario
@@ -312,14 +312,17 @@ namespace Web.Controllers
 
             try
             {
-                string url = urlDomain + "Login/Index";
+                var request = HttpContext.Request;
+                //string url = request.Url.Scheme + "://" + request.UserHostAddress + ":" +request.Url.Port+ "/Recuperacion/Recovery?token=" + token;
+                string url = urlDomain + request.Url.Port + "Login/Index";
+                //string url = urlDomain + "Login/Index";
                 MailMessage mmsg = new MailMessage();
                 mmsg.To.Add(new MailAddress(usuario.Correo));
 
                 mmsg.Subject = "Bienvenido a Naza Musical Note - Contraseña para primer ingreso";
                 mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
                 string ClaveTemp = ApplicationCore.Utils.Cryptography.DecrypthAES(usuario.Clave);
-                mmsg.Body = "<p>¡Hola " + usuario.Nombre + ", bienvenido a Naza Musical Note!</p><br><br><p>Su registro ha sido correcto. Se le asigó la contraseña: </p><p style='font-weight: bold'>" + ClaveTemp + "</p><br><br><p>Para iniciar sesión </p><a href='" + url + "'>presione aquí</a><br><br><p>Recuerde que cuando ingrese se le solicitará realizar un cambio de contraseña para brindar una mayor seguridad a su cuenta.</p><br><br><p>¡Gracias por usar nuestro sistema!</p>";
+                mmsg.Body = "<p>¡Hola " + usuario.Nombre + ", bienvenid@ a Naza Musical Note!</p><br><br><p>Su registro ha sido correcto. Se le asigó la contraseña: </p><p style='font-weight: bold'>" + ClaveTemp + "</p><br><br><p>Para iniciar sesión </p><a href='" + url + "'>presione aquí</a><br><br><p>Recuerde que cuando ingrese se le solicitará realizar un cambio de contraseña para brindar una mayor seguridad a su cuenta.</p><br><br><p>¡Gracias por usar nuestro sistema!</p><br><br><img src=\"~/Content/dist/img/logo Naza music note full primary.png\" width =\"40%\" height=\"10%\"/>";
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
                 mmsg.From = new MailAddress("nazamusicalnote@gmail.com");

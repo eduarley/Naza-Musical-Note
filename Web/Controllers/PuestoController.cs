@@ -116,8 +116,13 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
         public ActionResult Edit(int? id)
         {
-            ViewBag.IdCategoria = serviceCategoria.LlenarCombo();
+            List<Categoria> categorias = null;
+            categorias = serviceCategoria.GetCategorias();
+            //ViewBag.IdCategoria = serviceCategoria.LlenarCombo().ToList();
+            ViewBag.IdCategoria = categorias;
             Puesto puesto = servicePuesto.GetPuestoById(id.Value);
+            //ViewBag.ElId = (puesto.IdCategoria);
+            
             //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
             return View(puesto);
         }
