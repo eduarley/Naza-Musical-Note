@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Usuario
 
-@{
-    ViewBag.Title = "Details";
-}
+@{ ViewBag.Title = "Details"; }
 
 @{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
 
@@ -34,6 +32,16 @@
 
         <div class="col-md-8">
             @Html.DisplayFor(model => model.Nombre)
+        </div>
+    </div>
+    <hr />
+    <div class="row justify-content-md-centers">
+        <div class="col-md-2" style="font-weight:bold">
+            @Html.DisplayNameFor(model => model.Id)
+        </div>
+
+        <div class="col-md-8">
+            @Html.DisplayFor(model => model.Id)
         </div>
     </div>
     <hr />
@@ -82,18 +90,14 @@
             @Html.DisplayNameFor(model => model.Foto)
         </div>
 
-        @{
-            if (Model.Foto != null)
+        @{ if (Model.Foto != null)
             {
-                <div class="col-md-8">
-                    <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" id="ImagenUsuario" style="height:75px;width:75px" />
-                </div>
-            }
-            else
-            {
-                <img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:75px;width:75px" />
-            }
-        }
+<div class="col-md-8">
+    <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" id="ImagenUsuario" style="height:75px;width:75px" />
+</div> }
+else
+{
+<img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:75px;width:75px" /> } }
 
     </div>
     <hr />
@@ -131,11 +135,14 @@
 <br />
 <hr />
 <p>
-    @{
-        if (UsuarioLogueado.Rol.Descripcion != "Integrante")
-        {
-            <a class="btn btn-primary" href="@Url.Action("Edit", "Puesto", new { id = Model.Id })" role="button"><i class="fas fa-user-edit"></i>  Editar</a> <strong> | </strong>
-        }
-    }
+    @{ if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+                    {
+        <a class="btn btn-primary" href="@Url.Action("Edit", "Usuario", new { id = Model.Id })" role="button"><i class="fas fa-user-edit"></i>  Editar</a> <strong> | </strong> } }
     <a class="btn btn-warning" href="@Url.Action("Index", "Usuario")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
 </p>
+@section scripts {
+    <script>//AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#menuusuarios").addClass('active');
+        });</script>
+}

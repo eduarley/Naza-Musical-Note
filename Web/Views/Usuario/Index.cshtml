@@ -95,11 +95,11 @@
                                             <td class="text-center">
                                                 @if (item.Estado)
                                                 {
-                                                    <h5 onload="activarBotonEliminar()"><span class="right badge badge-success">Activo</span></h5>
+                                                    <h5><span class="right badge badge-success">Activo</span></h5>
                                                 }
                                                 else
                                                 {
-                                                    <h5 onload="desactivarBotonEliminar()"><span class="right badge badge-danger">Inactivo</span></h5>
+                                                    <h5><span class="right badge badge-danger">Inactivo</span></h5>
                                                 }
                                             </td>
                                             <td>
@@ -128,12 +128,17 @@
                                                     @{
                                                         if (UsuarioLogueado.Rol.Descripcion != "Integrante")
                                                         {
-                                                            <li>
-                                                                <a id="botonEliminar" class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)" href="#">
-                                                                    <i class="fas fa-trash">
-                                                                    </i>
-                                                                </a>
-                                                            </li>
+
+                                                            if (item.Estado)
+                                                            {
+                                                                <li>
+                                                                    <a id="botonEliminar" class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)" href="#">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </a>
+                                                                </li>
+                                                            }
+
+                                                            
                                                         }
                                                     }
                                                 </ul>
@@ -288,7 +293,7 @@
             function eliminar(id) {
                 Swal.fire({
                     title: 'Estás seguro?',
-                    text: "No podrás revertirlo!",
+                    text: "Se desactivará este usuario.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -315,15 +320,5 @@
                 })
             }
 
-        </script>
-
-        <script>
-            function desactivarBotonEliminar() {
-                document.getElementById("botonEliminar").setAttribute("disabled", "false");
-            }
-
-            function activarBotonEliminar() {
-                document.getElementById("botonEliminar").setAttribute("disabled", "true");
-            }
         </script>
     }

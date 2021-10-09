@@ -115,6 +115,7 @@
     <Compile Include="Repository\RepositoryRolServicio.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\MembershipPasswordRequiredAttribute.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

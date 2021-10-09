@@ -79,7 +79,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                    <a href="../Login/Logout" class="btn btn-default btn-flat float-right">Salir</a>
+                    <a href="@Url.Action("Logout","Login")" class="btn btn-default btn-flat float-right">Salir</a>
                 </li>
             </ul>
         </li>
@@ -131,7 +131,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index","Puesto")" class="nav-link">
+                            <a href="@Url.Action("","")" class="nav-link" id="menucategorias">
+                                <i class="fas fa-clipboard-list nav-icon"></i>
+                                <p>Categorías</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Puesto")" class="nav-link" id="menupuestos">
                                 <i class="fas fa-guitar nav-icon"></i>
                                 <p>Puestos</p>
                             </a>

@@ -64,28 +64,79 @@ namespace Infraestructure.Models
         [DataType(DataType.Date)]
         public System.DateTime Fecha_creacion { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
         public string Nombre { get; set; }
 
         [Display(Name = "Género")]
         public string Genero { get; set; }
 
         [Display(Name = "Enlace para la versión")]
+        [RegularExpression(@"https:\/\/youtu.be[^' '\n\r]+",
+         ErrorMessage = "Formato no permitido. Ejemplo de formato: https://youtu.be/......")]
         public string Url_version { get; set; }
     }
 
     internal partial class PuestoMetadata
     {
 
-        [Required(ErrorMessage = "{0} es requerido")]
+        [Required(ErrorMessage = "{0} es requerido.")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "{0} es requerido")]
+        [Required(ErrorMessage = "{0} es requerida.")]
         [Display(Name = "Categoría")]
         public int IdCategoria { get; set; }
 
-        [Required(ErrorMessage = "{0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
     }
+
+    public partial class UsuarioMetadata
+    {
+        //FORMATO A CEDULA, 9 DIGITOS, UNICAMENTE DIGITOS
+        [Display(Name = "Cédula")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
+        public string Id { get; set; }
+
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        public string Nombre { get; }
+
+        [Display(Name = "Rol")]
+        [Required(ErrorMessage = "{0} es requerido.")]
+        public int IdRol { get; set; }
+
+        [Display(Name = "Apellido paterno")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        public string Apellido_paterno { get; set; }
+
+        [Display(Name = "Apellido materno")]
+        public string Apellido_materno { get; set; }
+
+
+        //VALIDAR FORMATO DE CONTRASENA
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
+        public string Clave { get; set; }
+
+        [Display(Name = "Teléfono")]
+        //[DataType(DataType.PhoneNumber, ErrorMessage = "El {0} no tiene un formato válido.")]
+        public string Telefono { get; set; }
+
+
+        [Display(Name = "Correo electrónico")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene un formato válido.")]
+        public string Correo { get; set; }
+
+
+        [Display(Name = "Fecha de creación")]
+        [DataType(DataType.DateTime)]
+        public System.DateTime Fecha_creacion { get; set; }
+
+
+
+        [Display(Name = "Nombre")]
+        public string NombreCompleto { get; }
+    }
+
 }

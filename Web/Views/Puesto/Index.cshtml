@@ -92,7 +92,7 @@
                                                     {
                                                         <li>
                                                             <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit", "Puesto", new { id = item.Id })">
-                                                                <i class="fas fa-edit">
+                                                                <i class="fas fa-pencil-alt">
                                                                 </i>
                                                             </a>
                                                         </li>
@@ -250,7 +250,8 @@
 
                         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
                         $(document).ready(function () {
-                            $("#menuusuarios").addClass('active');
+                            $("#menupuestos").addClass('active');
+                            $("#mantenimientos").addClass('active');
                         });
 
                     </script>

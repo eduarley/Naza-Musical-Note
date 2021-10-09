@@ -41,6 +41,9 @@
 
 
 <div class="card card-default mt-3">
+    <div class="card-header text-danger border-bottom-0" >
+        <p>* Campos requeridos</p>
+    </div>
     <div class="card-body p-3">
         <div class="bs-stepper">
             <div class="bs-stepper-header modal-header" style="border-bottom:hidden" role="tablist" hidden>
@@ -85,6 +88,7 @@
                                     <div class="col-md-6">
                                         <input type="hidden" id="hdEventID" value="0" />
                                         <div class="form-group">
+                                            <strong class="text-danger">*</strong>
                                             <label>Título</label>
                                             <input type="text" id="txtSubject" class="form-control" name="titulo" />
                                             <!--
@@ -95,6 +99,7 @@
                                     <div class="col-md-6">
                                         <!-- Date -->
                                         <div class="form-group">
+                                            <strong class="text-danger">*</strong>
                                             <label>Fecha:</label>
                                             <div class="input-group date" id="fecha" data-target-input="nearest">
                                                 <input type="text" class="form-control datetimepicker-input" data-target="#fecha" id="txtStart" />
@@ -114,6 +119,7 @@
                                     <!-- HORA INICIO -->
                                     <div class="bootstrap-timepicker col-md-6">
                                         <div class="form-group">
+                                            <strong class="text-danger">*</strong>
                                             <label>Hora inicio:</label>
 
                                             <div class="input-group date" data-target-input="nearest">
@@ -129,6 +135,7 @@
                                     <!-- HORA FIN -->
                                     <div class="bootstrap-timepicker col-md-6">
                                         <div class="form-group">
+                                            <strong class="text-danger">*</strong>
                                             <label>Hora fin:</label>
 
                                             <div class="input-group date" data-target-input="nearest">
@@ -153,17 +160,16 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <strong class="text-danger">*</strong>
                                             <label>Canciones</label>
 
                                             @if (ViewBag.Canciones != null)
                                             {
-                                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" })
-                                            }
+                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" }) }
                                             else
                                             {
-                                                <br />
-                                                <span class="right badge badge-danger" id="alertaCancion" data-info="error">Aún no hay canciones.</span>
-                                            }
+                                <br />
+                                                <span class="right badge badge-danger" id="alertaCancion" data-info="error">Aún no hay canciones.</span>}
                                             <br />
 
                                         </div>
@@ -215,15 +221,13 @@
                                             foreach (var cat in categorias)
                                             {
 
-                                                <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
-                                            }
+                            <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li> }
                                         }
                                         else
                                         {
-                                            <li>
-                                                <span class="right badge badge-danger">Aún no hay categorías.</span>
-                                            </li>
-                                        }
+                            <li>
+                                <span class="right badge badge-danger">Aún no hay categorías.</span>
+                            </li>}
 
 
                                     </ul>
@@ -237,14 +241,12 @@
                                     @foreach (var item in puestos)
                                     {
                                         var idP = puestos;
-                                        <li id='puesto_@item.IdCategoria' hidden>
-                                            <label>@item.Descripcion</label>
-                                            @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
-                                            <input id="hiddenID" type="hidden" value="@item.Id" />
-                                            <br />
-                                        </li>
-
-                                    }
+                        <li id='puesto_@item.IdCategoria' hidden>
+                            <label>@item.Descripcion</label>
+                            @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
+                            <input id="hiddenID" type="hidden" value="@item.Id" />
+                            <br />
+                        </li>}
 
                                 </ul>
                             </div>

@@ -166,7 +166,8 @@
 
     <script>
         function enlaceCancion(id) {
-            window.location.href = "../../Cancion/Details/" + id;
+            url = "../../Cancion/Details/" + id;
+            window.open(url, '_blank').focus();
         }
     </script>
 }

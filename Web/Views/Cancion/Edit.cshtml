@@ -70,20 +70,22 @@
 
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" >
-                            @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "custom-control-input", id = "customSwitch3", @type = "checkbox" } })
-                            <label class="custom-control-label" for="customSwitch3">Estado</label>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Url_version, htmlAttributes: new { @class = "control-label" })
-                        @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Url_version, "", new { @class = "text-danger" })
 
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                            @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "custom-control-input", id = "customSwitch3", @type = "checkbox" } })
+                            <label class="custom-control-label" for="customSwitch3">Estado</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,10 +94,8 @@
 
 
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Guardar" class="btn btn-success" />
-                </div>
+            <div class="modal-footer justify-content-end">
+                <button type="submit" class="btn btn-success">Guardar</button>
             </div>
 
         </div>

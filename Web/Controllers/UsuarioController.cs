@@ -81,7 +81,7 @@ namespace Web.Controllers
         {
             try
             {
-                ViewBag.IdRol = new SelectList(db.Rol, "Id", "Descripcion");
+                ViewBag.Rol = db.Rol.ToList();
             }
             catch (Exception ex)
             {
@@ -119,7 +119,6 @@ namespace Web.Controllers
                         }
                         else
                         {
-                            //serviceUsuario.NoGuardarUsuario(usuario.Id);
                             @TempData["Action"] = "C";
                             TempData.Keep();
                         }
@@ -134,7 +133,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Create");
+                    return RedirectToAction("Create", usuario);
                 }
             }
             catch (Exception ex)
@@ -214,7 +213,7 @@ namespace Web.Controllers
             }
             try
             {
-                ViewBag.IdRol = new SelectList(db.Rol, "Id", "Descripcion", usuario.IdRol);
+                ViewBag.Rol = db.Rol.ToList();
                 return View(usuario);
             }
             catch (Exception ex)
