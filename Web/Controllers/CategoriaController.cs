@@ -50,7 +50,6 @@ namespace Web.Controllers
             try
             {
                 categoria = serviceCategoria.GetCategoriaByID(id);
-
                 if (categoria == null)
                 {
                     TempData["Message"] = "No existe la categoría indicada";

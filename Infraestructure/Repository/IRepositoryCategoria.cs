@@ -13,5 +13,6 @@ namespace Infraestructure.Repository
         Categoria GetCategoriaByID(int id);
         bool DeteteCategoria(int id);
         Categoria Save(Categoria categoria);
+
     }
 }

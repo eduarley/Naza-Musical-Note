@@ -140,6 +140,17 @@ namespace Infraestructure.Models
         public string NombreCompleto { get; }
     }
 
+    
+
+
+
+    public partial class CategoriaMetadata
+    {
+        [Display(Name = "Descripción")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
+        public string Descripcion { get; set; }
+    }
+
 
 
     

@@ -2224,6 +2224,9 @@
     <Content Include="Views\Shared\_MenuLider.cshtml" />
     <Content Include="Views\Shared\_MenuIntegrante.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Categoria\Create.cshtml" />
+    <Content Include="Views\Categoria\Edit.cshtml" />
+    <Content Include="Views\Categoria\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

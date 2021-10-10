@@ -1,7 +1,274 @@
-﻿
+﻿@model IEnumerable<Infraestructure.Models.Categoria>
 @{
     ViewBag.Title = "Categorías de Puestos";
 }
+@section Styles{
+    @Styles.Render("~/Content/datatable")
+
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Categorías</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Categoria")">
+        <i class="fa fa-plus mr-2"></i>
+        Nueva categoría
+    </a>
+</p>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Descripcion)
+                                    </th>
+
+                                    <th class="notexport" style="text-align:center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </td>
+
+                                        <td class="text-center ">
+                                            <ul style="display:flex; list-style:none">
+                                                <li>
+                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Categoria", new { id = item.Id })">
+                                                        <i class="fas fa-eye">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Categoria", new { id = item.Id })">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                    </a>
+                                                </li>
+                                                <li>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                    </a>
+
+
+                                                </li>
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
 
 
 
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+
+
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/datatable")
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+
+                // Recibe los parámetros del Controller
+                var option = '@TempData["Action"]'
+                var message = '@TempData["Message"]'
+
+
+
+                if (option == 'S') {
+                    Swal.fire('Éxito!',
+                        'El registro fue salvado correctamente.',
+                        'success');
+                }
+
+
+                 if (option == 'D') {
+                     Swal.fire('Éxito!',
+                         'El registro fue borrado correctamente.',
+                         'success');
+                }
+
+
+                 if (option == 'U') {
+                     Swal.fire('Éxito!',
+                         'El registro fue actualizado correctamente.',
+                         'success');
+                }
+
+            if (option == 'E') {
+                Swal.fire('Error!',
+                    'Se ha producido un error: '+message,
+                    'error');
+            }
+        });
+
+
+
+    </script>
+
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                dom: 'Bfrtip',
+                //poner clase notexport a la columnas que no queremos en las exportaciones
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copiar',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'CSV',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Excel',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Imprimir',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    }
+
+                ],
+
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+    </script>
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#menucategorias").addClass('active');
+
+        });
+
+    </script>
+
+
+
+
+    <script>
+        function eliminar(id) {
+            Swal.fire({
+                title: 'Estás seguro?',
+                text: "También se borarán los puestos vinculados. No podrás revertirlo!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralo!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Categoria/Delete',
+                        data: { 'id': id },
+                        success: function (data) {
+
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            location.reload();
+                        }
+                    })
+
+
+                }
+            })
+        }
+
+
+
+
+
+
+    </script>
+}

@@ -19,9 +19,15 @@ namespace Infraestructure.Repository
             {
                 using (MyContext ctx = new MyContext())
                 {
-                    Categoria oCategoria = ctx.Categoria.Where(a => a.Id == id).FirstOrDefault();
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    Categoria oCategoria = ctx.Categoria.Where(a => a.Id == id).Include(e =>e.Puesto).FirstOrDefault();
                     if (oCategoria != null)
                     {
+                        foreach (var item in oCategoria.Puesto)
+                        {
+                            ctx.Database.ExecuteSqlCommand("delete from Usuario_RolServicio where IdPuesto =" + item.Id);
+                        }
+                        ctx.Database.ExecuteSqlCommand("delete from puesto where IdCategoria =" + oCategoria.Id);
                         ctx.Categoria.Remove(oCategoria);
                         if (ctx.SaveChanges() >= 0)
                             estado = true;
@@ -47,6 +53,7 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oCategoria = ctx.Categoria.
                         Where(p => p.Id == id)
+                        .Include("Puesto")
                         .FirstOrDefault<Categoria>();
                 }
 
@@ -79,6 +86,7 @@ namespace Infraestructure.Repository
 
             return categorias;
         }
+
 
         public Categoria Save(Categoria categoria)
         {

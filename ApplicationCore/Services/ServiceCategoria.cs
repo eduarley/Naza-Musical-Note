@@ -27,6 +27,7 @@ namespace ApplicationCore.Services
             return repository.GetCategorias();
         }
 
+
         public Categoria Save(Categoria categoria)
         {
             return repository.Save(categoria);
