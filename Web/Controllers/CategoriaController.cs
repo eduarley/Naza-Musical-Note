@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -14,7 +15,7 @@ namespace Web.Controllers
         IServiceCategoria serviceCategoria = new ServiceCategoria();
 
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Index()
         {
             List<Categoria> lista = null;
@@ -37,12 +38,13 @@ namespace Web.Controllers
         }
 
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Details(int id)
         {
 
@@ -71,7 +73,7 @@ namespace Web.Controllers
             return View(categoria);
         }
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(int id)
         {
 
@@ -105,6 +107,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult Delete(int id)
         {
             var status = false;
@@ -145,6 +148,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Save(Categoria categoria)
         {
             try

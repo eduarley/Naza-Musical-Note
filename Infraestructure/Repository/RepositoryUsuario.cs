@@ -214,13 +214,30 @@ namespace Infraestructure.Repository
 
         public string AsignarClaveNewUser()
         {
-            string[] lista = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+            string[] listaMinusculas = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+            string[] listaNumeros = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            string[] listaMayusculas = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+            string[] listaSimbolos = { "!", "*", "?", "¿", "¡", "-" };
             string val = "";
             var random = new Random();
-            for (int i = 0; i < 6; i++)
+            val = "";
+            for (int i = 0; i < 2; i++)
             {
-                val += lista[random.Next(0, 34)];
+                val += listaMinusculas[random.Next(0, 25)];
             }
+
+            for (int i = 0; i < 3; i++)
+            {
+                val += listaNumeros[random.Next(0, 8)];
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                val += listaMayusculas[random.Next(0, 25)];
+            }
+
+            val += listaSimbolos[random.Next(0, 5)];
+
             return val;
         }
 

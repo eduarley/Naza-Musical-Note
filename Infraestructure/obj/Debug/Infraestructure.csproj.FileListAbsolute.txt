@@ -53,3 +53,4 @@ C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Infraestructure\obj\Debug\Infraestructure
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Infraestructure\obj\Debug\Infraestructure.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Infraestructure\obj\Debug\Infraestructure.pdb
+C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache

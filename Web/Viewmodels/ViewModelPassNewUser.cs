@@ -9,10 +9,14 @@ namespace Web.Viewmodels
     public class ViewModelPassNewUser
     {
         public string IdUsuario { get; set; }
-        [Required]
+        [Display(Name = "La nueva contraseña")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
+        [StringLength(200, MinimumLength = 9, ErrorMessage = "La contraseña debe tener 9 o más caracteres")]
         public string NewClave { get; set; }
-        [Compare("NewClave")]
-        [Required]
+        [Display(Name = "La confirmación de la nueva contraseña")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
+        [Compare(nameof(NewClave), ErrorMessage = "La contraseña debe coincidir en ambos campos")]
+        [StringLength(200, MinimumLength = 9, ErrorMessage = "La contraseña debe tener 9 o más caracteres")]
         public string ConfirmNewClave { get; set; }
     }
 }

@@ -8,12 +8,14 @@ using System.Net;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
     public class RolServicioController : Controller
     {
         // GET: RolServicio
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Index()
         {
             IServiceRolServicio serviceRolServicio = new ServiceRolServicio();
@@ -35,7 +37,7 @@ namespace Web.Controllers
 
         }
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
             ViewBag.Usuarios = null;
@@ -87,7 +89,7 @@ namespace Web.Controllers
 
 
 
-
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Details(int id)
         {
             IServiceRolServicio serviceRolServicio = new ServiceRolServicio();
@@ -117,7 +119,7 @@ namespace Web.Controllers
             return View(rs);
         }
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(int id)
         {
             RolServicio rs = null;
@@ -210,6 +212,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult Delete(int eventID)
         {
             IServiceCalendario serviceCalendario = new ServiceCalendario();
@@ -246,6 +249,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult Save(
               RolServicio rs,
               int[] cancion,

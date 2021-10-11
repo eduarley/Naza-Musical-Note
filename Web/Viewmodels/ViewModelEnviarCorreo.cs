@@ -8,12 +8,12 @@ namespace Web.Viewmodels
 {
     public class ViewModelEnviarCorreo
     {
-        [Required]
-        [Display(Name = "cédula")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida")]
+        [Display(Name = "Cédula")]
         public string Id { get; set; }
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "correo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Formato de correo inválido")]
+        [Display(Name = "Correo")]
         public string Correo { get; set; }
     }
 }

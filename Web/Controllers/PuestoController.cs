@@ -21,6 +21,7 @@ namespace Web.Controllers
         private static String Message;
 
         // GET: Puesto
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Index()
         {
             try
@@ -38,6 +39,7 @@ namespace Web.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Lider)]
         // GET: Puesto/Details/5
         public ActionResult Details(int id)
         {
@@ -45,8 +47,9 @@ namespace Web.Controllers
             return View(puesto);
         }
 
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        
         // GET: Puesto/Create
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
             ViewBag.Categoria = serviceCategoria.GetCategorias();
@@ -58,7 +61,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create(Puesto puesto)
         {
             Action = "S";
@@ -98,7 +101,7 @@ namespace Web.Controllers
         }
 
         // GET: Puesto/Edit/5
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(int? id)
         {
             List<Categoria> categorias = null;
@@ -117,7 +120,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(Puesto puesto)
         {
             Action = "U";
@@ -148,7 +151,7 @@ namespace Web.Controllers
             }
         }
 
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Delete(int id)
         {
             Action = "D";

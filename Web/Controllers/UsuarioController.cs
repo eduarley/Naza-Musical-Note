@@ -77,7 +77,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Create
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
             try
@@ -108,7 +108,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult New(Usuario usuario)
         {
             try
@@ -164,7 +164,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Update(Usuario usuario)
         {
             try
@@ -211,7 +211,7 @@ namespace Web.Controllers
 
 
         // GET: Usuario/Edit/5
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -244,7 +244,7 @@ namespace Web.Controllers
 
 
 
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Lider)]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult Delete(string id)
         {
             var status = false;

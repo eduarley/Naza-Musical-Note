@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -38,7 +39,7 @@ namespace Web.Controllers
 
 
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
             //Para que el toggle del estado se ponga en activo por defecto
@@ -83,7 +84,7 @@ namespace Web.Controllers
             return View(cancion);
         }
 
-
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(int id)
         {
 
@@ -120,6 +121,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult Delete(int id)
         {
             var status = false;
@@ -158,6 +160,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Save(Cancion cancion)
         {
             cancion.Fecha_creacion = DateTime.Now;

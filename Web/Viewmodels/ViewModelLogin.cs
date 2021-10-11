@@ -8,11 +8,11 @@ namespace Web.Viewmodels
 {
     public class ViewModelLogin
     {
-        [Required]
-        [Display(Name = "cédula")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida")]
+        [Display(Name = "Cédula")]
         public string Id { get; set; }
-        [Required]
-        [Display(Name = "contraseña")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida")]
+        [Display(Name = "Contraseña")]
         public string Clave { get; set; }
     }
 }
