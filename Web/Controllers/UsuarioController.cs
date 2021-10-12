@@ -20,6 +20,7 @@ namespace Web.Controllers
         string urlDomain = "http://localhost:";
 
         // GET: Usuario
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Index()
         {
             List<Usuario> lista = null;
@@ -41,6 +42,7 @@ namespace Web.Controllers
             return View(lista);
         }
 
+        [CustomAuthorize((int)Roles.Lider)]
         // GET: Usuario/Details/5
         public ActionResult Details(string id)
         {

@@ -42,31 +42,25 @@
                                 @Html.HiddenFor(model => model.token)
                                 <p>INGRESE SU NUEVA CONTRASEÑA</p>
                                 <!--<input type="text" />-->
-                                @Html.PasswordFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.TextBoxFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                <!--<input type="text" id="claveNueva"/>-->
                                 @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
                             </div>
                             <div class="formDiv" style="transition-delay: 0.4s">
                                 <p>CONFIRME SU NUEVA CONTRASEÑA</p>
                                 <!--<input type="text" />-->
-                                @Html.PasswordFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.TextBoxFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                <!--<input type="text" id="claveNuevaConfirm" />-->
                                 @Html.ValidationMessageFor(model => model.ConfirmNewClave, "", new { @class = "text-danger" })
                             </div>
                             <div class="formDiv" style="transition-delay: 0.6s">
-                                <!--
-                                <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
-                                -->
-                                <button class="acceptBtn" type="submit">
-                                    Guardar cambio
-                                </button>
+                                 <div style="text-align:center">
+                                        <button id="botonAceptar" class="btn-primary" type="submit" >
+                                            Guardar cambio
+                                        </button>
+                                 </div>
+                                
                                 <!--<span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>-->
-                            </div>
-                            <div class="formDiv" style="transition-delay: 0.8s">
-                                @if (TempData["Message"] != null)
-                                {
-                                    string mensaje = @"<div class='alert alert-danger al-dismissertible' role='alert' ><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                                                                                                                                                                                                                 </button><strong></strong> " + TempData["Message"] + " </div>";
-                                    @Html.Raw(mensaje);
-                                }
                             </div>
 
                         </div>
@@ -81,10 +75,120 @@
 </html>
 }
 
-<script>
+<script type="text/javascript">
     // Habilita los tooltips
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    $(document).ready(function () {
+        //document.getElementById('botonAceptar').disabled = true;
+        //document.getElementById('botonAceptar').style= "background-color: white; color: gray"
+        $("#botonAceptar").attr('disabled', 'disabled');
+        $("#botonAceptar").addClass('btn-primary-disabled');
+    });
+
+    $("#NewClave").on("keyup paste", function () {
+        //alert("Hola mundo");
+        validarClave();
+        //$("#botonAceptar").removeAttr('disabled');
+        //$("#botonAceptar").removeClass('btn-primary-disabled');
+    });
+
+    $("#ConfirmNewClave").on("keyup paste", function () {
+        //alert('Hola mundo');
+        validarClave();
+        //$("#botonAceptar").removeAttr('disabled');
+        //$("#botonAceptar").removeClass('btn-success-disabled');
+    });
+
+    //$("#claveNuevaConfirm").keyup(function (e) {
+    //    validarClave();
+    //});
+
+    function validarClave() {
+        
+        
+        //var claveNueva = $("#claveNueva").val();
+        //var claveNuevaConfirm = $("#claveNuevaConfirm").val();
+        var claveNueva = $("#NewClave").val();
+        var claveNuevaConfirm = $("#ConfirmNewClave").val();
+        //alert(claveNueva2 + claveNueva3);
+        var claveValidada = false;
+
+
+        //Tamaño de la clave entre 9 y 25
+        let tamanno = (claveNueva.length >= 9 && claveNueva.length <= 25 && claveNuevaConfirm.length >= 9 && claveNuevaConfirm.length <= 25);
+        if (tamanno) {
+            claveValidada = true;
+        } else {
+            claveValidada = false;
+        }
+
+        
+
+        //debugger;
+        //let regexLetraMinuscula = new RegExp(/(?=.* [a-z]).{1,}$/);
+        let regexLetraMinuscula = /[a-z]$/;
+        let letraMinuscula1 = regexLetraMinuscula.test(claveNueva);
+        let letraMinuscula2 = regexLetraMinuscula.test(claveNuevaConfirm);
+        if (letraMinuscula1 == true && letraMinuscula2 == true) {
+            claveValidada = true;
+        }
+
+        if (letraMinuscula1 == false && letraMinuscula2 == false || letraMinuscula1 == true && letraMinuscula2 == false || letraMinuscula1 == false && letraMinuscula2 == true) {
+            claveValidada = false;
+        }
+
+
+        //let regexLetraMayuscula = new RegExp(/(?=.*[A-Z]).{1,}$/);
+        let regexLetraMayuscula = /[A-Z]$/;
+        let letraMayuscula1 = regexLetraMayuscula.test(claveNueva);
+        let letraMayuscula2 = regexLetraMayuscula.test(claveNuevaConfirm);
+        if (letraMayuscula1 == true && letraMayuscula2 == true) {
+            claveValidada = true;
+        }
+
+        if (letraMayuscula1 == false && letraMayuscula2 == false || letraMayuscula1 == true && letraMayuscula2 == false || letraMayuscula1 == false && letraMayuscula2 == true) {
+            claveValidada = false;
+        }
+
+
+        //let regexNumero = new RegExp(/(?=.*[0-9]).{1,}$/);
+        let regexNumero = /[0-9]$/;
+        let numero1 = regexNumero.test(claveNueva);
+        let numero2 = regexNumero.test(claveNuevaConfirm);
+        if (numero1 == true && numero2 == true) {
+            claveValidada = true;
+        }
+
+        if (numero1 == false && numero2 == false || numero1 == true && numero2 == false || numero1 == false && numero2 == true) {
+            claveValidada = false;
+        }
+
+
+        //let regexEspeciales = new RegExp(/(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/);
+        let regexEspeciales = /[!#$%&'()*+,-./:;<=>?[\]^_{|}~]$/;
+        let especiales1 = regexEspeciales.test(claveNueva);
+        let especiales2 = regexEspeciales.test(claveNuevaConfirm);
+        if (especiales1 == true && especiales2 == true) {
+            claveValidada = true;
+        }
+
+        if (especiales1 == false && especiales2 == false || especiales1 == true && especiales2 == false || especiales1 == false && especiales2 == true) {
+            claveValidada = false;
+        }
+
+        //$("#botonAceptar").prop('disabled', claveValidada);
+        if (claveValidada) {
+            $("#botonAceptar").removeAttr('disabled');
+            $("#botonAceptar").removeClass('btn-primary-disabled');
+        } else {
+            $("#botonAceptar").attr('disabled', 'disabled');
+            $("#botonAceptar").addClass('btn-primary-disabled');
+        }
+    }
+
 </script>
 @Scripts.Render("~/bundles/jqueryval")
+

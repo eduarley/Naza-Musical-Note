@@ -52,7 +52,7 @@
 <hr />
 <p>
     @{
-        if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+        if (UsuarioLogueado != null && UsuarioLogueado.Rol.Descripcion != "Integrante")
         {
             <a class="btn btn-primary" href="@Url.Action("Edit", "Puesto", new { id = Model.Id })" role="button"><i class="fas fa-edit"></i>  Editar</a> <strong> | </strong>
         }

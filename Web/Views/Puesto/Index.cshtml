@@ -33,7 +33,7 @@
 </div>
 
 @{
-    if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+    if (UsuarioLogueado != null && UsuarioLogueado.Rol.Descripcion != "Integrante")
     {
         <p>
             <a class="btn btn-primary" href="@Url.Action("Create","Puesto")">
