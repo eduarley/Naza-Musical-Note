@@ -96,6 +96,26 @@ namespace Infraestructure.Repository
             return puestos;
         }
 
+        public List<Puesto> GetPuestosActivos()
+        {
+            List<Puesto> puestos = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    puestos = ctx.Puesto.Where(p => p.Estado).Include("Categoria").ToList();
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+            return puestos;
+        }
+
         public Puesto Save(Puesto puesto)
         {
             int retorno = 0;
@@ -108,6 +128,7 @@ namespace Infraestructure.Repository
                     oPuesto = GetPuestoById(puesto.Id);
                     if (oPuesto == null)
                     {
+                        puesto.Estado = true;
                         ctx.Puesto.Add(puesto);
                     }
                     else

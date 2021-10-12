@@ -41,7 +41,7 @@
 
 
 <div class="card card-default mt-3">
-    <div class="card-header text-danger border-bottom-0" >
+    <div class="card-header text-danger border-bottom-0">
         <p>* Campos requeridos</p>
     </div>
     <div class="card-body p-3">
@@ -165,10 +165,10 @@
 
                                             @if (ViewBag.Canciones != null)
                                             {
-                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" }) }
+                                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" }) }
                                             else
                                             {
-                                <br />
+                                                <br />
                                                 <span class="right badge badge-danger" id="alertaCancion" data-info="error">Aún no hay canciones.</span>}
                                             <br />
 
@@ -220,14 +220,16 @@
                                         {
                                             foreach (var cat in categorias)
                                             {
-
-                            <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li> }
+                                                
+                                                <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
+                                            }
                                         }
                                         else
                                         {
-                            <li>
-                                <span class="right badge badge-danger">Aún no hay categorías.</span>
-                            </li>}
+                                            <li>
+                                                <span class="right badge badge-danger">Aún no hay categorías.</span>
+                                            </li>
+                                        }
 
 
                                     </ul>
@@ -237,16 +239,24 @@
 
                                 <ul class="tab-content" style="height: 13em; overflow-y:scroll">
 
-
-                                    @foreach (var item in puestos)
+                                    @if (puestos != null)
                                     {
-                                        var idP = puestos;
-                        <li id='puesto_@item.IdCategoria' hidden>
-                            <label>@item.Descripcion</label>
-                            @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
-                            <input id="hiddenID" type="hidden" value="@item.Id" />
-                            <br />
-                        </li>}
+                                        foreach (var item in puestos)
+                                        {
+                                            var idP = puestos;
+                                            <li id='puesto_@item.IdCategoria' hidden>
+                                                <label>@item.Descripcion</label>
+                                                @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
+                                                <input id="hiddenID" type="hidden" value="@item.Id" />
+                                                <br />
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="right badge badge-pill badge-warning" data-info="error">No existen puestos o todos se han desactivado.</span>
+                                    }
+
 
                                 </ul>
                             </div>
@@ -409,8 +419,8 @@
                 return;
             }
 
-            
-          
+
+
 
             if ($('#horafin').val().trim() == "") {
                 mensaje('warning', 'Debe seleccionar hora final', true);

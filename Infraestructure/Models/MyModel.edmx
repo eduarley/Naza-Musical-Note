@@ -32,6 +32,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CorreoEmisor">
           <Key>
@@ -48,6 +49,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCategoria" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -62,8 +64,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Titulo" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="600" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="FechaInicio" Type="datetime" Nullable="false" />
           <Property Name="FechaFin" Type="datetime" />
           <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
@@ -92,7 +94,7 @@
           <Property Name="Apellido_materno" Type="varchar" MaxLength="50" />
           <Property Name="Clave" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Telefono" Type="varchar" MaxLength="8" />
-          <Property Name="Correo" Type="varchar" MaxLength="50" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Foto" Type="varbinary(max)" />
           <Property Name="Token_recovery" Type="varchar" MaxLength="200" />
           <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
@@ -107,6 +109,7 @@
           <Property Name="IdUsuario" Type="varchar" MaxLength="15" />
           <Property Name="IdRolServicio" Type="int" Nullable="false" />
           <Property Name="IdPuesto" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cancion_RolServicio_Cancion">
           <End Role="Cancion" Type="Self.Cancion" Multiplicity="1" />
@@ -252,34 +255,74 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NazaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cancion" EntityType="NazaDBModel.Cancion" />
+          <EntitySet Name="Categoria" EntityType="NazaDBModel.Categoria" />
+          <EntitySet Name="CorreoEmisor" EntityType="NazaDBModel.CorreoEmisor" />
+          <EntitySet Name="Puesto" EntityType="NazaDBModel.Puesto" />
+          <EntitySet Name="Rol" EntityType="NazaDBModel.Rol" />
+          <EntitySet Name="RolServicio" EntityType="NazaDBModel.RolServicio" />
+          <EntitySet Name="sysdiagrams" EntityType="NazaDBModel.sysdiagrams" />
+          <EntitySet Name="Usuario" EntityType="NazaDBModel.Usuario" />
+          <EntitySet Name="Usuario_RolServicio" EntityType="NazaDBModel.Usuario_RolServicio" />
+          <AssociationSet Name="FK_Puesto_Categoria" Association="NazaDBModel.FK_Puesto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Puesto" EntitySet="Puesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_Puesto" Association="NazaDBModel.FK_Usuario_RolServicio_Puesto">
+            <End Role="Puesto" EntitySet="Puesto" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="NazaDBModel.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolServicio_Usuario" Association="NazaDBModel.FK_RolServicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="RolServicio" EntitySet="RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_RolServicio" Association="NazaDBModel.FK_Usuario_RolServicio_RolServicio">
+            <End Role="RolServicio" EntitySet="RolServicio" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_RolServicio_Usuario" Association="NazaDBModel.FK_Usuario_RolServicio_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
+          </AssociationSet>
+          <AssociationSet Name="Cancion_RolServicio" Association="NazaDBModel.Cancion_RolServicio">
+            <End Role="Cancion" EntitySet="Cancion" />
+            <End Role="RolServicio" EntitySet="RolServicio" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Cancion">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Autor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Genero" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Url_version" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Tonalidad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="RolServicio" Relationship="Self.Cancion_RolServicio" FromRole="Cancion" ToRole="RolServicio" />
+          <NavigationProperty Name="RolServicio" Relationship="NazaDBModel.Cancion_RolServicio" FromRole="Cancion" ToRole="RolServicio" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Puesto" Relationship="Self.FK_Puesto_Categoria" FromRole="Categoria" ToRole="Puesto" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Puesto" Relationship="NazaDBModel.FK_Puesto_Categoria" FromRole="Categoria" ToRole="Puesto" />
         </EntityType>
         <EntityType Name="CorreoEmisor">
           <Key>
             <PropertyRef Name="Correo" />
           </Key>
-          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Clave" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Puesto">
@@ -288,41 +331,42 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdCategoria" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Categoria" Relationship="Self.FK_Puesto_Categoria" FromRole="Puesto" ToRole="Categoria" />
-          <NavigationProperty Name="Usuario_RolServicio" Relationship="Self.FK_Usuario_RolServicio_Puesto" FromRole="Puesto" ToRole="Usuario_RolServicio" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="NazaDBModel.FK_Puesto_Categoria" FromRole="Puesto" ToRole="Categoria" />
+          <NavigationProperty Name="Usuario_RolServicio" Relationship="NazaDBModel.FK_Usuario_RolServicio_Puesto" FromRole="Puesto" ToRole="Usuario_RolServicio" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="NazaDBModel.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="RolServicio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario_Propietario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario_Propietario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaFin" Type="DateTime" Precision="3" />
           <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_RolServicio_Usuario" FromRole="RolServicio" ToRole="Usuario" />
-          <NavigationProperty Name="Usuario_RolServicio" Relationship="Self.FK_Usuario_RolServicio_RolServicio" FromRole="RolServicio" ToRole="Usuario_RolServicio" />
-          <NavigationProperty Name="Cancion" Relationship="Self.Cancion_RolServicio" FromRole="RolServicio" ToRole="Cancion" />
+          <NavigationProperty Name="Usuario" Relationship="NazaDBModel.FK_RolServicio_Usuario" FromRole="RolServicio" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario_RolServicio" Relationship="NazaDBModel.FK_Usuario_RolServicio_RolServicio" FromRole="RolServicio" ToRole="Usuario_RolServicio" />
+          <NavigationProperty Name="Cancion" Relationship="NazaDBModel.Cancion_RolServicio" FromRole="RolServicio" ToRole="Cancion" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -332,22 +376,22 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="IdRol" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Apellido_paterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido_paterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Apellido_materno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Clave" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Token_recovery" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Primer_ingreso" Type="Boolean" Nullable="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Rol" Relationship="Self.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
-          <NavigationProperty Name="RolServicio" Relationship="Self.FK_RolServicio_Usuario" FromRole="Usuario" ToRole="RolServicio" />
-          <NavigationProperty Name="Usuario_RolServicio" Relationship="Self.FK_Usuario_RolServicio_Usuario" FromRole="Usuario" ToRole="Usuario_RolServicio" />
+          <NavigationProperty Name="Rol" Relationship="NazaDBModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="RolServicio" Relationship="NazaDBModel.FK_RolServicio_Usuario" FromRole="Usuario" ToRole="RolServicio" />
+          <NavigationProperty Name="Usuario_RolServicio" Relationship="NazaDBModel.FK_Usuario_RolServicio_Usuario" FromRole="Usuario" ToRole="Usuario_RolServicio" />
         </EntityType>
         <EntityType Name="Usuario_RolServicio">
           <Key>
@@ -357,13 +401,14 @@
           <Property Name="IdUsuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="IdRolServicio" Type="Int32" Nullable="false" />
           <Property Name="IdPuesto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Puesto" Relationship="Self.FK_Usuario_RolServicio_Puesto" FromRole="Usuario_RolServicio" ToRole="Puesto" />
-          <NavigationProperty Name="RolServicio" Relationship="Self.FK_Usuario_RolServicio_RolServicio" FromRole="Usuario_RolServicio" ToRole="RolServicio" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_RolServicio_Usuario" FromRole="Usuario_RolServicio" ToRole="Usuario" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Puesto" Relationship="NazaDBModel.FK_Usuario_RolServicio_Puesto" FromRole="Usuario_RolServicio" ToRole="Puesto" />
+          <NavigationProperty Name="RolServicio" Relationship="NazaDBModel.FK_Usuario_RolServicio_RolServicio" FromRole="Usuario_RolServicio" ToRole="RolServicio" />
+          <NavigationProperty Name="Usuario" Relationship="NazaDBModel.FK_Usuario_RolServicio_Usuario" FromRole="Usuario_RolServicio" ToRole="Usuario" />
         </EntityType>
         <Association Name="FK_Puesto_Categoria">
-          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
-          <End Role="Puesto" Type="Self.Puesto" Multiplicity="*" />
+          <End Type="NazaDBModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="NazaDBModel.Puesto" Role="Puesto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categoria">
               <PropertyRef Name="Id" />
@@ -374,8 +419,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_RolServicio_Puesto">
-          <End Role="Puesto" Type="Self.Puesto" Multiplicity="1" />
-          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <End Type="NazaDBModel.Puesto" Role="Puesto" Multiplicity="1" />
+          <End Type="NazaDBModel.Usuario_RolServicio" Role="Usuario_RolServicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Puesto">
               <PropertyRef Name="Id" />
@@ -386,8 +431,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Rol">
-          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Type="NazaDBModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="NazaDBModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="Id" />
@@ -398,8 +443,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RolServicio_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="*" />
+          <End Type="NazaDBModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="NazaDBModel.RolServicio" Role="RolServicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -410,8 +455,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_RolServicio_RolServicio">
-          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="1" />
-          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <End Type="NazaDBModel.RolServicio" Role="RolServicio" Multiplicity="1" />
+          <End Type="NazaDBModel.Usuario_RolServicio" Role="Usuario_RolServicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RolServicio">
               <PropertyRef Name="Id" />
@@ -422,8 +467,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_RolServicio_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Usuario_RolServicio" Type="Self.Usuario_RolServicio" Multiplicity="*" />
+          <End Type="NazaDBModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="NazaDBModel.Usuario_RolServicio" Role="Usuario_RolServicio" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="Id" />
@@ -434,48 +479,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="Cancion_RolServicio">
-          <End Role="Cancion" Type="Self.Cancion" Multiplicity="*" />
-          <End Role="RolServicio" Type="Self.RolServicio" Multiplicity="*" />
+          <End Type="NazaDBModel.Cancion" Role="Cancion" Multiplicity="*" />
+          <End Type="NazaDBModel.RolServicio" Role="RolServicio" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cancion" EntityType="Self.Cancion" />
-          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
-          <EntitySet Name="CorreoEmisor" EntityType="Self.CorreoEmisor" />
-          <EntitySet Name="Puesto" EntityType="Self.Puesto" />
-          <EntitySet Name="Rol" EntityType="Self.Rol" />
-          <EntitySet Name="RolServicio" EntityType="Self.RolServicio" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <EntitySet Name="Usuario_RolServicio" EntityType="Self.Usuario_RolServicio" />
-          <AssociationSet Name="FK_Puesto_Categoria" Association="Self.FK_Puesto_Categoria">
-            <End Role="Categoria" EntitySet="Categoria" />
-            <End Role="Puesto" EntitySet="Puesto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_RolServicio_Puesto" Association="Self.FK_Usuario_RolServicio_Puesto">
-            <End Role="Puesto" EntitySet="Puesto" />
-            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RolServicio_Usuario" Association="Self.FK_RolServicio_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="RolServicio" EntitySet="RolServicio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_RolServicio_RolServicio" Association="Self.FK_Usuario_RolServicio_RolServicio">
-            <End Role="RolServicio" EntitySet="RolServicio" />
-            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_RolServicio_Usuario" Association="Self.FK_Usuario_RolServicio_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Usuario_RolServicio" EntitySet="Usuario_RolServicio" />
-          </AssociationSet>
-          <AssociationSet Name="Cancion_RolServicio" Association="Self.Cancion_RolServicio">
-            <End Role="Cancion" EntitySet="Cancion" />
-            <End Role="RolServicio" EntitySet="RolServicio" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -485,112 +491,115 @@
           <EntitySetMapping Name="Cancion">
             <EntityTypeMapping TypeName="NazaDBModel.Cancion">
               <MappingFragment StoreEntitySet="Cancion">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Autor" ColumnName="Autor" />
-                <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="Url_version" ColumnName="Url_version" />
-                <ScalarProperty Name="Tonalidad" ColumnName="Tonalidad" />
-                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="Tonalidad" ColumnName="Tonalidad" />
+                <ScalarProperty Name="Url_version" ColumnName="Url_version" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="NazaDBModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CorreoEmisor">
             <EntityTypeMapping TypeName="NazaDBModel.CorreoEmisor">
               <MappingFragment StoreEntitySet="CorreoEmisor">
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Puesto">
             <EntityTypeMapping TypeName="NazaDBModel.Puesto">
               <MappingFragment StoreEntitySet="Puesto">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rol">
             <EntityTypeMapping TypeName="NazaDBModel.Rol">
               <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RolServicio">
             <EntityTypeMapping TypeName="NazaDBModel.RolServicio">
               <MappingFragment StoreEntitySet="RolServicio">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="NazaDBModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="NazaDBModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido_paterno" ColumnName="Apellido_paterno" />
-                <ScalarProperty Name="Apellido_materno" ColumnName="Apellido_materno" />
-                <ScalarProperty Name="Clave" ColumnName="Clave" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
-                <ScalarProperty Name="Token_recovery" ColumnName="Token_recovery" />
-                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
-                <ScalarProperty Name="Primer_ingreso" ColumnName="Primer_ingreso" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Primer_ingreso" ColumnName="Primer_ingreso" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="Token_recovery" ColumnName="Token_recovery" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Apellido_materno" ColumnName="Apellido_materno" />
+                <ScalarProperty Name="Apellido_paterno" ColumnName="Apellido_paterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario_RolServicio">
             <EntityTypeMapping TypeName="NazaDBModel.Usuario_RolServicio">
               <MappingFragment StoreEntitySet="Usuario_RolServicio">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdRolServicio" ColumnName="IdRolServicio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdPuesto" ColumnName="IdPuesto" />
+                <ScalarProperty Name="IdRolServicio" ColumnName="IdRolServicio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="Cancion_RolServicio" TypeName="NazaDBModel.Cancion_RolServicio" StoreEntitySet="Cancion_RolServicio">
-            <EndProperty Name="Cancion">
-              <ScalarProperty Name="Id" ColumnName="IdCancion" />
-            </EndProperty>
             <EndProperty Name="RolServicio">
               <ScalarProperty Name="Id" ColumnName="IdRolServicio" />
+            </EndProperty>
+            <EndProperty Name="Cancion">
+              <ScalarProperty Name="Id" ColumnName="IdCancion" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

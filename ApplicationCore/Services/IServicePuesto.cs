@@ -10,6 +10,7 @@ namespace ApplicationCore.Services
     public interface IServicePuesto
     {
         List<Puesto> GetPuestos();
+        List<Puesto> GetPuestosActivos();
         Puesto GetPuestoById(int? id);
         Puesto Save(Puesto puesto);
         bool BorrarPuesto(int id);

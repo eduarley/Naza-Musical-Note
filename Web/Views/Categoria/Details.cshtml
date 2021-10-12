@@ -54,7 +54,19 @@
                     <div class="text-muted">
                         <p class="text-sm">
                             @Html.DisplayName("Id: ")
-                            <b>@Html.DisplayFor(model => model.Id)</b>
+                            <b class="d-block">@Html.DisplayFor(model => model.Id)</b>
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Estado)
+                            @if (Model.Estado)
+                            {
+                                <b class="d-block">Activo</b>
+                            }
+                            else
+                            {
+                                <b class="d-block">Inactivo</b>
+                            }
+
                         </p>
                     </div>
                 </div>

@@ -63,6 +63,9 @@
                                     <th>
                                         @Html.DisplayName("Categoría")
                                     </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Estado)
+                                    </th>
                                     <th class="notexport" style="text-align:center"></th>
                                 </tr>
                             </thead>
@@ -70,49 +73,53 @@
                                 @foreach (var item in Model)
                                 {
 
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Descripcion)
-                                        </td>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
-                                        </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
+                                    </td>
+                                    <td class="text-center">
+                                        @if (item.Estado)
+                                        {
+                                            <h5><span class="right badge badge-pill badge-success">Activo</span></h5>
+                                        }
+                                        else
+                                        {
+                                            <h5><span class="right badge badge-pill badge-danger">Inactivo</span></h5>
+                                        }
 
-                                        <td class="text-center ">
-                                            <ul style="display:flex; list-style:none">
+                                    </td>
+                                    <td class="text-center ">
+                                        <ul style="display:flex; list-style:none">
+                                            <li>
+                                                <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details", "Puesto", new { id = item.Id })">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                </a>
+                                            </li>
+                                            @{ if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+                                                                {
                                                 <li>
-                                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details", "Puesto", new { id = item.Id })">
-                                                        <i class="fas fa-eye">
+                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit", "Puesto", new { id = item.Id })">
+                                                        <i class="fas fa-pencil-alt">
                                                         </i>
                                                     </a>
-                                                </li>
-                                                @{
-                                                    if (UsuarioLogueado.Rol.Descripcion != "Integrante")
-                                                    {
-                                                        <li>
-                                                            <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit", "Puesto", new { id = item.Id })">
-                                                                <i class="fas fa-pencil-alt">
-                                                                </i>
-                                                            </a>
-                                                        </li>
-                                                        }
-                                                    }
+                                                </li> } }
 
-                                                    @{
-                                                        if (UsuarioLogueado.Rol.Descripcion != "Integrante")
-                                                        {
-                                                            <li>
-                                                                <a id="botonEliminar" class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)" href="#">
-                                                                    <i class="fas fa-trash">
-                                                                    </i>
-                                                                </a>
-                                                            </li>
-                                                        }
-                                                    }
-                                                </ul>
-                                            </td>
-                                        </tr>
+                                            @{ if (UsuarioLogueado.Rol.Descripcion != "Integrante")
+                                                                {
+                                                <li>
+                                                    <a id="botonEliminar" class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)" href="#">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                    </a>
+                                                </li> } }
+                                        </ul>
+                                    </td>
+                                </tr>
                                                 }
                                             </tbody>
                                         </table>

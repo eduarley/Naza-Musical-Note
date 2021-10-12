@@ -27,6 +27,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="CorreoEmisor">
     <Key>
@@ -43,6 +44,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdCategoria" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -57,8 +59,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="Titulo" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="600" />
+    <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
     <Property Name="FechaInicio" Type="datetime" Nullable="false" />
     <Property Name="FechaFin" Type="datetime" />
     <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
@@ -87,7 +89,7 @@
     <Property Name="Apellido_materno" Type="varchar" MaxLength="50" />
     <Property Name="Clave" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Telefono" Type="varchar" MaxLength="8" />
-    <Property Name="Correo" Type="varchar" MaxLength="50" />
+    <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Foto" Type="varbinary(max)" />
     <Property Name="Token_recovery" Type="varchar" MaxLength="200" />
     <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
@@ -102,6 +104,7 @@
     <Property Name="IdUsuario" Type="varchar" MaxLength="15" />
     <Property Name="IdRolServicio" Type="int" Nullable="false" />
     <Property Name="IdPuesto" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Cancion_RolServicio_Cancion">
     <End Role="Cancion" Type="Self.Cancion" Multiplicity="1" />

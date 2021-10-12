@@ -52,7 +52,7 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
-            ViewBag.Categoria = serviceCategoria.GetCategorias();
+            ViewBag.Categoria = serviceCategoria.GetCategoriasActivas();
             return View();
         }
 
@@ -62,15 +62,24 @@ namespace Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorize((int)Roles.Lider)]
-        public ActionResult Create(Puesto puesto)
+        public ActionResult Save(Puesto puesto)
         {
-            Action = "S";
+            /*
+            if (puesto.Estado == true && puesto.Categoria.Estado == false)
+            {
+                TempData["Message"] = "No puedes activar este puesto porque su categoría está desactivada.";
+                @TempData["Action"] = "E";
+                TempData.Keep();
+            }
+            */
 
+            Action = "S";
             try
             {
                 // Es valido
                 if (ModelState.IsValid)
                 {
+                    
                     servicePuesto.Save(puesto);
                     TempData["Action"] = Action;
                 }
@@ -105,7 +114,7 @@ namespace Web.Controllers
         public ActionResult Edit(int? id)
         {
             List<Categoria> categorias = null;
-            categorias = serviceCategoria.GetCategorias();
+            categorias = serviceCategoria.GetCategoriasActivas();
             //ViewBag.IdCategoria = serviceCategoria.LlenarCombo().ToList();
             ViewBag.Categoria = categorias;
             Puesto puesto = servicePuesto.GetPuestoById(id.Value);
@@ -152,8 +161,9 @@ namespace Web.Controllers
         }
 
         [CustomAuthorize((int)Roles.Lider)]
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
+            var status = false;
             Action = "D";
             try
             {
@@ -162,7 +172,7 @@ namespace Web.Controllers
 
                 @TempData["Action"] = Action;
                 TempData.Keep();
-                return RedirectToAction("Index", "Puesto");
+                status = true;
             }
             catch (Exception ex)
             {
@@ -171,9 +181,8 @@ namespace Web.Controllers
                 TempData["Message"] = "Error al procesar los datos!";
                 TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
-                // Redireccion a la captura del Error
-                return RedirectToAction("Index", "Puesto");
             }
+            return new JsonResult { Data = new { status = status } };
         }
     }
 }

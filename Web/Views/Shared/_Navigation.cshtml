@@ -24,16 +24,16 @@
                 <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline">
                     @{ Infraestructure.Models.Usuario oUsuario1 = null;
-                                    // Validar si vienen datos en la session
-                                    if (Session["User"] != null)
-                                    {
-                                        // Casting
-                                        oUsuario1 = Session["User"] as Infraestructure.Models.Usuario;
-                                    }
+                        // Validar si vienen datos en la session
+                        if (Session["User"] != null)
+                        {
+                            // Casting
+                            oUsuario1 = Session["User"] as Infraestructure.Models.Usuario;
+                        }
 
-                                    if (oUsuario1 != null)
-                                    {
-                        @oUsuario1.NombreCompleto } }
+                        if (oUsuario1 != null)
+                        {
+            @oUsuario1.NombreCompleto } }
                 </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -45,10 +45,10 @@
                         if (UsuarioLogueado.Foto == null)
                         {
         <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> }
-                        else
-                        {
-        <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image">}
-                    }
+    else
+    {
+<img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image">}
+}
 
 
 
@@ -56,15 +56,15 @@
                     <p>
 
                         @{ string rol = "";
-                                        // Validar si vienen datos en la session
-                                        if (Session["User"] != null)
-                                        {
-                                            if (oUsuario1 != null)
-                                            {
-                                                rol = $"{oUsuario1.Rol.Descripcion}";
-                                            }
-                                        }
-                            @rol }
+                            // Validar si vienen datos en la session
+                            if (Session["User"] != null)
+                            {
+                                if (oUsuario1 != null)
+                                {
+                                    rol = $"{oUsuario1.Rol.Descripcion}";
+                                }
+                            }
+                @rol }
                         <!--<small>Miembro desde 23 de Julio, 2021</small>-->
                     </p>
                 </li>
@@ -82,15 +82,18 @@
 </nav>
 <!-- /.navbar -->
 <!-- Main Sidebar Container -->
-
-@if (UsuarioLogueado.Rol.Id == 1)
+@if (UsuarioLogueado != null)
 {
-    @Html.Partial("_MenuLider")
-}
+    if (UsuarioLogueado.Rol.Id == 1)
+    {
+        @Html.Partial("_MenuLider") 
+    }
 else
-{
-    @Html.Partial("_MenuIntegrante")
+    {
+        @Html.Partial("_MenuIntegrante")
+    }
 }
+
 
 
 

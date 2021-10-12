@@ -1,11 +1,8 @@
 ﻿@model Infraestructure.Models.RolServicio
-@{
-    ViewBag.Title = "Editar Rol de Servicio";
-    List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
+@{ ViewBag.Title = "Editar Rol de Servicio";
+                List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
 
-    List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos;
-
-}
+                List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos; }
 @section Styles{
     <link rel="stylesheet" href="~/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
     <!-- Select2 -->
@@ -215,15 +212,13 @@
                                             foreach (var cat in categorias)
                                             {
 
-                            <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
- }
-                    }
-                    else
-                    {
-        <li>
-            <span class="right badge badge-danger">Aún no hay categorías.</span>
-        </li>
-}
+                            <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li> }
+                                        }
+                                        else
+                                        {
+                            <li>
+                                <span class="right badge badge-danger">Aún no hay categorías.</span>
+                            </li>}
 
 
                                     </ul>
@@ -233,17 +228,24 @@
 
                                 <ul class="tab-content" style="height: 13em; overflow-y:scroll">
 
-
-                                    @foreach (var item in puestos)
+                                    @if (puestos != null)
                                     {
-                                        var idP = puestos;
-                        <li id='puesto_@item.IdCategoria' hidden>
-                            <label>@item.Descripcion</label>
-                            @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
-                            <input id="hiddenID" type="hidden" value="@item.Id" />
-                            <br />
-                        </li>
-}
+                                        foreach (var item in puestos)
+                                        {
+                                            var idP = puestos;
+                                            <li id='puesto_@item.IdCategoria' hidden>
+                                                <label>@item.Descripcion</label>
+                                                @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
+                                                <input id="hiddenID" type="hidden" value="@item.Id" />
+                                                <br />
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="right badge badge-pill badge-warning" data-info="error">No existen puestos o todos se han desactivado.</span>
+                                    }
+
 
                                 </ul>
                             </div>
@@ -523,7 +525,7 @@
 
 
 
-            
+
 
 
         }
@@ -534,10 +536,10 @@
         $(document).ready(function () {
 
 
-            
-           
+
+
             Cargar();
-            
+
 
 
 
@@ -573,7 +575,7 @@
                     IdUsuarios: listausuarios,
 
                 }
-                
+
                 SaveEvent(data);
                 //llama la funcion para enviar la data al servidor
             })

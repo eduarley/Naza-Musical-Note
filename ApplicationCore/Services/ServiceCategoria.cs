@@ -27,6 +27,10 @@ namespace ApplicationCore.Services
             return repository.GetCategorias();
         }
 
+        public List<Categoria> GetCategoriasActivas()
+        {
+            return repository.GetCategoriasActivas();
+        }
 
         public Categoria Save(Categoria categoria)
         {

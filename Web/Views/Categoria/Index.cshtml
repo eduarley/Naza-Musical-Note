@@ -44,7 +44,9 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Descripcion)
                                     </th>
-
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Estado)
+                                    </th>
                                     <th class="notexport" style="text-align:center"></th>
                                 </tr>
                             </thead>
@@ -56,7 +58,17 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Descripcion)
                                         </td>
+                                        <td class="text-center">
+                                            @if (item.Estado)
+                                            {
+                                                <h5><span class="right badge badge-pill badge-success">Activo</span></h5>
+                                            }
+                                            else
+                                            {
+                                                <h5><span class="right badge badge-pill badge-danger">Inactivo</span></h5>
+                                            }
 
+                                        </td>
                                         <td class="text-center ">
                                             <ul style="display:flex; list-style:none">
                                                 <li>
@@ -238,7 +250,7 @@
         function eliminar(id) {
             Swal.fire({
                 title: 'Estás seguro?',
-                text: "También se borarán los puestos vinculados. No podrás revertirlo!",
+                text: "Se desactivarán los puestos vinculados a esta categoría.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

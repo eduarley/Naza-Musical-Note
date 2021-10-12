@@ -27,6 +27,11 @@ namespace ApplicationCore.Services
             return repository.GetPuestos();
         }
 
+        public List<Puesto> GetPuestosActivos()
+        {
+            return repository.GetPuestosActivos();
+        }
+
         public Puesto Save(Puesto puesto)
         {
             return repository.Save(puesto);

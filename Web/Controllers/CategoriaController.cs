@@ -151,6 +151,7 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Save(Categoria categoria)
         {
+
             try
             {
                 if (ModelState.IsValid)

@@ -57,8 +57,8 @@ namespace Web.Controllers
                 participantes = serviceUsuario.GetIntegrantesActivos();
                 participantes.Insert(0, new Usuario() { Id = null, Nombre = "Sin Asignar" });
                 canciones = serviceCancion.GetCancionesActivas();
-                puestos = servicePuesto.GetPuestos();
-                categorias = serviceCategoria.GetCategorias();
+                puestos = servicePuesto.GetPuestosActivos();
+                categorias = serviceCategoria.GetCategoriasActivas();
                 var usuarioQuery = participantes.Select(p => new { p.Id, DisplayText = p.NombreCompleto });
                 ViewBag.Usuarios = usuarioQuery;
                 if (canciones.Count > 0)
@@ -141,8 +141,8 @@ namespace Web.Controllers
                 participantes = serviceUsuario.GetIntegrantesActivos();
                 participantes.Insert(0, new Usuario() { Id = null, Nombre = "Sin Asignar" });
                 canciones = serviceCancion.GetCancionesActivas();
-                puestos = servicePuesto.GetPuestos();
-                categorias = serviceCategoria.GetCategorias();
+                puestos = servicePuesto.GetPuestosActivos();
+                categorias = serviceCategoria.GetCategoriasActivas();
                 var usuarioQuery = participantes.Select(p => new { p.Id, DisplayText = p.NombreCompleto });
                 ViewBag.Usuarios = usuarioQuery;
                 if (canciones.Count > 0)

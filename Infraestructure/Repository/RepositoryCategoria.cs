@@ -20,15 +20,16 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    Categoria oCategoria = ctx.Categoria.Where(a => a.Id == id).Include(e =>e.Puesto).FirstOrDefault();
+                    Categoria oCategoria = ctx.Categoria.Where(a => a.Id == id).Include(e => e.Puesto).FirstOrDefault();
                     if (oCategoria != null)
                     {
                         foreach (var item in oCategoria.Puesto)
                         {
-                            ctx.Database.ExecuteSqlCommand("delete from Usuario_RolServicio where IdPuesto =" + item.Id);
+                            ctx.Database.ExecuteSqlCommand("update Usuario_RolServicio set estado = 0 where IdPuesto =" + item.Id);
                         }
-                        ctx.Database.ExecuteSqlCommand("delete from puesto where IdCategoria =" + oCategoria.Id);
-                        ctx.Categoria.Remove(oCategoria);
+                        ctx.Database.ExecuteSqlCommand("update puesto set estado = 0 where IdCategoria =" + oCategoria.Id);
+                        oCategoria.Estado = false;
+                        ctx.Entry(oCategoria).State = EntityState.Modified;
                         if (ctx.SaveChanges() >= 0)
                             estado = true;
                     }
@@ -87,6 +88,38 @@ namespace Infraestructure.Repository
             return categorias;
         }
 
+        public List<Categoria> GetCategoriasActivas()
+        {
+            List<Categoria> categorias = null;
+            List<Categoria> categoriasConPuestos = new List<Categoria>();
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    categorias = ctx.Categoria.Where(p => p.Estado).Include("Puesto").ToList();
+                    foreach (var item in categorias)
+                    {
+                        if (item.Estado)
+                        {
+                            if (item.Puesto.Count > 0)
+                            {
+                                categoriasConPuestos.Add(item);
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+            return categoriasConPuestos;
+        }
 
         public Categoria Save(Categoria categoria)
         {
@@ -99,7 +132,10 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oCategoria = GetCategoriaByID(categoria.Id);
                     if (oCategoria == null)
+                    {
+                        categoria.Estado = true;
                         ctx.Categoria.Add(categoria);
+                    }
                     else
                         ctx.Entry(categoria).State = EntityState.Modified;
 

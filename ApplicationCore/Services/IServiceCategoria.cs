@@ -10,6 +10,7 @@ namespace ApplicationCore.Services
     public interface IServiceCategoria
     {
         List<Categoria> GetCategorias();
+        List<Categoria> GetCategoriasActivas();
         Categoria GetCategoriaByID(int id);
         bool DeteteCategoria(int id);
         Categoria Save(Categoria categoria);
