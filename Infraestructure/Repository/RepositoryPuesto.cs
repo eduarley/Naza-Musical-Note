@@ -12,7 +12,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryPuesto : IRepositoryPuesto
     {
-        public bool BorrarPuesto(int id)
+        public bool DeletePuesto(int id)
         {
             try
             {
@@ -22,9 +22,10 @@ namespace Infraestructure.Repository
                     Puesto puesto = GetPuestoById(id);
                     if (puesto != null)
                     {
-                        ctx.Database.ExecuteSqlCommand("delete from Puesto where Id =" + puesto.Id);
+                        //ctx.Database.ExecuteSqlCommand("delete from Puesto where Id =" + puesto.Id);
                         //ctx.Puesto.Remove(puesto);
-
+                        puesto.Estado = false;
+                        ctx.Entry(puesto).State = EntityState.Modified;
                         if (ctx.SaveChanges() >= 0)
                             estado = true;
                     }

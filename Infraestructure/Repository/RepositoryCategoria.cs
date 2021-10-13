@@ -91,24 +91,13 @@ namespace Infraestructure.Repository
         public List<Categoria> GetCategoriasActivas()
         {
             List<Categoria> categorias = null;
-            List<Categoria> categoriasConPuestos = new List<Categoria>();
+            //List<Categoria> categoriasConPuestos = new List<Categoria>();
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     categorias = ctx.Categoria.Where(p => p.Estado).Include("Puesto").ToList();
-                    foreach (var item in categorias)
-                    {
-                        if (item.Estado)
-                        {
-                            if (item.Puesto.Count > 0)
-                            {
-                                categoriasConPuestos.Add(item);
-                            }
-
-                        }
-
-                    }
+                    
                 }
             }
             catch (DbUpdateException dbEx)
@@ -118,7 +107,8 @@ namespace Infraestructure.Repository
                 throw new Exception(mensaje);
             }
 
-            return categoriasConPuestos;
+            //return categoriasConPuestos;
+            return categorias;
         }
 
         public Categoria Save(Categoria categoria)

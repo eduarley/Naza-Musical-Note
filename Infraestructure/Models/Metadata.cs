@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Infraestructure.Utils;
 
 namespace Infraestructure.Models
 {
@@ -113,9 +114,8 @@ namespace Infraestructure.Models
         [Display(Name = "Apellido materno")]
         public string Apellido_materno { get; set; }
 
-
-        //VALIDAR FORMATO DE CONTRASENA
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
+        [PasswordValidation]
+        [DataType(DataType.Password)]
         public string Clave { get; set; }
 
         [Display(Name = "Teléfono")]

@@ -32,8 +32,8 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
+                return RedirectToAction("Default", "Error");
             }
-            return View();
         }
 
 
@@ -59,15 +59,19 @@ namespace Web.Controllers
             try
             {
                 cancion = serviceCancion.GetCancionByID(id);
-                ViewBag.UrlFormat = serviceCancion.FormatURL(cancion.Url_version);
+                
 
-                string prueba = ViewBag.UrlFormat;
+                
                 if (cancion == null)
                 {
-                    TempData["Message"] = "No existe la canción";
+                    TempData["Message"] = "No existe la canción indicada";
                     @TempData["Action"] = "E";
                     TempData.Keep();
                     return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.UrlFormat = serviceCancion.FormatURL(cancion.Url_version);
                 }
             }
             catch (Exception ex)
@@ -101,7 +105,7 @@ namespace Web.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
                     TempData["Action"] = "E";
-                    TempData["Message"] = "No existe esa canción";
+                    TempData["Message"] = "No existe la canción indicada";
                     TempData.Keep();
                     return RedirectToAction("Index");
                 }

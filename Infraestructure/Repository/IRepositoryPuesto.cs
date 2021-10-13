@@ -13,6 +13,6 @@ namespace Infraestructure.Repository
         List<Puesto> GetPuestosActivos();
         Puesto GetPuestoById(int? id);
         Puesto Save(Puesto puesto);
-        bool BorrarPuesto(int id);
+        bool DeletePuesto(int id);
     }
 }

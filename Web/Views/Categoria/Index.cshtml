@@ -86,7 +86,7 @@
                                                 <li>
 
                                                     <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
-                                                        <i class="fas fa-trash">
+                                                        <i class="fas fa-ban">
                                                         </i>
                                                     </a>
 
@@ -255,7 +255,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, bórralo!',
+                confirmButtonText: 'Sí, desactívalo!',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {

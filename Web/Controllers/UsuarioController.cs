@@ -27,6 +27,7 @@ namespace Web.Controllers
             try
             {
                 lista = serviceUsuario.GetUsuarios();
+                return View(lista);
             }
             catch (Exception ex)
             {
@@ -37,9 +38,9 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
+                return RedirectToAction("Default", "Error");
             }
-            
-            return View(lista);
+
         }
 
         [CustomAuthorize((int)Roles.Lider)]
@@ -220,15 +221,23 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = serviceUsuario.GetUsuarioByID(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
+            
             try
             {
-                ViewBag.Rol = serviceRol.GetRoles();
-                return View(usuario);
+                Usuario usuario = serviceUsuario.GetUsuarioByID(id);
+                if (usuario != null)
+                {
+                    ViewBag.Rol = serviceRol.GetRoles();
+                    return View(usuario);
+                }
+                else
+                {
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "Error al procesar los datos! ";
+                    TempData.Keep();
+                    return RedirectToAction("Index");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -284,6 +293,7 @@ namespace Web.Controllers
 
         public ActionResult ChangePassNewUser(string id)
         {
+
             Viewmodels.ViewModelPassNewUser model = new Viewmodels.ViewModelPassNewUser();
             model.IdUsuario = id;
             return View(model);
@@ -362,6 +372,46 @@ namespace Web.Controllers
             }
         }
 
+
+        public ActionResult Profile(string id)
+        {
+            try
+            {
+                
+                Usuario usuario = (Usuario)Session["User"];
+                if (usuario != null)
+                {
+                    return View(usuario);
+                }
+                else
+                {
+                    @TempData["Action"] = "E";
+                    TempData["Message"] = "Error al procesar los datos!";
+                    TempData.Keep();
+                    return RedirectToAction("default", "Error");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+           
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateProfile()
+        {
+            return null;
+        }
    
     }
 }

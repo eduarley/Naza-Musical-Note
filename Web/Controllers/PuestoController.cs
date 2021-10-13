@@ -17,8 +17,8 @@ namespace Web.Controllers
     {
         IServiceCategoria serviceCategoria = new ServiceCategoria();
         IServicePuesto servicePuesto = new ServicePuesto();
-        private static String Action;
-        private static String Message;
+
+
 
         // GET: Puesto
         [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
@@ -34,6 +34,7 @@ namespace Web.Controllers
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 @TempData["Message"] = ex.Message;
+                @TempData["Action"] = "E";
                 TempData.Keep();
                 return RedirectToAction("Default", "Error");
             }
@@ -43,7 +44,26 @@ namespace Web.Controllers
         // GET: Puesto/Details/5
         public ActionResult Details(int id)
         {
-            Puesto puesto = servicePuesto.GetPuestoById(id);
+            Puesto puesto = null;
+            try
+            {
+                puesto = servicePuesto.GetPuestoById(id);
+                if (puesto == null)
+                {
+                    TempData["Message"] = "No existe el puesto indicado";
+                    @TempData["Action"] = "E";
+                    TempData.Keep();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Pasar el Error a la página que lo muestra
+                @TempData["Message"] = ex.Message;
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
             return View(puesto);
         }
 
@@ -52,8 +72,22 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Create()
         {
-            ViewBag.Categoria = serviceCategoria.GetCategoriasActivas();
-            return View();
+            try
+            {
+                ViewBag.Categoria = serviceCategoria.GetCategoriasActivas();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData.Keep();
+                @TempData["Action"] = "E";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Index");
+            }
+
         }
 
         // POST: Puesto/Create
@@ -73,7 +107,7 @@ namespace Web.Controllers
             }
             */
 
-            Action = "S";
+
             try
             {
                 // Es valido
@@ -81,17 +115,16 @@ namespace Web.Controllers
                 {
                     
                     servicePuesto.Save(puesto);
-                    TempData["Action"] = Action;
+                    TempData["Action"] = "S";
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
-
-                    TempData["Message"] = "Error al procesar los datos!";
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "Error al procesar los datos! ";
                     TempData.Keep();
-
-                    return View("Create", puesto);
+                    return RedirectToAction("Index");
                 }
 
                 // redirigir
@@ -101,11 +134,11 @@ namespace Web.Controllers
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! ";
-                TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
+                @TempData["Action"] = "E";
                 // Redireccion a la captura del Error
-                return RedirectToAction("Index", "Puesto");
+                return RedirectToAction("Index");
             }
         }
 
@@ -114,14 +147,35 @@ namespace Web.Controllers
         public ActionResult Edit(int? id)
         {
             List<Categoria> categorias = null;
-            categorias = serviceCategoria.GetCategoriasActivas();
-            //ViewBag.IdCategoria = serviceCategoria.LlenarCombo().ToList();
-            ViewBag.Categoria = categorias;
-            Puesto puesto = servicePuesto.GetPuestoById(id.Value);
-            //ViewBag.ElId = (puesto.IdCategoria);
+            try
+            {
+                categorias = serviceCategoria.GetCategoriasActivas();
+                ViewBag.Categoria = categorias;
+                Puesto puesto = servicePuesto.GetPuestoById(id.Value);
+                if(puesto != null)
+                    return View(puesto);
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "No existe el puesto indicado";
+                    TempData.Keep();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData.Keep();
+                @TempData["Action"] = "E";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Index");
+            }
+
             
-            //ViewBag.IdCategoria = new SelectList(db.Categoria, "Id", "Descripcion");
-            return View(puesto);
         }
 
         // POST: Puesto/Edit/5
@@ -132,16 +186,14 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Edit(Puesto puesto)
         {
-            Action = "U";
+
             try
             {
-                //Puesto puesto = servicePuesto.GetPuestoById(id);
-                // Response.StatusCode = 500;
 
                 if (ModelState.IsValid)
                 {
                     servicePuesto.Save(puesto);
-                    TempData["Action"] = Action;
+                    TempData["Action"] = "U";
                     return RedirectToAction("Index");
                 }
                 ViewBag.IdCategoria = serviceCategoria.GetCategorias();
@@ -152,8 +204,7 @@ namespace Web.Controllers
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos!";
-                TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
                 // Redireccion a la captura del Error
                 return RedirectToAction("Index", "Puesto");
@@ -164,22 +215,34 @@ namespace Web.Controllers
         public JsonResult Delete(int id)
         {
             var status = false;
-            Action = "D";
             try
             {
-                Puesto puesto = servicePuesto.GetPuestoById(id);
-                servicePuesto.BorrarPuesto(id);
 
-                @TempData["Action"] = Action;
-                TempData.Keep();
-                status = true;
+                Puesto puesto = servicePuesto.GetPuestoById(id);
+                if (servicePuesto.DeletePuesto(id))
+                {
+                    @TempData["Action"] = "D";
+                    TempData.Keep();
+                    status = true;
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "No existe el puesto indicado";
+                    TempData.Keep();
+                }
+
+               
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos!";
-                TempData["MessageError"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
                 TempData.Keep();
             }
             return new JsonResult { Data = new { status = status } };

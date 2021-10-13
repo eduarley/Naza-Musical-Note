@@ -33,8 +33,8 @@ namespace Web.Controllers
                 ViewBag.Message = TempData["Message"];
                 @TempData["Action"] = "E";
                 TempData.Keep();
+                return RedirectToAction("Default", "Error");
             }
-            return View();
         }
 
 

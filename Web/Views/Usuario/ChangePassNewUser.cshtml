@@ -43,7 +43,7 @@
                                 @Html.PasswordFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
                                 @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
                             </div>
-                            <div class="formDiv" style="transition-delay: 0.4s">
+                            <div class="formDiv" style="transition-delay: 0.4s; margin-top: 20px">
                                 <p>CONFIRME SU NUEVA CONTRASEÑA</p>
                                 <!--<input type="text" />-->
                                 @Html.PasswordFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })

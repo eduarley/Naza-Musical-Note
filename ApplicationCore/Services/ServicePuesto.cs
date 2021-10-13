@@ -11,9 +11,9 @@ namespace ApplicationCore.Services
     public class ServicePuesto : IServicePuesto
     {
         IRepositoryPuesto repository = new RepositoryPuesto();
-        public bool BorrarPuesto(int id)
+        public bool DeletePuesto(int id)
         {
-            return repository.BorrarPuesto(id);
+            return repository.DeletePuesto(id);
         }
 
         public Puesto GetPuestoById(int? id)
