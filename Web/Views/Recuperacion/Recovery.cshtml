@@ -36,20 +36,20 @@
                         <div class="formContainer">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="formDiv" style="transition-delay: 0.2s">
-                                <p style="margin-bottom:15px">Recuerde que la contraseña debe coincidir en ambos campos.</p>
+                                <p style="margin-bottom:15px; text-align:justify">Recuerde que la contraseña debe coincidir en ambos campos. Además, debe contener al menos una letra minúscula y mayúscula, al menos un número y al menos un caracter especial.</p>
                             </div>
                             <div class="formDiv" style="transition-delay: 0.4s">
                                 @Html.HiddenFor(model => model.token)
                                 <p>INGRESE SU NUEVA CONTRASEÑA</p>
                                 <!--<input type="text" />-->
-                                @Html.TextBoxFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.PasswordFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
                                 <!--<input type="text" id="claveNueva"/>-->
                                 @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
                             </div>
                             <div class="formDiv" style="transition-delay: 0.4s">
                                 <p>CONFIRME SU NUEVA CONTRASEÑA</p>
                                 <!--<input type="text" />-->
-                                @Html.TextBoxFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
+                                @Html.PasswordFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
                                 <!--<input type="text" id="claveNuevaConfirm" />-->
                                 @Html.ValidationMessageFor(model => model.ConfirmNewClave, "", new { @class = "text-danger" })
                             </div>
@@ -107,80 +107,84 @@
     //});
 
     function validarClave() {
-        
-        
+
+
         //var claveNueva = $("#claveNueva").val();
         //var claveNuevaConfirm = $("#claveNuevaConfirm").val();
         var claveNueva = $("#NewClave").val();
         var claveNuevaConfirm = $("#ConfirmNewClave").val();
         //alert(claveNueva2 + claveNueva3);
-        var claveValidada = false;
+        var longitudValidada = false;
+        var minusculasValidada = false;
+        var mayusculasValidada = false;
+        var numerosValidada = false;
+        var simbolosValidada = false;
 
 
         //Tamaño de la clave entre 9 y 25
         let tamanno = (claveNueva.length >= 9 && claveNueva.length <= 25 && claveNuevaConfirm.length >= 9 && claveNuevaConfirm.length <= 25);
         if (tamanno) {
-            claveValidada = true;
+            longitudValidada = true;
         } else {
-            claveValidada = false;
+            longitudValidada = false;
         }
 
-        
+
 
         //debugger;
-        //let regexLetraMinuscula = new RegExp(/(?=.* [a-z]).{1,}$/);
-        let regexLetraMinuscula = /[a-z]$/;
+        //let regexLetraMinuscula = new RegExp(/(?=.*[a-z]).{1,}$/);^
+        let regexLetraMinuscula = /(?=.*[a-z]).{1,}$/;
         let letraMinuscula1 = regexLetraMinuscula.test(claveNueva);
         let letraMinuscula2 = regexLetraMinuscula.test(claveNuevaConfirm);
         if (letraMinuscula1 == true && letraMinuscula2 == true) {
-            claveValidada = true;
+            minusculasValidada = true;
         }
 
         if (letraMinuscula1 == false && letraMinuscula2 == false || letraMinuscula1 == true && letraMinuscula2 == false || letraMinuscula1 == false && letraMinuscula2 == true) {
-            claveValidada = false;
+            minusculasValidada = false;
         }
 
 
         //let regexLetraMayuscula = new RegExp(/(?=.*[A-Z]).{1,}$/);
-        let regexLetraMayuscula = /[A-Z]$/;
+        let regexLetraMayuscula = /(?=.*[A-Z]).{1,}$/;
         let letraMayuscula1 = regexLetraMayuscula.test(claveNueva);
         let letraMayuscula2 = regexLetraMayuscula.test(claveNuevaConfirm);
         if (letraMayuscula1 == true && letraMayuscula2 == true) {
-            claveValidada = true;
+            mayusculasValidada = true;
         }
 
         if (letraMayuscula1 == false && letraMayuscula2 == false || letraMayuscula1 == true && letraMayuscula2 == false || letraMayuscula1 == false && letraMayuscula2 == true) {
-            claveValidada = false;
+            mayusculasValidada = false;
         }
 
 
         //let regexNumero = new RegExp(/(?=.*[0-9]).{1,}$/);
-        let regexNumero = /[0-9]$/;
+        let regexNumero = /(?=.*[0-9]).{1,}$/;
         let numero1 = regexNumero.test(claveNueva);
         let numero2 = regexNumero.test(claveNuevaConfirm);
         if (numero1 == true && numero2 == true) {
-            claveValidada = true;
+            numerosValidada = true;
         }
 
         if (numero1 == false && numero2 == false || numero1 == true && numero2 == false || numero1 == false && numero2 == true) {
-            claveValidada = false;
+            numerosValidada = false;
         }
 
 
         //let regexEspeciales = new RegExp(/(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/);
-        let regexEspeciales = /[!#$%&'()*+,-./:;<=>?[\]^_{|}~]$/;
+        let regexEspeciales = /(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/;
         let especiales1 = regexEspeciales.test(claveNueva);
         let especiales2 = regexEspeciales.test(claveNuevaConfirm);
         if (especiales1 == true && especiales2 == true) {
-            claveValidada = true;
+            simbolosValidada = true;
         }
 
         if (especiales1 == false && especiales2 == false || especiales1 == true && especiales2 == false || especiales1 == false && especiales2 == true) {
-            claveValidada = false;
+            simbolosValidada = false;
         }
-
+        debugger;
         //$("#botonAceptar").prop('disabled', claveValidada);
-        if (claveValidada) {
+        if (longitudValidada == true && minusculasValidada == true && mayusculasValidada == true && numerosValidada == true && simbolosValidada == true) {
             $("#botonAceptar").removeAttr('disabled');
             $("#botonAceptar").removeClass('btn-primary-disabled');
         } else {
