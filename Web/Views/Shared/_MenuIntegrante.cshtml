@@ -1,1 +1,54 @@
-﻿
+﻿<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="@Url.Action("Index","Home")" class="brand-link">
+        <img src="~/Content/dist/img/logo nazareno blanco.png" alt="logo" class="brand-image img-circle" style="opacity: .8">
+        <span class="brand-text font-weight-light"><b>NAZA </b>Musical Note</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-4">
+            <ul class="nav nav-pills nav-sidebar flex-column open" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+
+                <li class="nav-header">INFORMACIÓN</li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","RolServicio")" class="nav-link" id="rolServicio">
+                        <i class="far fa-calendar-plus nav-icon"></i>
+                        <p>Rol de Servicio</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Cancion")" class="nav-link" id="menucancion">
+                        <i class="fas fa-file-audio nav-icon"></i>
+                        <p>Canciones</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Calendario")" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Agenda
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Puesto")" class="nav-link">
+                        <i class="fas fa-guitar nav-icon"></i>
+                        <p>
+                            Puestos
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+

@@ -13,6 +13,7 @@ using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
     public class PuestoController : Controller
     {
         IServiceCategoria serviceCategoria = new ServiceCategoria();
@@ -20,8 +21,6 @@ namespace Web.Controllers
 
 
 
-        // GET: Puesto
-        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Index()
         {
             try
@@ -40,8 +39,7 @@ namespace Web.Controllers
             }
         }
 
-        [CustomAuthorize((int)Roles.Lider)]
-        // GET: Puesto/Details/5
+
         public ActionResult Details(int id)
         {
             Puesto puesto = null;

@@ -8,16 +8,15 @@ using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
     public class HomeController : Controller
     {
-        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Index()
         {
             return View();
         }
 
 
-        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult Contact()
         {
             return View();

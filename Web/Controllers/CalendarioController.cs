@@ -7,12 +7,14 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
     public class CalendarioController : Controller
     {
-        // GET: Calendario
+
         public ActionResult Index()
         {
             ViewBag.Usuarios = null;
@@ -95,7 +97,11 @@ namespace Web.Controllers
 
         }
 
+
+
+        
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult DeleteEvent(int eventID)
         {
             var status = false;
@@ -182,6 +188,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult SaveEvent(
             RolServicio rs,
             int[] cancion,

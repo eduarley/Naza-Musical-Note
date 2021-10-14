@@ -76,7 +76,7 @@ namespace Web.Controllers
                 TempData.Keep();
             }
             return RedirectToAction("Index");
-            
+
         }
 
         // GET: Usuario/Create
@@ -104,7 +104,7 @@ namespace Web.Controllers
                 TempData.Keep();
                 return RedirectToAction("Index");
             }
-            
+
 
         }
 
@@ -186,7 +186,7 @@ namespace Web.Controllers
                         TempData["Message"] = "Error al procesar los datos! ";
                         TempData.Keep();
                         return RedirectToAction("Index");
-                    }   
+                    }
                 }
                 else
                 {
@@ -221,7 +221,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             try
             {
                 Usuario usuario = serviceUsuario.GetUsuarioByID(id);
@@ -237,7 +237,7 @@ namespace Web.Controllers
                     TempData.Keep();
                     return RedirectToAction("Index");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -373,12 +373,13 @@ namespace Web.Controllers
         }
 
 
-        public ActionResult Profile(string id)
+        public ActionResult UserProfile(string id)
         {
             try
             {
-                
+
                 Usuario usuario = (Usuario)Session["User"];
+
                 if (usuario != null)
                 {
                     return View(usuario);
@@ -390,7 +391,7 @@ namespace Web.Controllers
                     TempData.Keep();
                     return RedirectToAction("default", "Error");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -403,15 +404,128 @@ namespace Web.Controllers
                 TempData.Keep();
                 return RedirectToAction("Default", "Error");
             }
-           
+
         }
 
 
         [HttpPost]
-        public ActionResult UpdateProfile()
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateUserProfile(Usuario usuario, HttpPostedFileBase ImageFile)
         {
-            return null;
+            string errores = "";
+            MemoryStream target = new MemoryStream();
+            try
+            {
+                //usuario.Clave = serviceUsuario.GetSha256(usuario.Clave);
+
+                usuario.Rol = serviceRol.GetRolById(usuario.IdRol);
+                byte[] foto = null;
+
+
+                Usuario usuarioTemp = serviceUsuario.GetUsuarioByID(usuario.Id);
+                if (usuarioTemp != null)
+                {
+                    if(usuarioTemp.Foto != null)
+                    {
+                        foto = usuarioTemp.Foto;
+                        if(foto != usuario.Foto)
+                        {
+                            if (ImageFile != null)
+                            {
+                                ImageFile.InputStream.CopyTo(target);
+                                usuario.Foto = target.ToArray();
+                                ModelState.Remove("Foto");
+                            }
+                        }
+                    }
+                }
+
+                if (ModelState.IsValid)
+                {
+                    if (serviceUsuario.Save(usuario) != null)
+                    {
+                        @TempData["Action"] = "U";
+                        Session["User"] = usuario;
+                        return RedirectToAction("UserProfile");
+                    }
+                    else
+                    {
+                        @TempData["Action"] = "E";
+                        TempData["Message"] = "Error editar.";
+                        TempData.Keep();
+                        return RedirectToAction("UserProfile");
+                    }
+
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Message"] = "Error al procesar los datos! " + errores;
+                    TempData.Keep();
+                    return RedirectToAction("UserProfile");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
         }
-   
+
+
+
+        [HttpPost]
+        public JsonResult ChangePasswordProfile(string id, string pass, string confirmPass)
+        {
+            var status = false;
+            try
+            {
+                if(pass == confirmPass)
+                {
+                    Usuario usuario = serviceUsuario.GetUsuarioByID(id);
+                    if(usuario != null)
+                    {
+                        usuario.Clave = serviceUsuario.GetEncryptedPass(pass);
+                        if (serviceUsuario.Save(usuario) != null)
+                        {
+                            @TempData["Action"] = "P";
+                            status = true;
+                        }
+                    }
+                }
+                else
+                {
+                    status = false;
+                    @TempData["Action"] = "E";
+                    TempData["Message"] = "La clave no es la misma a la confirmación";
+                    TempData.Keep();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+            }
+
+            return new JsonResult { Data = new { status = status } };
+        }
+
+
+
+
+
+
     }
 }

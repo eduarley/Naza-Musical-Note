@@ -21,7 +21,19 @@
 
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
+                @if(UsuarioLogueado != null)
+                {
+                    if (UsuarioLogueado.Foto != null)
+                    {
+                        <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="user-image img-circle elevation-2" alt="User Image">
+                    }
+                    else
+                    {
+                        <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
+                    }
+                }
+                
+
                 <span class="d-none d-md-inline">
                     @{ Infraestructure.Models.Usuario oUsuario1 = null;
                         // Validar si vienen datos en la session
@@ -44,11 +56,13 @@
                     {
                         if (UsuarioLogueado.Foto == null)
                         {
-        <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> }
-    else
-    {
-<img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image">}
-}
+                            <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> 
+                        }
+                        else
+                        {
+                            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(UsuarioLogueado.Foto)" class="img-circle elevation-2" alt="User Image">
+                        }
+                    }
 
 
 
@@ -71,7 +85,7 @@
 
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="@Url.Action("Perfil","Usuario")" class="btn btn-default btn-flat">Perfil</a>
+                    <a href="@Url.Action("UserProfile","Usuario")" class="btn btn-default btn-flat">Perfil</a>
                     <a href="@Url.Action("Logout","Login")" class="btn btn-default btn-flat float-right">Salir</a>
                 </li>
             </ul>
@@ -86,13 +100,11 @@
 {
     if (UsuarioLogueado.Rol.Id == 1)
     {
-        @Html.Partial("_MenuLider") 
-    }
-else
-    {
-        @Html.Partial("_MenuIntegrante")
-    }
-}
+@Html.Partial("_MenuLider") }
+                else
+                {
+@Html.Partial("_MenuIntegrante")}
+            }
 
 
 

@@ -12,10 +12,10 @@ using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
     public class RolServicioController : Controller
     {
-        // GET: RolServicio
-        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
+
         public ActionResult Index()
         {
             IServiceRolServicio serviceRolServicio = new ServiceRolServicio();
@@ -89,7 +89,7 @@ namespace Web.Controllers
 
 
 
-        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
+
         public ActionResult Details(int id)
         {
             IServiceRolServicio serviceRolServicio = new ServiceRolServicio();

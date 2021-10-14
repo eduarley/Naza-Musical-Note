@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
     public interface IServiceRol
     {
         List<Rol> GetRoles();
+        Rol GetRolById(int id);
     }
 }

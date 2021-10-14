@@ -24,67 +24,68 @@
 
 @using (Html.BeginForm("Save", "Puesto", FormMethod.Post))
 {
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-<div class="container">
-    <strong class="text-danger">Los campos marcados con * son obligatorios</strong>
-    <br />
-    <div class="row justify-content-md-center">
-        <div class="col-md-12">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
-        </div>
-    </div>
+    <center>
+        <div class="card card-default mt-3 col-md-8">
+            <div class="card-body p-3 col-md-12">
+                <div class="card-header text-danger text-left border-bottom-0">
+                    <p>* Campos requeridos</p>
+                </div>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="row text-left">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <strong class="text-danger">*</strong>
+                                @Html.LabelFor(model => model.IdCategoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(model => model.IdCategoria, new SelectList(ViewBag.Categoria, "Id", "Descripcion"), htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.IdCategoria, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-    <div class="form-group row">
-        <strong class="text-danger">*</strong>
-        @Html.LabelFor(model => model.IdCategoria, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-8">
-            @Html.DropDownListFor(model => model.IdCategoria, new SelectList(ViewBag.Categoria, "Id", "Descripcion"), htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IdCategoria, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <strong class="text-danger">*</strong>
-        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @if (Model.Categoria.Estado)
-    {
-        <div class="form-group">
-            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "custom-control-input", id = "customSwitch3", @type = "checkbox" } })
-                <label class="custom-control-label" for="customSwitch3">Estado</label>
+                            <div class="form-group row">
+                                <strong class="text-danger">*</strong>
+                                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                  
+                            @if (Model.Categoria.Estado)
+                            {
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "custom-control-input", id = "customSwitch3", @type = "checkbox" } })
+                                        <label class="custom-control-label" for="customSwitch3">Estado</label>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="right badge-pill badge-warning">La categoría de este puesto está desactivada.</span>
+                            }
+                            <div class="modal-footer justify-content-end">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    }
-    else
-    {
-        <span class="right badge-pill badge-warning">La categoría de este puesto está desactivada.</span>
-    }
+    </center>
+
+   
+}
 
 
-
-    <div class="form-group row" style="text-align:center">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Editar" class="btn btn-success" />
-        </div>
-    </div>
-</div>
- }
-
-<div>
-    <a class="btn btn-warning" style="margin-bottom: 10px" href="@Url.Action("Index", "Puesto")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
-</div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>//AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
             $("#mantenimientos").addClass('active');
             $("#menupuestos").addClass('active');

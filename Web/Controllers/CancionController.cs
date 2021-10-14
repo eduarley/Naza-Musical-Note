@@ -10,6 +10,7 @@ using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
     public class CancionController : Controller
     {
         // GET: Cancion

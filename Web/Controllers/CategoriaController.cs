@@ -10,12 +10,13 @@ using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider)]
     public class CategoriaController : Controller
     {
         IServiceCategoria serviceCategoria = new ServiceCategoria();
 
 
-        [CustomAuthorize((int)Roles.Lider)]
+
         public ActionResult Index()
         {
             List<Categoria> lista = null;
@@ -38,7 +39,7 @@ namespace Web.Controllers
         }
 
 
-        [CustomAuthorize((int)Roles.Lider)]
+
         public ActionResult Create()
         {
             return View();
@@ -73,7 +74,7 @@ namespace Web.Controllers
             return View(categoria);
         }
 
-        [CustomAuthorize((int)Roles.Lider)]
+
         public ActionResult Edit(int id)
         {
 
@@ -107,7 +108,6 @@ namespace Web.Controllers
 
 
         [HttpPost]
-        [CustomAuthorize((int)Roles.Lider)]
         public JsonResult Delete(int id)
         {
             var status = false;
@@ -148,7 +148,6 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize((int)Roles.Lider)]
         public ActionResult Save(Categoria categoria)
         {
 

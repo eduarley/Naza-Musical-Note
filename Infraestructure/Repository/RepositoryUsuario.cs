@@ -116,9 +116,10 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oUsuario = ctx.Usuario.
-                                 Where(p => p.Id.Equals(id) && p.Clave == password).
-                                 FirstOrDefault<Usuario>();
+                    oUsuario = ctx.Usuario
+                                 .Where(p => p.Id.Equals(id) && p.Clave == password)
+                                 .Include(p => p.Rol)
+                                 .FirstOrDefault<Usuario>();
                 }
 
                 if (oUsuario != null)

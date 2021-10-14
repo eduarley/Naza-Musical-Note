@@ -127,7 +127,18 @@ namespace Infraestructure.Repository
                         ctx.Categoria.Add(categoria);
                     }
                     else
+                    {
+                        if (!categoria.Estado)
+                        {
+                            foreach (var item in oCategoria.Puesto)
+                            {
+                                ctx.Database.ExecuteSqlCommand("update Usuario_RolServicio set estado = 0 where IdPuesto =" + item.Id);
+                            }
+                            ctx.Database.ExecuteSqlCommand("update puesto set estado = 0 where IdCategoria =" + oCategoria.Id);
+                        }
                         ctx.Entry(categoria).State = EntityState.Modified;
+                    }
+                        
 
                     retorno = ctx.SaveChanges();
                 }

@@ -22,5 +22,6 @@ namespace ApplicationCore.Services
         void NoGuardarUsuario(string id);
         Usuario SaveClavePrimerIngreso(Usuario usuario);
         Usuario SaveClaveCambio(Usuario usuario);
+        string GetEncryptedPass(string password);
     }
 }

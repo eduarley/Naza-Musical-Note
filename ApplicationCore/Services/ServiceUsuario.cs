@@ -114,5 +114,10 @@ namespace ApplicationCore.Services
             IRepositoryUsuario repository = new RepositoryUsuario();
             repository.NoGuardarUsuario(id);
         }
+
+        public string GetEncryptedPass(string password)
+        {
+            return Cryptography.EncrypthAES(password);
+        }
     }
 }

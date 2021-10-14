@@ -1,0 +1,393 @@
+﻿@model Infraestructure.Models.Usuario
+
+@{ ViewBag.Title = "Perfil"; }
+
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
+
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Perfil</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+            <div class="card-body box-profile">
+                <div class="text-center">
+                    @if (Model.Foto != null)
+                    {
+                        <img src="data:image/jpeg;charset=utf-8;base64,
+                                         @Convert.ToBase64String(Model.Foto)"
+                             id="ImagenUsuario"
+                             class="profile-user-img img-fluid  img-circle"
+                             style="height: 200px; width:200px" />
+                    }
+                    else
+                    {
+                        <img class="profile-user-img img-fluid img-circle"
+                             src="~/Content/dist/img/avatar.png"
+                             alt="User profile picture">
+                    }
+
+                </div>
+
+                <h3 class="profile-username text-center">@Model.NombreCompleto</h3>
+
+                <p class="text-muted text-center">@Model.Rol.Descripcion</p>
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Id)</b> <a class="float-right">@Html.DisplayFor(model => model.Id)</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Telefono)</b> <a class="float-right">@Html.DisplayFor(model => model.Telefono)</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Correo)</b> <a class="float-right">@Html.DisplayFor(model => model.Correo)</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Id)</b> <a class="float-right">@Html.DisplayFor(model => model.Id)</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Fecha_creacion)</b> <a class="float-right">@Html.DisplayFor(model => model.Fecha_creacion)</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Estado)</b>
+                        @if (Model.Estado)
+                        {
+                            <a class="float-right">Activo</a>
+                        }
+                        else
+                        {
+                            <a class="float-right">Inactivo</a>
+                        }
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header p-2">
+                <a class="nav-link" href="#">Editar</a>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+                <div>
+                    @using (Html.BeginForm("UpdateUSerProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="card-body p-3 col-md-12">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.Fecha_creacion)
+                            @Html.HiddenFor(model => model.IdRol)
+                            @Html.HiddenFor(model => model.Estado)
+                            @Html.HiddenFor(model => model.Clave)
+                            @Html.HiddenFor(model => model.Foto)
+                            @if (Model.Foto != null)
+                            {
+
+                            }
+
+
+
+
+                            <div class="col-md-12 form-horizontal">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Apellido_paterno, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Apellido_paterno, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Apellido_paterno, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Apellido_materno, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Apellido_materno, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Apellido_materno, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.Foto, htmlAttributes: new { @class = "col-sm-2 control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input type="file" accept="image/png,image/jpeg" class="form-control" name="ImageFile" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Cambiar Clave</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-end">
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+
+                    }
+
+                </div>
+
+            </div><!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!--MODAL CAMBIO CLAVE-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar clave</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label col-md-2">Clave</label>
+                        <div class="col-md-10">
+                            <input id="pass" type="password" class="form-control" />
+                            <p class="text-danger" id="errorPass"></p>
+                        </div>  
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label col-md-2">Confirmar</label>
+                        <div class="col-md-10">
+                            <input id="confirmPass" type="password" class="form-control" />
+                            <p class="text-danger" id="errorConfirmPass"></p>
+                        </div> 
+                    </div>
+                    <ul>
+                        <li>Entre 9 y 25 caracteres.</li>
+                        <li>Al menos una mayúscula.</li>
+                        <li>Al menos una minúscula.</li>
+                        <li>Al menos un caracter especial.</li>
+                        <li>Al menos un número.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer justify-content-end">
+
+                    <button class="btn btn-danger btn-sm " data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancelar
+                    </button>
+                    <button class="btn btn-success btn-sm" type="button" style="margin-right:5px;" id="btnCambiarClave">
+                        <span class="glyphicon glyphicon-pencil" ></span> Guardar
+                    </button>
+                </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+@section scripts {
+    <script>
+       
+        $(document).ready(function () {
+
+        // Recibe los parámetros del Controller
+        var option = '@TempData["Action"]'
+        var message = '@TempData["Message"]'
+
+        if (option == 'U') {
+            Swal.fire('Éxito!',
+                'Se ha actualizado tu perfil correctamente.',
+                'success');
+        }
+
+        if (option == 'E') {
+            Swal.fire('Error!',
+                'Se ha producido un error: ' + message,
+                'error');
+        }
+        if (option == 'P') {
+            Swal.fire('Éxito!',
+                'Se ha actualizado tu clave correctamente.',
+                'success');
+            }
+
+            $('#pass').val('');
+            $('#confirmPass').val('');
+        });
+
+       
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#pass').val('');
+        })
+    </script>
+
+
+    <script>
+
+        
+        $("#pass").on("keyup paste", function () {
+            limpiarErrores();
+            validarClave();
+        });
+        $("#confirmPass").on("keyup paste", function () {
+            limpiarErrores();
+            validarClave();
+        });
+
+        
+
+        function validarClave() {
+
+            let hasNumber = new RegExp('[0-9]+');
+            let hasUpperChar = new RegExp('[A-Z]+');
+            let hasMiniMaxChars = new RegExp('.{9,25}');
+            let hasLowerChar = new RegExp('[a-z]+');
+            let hasSymbols = /(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/;
+
+            var pswd = $('#pass').val();
+            var cpswd = $('#confirmPass').val();
+
+
+            if (pswd.trim() == "") {
+                $('#errorPass').text('El campo clave no puede estar en blanco.');
+                //$('#pass').addClass('is-invalid');
+                $('#pass').focus();
+                return;
+            }
+
+            if (!hasMiniMaxChars.test(pswd)) {
+                $('#errorPass').text('La clave debe ser entre 9 y 25 caracteres.');
+                //$('#pass').addClass('is-invalid');
+                $('#pass').focus();
+                return;
+            }
+
+            if (!hasNumber.test(pswd)) {
+                $('#errorPass').text('La clave debe contener al menos un número.');
+                //$('#pass').addClass('is-invalid');
+                $('#pass').focus();
+                return;
+            }
+
+            if (!hasUpperChar.test(pswd)) {
+                $('#errorPass').text('La clave debe contener al menos una letra mayúscula.');
+                //$('#pass').addClass('is-invalid');
+                $('#pass').focus();
+                return;
+            }
+
+            if (!hasLowerChar.test(pswd)) {
+                $('#errorPass').text('La clave debe contener al menos una letra minúscula.');
+                //$('#pass').addClass('is-invalid');
+                $('#pass').focus();
+                return;
+            }
+            if (!hasSymbols.test(pswd)) {
+                $('#errorPass').text('La clave debe contener al menos un caracter especial.');
+                //$('#pass').addClass('is-invalid');
+                $('#pass').focus();
+                return;
+            }
+
+            if (pswd.trim() != cpswd.trim()) {
+                $('#errorConfirmPass').text('Ambos campos no coinciden.');
+                //$('#confirmPass').addClass('is-invalid');
+                $('#confirmPass').focus();
+                return;
+            }
+        }
+
+
+        function limpiarErrores() {
+            $('#errorPass').text('');
+            $('#errorConfirmPass').text('');
+            //$('#errorPass').removeClass('is-invalid');
+            //$('#errorConfirmPass').removeClass('is-invalid');
+        }
+
+
+
+        $('#btnCambiarClave').click(function () {
+
+      
+            var data = {
+                id: '@UsuarioLogueado.Id',
+                pass: $('#pass').val().trim(),
+                confirmPass: $('#confirmPass').val().trim(),
+            }
+            CambiarClave(data);
+        });
+
+    </script>
+
+
+
+
+    <script>
+        function CambiarClave(data) {
+            $.ajax({
+                type: "POST",
+                url: '/Usuario/ChangePasswordProfile',
+
+                data: data,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    location.reload();
+                }
+            })
+        }
+    </script>
+}
+

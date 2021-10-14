@@ -11,7 +11,25 @@ namespace Infraestructure.Repository
 {
     public class RepositoryRol : IRepositoryRol
     {
+        public Rol GetRolById(int id)
+        {
+            Rol rol = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    rol = ctx.Rol.Where(p => p.Id == id).FirstOrDefault();
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
 
+            return rol;
+        }
 
         public List<Rol> GetRoles()
         {

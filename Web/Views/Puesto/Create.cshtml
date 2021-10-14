@@ -23,46 +23,45 @@
 @using (Html.BeginForm("Save", "Puesto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <center>
+        <div class="card card-default mt-3 col-md-8">
+            <div class="card-body p-3 col-md-12">
+                <div class="card-header text-danger text-left border-bottom-0">
+                    <p>* Campos requeridos</p>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row text-left">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <strong class="text-danger">*</strong>
+                            @Html.LabelFor(model => model.IdCategoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.IdCategoria, new SelectList(ViewBag.Categoria, "Id", "Descripcion"), htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IdCategoria, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <strong class="text-danger">*</strong>
+                            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <div class="container">
-        <strong class="text-danger">Los campos marcados con * son obligatorios</strong>
-        <br />
-        <div class="row justify-content-md-center">
-            <div class="col-md-12">
-                <!--<h4>Usuario</h4>-->
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger col-md-10" })
+               
+                        <div class="modal-footer justify-content-end">
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </center>
+    
+}
 
-        <div class="form-group row">
-            <strong class="text-danger">*</strong>
-            @Html.LabelFor(model => model.IdCategoria, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-8">
-                @Html.DropDownListFor(model => model.IdCategoria, new SelectList(ViewBag.Categoria, "Id", "Descripcion"), htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdCategoria, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group row">
-            <strong class="text-danger">*</strong>
-            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group row" style="text-align:center">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-success" />
-            </div>
-        </div>
-    </div>}
-
-<div>
-    <a class="btn btn-warning" style="margin-bottom: 10px" href="@Url.Action("Index", "Puesto")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
-</div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>

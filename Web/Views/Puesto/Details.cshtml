@@ -24,40 +24,61 @@
 </div>
 
 
-<div class="content">
-    <!--<h4>Usuario</h4>-->
-    <hr />
-    <div class="row justify-content-md-centers">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.IdCategoria)
-        </div>
 
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Categoria.Descripcion)
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@Html.DisplayNameFor(model => model.Descripcion)</h3>
+            <br />
+            <h3> @Html.DisplayFor(model => model.Descripcion)</h3>
+
         </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                    <h3 class="text-primary">@Html.DisplayName("Categoría")</h3>
+                    <p>@Html.DisplayFor(model => model.Categoria.Descripcion)</p>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
+
+                    <div class="text-muted">
+                        <p class="text-sm">
+                            @Html.DisplayName("Id: ")
+                            <b class="d-block">@Html.DisplayFor(model => model.Id)</b>
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Estado)
+                            @if (Model.Estado)
+                            {
+                <b class="d-block">Activo</b> }
+                            else
+                            {
+                <b class="d-block">Inactivo</b>}
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Puesto", new { id = Model.Id })">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.card-body -->
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-2" style="font-weight:bold">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </div>
+    <!-- /.card -->
 
-        <div class="col-md-8">
-            @Html.DisplayFor(model => model.Descripcion)
-        </div>
-    </div>
-</div>
-<br />
-<br />
-<hr />
-<p>
-    @{
-        if (UsuarioLogueado != null && UsuarioLogueado.Rol.Descripcion != "Integrante")
-        {
-            <a class="btn btn-primary" href="@Url.Action("Edit", "Puesto", new { id = Model.Id })" role="button"><i class="fas fa-edit"></i>  Editar</a> <strong> | </strong>
-        }
-    }
+</section>
+<!-- /.content -->
 
 
-    <a class="btn btn-warning" href="@Url.Action("Index", "Puesto")" role="button"><i class="fas fa-arrow-alt-circle-up"></i>  Volver</a>
-</p>
+

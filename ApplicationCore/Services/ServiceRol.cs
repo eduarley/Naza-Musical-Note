@@ -10,6 +10,12 @@ namespace ApplicationCore.Services
 {
     public class ServiceRol : IServiceRol
     {
+        public Rol GetRolById(int id)
+        {
+            IRepositoryRol repository = new RepositoryRol();
+            return repository.GetRolById(id);
+        }
+
         public List<Rol> GetRoles()
         {
             IRepositoryRol repository = new RepositoryRol();

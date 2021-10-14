@@ -114,7 +114,7 @@ namespace Infraestructure.Models
         [Display(Name = "Apellido materno")]
         public string Apellido_materno { get; set; }
 
-        [PasswordValidation]
+        //[PasswordValidation]
         [DataType(DataType.Password)]
         public string Clave { get; set; }
 

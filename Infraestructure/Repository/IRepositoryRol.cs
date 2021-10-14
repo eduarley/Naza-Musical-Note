@@ -10,5 +10,6 @@ namespace Infraestructure.Repository
     public interface IRepositoryRol
     {
         List<Rol> GetRoles();
+        Rol GetRolById(int id);
     }
 }
