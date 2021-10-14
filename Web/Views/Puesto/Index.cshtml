@@ -33,9 +33,9 @@
 </div>
 
 @{
-    if (UsuarioLogueado != null && UsuarioLogueado.Rol.Descripcion != "Integrante")
+    if (UsuarioLogueado != null && UsuarioLogueado.IdRol == 1)
     {
-        <p>
+        <p  class="tooltip--right" data-tooltip="Crea un nuevo puesto">
             <a class="btn btn-primary" href="@Url.Action("Create","Puesto")">
                 <i class="fa fa-plus"></i>
                 Nuevo Puesto
@@ -95,30 +95,36 @@
                                         <td class="text-center ">
                                             <ul style="display:flex; list-style:none">
                                                 <li>
-                                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details", "Puesto", new { id = item.Id })">
-                                                        <i class="fas fa-eye">
-                                                        </i>
-                                                    </a>
+                                                    <p class="tooltip--triangle" data-tooltip="Ver detalles del puesto">
+                                                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details", "Puesto", new { id = item.Id })">
+                                                            <i class="fas fa-eye">
+                                                            </i>
+                                                        </a>
+                                                    </p>
+                                                    
                                                 </li>
-                                                @{ if (UsuarioLogueado.Rol.Descripcion != "Integrante")
-                                                    {
-                                                        <li>
+                                                @if (UsuarioLogueado.IdRol == 1)
+                                                {
+                                                    <li>
+                                                        <p class="tooltip--triangle" data-tooltip="Editar el puesto">
                                                             <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit", "Puesto", new { id = item.Id })">
                                                                 <i class="fas fa-pencil-alt">
                                                                 </i>
                                                             </a>
-                                                        </li>
- } }
+                                                        </p>
+                                                    </li>
 
-                                                @{ if (UsuarioLogueado.Rol.Descripcion != "Integrante")
-                                                    {
-                                                        <li>
+                                                    <li>
+                                                        <p class="tooltip--triangle" data-tooltip="Desactivar el puesto">
                                                             <a id="botonEliminar" class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)" href="#">
                                                                 <i class="fas fa-ban">
                                                                 </i>
                                                             </a>
-                                                        </li>
- } }
+                                                        </p>
+                                                        
+                                                    </li>
+                                                }
+
                                             </ul>
                                         </td>
                                     </tr>

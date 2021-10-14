@@ -114,7 +114,11 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oCancion = GetCancionByID(cancion.Id);
                     if (oCancion == null)
+                    {
+                        cancion.Estado = true;
                         ctx.Cancion.Add(cancion);
+                    }
+                        
                     else
                         ctx.Entry(cancion).State = EntityState.Modified;
 

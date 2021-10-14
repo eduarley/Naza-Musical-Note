@@ -23,5 +23,6 @@ namespace ApplicationCore.Services
         Usuario SaveClavePrimerIngreso(Usuario usuario);
         Usuario SaveClaveCambio(Usuario usuario);
         string GetEncryptedPass(string password);
+        bool DeleteImagen(string id);
     }
 }

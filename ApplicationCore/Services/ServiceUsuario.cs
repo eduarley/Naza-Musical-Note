@@ -119,5 +119,11 @@ namespace ApplicationCore.Services
         {
             return Cryptography.EncrypthAES(password);
         }
+
+        public bool DeleteImagen(string id)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.DeleteImagen(id);
+        }
     }
 }

@@ -374,6 +374,7 @@ namespace Web.Controllers
         }
 
 
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult UserProfile(string id)
         {
             try
@@ -411,6 +412,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public ActionResult UpdateUserProfile(Usuario usuario, HttpPostedFileBase ImageFile)
         {
             string errores = "";
@@ -437,6 +439,15 @@ namespace Web.Controllers
                                 usuario.Foto = target.ToArray();
                                 ModelState.Remove("Foto");
                             }
+                        }
+                    }
+                    else
+                    {
+                        if (ImageFile != null)
+                        {
+                            ImageFile.InputStream.CopyTo(target);
+                            usuario.Foto = target.ToArray();
+                            ModelState.Remove("Foto");
                         }
                     }
                 }
@@ -483,6 +494,7 @@ namespace Web.Controllers
 
 
         [HttpPost]
+        [CustomAuthorize((int)Roles.Lider, (int)Roles.Integrante)]
         public JsonResult ChangePasswordProfile(string id, string pass, string confirmPass)
         {
             var status = false;
@@ -524,8 +536,38 @@ namespace Web.Controllers
         }
 
 
+        [HttpPost]
+        public JsonResult DeleteImage(string id)
+        {
+            var status = false;
+            try
+            {
+                if (serviceUsuario.DeleteImagen(id))
+                {
+                    Usuario usuario = serviceUsuario.GetUsuarioByID(id);
+                    @TempData["Action"] = "U";
+                    Session["User"] = usuario;
+                    status = true;
+                }
+                else
+                {
+                    @TempData["Action"] = "E";
+                    TempData["Message"] = "Error editar.";
+                    TempData.Keep();
+                }
+            }
+            catch (Exception ex)
+            {
 
-
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
 
 
     }

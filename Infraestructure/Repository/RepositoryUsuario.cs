@@ -77,8 +77,11 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oUsuario = GetUsuarioByID(usuario.Id);
-                    if (oUsuario == null)                 
+                    if (oUsuario == null)
+                    {
+                        usuario.Estado = true;
                         ctx.Usuario.Add(usuario);
+                    }                 
                     else
                         ctx.Entry(usuario).State = EntityState.Modified;
 
@@ -318,6 +321,37 @@ namespace Infraestructure.Repository
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw;
             }
+        }
+
+        public bool DeleteImagen(string id)
+        {
+            bool estado = false;
+            try
+            {               
+                using (MyContext ctx = new MyContext())
+                {
+                    var usuario = ctx.Usuario.Where(p => p.Id == id).FirstOrDefault();
+                    if(usuario != null)
+                    {
+                        usuario.Foto = null;
+                        if (ctx.SaveChanges() >= 0)
+                            estado = true;
+                    }
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+            return estado;
         }
     }
 }

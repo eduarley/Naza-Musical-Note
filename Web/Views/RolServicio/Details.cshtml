@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.RolServicio
-
-@{
-    ViewBag.Title = "Detalles Rol de Servicio";
-}
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
+@{ ViewBag.Title = "Detalles Rol de Servicio"; }
 
 
 <!-- Content Header (Page header) -->
@@ -71,21 +69,17 @@
                                 <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Usuario_RolServicio)</h3>
                                 @foreach (var item in Model.Usuario_RolServicio)
                                 {
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            @if (item.Usuario != null)
-                                            {
-                                                <p>@item.Puesto.Descripcion : <b>@item.Usuario.NombreCompleto</b></p>
-                                            }
-                                            else
-                                            {
-                                                <p>@item.Puesto.Descripcion : <span class="right badge badge-danger">Sin asignar</span></p>
+                    <ul class="list-unstyled">
+                        <li>
+                            @if (item.Usuario != null)
+                            {
+            <p>@item.Puesto.Descripcion : <b>@item.Usuario.NombreCompleto</b></p> }
+                            else
+                            {
+            <p>@item.Puesto.Descripcion : <span class="right badge badge-danger">Sin asignar</span></p>}
 
-                                            }
-
-                                        </li>
-                                    </ul>
-                                }
+                        </li>
+                    </ul>}
 
                             </div>
                         </div>
@@ -94,17 +88,17 @@
                                 <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Cancion)</h3>
                                 @foreach (var item in Model.Cancion)
                                 {
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <p><b>@item.Nombre</b>
-                                                <a href="#" onclick="enlaceCancion(@item.Id)">
-                                                    <i class="fas fa-external-link-alt ml-3"></i>
-                                                </a>
-                                            </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>
+                                <b>@item.Nombre</b>
+                                <a href="#" onclick="enlaceCancion(@item.Id)">
+                                    <i class="fas fa-external-link-alt ml-3"></i>
+                                </a>
+                            </p>
 
-                                        </li>
-                                    </ul>
-                                }
+                        </li>
+                    </ul>}
 
                             </div>
                         </div>
@@ -129,12 +123,10 @@
                             @Html.DisplayNameFor(model => model.Estado)
                             @if (Model.Estado)
                             {
-                                <b class="d-block">Activo</b>
-                            }
+                <b class="d-block">Activo</b> }
                             else
                             {
-                                <b class="d-block">Inactivo</b>
-                            }
+                <b class="d-block">Inactivo</b>}
 
                         </p>
                     </div>
@@ -143,13 +135,17 @@
                 </div>
             </div>
             <div class="card-footer">
-                <div class="float-right">
-                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = Model.Id })">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Editar
-                    </a>
-                </div>
+                @if (UsuarioLogueado.IdRol == 1)
+                {
+                    <div class="float-right">
+                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = Model.Id })">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Editar
+                        </a>
+                    </div>
+                }
+
 
             </div>
         </div>
@@ -171,4 +167,3 @@
         }
     </script>
 }
-    

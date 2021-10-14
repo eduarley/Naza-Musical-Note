@@ -188,6 +188,7 @@
     <Content Include="Content\dist\css\changecomplet\changecompletstyle.css" />
     <Content Include="Content\dist\css\login\loginstyle.css" />
     <Content Include="Content\dist\css\recupera2\recuperastyle.css" />
+    <Content Include="Content\dist\css\tooltip.css" />
     <Content Include="Content\dist\img\avatar.png" />
     <Content Include="Content\dist\img\login\fondologin.jpg" />
     <Content Include="Content\dist\img\login\fondologin2.jpg" />

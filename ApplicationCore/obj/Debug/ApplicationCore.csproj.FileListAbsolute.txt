@@ -26,20 +26,6 @@ C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\ApplicationCore\obj\Debug\App
 C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
 C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.dll
 C:\PROYECTO GRADUA\NUEVO OFICIAL\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.pdb
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\ApplicationCore.dll
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\ApplicationCore.pdb
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.dll
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\log4net.dll
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\EntityFramework.dll
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.pdb
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.dll.config
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\log4net.xml
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\EntityFramework.xml
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.dll
-C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.pdb
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\bin\Debug\ApplicationCore.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\bin\Debug\ApplicationCore.pdb
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\bin\Debug\Infraestructure.dll
@@ -54,3 +40,17 @@ C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore.pdb
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\ApplicationCore.dll
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\ApplicationCore.pdb
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.dll
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\log4net.dll
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\EntityFramework.dll
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.pdb
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.dll.config
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\log4net.xml
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\EntityFramework.xml
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.dll
+C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.pdb

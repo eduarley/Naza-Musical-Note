@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Infraestructure.Models.RolServicio>
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
 
-@{
-    ViewBag.Title = "Roles de servicio";
-}
+@{ ViewBag.Title = "Roles de servicio"; }
 
 @section Styles{
     @Styles.Render("~/Content/datatable")
 
 }
+
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -27,14 +27,15 @@
 </div>
 
 
-
-<p>
+@if (UsuarioLogueado.IdRol == 1)
+{
+<p class="tooltip--right" data-tooltip="Crea un nuevo rol de servicio">
     <a class="btn btn-primary" href="@Url.Action("Create", "RolServicio")">
         <i class="fa fa-plus mr-2"></i>
         Nuevo Rol de Servicio
     </a>
 </p>
-
+}
 
 
 
@@ -55,9 +56,9 @@
                                         @Html.DisplayNameFor(model => model.Titulo)
                                     </th>
                                     <th>
-                                            @Html.DisplayNameFor(model => model.Descripcion)
+                                        @Html.DisplayNameFor(model => model.Descripcion)
                                     </th>
-                                   
+
                                     <th class="notexport" style="text-align:center"></th>
                                 </tr>
                             </thead>
@@ -65,55 +66,63 @@
                                 @foreach (var item in Model)
                                 {
 
-                                <tr>
-                                    <td class="text-center">
-                                        @Html.DisplayFor(modelItem => item.FechaSt)
-                                        <br />
-                                        <small>@Html.DisplayFor(modelItem => item.HoraInicioSt) - @Html.DisplayFor(modelItem => item.HoraFinSt)</small>
-                                        
-                                    </td>
-                                    
-                                    <td>
-                                        <div style="max-height: 100px; overflow: hidden;">
-                                            @Html.DisplayFor(modelItem => item.Titulo)
-                                        </div>
-                                    </td>
-                                    <td class="text-justify">
-                                        <div style="max-height: 100px; overflow: hidden;">
-                                            @Html.DisplayFor(modelItem => item.Descripcion)
-                                        </div>
-                                        
-                                    </td>
-                                    
-                                    <td class="text-center ">
-                                        <ul style="display:flex; list-style:none">
-                                            <li>
-                                                <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","RolServicio", new { id = item.Id })">
-                                                    <i class="fas fa-eye">
-                                                    </i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = item.Id })">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                </a>
-                                            </li>
-                                            <li>
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.FechaSt)
+                            <br />
+                            <small>@Html.DisplayFor(modelItem => item.HoraInicioSt) - @Html.DisplayFor(modelItem => item.HoraFinSt)</small>
 
-                                                <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
-                                                    <i class="fas fa-trash">
-                                                    </i>
-                                                </a>
+                        </td>
+
+                        <td>
+                            <div style="max-height: 100px; overflow: hidden;">
+                                @Html.DisplayFor(modelItem => item.Titulo)
+                            </div>
+                        </td>
+                        <td class="text-justify">
+                            <div style="max-height: 100px; overflow: hidden;">
+                                @Html.DisplayFor(modelItem => item.Descripcion)
+                            </div>
+
+                        </td>
+
+                        <td class="text-center ">
+                            <ul style="display:flex; list-style:none">
+                                <li>
+                                    <p class="tooltip--triangle" data-tooltip="Ver detalles del rol de servicio">
+                                        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","RolServicio", new { id = item.Id })">
+                                            <i class="fas fa-eye">
+                                            </i>
+                                        </a>
+                                    </p>
+
+                                </li>
+
+                                @if (UsuarioLogueado.IdRol == 1)
+                                {
+                            <li>
+                                <p class="tooltip--triangle" data-tooltip="Editar el rol de servicio">
+                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = item.Id })">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                    </a>
+                                </p>
+
+                            </li>
+                                                <li>
+                                                    <p class="tooltip--triangle" data-tooltip="Elimina permanentemente el rol de servicio">
+                                                        <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                        </a>
+                                                    </p>
+                                                </li>}
 
 
-                                            </li>
 
-
-                                        </ul>
-                                    </td>
-                                </tr>
-                                }
+                            </ul>
+                        </td>
+                    </tr>}
                             </tbody>
                         </table>
 

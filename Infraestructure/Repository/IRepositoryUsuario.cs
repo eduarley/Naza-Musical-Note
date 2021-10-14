@@ -20,5 +20,6 @@ namespace Infraestructure.Repository
         List<Usuario> GetUsuarios();
         Usuario GetUsuarioByID(string id);
         void NoGuardarUsuario(string id);
+        bool DeleteImagen(string id);
     }
 }

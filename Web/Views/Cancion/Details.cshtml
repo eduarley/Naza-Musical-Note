@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Cancion
-@{
-    ViewBag.Title = "Detalles Canción";
-}
-
+@{ ViewBag.Title = "Detalles Canción"; }
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
 <style>
     .iframe-container {
         position: relative;
@@ -49,31 +47,29 @@
 
         </div>
         <div class="card-body">
-            <div class="row" >
+            <div class="row">
                 <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
 
                     @if (ViewBag.UrlFormat != "")
                     {
-                        <div class="iframe-container">
-                            <iframe width="560"
-                                    height="315"
-                                    src="@ViewBag.UrlFormat"
-                                    frameborder="0">
-                                Hubo un problema al cargar el video.
-                            </iframe>
-                            <p>Video de la versión.</p>
-                        </div>
-                    }
+        <div class="iframe-container">
+            <iframe width="560"
+                    height="315"
+                    src="@ViewBag.UrlFormat"
+                    frameborder="0">
+                Hubo un problema al cargar el video.
+            </iframe>
+            <p>Video de la versión.</p>
+        </div> }
                     else
                     {
-                        <span class="right badge badge-warning">No se ha ingresado un enlace para la versión.</span>
-                    }
+        <span class="right badge badge-warning">No se ha ingresado un enlace para la versión.</span>}
 
 
 
                 </div>
                 <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
-                    
+
                     <div class="text-muted">
                         <p class="text-sm">
                             @Html.DisplayNameFor(model => model.Autor)
@@ -95,12 +91,10 @@
                             @Html.DisplayNameFor(model => model.Estado)
                             @if (Model.Estado)
                             {
-                                <b class="d-block">Activo</b>
-                            }
+                <b class="d-block">Activo</b> }
                             else
                             {
-                                <b class="d-block">Inactivo</b>
-                            }
+                <b class="d-block">Inactivo</b>}
 
                         </p>
                     </div>
@@ -109,13 +103,17 @@
                 </div>
             </div>
             <div class="card-footer">
-                <div class="float-right">
-                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = Model.Id })">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Editar
-                    </a>
-                </div>
+                @if (UsuarioLogueado.IdRol == 1)
+                {
+                    <div class="float-right">
+                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = Model.Id })">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Editar
+                        </a>
+                    </div>
+                }
+
 
             </div>
         </div>

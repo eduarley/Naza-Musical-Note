@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<Infraestructure.Models.Cancion>
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
 
-@{
-    ViewBag.Title = "Canciones";
-}
+@{ ViewBag.Title = "Canciones"; }
 
 @section Styles{
     @Styles.Render("~/Content/datatable")
@@ -29,13 +28,16 @@
 </div>
 
 
-
-<p>
+@if(UsuarioLogueado.IdRol == 1)
+{
+<p class="tooltip--right" data-tooltip="Crea una nueva canción">
     <a class="btn btn-primary" href="@Url.Action("Create", "Cancion")">
         <i class="fa fa-plus mr-2"></i>
         Nueva canción
     </a>
 </p>
+}
+
 
 
 
@@ -69,56 +71,64 @@
                                 @foreach (var item in Model)
                                 {
 
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Nombre)
-                                        </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Autor)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Tonalidad)
-                                        </td>
-                                        <td class="text-center">
-                                            @if (item.Estado)
-                                            {
-                                                <h5><span class="right badge badge-pill badge-success">Activo</span></h5>
-                                            }
-                                            else
-                                            {
-                                                <h5><span class="right badge badge-pill badge-danger">Inactivo</span></h5>
-                                            }
-                                        </td>
-                                        <td class="text-center ">
-                                            <ul style="display:flex; list-style:none">
-                                                <li>
-                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Cancion", new { id = item.Id })">
-                                                        <i class="fas fa-eye">
-                                                        </i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = item.Id })">
-                                                        <i class="fas fa-pencil-alt">
-                                                        </i>
-                                                    </a>
-                                                </li>
-                                                <li>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Autor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tonalidad)
+                        </td>
+                        <td class="text-center">
+                            @if (item.Estado)
+                            {
+            <h5><span class="right badge badge-pill badge-success">Activo</span></h5> }
+                            else
+                            {
+            <h5><span class="right badge badge-pill badge-danger">Inactivo</span></h5>}
+                        </td>
+                        <td class="text-center ">
+                            <ul style="display:flex; list-style:none">
+                                <li>
+                                    <p class="tooltip--triangle" data-tooltip="Ver detalles de la canción">
+                                        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Cancion", new { id = item.Id })">
+                                            <i class="fas fa-eye">
+                                            </i>
+                                        </a>
+                                    </p>
+                                    
+                                </li>
 
-                                                    <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
-                                                        <i class="fas fa-trash">
-                                                        </i>
-                                                    </a>
-
-
-                                                </li>
-
-
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                @if (UsuarioLogueado.Rol.Id == 1)
+                                {
+                                    <li>
+                                        <p class="tooltip--triangle" data-tooltip="Editar la canción">
+                                            <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = item.Id })">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                            </a>
+                                        </p>
+                                        
+                                    </li>
+                                    <li>
+                                        <p class="tooltip--triangle" data-tooltip="Eliminar permanentemente la canción">
+                                            <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                            </a>
+                                        </p>
+                                        
+                                    </li>
                                 }
+
+
+
+                            </ul>
+                        </td>
+                    </tr>}
                             </tbody>
                         </table>
 
