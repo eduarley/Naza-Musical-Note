@@ -316,6 +316,7 @@ C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\bin\es\System.Web.Http.WebHost.res
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.csproj.CopyComplete
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.pdb
+C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\EntityFramework.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\Web.dll.config
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\Web.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\Web.pdb
@@ -370,7 +371,6 @@ C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\roslyn\VBCSCompiler.exe
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\roslyn\VBCSCompiler.exe.config
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\Antlr3.Runtime.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\ApplicationCore.dll
-C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\EntityFramework.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\EntityFramework.SqlServer.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\Infraestructure.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\Web\bin\log4net.dll

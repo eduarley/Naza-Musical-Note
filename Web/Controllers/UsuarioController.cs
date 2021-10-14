@@ -300,27 +300,28 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CambioClave(Viewmodels.ViewModelPassNewUser model)
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    return View(model);
-                }
-                Usuario oUser = serviceUsuario.GetUsuarioByID(model.IdUsuario);
+                    Usuario oUser = serviceUsuario.GetUsuarioByID(model.IdUsuario);
 
-                if (oUser != null)
-                {
-                    oUser.Clave = model.NewClave;
-                    //oUser.Primer_ingreso = false;
-                    serviceUsuario.SaveClavePrimerIngreso(oUser);
-                    return View("ChangeComplet");
+                    if (oUser != null)
+                    {
+                        oUser.Clave = model.NewClave;
+                        //oUser.Primer_ingreso = false;
+                        serviceUsuario.SaveClavePrimerIngreso(oUser);
+                        return View("ChangeComplet");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                return RedirectToAction("Default", "Error");
             }
             return View();
         }
