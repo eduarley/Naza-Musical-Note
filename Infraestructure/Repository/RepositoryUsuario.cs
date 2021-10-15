@@ -153,6 +153,49 @@ namespace Infraestructure.Repository
             }
         }
 
+        public Usuario SaveGuardarToken(Usuario usuario)
+        {
+            int retorno = 0;
+            Usuario oUsuario = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oUsuario = GetUsuarioByID(usuario.Id);
+                    if (oUsuario == null)
+                    {
+                        usuario.Estado = true;
+                        ctx.Usuario.Add(usuario);
+                    }
+                    else
+                    {
+                        ctx.Entry(usuario).State = EntityState.Modified;
+                    }
+
+
+                    retorno = ctx.SaveChanges();
+                }
+
+                if (retorno >= 0)
+                    oUsuario = GetUsuarioByID(usuario.Id);
+
+                return oUsuario;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
 
 
         public Usuario GetUsuario(string id, string password)

@@ -22,6 +22,7 @@ namespace ApplicationCore.Services
         void NoGuardarUsuario(string id);
         Usuario SaveClavePrimerIngreso(Usuario usuario);
         Usuario SaveClaveCambio(Usuario usuario);
+        Usuario SaveGuardarToken(Usuario usuario);
         string GetEncryptedPass(string password);
         bool DeleteImagen(string id);
     }

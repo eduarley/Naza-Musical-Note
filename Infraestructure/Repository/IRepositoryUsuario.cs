@@ -22,5 +22,6 @@ namespace Infraestructure.Repository
         Usuario GetUsuarioByID(string id);
         void NoGuardarUsuario(string id);
         bool DeleteImagen(string id);
+        Usuario SaveGuardarToken(Usuario usuario);
     }
 }

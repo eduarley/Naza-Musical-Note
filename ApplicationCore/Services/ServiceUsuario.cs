@@ -51,6 +51,15 @@ namespace ApplicationCore.Services
             return repository.SaveCambioClave(usuario);
         }
 
+        public Usuario SaveGuardarToken(Usuario usuario)
+        {
+            string clave = Cryptography.EncrypthAES(usuario.Clave);
+            usuario.Clave = clave;
+
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.SaveGuardarToken(usuario);
+        }
+
         public Usuario GetUsuario(string id, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();

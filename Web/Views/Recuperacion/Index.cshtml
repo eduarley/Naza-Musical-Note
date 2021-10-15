@@ -36,7 +36,7 @@
         <div id="container">
             <div id="inviteContainer">
                 <div class="acceptContainer">
-                    <div class="form-horizontal">
+                    <form action="@Url.Content("~/Recuperacion/Send")" method="post">
                         <h1>Recuperación de contraseña</h1>
                         <div class="formContainer">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -71,7 +71,7 @@
 
                         </div>
 
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -23,9 +23,9 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Send(Usuario usuario)
         {
-            Usuario oUsuario = null;
             try
             {
+                Usuario oUsuario = null;
                 if (!ModelState.IsValid)
                 {
                     IServiceUsuario service = new ServiceUsuario();
@@ -36,7 +36,7 @@ namespace Web.Controllers
                     if (oUsuario != null)
                     {
                         oUsuario.Token_recovery = token;
-                        service.Save(oUsuario);
+                        service.SaveGuardarToken(oUsuario);
 
                         var request = HttpContext.Request;
                         //string url = request.Url.Scheme + "://" + request.UserHostAddress + ":" +request.Url.Port+ "/Recuperacion/Recovery?token=" + token;
@@ -75,9 +75,12 @@ namespace Web.Controllers
                         @TempData["Action"] = "N";
                         TempData.Keep();
                     }
+                    return View("Index");
                 }
-
-                return View("Index");
+                else
+                {
+                    return View("Index");
+                }
             }
             catch (Exception ex)
             {
@@ -136,19 +139,19 @@ namespace Web.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    return View(model);
-                }
-                IServiceUsuario service = new ServiceUsuario();
-                Usuario oUser = service.ConsultarPorToken(model.token);
+                    IServiceUsuario service = new ServiceUsuario();
+                    Usuario oUser = service.ConsultarPorToken(model.token);
 
-                if (oUser != null)
-                {
-                    oUser.Clave = model.NewClave;
-                    service.SaveClaveCambio(oUser);
-                    return View("ChangeComplet");
+                    if (oUser != null)
+                    {
+                        oUser.Clave = model.NewClave;
+                        service.SaveClaveCambio(oUser);
+                        return View("ChangeComplet");
+                    }
                 }
+                
             }
             catch (Exception ex)
             {
