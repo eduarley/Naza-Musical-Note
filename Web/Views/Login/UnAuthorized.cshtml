@@ -1,16 +1,54 @@
 ﻿
-@{
-    ViewBag.Title = "No Autorizado";
-}
+@{ ViewBag.Title = "No Autorizado"; }
 
-@{
-    Layout = Layout = "~/Views/Shared/_Layout.cshtml"; ;
-}
+@{ Layout = Layout = "~/Views/Shared/_Layout.cshtml"; ; }
 
-<h2>No se encuentra autorizado para acceder a esta página!</h2>
-<br>
 
-<input type="button" value="Volver" class="btn btn-default" onclick="goBack()" />
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">No autorizado</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+<section class="content">
+    <div class="error-page">
+        <h2 class="headline text-warning"> 401</h2>
+
+        <div class="error-content">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Ups! Hubo un error.</h3>
+
+            <p>
+                No se encuentra autorizado para acceder a esta página.
+                Revisa tus permisos de acceso o si no, puedes <a href="@Url.Action("Index","Login")">Iniciar sesión</a> con un usuario autorizado.
+            </p>
+            <br />
+            <br />
+
+            <a  class="btn btn-secondary" onclick="goBack()">
+                <i class="fas fa-arrow-alt-circle-left">    Volver</i>
+            </a>
+
+        </div>
+        <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+</section>
+
+
+
 
 
 <script>

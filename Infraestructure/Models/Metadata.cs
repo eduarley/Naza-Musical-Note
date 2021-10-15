@@ -72,8 +72,7 @@ namespace Infraestructure.Models
         public string Genero { get; set; }
 
         [Display(Name = "Enlace para la versión")]
-        [RegularExpression(@"https:\/\/youtu.be[^' '\n\r]+",
-         ErrorMessage = "Formato no permitido. Ejemplo de formato: https://youtu.be/......")]
+        [RegularExpression(@"https:\/\/youtu.be[^' '\n\r]+", ErrorMessage = "Formato no permitido. Ejemplo de formato: https://youtu.be/......")]
         public string Url_version { get; set; }
     }
 
@@ -97,6 +96,7 @@ namespace Infraestructure.Models
         //FORMATO A CEDULA, 9 DIGITOS, UNICAMENTE DIGITOS
         [Display(Name = "Cédula")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
+        [RegularExpression(@"[0-9]{9}", ErrorMessage = "Únicamente 9 dígitos. Ejemplo: 101110111")]
         public string Id { get; set; }
 
 

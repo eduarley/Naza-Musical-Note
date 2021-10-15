@@ -1,29 +1,55 @@
-﻿@{
+﻿@{ ViewBag.Title = "Error"; }
 
-    ViewBag.Title = "Error";
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
 
-}
-
-<div style=" padding:20px; color:red">
-
-    <h3>
-
-        Error 404:
-
-    </h3>
-
-    <h4>
-
-        Página no Encontrada
-
-    </h4>
-    <br>
-    <br>
-
-    <h6>@Html.ActionLink("Go Back To Home Page", "Index", "Home")</h6> @*link name , action method name , controller name*@
-
-    <br />
-
-    <br />
-
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Página no encontrada</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
+
+
+
+<section class="content">
+    <div class="error-page">
+        <h2 class="headline text-warning"> 404</h2>
+
+        <div class="error-content">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Ups! No se encuentra el recurso.</h3>
+
+            <p>
+                La página que solicitas no existe o no está disponible.
+            </p>
+            <br />
+            <p>
+                Revisa el URL ingresado o ve al <a href="@Url.Action("Index","Home")">Inicio</a>.
+            </p>
+            <br />
+            <br />
+
+            <a class="btn btn-secondary" onclick="goBack()">
+                <i class="fas fa-arrow-alt-circle-left">    Volver</i>
+            </a>
+
+        </div>
+        <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+</section>
+
+
+
+
+
+<script>function goBack() {
+        window.history.back();
+    }</script>

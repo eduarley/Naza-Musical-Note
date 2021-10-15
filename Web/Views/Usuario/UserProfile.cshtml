@@ -214,9 +214,10 @@
                                         <input type="file" accept="image/png,image/jpeg" class="form-control" name="ImageFile" />
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <p class="tooltip--triangle" data-tooltip="Editar la contraseña con la que inicias sesión">
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Cambiar Clave</button>
-                                </div>
+                                </p>
+
                             </div>
                         </div>
                         <div class="modal-footer justify-content-end">
@@ -249,6 +250,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 control-label col-md-2">Clave</label>
                     <div class="col-md-10">
+
                         <input id="pass" type="password" class="form-control" />
                         <p class="text-danger" id="errorPass"></p>
                     </div>
@@ -326,6 +328,8 @@
 
     <script>
 
+
+      
 
         $("#pass").on("keyup paste", function () {
             limpiarErrores();
@@ -410,7 +414,19 @@
 
 
         $('#btnCambiarClave').click(function () {
-
+            var pswd = $('#pass').val();
+            var cpswd = $('#confirmPass').val();
+            if (pswd.trim() == "") {
+                $('#errorPass').text('El campo clave no puede estar en blanco.');
+                $('#pass').focus();
+                return;
+            }
+            if (pswd.trim() != cpswd.trim()) {
+                $('#errorConfirmPass').text('Ambos campos no coinciden.');
+                //$('#confirmPass').addClass('is-invalid');
+                $('#confirmPass').focus();
+                return;
+            }
 
             var data = {
                 id: '@UsuarioLogueado.Id',

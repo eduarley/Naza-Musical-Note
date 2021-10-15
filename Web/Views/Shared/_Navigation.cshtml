@@ -21,7 +21,7 @@
 
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                @if(UsuarioLogueado != null)
+                @if (UsuarioLogueado != null)
                 {
                     if (UsuarioLogueado.Foto != null)
                     {
@@ -32,7 +32,7 @@
                         <img src="~/Content/dist/img/avatar.png" class="user-image img-circle elevation-2" alt="User Image">
                     }
                 }
-                
+
 
                 <span class="d-none d-md-inline">
                     @{ Infraestructure.Models.Usuario oUsuario1 = null;
@@ -45,7 +45,7 @@
 
                         if (oUsuario1 != null)
                         {
-            @oUsuario1.NombreCompleto } }
+                            @oUsuario1.NombreCompleto } }
                 </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -56,7 +56,7 @@
                     {
                         if (UsuarioLogueado.Foto == null)
                         {
-                            <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image"> 
+                            <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
                         }
                         else
                         {
@@ -78,7 +78,7 @@
                                     rol = $"{oUsuario1.Rol.Descripcion}";
                                 }
                             }
-                @rol }
+                            @rol }
                         <!--<small>Miembro desde 23 de Julio, 2021</small>-->
                     </p>
                 </li>
@@ -100,11 +100,17 @@
 {
     if (UsuarioLogueado.Rol.Id == 1)
     {
-@Html.Partial("_MenuLider") }
-                else
-                {
-@Html.Partial("_MenuIntegrante")}
-            }
+        @Html.Partial("_MenuLider")
+    }
+    else
+    {
+        @Html.Partial("_MenuIntegrante")
+    }
+}
+else
+{
+    @Html.Partial("_MenuLogOut")
+}
 
 
 
