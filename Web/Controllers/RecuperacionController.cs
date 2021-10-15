@@ -98,9 +98,31 @@ namespace Web.Controllers
 
         public ActionResult Recovery(string token)
         {
-            Viewmodels.ViewModelChangePass model = new Viewmodels.ViewModelChangePass();
-            model.token = token;
-            return View(model);
+            try
+            {
+                IServiceUsuario service = new ServiceUsuario();
+                Usuario oUser = service.ConsultarPorToken(token);
+                if (oUser != null)
+                {
+                    Viewmodels.ViewModelChangePass model = new Viewmodels.ViewModelChangePass();
+                    model.token = token;
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("UnAuthorized", "Login");
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Pasar el Error a la página que lo muestra
+                @TempData["Message"] = ex.Message;
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         public ActionResult ChangeComplet()

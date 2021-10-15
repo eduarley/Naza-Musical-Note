@@ -39,7 +39,7 @@ namespace ApplicationCore.Services
             }
 
             IRepositoryUsuario repository = new RepositoryUsuario();
-            return repository.Save(usuario);
+            return repository.SaveCambioClave(usuario);
         }
 
         public Usuario SaveClaveCambio(Usuario usuario)
@@ -48,7 +48,7 @@ namespace ApplicationCore.Services
                 usuario.Clave = clave;
 
             IRepositoryUsuario repository = new RepositoryUsuario();
-            return repository.Save(usuario);
+            return repository.SaveCambioClave(usuario);
         }
 
         public Usuario GetUsuario(string id, string password)

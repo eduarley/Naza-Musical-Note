@@ -11,6 +11,7 @@ namespace Infraestructure.Repository
     {
         List<Usuario> GetIntegrantesActivos();
         Usuario Save(Usuario usuario);
+        Usuario SaveCambioClave(Usuario usuario);
         Usuario GetUsuario(string id, string password);
         Rol GetRolByUsuario(int idRolUsuario);
         string GetSha256(string str);
