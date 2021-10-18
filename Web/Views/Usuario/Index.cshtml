@@ -18,6 +18,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+                <h3>USUARIOS</h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -82,6 +83,14 @@
 
                                 <tr>
                                     <td>
+                                        @if (UsuarioLogueado != null && item.Id == UsuarioLogueado.Id)
+                                        {
+                                            <div class="notexport">
+                                                <span class="right badge badge-primary ml-5">Tú</span>
+                                            </div>
+
+                                        }
+
                                         @if (item.Foto != null)
                                         {
                                             <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle elevation-2" alt="User Image" style="height: 34px; width:34px"> }
@@ -89,6 +98,7 @@
                                         {
                                             <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
                                         }
+
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Id)
@@ -96,10 +106,7 @@
 
                                     <td>
                                         @Html.DisplayFor(modelItem => item.NombreCompleto)
-                                        @if (UsuarioLogueado != null && item.Id == UsuarioLogueado.Id)
-                                        {
-                                            <span class="right badge badge-primary ml-5">Tú</span>
-                                        }
+                                       
 
                                     </td>
 

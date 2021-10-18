@@ -96,7 +96,7 @@ namespace Infraestructure.Models
         //FORMATO A CEDULA, 9 DIGITOS, UNICAMENTE DIGITOS
         [Display(Name = "Cédula")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
-        [RegularExpression(@"[0-9]{9}", ErrorMessage = "Únicamente 9 dígitos. Ejemplo: 101110111")]
+        [RegularExpression(@"[0-9]{9,12}", ErrorMessage = "Debe contener mínimo 9 y máximo 12 dígitos. Ejemplo: 101110111")]
         public string Id { get; set; }
 
 
@@ -107,11 +107,11 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es requerido.")]
         public int IdRol { get; set; }
 
-        [Display(Name = "Apellido paterno")]
+        [Display(Name = "Primer apellido")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
         public string Apellido_paterno { get; set; }
 
-        [Display(Name = "Apellido materno")]
+        [Display(Name = "Segundo apellido")]
         public string Apellido_materno { get; set; }
 
         //[PasswordValidation]
@@ -152,6 +152,11 @@ namespace Infraestructure.Models
     }
 
 
+    public partial class RolMetadata
+    {
+        [Display(Name = "Descripción")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
+        public string Descripcion { get; set; }
+    }
 
-    
 }

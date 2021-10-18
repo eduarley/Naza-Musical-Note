@@ -190,6 +190,9 @@
     <Content Include="Content\dist\css\recupera2\recuperastyle.css" />
     <Content Include="Content\dist\css\tooltip.css" />
     <Content Include="Content\dist\img\avatar.png" />
+    <Content Include="Content\dist\img\Error\computer.png" />
+    <Content Include="Content\dist\img\Error\page-not-found.png" />
+    <Content Include="Content\dist\img\Error\unauthorized.png" />
     <Content Include="Content\dist\img\login\fondologin.jpg" />
     <Content Include="Content\dist\img\login\fondologin2.jpg" />
     <Content Include="Content\dist\img\login\fondologin2blur.png" />

@@ -12,31 +12,33 @@
 namespace Infraestructure.Models
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class Rol
-{
+    using System.ComponentModel.DataAnnotations;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Rol()
+    [MetadataType(typeof(RolMetadata))]
+    public partial class Rol
     {
 
-        this.Usuario = new HashSet<Usuario>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Rol()
+        {
+
+            this.Usuario = new HashSet<Usuario>();
+
+        }
+
+
+        public int Id { get; set; }
+
+        public string Descripcion { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<Usuario> Usuario { get; set; }
 
     }
-
-
-    public int Id { get; set; }
-
-    public string Descripcion { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Usuario> Usuario { get; set; }
-
-}
 
 }
