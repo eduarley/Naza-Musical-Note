@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Bitacora_General.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bitacora_Sesion.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cancion.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -109,6 +115,7 @@
     <Compile Include="Repository\IRepositoryRol.cs" />
     <Compile Include="Repository\IRepositoryRolServicio.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
+    <Compile Include="Repository\IRepositoryReporte.cs" />
     <Compile Include="Repository\RepositoryCalendario.cs" />
     <Compile Include="Repository\RepositoryCancion.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
@@ -116,6 +123,7 @@
     <Compile Include="Repository\RepositoryRol.cs" />
     <Compile Include="Repository\RepositoryRolServicio.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
+    <Compile Include="Repository\RepositoryReporte.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\PasswordValidationAttribute.cs" />
   </ItemGroup>

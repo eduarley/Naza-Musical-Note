@@ -49,7 +49,6 @@ C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\bin\Debug\log4net.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\bin\Debug\EntityFramework.xml
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\bin\Debug\log4net.xml
-C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.dll
@@ -68,3 +67,4 @@ C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.dll
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.pdb
+C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache

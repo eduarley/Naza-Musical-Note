@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -151,6 +154,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PuestoController.cs" />
     <Compile Include="Controllers\RecuperacionController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\RolServicioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Enum\Roles.cs" />
@@ -158,6 +162,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReporteAccesos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteAccesos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Security\CustomAuthenticationFilter.cs" />
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
@@ -166,6 +176,7 @@
     <Compile Include="Viewmodels\ViewModelEnviarCorreo.cs" />
     <Compile Include="Viewmodels\ViewModelLogin.cs" />
     <Compile Include="Viewmodels\ViewModelPassNewUser.cs" />
+    <Compile Include="Viewmodels\ViewModelReporteSesion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -2234,6 +2245,7 @@
     <Content Include="Views\Categoria\Details.cshtml" />
     <Content Include="Views\Usuario\UserProfile.cshtml" />
     <Content Include="Views\Shared\_MenuLogOut.cshtml" />
+    <Content Include="Views\Reporte\ReporteSesion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2261,6 +2273,15 @@
       <Project>{2f599345-81b8-41e3-b992-dc0055ba777d}</Project>
       <Name>Infraestructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ReporteAccesos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteAccesos.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

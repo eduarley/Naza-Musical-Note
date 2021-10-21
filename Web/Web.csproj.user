@@ -13,7 +13,7 @@
     <Controller_SelectedScaffolderCategoryPath>root/Common/MVC/Controller</Controller_SelectedScaffolderCategoryPath>
     <WebStackScaffolding_ControllerDialogWidth>600</WebStackScaffolding_ControllerDialogWidth>
     <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
-    <WebStackScaffolding_IsPartialViewSelected>True</WebStackScaffolding_IsPartialViewSelected>
+    <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
@@ -23,6 +23,9 @@
     <WebStackScaffolding_DbContextTypeFullName>Infraestructure.Models.MyContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
     <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\</ReferencePath>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

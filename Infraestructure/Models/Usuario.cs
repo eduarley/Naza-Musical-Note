@@ -12,50 +12,55 @@
 namespace Infraestructure.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(UsuarioMetadata))]
     public partial class Usuario
+{
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Usuario()
     {
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
-        {
+        this.RolServicio = new HashSet<RolServicio>();
 
-            this.RolServicio = new HashSet<RolServicio>();
+        this.Usuario_RolServicio = new HashSet<Usuario_RolServicio>();
 
-            this.Usuario_RolServicio = new HashSet<Usuario_RolServicio>();
+        this.Bitacora_General = new HashSet<Bitacora_General>();
 
-        }
+        this.Bitacora_Sesion = new HashSet<Bitacora_Sesion>();
+
+    }
 
 
-        public string Id { get; set; }
+    public string Id { get; set; }
 
-        public int IdRol { get; set; }
+    public int IdRol { get; set; }
 
-        public string Nombre { get; set; }
+    public string Nombre { get; set; }
 
-        public string Apellido_paterno { get; set; }
+    public string Apellido_paterno { get; set; }
 
-        public string Apellido_materno { get; set; }
+    public string Apellido_materno { get; set; }
 
-        public string Clave { get; set; }
+    public string Clave { get; set; }
 
-        public string Telefono { get; set; }
+    public string Telefono { get; set; }
 
-        public string Correo { get; set; }
+    public string Correo { get; set; }
 
-        public byte[] Foto { get; set; }
+    public byte[] Foto { get; set; }
 
-        public string Token_recovery { get; set; }
+    public string Token_recovery { get; set; }
 
-        public System.DateTime Fecha_creacion { get; set; }
+    public System.DateTime Fecha_creacion { get; set; }
 
-        public bool Primer_ingreso { get; set; }
+    public bool Primer_ingreso { get; set; }
 
-        public bool Estado { get; set; }
+    public bool Estado { get; set; }
+
 
 
 
@@ -68,14 +73,22 @@ namespace Infraestructure.Models
 
         public virtual Rol Rol { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-        public virtual ICollection<RolServicio> RolServicio { get; set; }
+    public virtual ICollection<RolServicio> RolServicio { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-        public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
+    public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
 
-    }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Bitacora_General> Bitacora_General { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Bitacora_Sesion> Bitacora_Sesion { get; set; }
+
+}
 
 }

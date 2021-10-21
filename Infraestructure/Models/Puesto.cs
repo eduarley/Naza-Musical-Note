@@ -12,39 +12,39 @@
 namespace Infraestructure.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(PuestoMetadata))]
     public partial class Puesto
+{
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Puesto()
     {
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Puesto()
-        {
-
-            this.Usuario_RolServicio = new HashSet<Usuario_RolServicio>();
-
-        }
-
-
-        public int Id { get; set; }
-
-        public int IdCategoria { get; set; }
-
-        public string Descripcion { get; set; }
-
-        public bool Estado { get; set; }
-
-
-
-        public virtual Categoria Categoria { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-        public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
+        this.Usuario_RolServicio = new HashSet<Usuario_RolServicio>();
 
     }
+
+
+    public int Id { get; set; }
+
+    public int IdCategoria { get; set; }
+
+    public string Descripcion { get; set; }
+
+    public bool Estado { get; set; }
+
+
+
+    public virtual Categoria Categoria { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
+
+}
 
 }

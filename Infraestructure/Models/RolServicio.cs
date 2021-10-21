@@ -12,44 +12,45 @@
 namespace Infraestructure.Models
 {
 
-    using System;
+using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(RolServicioMetadata))]
     public partial class RolServicio
+{
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public RolServicio()
     {
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RolServicio()
-        {
+        this.Usuario_RolServicio = new HashSet<Usuario_RolServicio>();
 
-            this.Usuario_RolServicio = new HashSet<Usuario_RolServicio>();
+        this.Cancion = new HashSet<Cancion>();
 
-            this.Cancion = new HashSet<Cancion>();
-
-        }
+    }
 
 
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string IdUsuario_Propietario { get; set; }
+    public string IdUsuario_Propietario { get; set; }
 
-        public string Titulo { get; set; }
+    public string Titulo { get; set; }
 
-        public string Descripcion { get; set; }
+    public string Descripcion { get; set; }
 
-        public System.DateTime FechaInicio { get; set; }
+    public System.DateTime FechaInicio { get; set; }
 
-        public Nullable<System.DateTime> FechaFin { get; set; }
+    public Nullable<System.DateTime> FechaFin { get; set; }
 
-        public System.DateTime Fecha_creacion { get; set; }
+    public System.DateTime Fecha_creacion { get; set; }
 
-        public string Color { get; set; }
+    public string Color { get; set; }
 
-        public bool IsFullDay { get; set; }
+    public bool IsFullDay { get; set; }
 
-        public bool Estado { get; set; }
+    public bool Estado { get; set; }
+
 
 
 
@@ -68,17 +69,16 @@ namespace Infraestructure.Models
 
 
 
-
         public virtual Usuario Usuario { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-        public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
+    public virtual ICollection<Usuario_RolServicio> Usuario_RolServicio { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-        public virtual ICollection<Cancion> Cancion { get; set; }
+    public virtual ICollection<Cancion> Cancion { get; set; }
 
-    }
+}
 
 }

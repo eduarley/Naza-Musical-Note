@@ -115,5 +115,25 @@
         <ScalarProperty Name="Id" ColumnName="IdCancion" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Bitacora_General">
+      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_General">
+        <MappingFragment StoreEntitySet="Bitacora_General">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bitacora_Sesion">
+      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Sesion">
+        <MappingFragment StoreEntitySet="Bitacora_Sesion">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
