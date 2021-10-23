@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "ReporteServiciosByUsuario";
+}
+
+@section Styles{
+    @Styles.Render("~/Content/datatable")
+
+}
+
+@*
+        @using (Html.BeginForm("DescargarReporteUsuariosIngresados", "Reporte", FormMethod.Post))
+    {
+        <input type="date" id="fechaInicio" name="fechaInicio" />
+        <input type="date" id="fechaFin" name="fechaFin" />
+        <button type="submit">Generar Reporte</button>
+
+    }
+*@
+
+
+@using (Ajax.BeginForm("MostrarReporteUsuariosIngresados", "Reporte", null, new AjaxOptions
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "resultado",
+    OnSuccess = "onSuccessResult",
+    OnBegin = "onBeginResult",
+    OnFailure = "onFailureResult",
+    LoadingElementId = "imgloader",
+    LoadingElementDuration = 1000,
+    InsertionMode = InsertionMode.Replace
+
+}, new { id = "AjaxForm" }))
+{
+
+    <h2>Con ajax</h2>
+    <input type="date" id="fechaInicio" name="fechaInicio" />
+    <input type="date" id="fechaFin" name="fechaFin" />
+    <button type="submit">Generar Reporte</button>
+
+
+    <!--Imagen de progreso -->
+
+    <div id="imgloader" style="display:none;position:absolute;right: 45%; top: 20%">
+        <img src="~/Content/dist/img/loader.gif" height="100px" />
+    </div>
+
+
+
+
+
+    <div id="resultado"> </div>
+}
+
+
+
+<h2>Sin ajax</h2>
+
+@using (Html.BeginForm("MostrarReporteUsuariosIngresados", "Reporte", FormMethod.Post))
+{
+    <input type="date" id="fechaInicio" name="fechaInicio" />
+    <input type="date" id="fechaFin" name="fechaFin" />
+    <input type="submit" formtarget="_blank" value="Generar Reporte" />
+}
+
+
+@Html.ActionLink("Mostrar Reporte Prueba",
+    "MostrarReporteUsuariosIngresados",
+    "Reporte", new { fechaInicio = "fechaInicio", fechaFin = "fechaFin" },
+    new { target = "_blank" })
+
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/datatable")
+
+
+    <script>
+        var onBeginResult = function (msg) {
+
+        }
+    </script>
+
+    <script>
+        var onFailureResult = function (err) {
+            //$("#Mensaje").show("slow").delay(1000).hide("slow");
+        };
+    </script>
+
+    <!-- SE EJECUTA SI TODO FUE BIEN -->
+    <script>
+        var onSuccessResult = function (data) {
+
+
+        };
+    </script>
+
+
+    <script>
+
+        function Descargar() {
+            window.open("/Reporte/MostrarReporteUsuariosIngresados");
+        }
+
+        function Mostrar() {
+
+            $("#frmReporte")
+                .attr("src", "/Reporte/MostrarReporteUsuariosIngresados")
+                .load();
+        }
+
+
+
+        $(document).ready(function () {
+
+        });
+
+
+
+    </script>
+
+
+
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#menucategorias").addClass('active');
+
+        });
+
+
+
+
+    </script>
+
+
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                dom: 'Bfrtip',
+                //poner clase notexport a la columnas que no queremos en las exportaciones
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copiar',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'CSV',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Excel',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Imprimir',
+                        className: 'btn btn-default',
+                        exportOptions: {
+                            columns: ':not(.notexport)'
+                        }
+                    }
+
+                ],
+
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
+
+    </script>
+
+
+}
+

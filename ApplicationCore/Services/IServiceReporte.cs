@@ -9,7 +9,7 @@ namespace ApplicationCore.Services
 {
     public interface IServiceReporte
     {
-        List<Bitacora_Sesion> GetBitacorasSesion();
-        bool DeleteBitacorasSesion();
+
+        List<Usuario> GetUsuariosIngresadosByFechas(DateTime fechaInicio, DateTime fechaFin);
     }
 }

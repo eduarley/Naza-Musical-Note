@@ -168,6 +168,12 @@
       <DependentUpon>ReporteAccesos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ReporteUsuariosIngresados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteUsuariosIngresados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Security\CustomAuthenticationFilter.cs" />
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
@@ -177,6 +183,7 @@
     <Compile Include="Viewmodels\ViewModelLogin.cs" />
     <Compile Include="Viewmodels\ViewModelPassNewUser.cs" />
     <Compile Include="Viewmodels\ViewModelReporteSesion.cs" />
+    <Compile Include="Viewmodels\ViewModelReporteUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -204,6 +211,7 @@
     <Content Include="Content\dist\img\Error\computer.png" />
     <Content Include="Content\dist\img\Error\page-not-found.png" />
     <Content Include="Content\dist\img\Error\unauthorized.png" />
+    <Content Include="Content\dist\img\loader.gif" />
     <Content Include="Content\dist\img\login\fondologin.jpg" />
     <Content Include="Content\dist\img\login\fondologin2.jpg" />
     <Content Include="Content\dist\img\login\fondologin2blur.png" />
@@ -2188,6 +2196,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2246,6 +2256,8 @@
     <Content Include="Views\Usuario\UserProfile.cshtml" />
     <Content Include="Views\Shared\_MenuLogOut.cshtml" />
     <Content Include="Views\Reporte\ReporteSesion.cshtml" />
+    <Content Include="Views\Reporte\ReporteUsuariosIngresados.cshtml" />
+    <Content Include="Views\Reporte\_DetalleReporteUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2278,6 +2290,10 @@
     <EmbeddedResource Include="Reports\ReporteAccesos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAccesos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReporteUsuariosIngresados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteUsuariosIngresados.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

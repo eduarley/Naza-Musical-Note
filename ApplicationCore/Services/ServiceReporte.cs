@@ -11,15 +11,9 @@ namespace ApplicationCore.Services
     public class ServiceReporte : IServiceReporte
     {
         IRepositoryReporte repository = new RepositoryReporte();
-
-        public bool DeleteBitacorasSesion()
+        public List<Usuario> GetUsuariosIngresadosByFechas(DateTime fechaInicio, DateTime fechaFin)
         {
-            return repository.DeleteBitacorasSesion();
-        }
-
-        public List<Bitacora_Sesion> GetBitacorasSesion()
-        {
-            return repository.GetBitacorasSesion();
+            return repository.GetUsuariosIngresadosByFechas(fechaInicio, fechaFin);
         }
     }
 }

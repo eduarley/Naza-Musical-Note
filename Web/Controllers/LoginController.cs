@@ -29,6 +29,7 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     IServiceUsuario service = new ServiceUsuario();
+                    IServiceBitacora_Sesion serviceBitacora = new ServiceBitacora_Sesion();
                     oUsuario = service.GetUsuario(model.Id, model.Clave);
 
                     if (oUsuario != null)
@@ -42,6 +43,8 @@ namespace Web.Controllers
                         {
                             oRol.Usuario = null;
                             oUsuario.Rol = oRol;
+                            serviceBitacora.Save(oUsuario);
+                            
                             //Log.Info($"Accede {oUsuario.Nombre} {oUsuario.Apellidos} con el rol {oUsuario.Rol.IdRol}-{oUsuario.Rol.Descripcion}");
                             if (oUsuario.Primer_ingreso)
                             {

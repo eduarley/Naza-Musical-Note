@@ -19,11 +19,13 @@ namespace Web.Controllers
     {
 
         IServiceReporte serviceReporte = new ServiceReporte();
+        IServiceBitacora_Sesion serviceBitacora = new ServiceBitacora_Sesion();
         // GET: Reporte
         public ActionResult ReporteSesion()
         {
             return View();
         }
+
         public ActionResult DescargarReporteSesion()
         {
 
@@ -32,7 +34,7 @@ namespace Web.Controllers
             {
                 Usuario usuario = (Usuario)Session["User"];
                 IServiceReporte serviceReporte = new ServiceReporte();
-                var lista = serviceReporte.GetBitacorasSesion();
+                var lista = serviceBitacora.GetBitacorasSesion();
                 var rptH = new ReportClass();
                 rptH.FileName = Server.MapPath("/Reports/ReporteAccesos.rpt");
                 rptH.Load();
@@ -69,13 +71,13 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult BorrarBitacorasSesion()
+        public JsonResult DeleteBitacorasSesion()
         {
             var status = false;
             try
             {
                 
-                if (serviceReporte.DeleteBitacorasSesion())
+                if (serviceBitacora.DeleteBitacorasSesion())
                 {
                     status = true;
                     TempData["Action"] = "D";
@@ -103,6 +105,62 @@ namespace Web.Controllers
 
             return new JsonResult { Data = new { status = status } };
         }
+
+
+
+
+
+
+        public ActionResult ReporteUsuariosIngresados()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult MostrarReporteUsuariosIngresados(DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                Usuario usuario = (Usuario)Session["User"];
+                IServiceReporte serviceReporte = new ServiceReporte();
+                var lista = serviceReporte.GetUsuariosIngresadosByFechas(fechaInicio, fechaFin);
+                var rptH = new ReportClass();
+                rptH.FileName = Server.MapPath("/Reports/ReporteUsuariosIngresados.rpt");
+                rptH.Load();
+                rptH.SetDataSource(lista);
+                rptH.SetParameterValue("NombreUsuario", usuario.NombreCompleto);
+                rptH.SetParameterValue("fechaInicio", fechaInicio);
+                rptH.SetParameterValue("fechaFin", fechaFin);
+                Response.Buffer = false;
+                Response.ClearContent();
+                Response.ClearHeaders();
+
+                //En PDF
+                Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
+                rptH.Dispose();
+                rptH.Close();
+                return new FileStreamResult(stream, "application/pdf");
+                //return PartialView("_DetalleReporteUsuarios");
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
+
+
+       
+
+
 
     }
 }

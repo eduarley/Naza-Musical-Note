@@ -9,7 +9,6 @@ namespace Infraestructure.Repository
 {
     public interface IRepositoryReporte
     {
-        List<Bitacora_Sesion> GetBitacorasSesion();
-        bool DeleteBitacorasSesion();
+        List<Usuario> GetUsuariosIngresadosByFechas(DateTime fechaInicio, DateTime fechaFin);
     }
 }

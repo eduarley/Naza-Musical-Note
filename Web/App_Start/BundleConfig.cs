@@ -28,6 +28,11 @@ namespace Web
 
 
 
+            // Ajax unobtrusive
+            // JQUERY UNOBTRUSIVE PARA @Ajax.BeginForm() 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
+                        "~/Scripts/jquery.unobtrusive*"));
+
 
 
 

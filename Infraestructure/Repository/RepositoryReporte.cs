@@ -2,49 +2,33 @@
 using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Infraestructure.Repository
 {
     public class RepositoryReporte : IRepositoryReporte
     {
-        public bool DeleteBitacorasSesion()
+        public List<Usuario> GetUsuariosIngresadosByFechas(DateTime fechaInicio, DateTime fechaFin)
         {
-            bool estado = false;
+            List<Usuario> lista = null;
             try
             {
-                using (MyContext ctx = new MyContext())
-                {
-
-                    ctx.Database.ExecuteSqlCommand("delete from Bitacora_Sesion");
-                    if (ctx.SaveChanges() >= 0)
-                        estado = true;
-
-                }
-            }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-
-            return estado;
-        }
-
-        public List<Bitacora_Sesion> GetBitacorasSesion()
-        {
-            List<Bitacora_Sesion> lista = null;
-            try
-            {
+                
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Bitacora_Sesion.Include("Usuario").ToList();
+                    lista = ctx.Usuario
+                        .Include("Rol")
+                        .Where(p => DbFunctions.TruncateTime(p.Fecha_creacion) >= fechaInicio && DbFunctions.TruncateTime(p.Fecha_creacion) <= fechaFin)
+                        .ToList();
                 }
+                return lista;
+
             }
             catch (DbUpdateException dbEx)
             {
@@ -52,8 +36,13 @@ namespace Infraestructure.Repository
                 Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
 
-            return lista;
         }
     }
 }
