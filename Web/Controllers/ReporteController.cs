@@ -109,6 +109,8 @@ namespace Web.Controllers
 
 
 
+        //REPORTE USUARIOS
+
 
 
         public ActionResult ReporteUsuariosIngresados()
@@ -158,9 +160,94 @@ namespace Web.Controllers
         }
 
 
-       
 
 
+
+
+
+        //REPORTE SERVICIOS
+
+
+
+
+
+        public ActionResult ReporteServicios()
+        {
+            try
+            {
+                IServiceUsuario serviceUsuario = new ServiceUsuario();
+                ViewBag.Usuarios = serviceUsuario.GetUsuarios();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Pasar el Error a la página que lo muestra
+                @TempData["Message"] = ex.Message;
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+            
+        }
+
+        [HttpPost]
+        public ActionResult MostrarReporteServicios(string idUsuario)
+        {
+            try
+            {
+                IServiceUsuario serviceUsuario = new ServiceUsuario();
+                Usuario usuario = (Usuario)Session["User"];
+                Usuario usuarioConsultar = serviceUsuario.GetUsuarioByID(idUsuario);
+                IServiceReporte serviceReporte = new ServiceReporte();
+                var lista = serviceReporte.GetServiciosByUsuario(idUsuario);
+                var rptH = new ReportClass();
+                rptH.FileName = Server.MapPath("/Reports/ReporteServicios.rpt");
+                rptH.Load();
+
+                List<Viewmodels.ViewModelReporteServicio> listaViewModel = new List<Viewmodels.ViewModelReporteServicio>();
+
+
+                foreach (var item in lista)
+                {
+                    listaViewModel.Add(new Viewmodels.ViewModelReporteServicio()
+                    {
+                        Fecha = item.RolServicio.FechaInicio,
+                        Puesto = item.Puesto.Descripcion,
+                        Titulo = item.RolServicio.Titulo
+                    }); 
+                }
+
+
+
+                rptH.SetDataSource(listaViewModel);
+                rptH.SetParameterValue("NombreUsuario", usuario.NombreCompleto);
+                rptH.SetParameterValue("UsuarioAConsultar", usuarioConsultar.NombreCompleto);
+                rptH.SetParameterValue("CedulaUsuarioAConsultar", usuarioConsultar.Id);
+                rptH.SetParameterValue("Apariciones", listaViewModel.Count());
+                Response.Buffer = false;
+                Response.ClearContent();
+                Response.ClearHeaders();
+
+                //En PDF
+                Stream stream = rptH.ExportToStream(ExportFormatType.PortableDocFormat);
+                rptH.Dispose();
+                rptH.Close();
+                return new FileStreamResult(stream, "application/pdf");
+                //return PartialView("_DetalleReporteUsuarios");
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+        }
 
     }
 }

@@ -13,7 +13,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryUsuario : IRepositoryUsuario
     {
-        public List<Usuario> GetIntegrantesActivos()
+        public List<Usuario> GetUsuariosActivos()
         {
             List<Usuario> usuarios = null;
             try
@@ -21,7 +21,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     //Solamente usuarios rol integrante y estado activo
-                    usuarios = ctx.Usuario.Include("Rol").Where(p => p.IdRol != 1 && p.Estado == true).ToList();
+                    usuarios = ctx.Usuario.Include("Rol").Where(p => p.Estado).ToList();
                 }
             }
             catch (DbUpdateException dbEx)

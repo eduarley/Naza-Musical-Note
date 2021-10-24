@@ -9,7 +9,7 @@ namespace Infraestructure.Repository
 {
     public interface IRepositoryUsuario
     {
-        List<Usuario> GetIntegrantesActivos();
+        List<Usuario> GetUsuariosActivos();
         Usuario Save(Usuario usuario);
         Usuario SaveCambioClave(Usuario usuario);
         Usuario GetUsuario(string id, string password);

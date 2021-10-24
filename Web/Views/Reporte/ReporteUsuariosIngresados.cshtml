@@ -1,121 +1,121 @@
 ﻿
 @{
-    ViewBag.Title = "ReporteServiciosByUsuario";
-}
-
-@section Styles{
-    @Styles.Render("~/Content/datatable")
-
-}
-
-@*
-        @using (Html.BeginForm("DescargarReporteUsuariosIngresados", "Reporte", FormMethod.Post))
-    {
-        <input type="date" id="fechaInicio" name="fechaInicio" />
-        <input type="date" id="fechaFin" name="fechaFin" />
-        <button type="submit">Generar Reporte</button>
-
-    }
-*@
-
-
-@using (Ajax.BeginForm("MostrarReporteUsuariosIngresados", "Reporte", null, new AjaxOptions
-{
-    HttpMethod = "Post",
-    UpdateTargetId = "resultado",
-    OnSuccess = "onSuccessResult",
-    OnBegin = "onBeginResult",
-    OnFailure = "onFailureResult",
-    LoadingElementId = "imgloader",
-    LoadingElementDuration = 1000,
-    InsertionMode = InsertionMode.Replace
-
-}, new { id = "AjaxForm" }))
-{
-
-    <h2>Con ajax</h2>
-    <input type="date" id="fechaInicio" name="fechaInicio" />
-    <input type="date" id="fechaFin" name="fechaFin" />
-    <button type="submit">Generar Reporte</button>
-
-
-    <!--Imagen de progreso -->
-
-    <div id="imgloader" style="display:none;position:absolute;right: 45%; top: 20%">
-        <img src="~/Content/dist/img/loader.gif" height="100px" />
-    </div>
-
-
-
-
-
-    <div id="resultado"> </div>
+    ViewBag.Title = "Reporte Usuarios";
 }
 
 
 
-<h2>Sin ajax</h2>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>REPORTE USUARIOS INGRESADOS</h3>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Reportes</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
 
 @using (Html.BeginForm("MostrarReporteUsuariosIngresados", "Reporte", FormMethod.Post))
 {
-    <input type="date" id="fechaInicio" name="fechaInicio" />
-    <input type="date" id="fechaFin" name="fechaFin" />
-    <input type="submit" formtarget="_blank" value="Generar Reporte" />
+
+    <center>
+        <div class="card card-default mt-3 col-md-8">
+            <div class="card-body p-3 col-md-12">
+                <div class="card-header text-danger text-left border-bottom-0">
+                    <p>* Campos requeridos</p>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row text-left">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <strong class="text-danger">*</strong>
+                            <label class="col-md-2">Fecha inicial:</label>
+                            <div class="col-md-8">
+                                <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" />
+                                <p class="text-danger" id="errorFechaInicio"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <strong class="text-danger">*</strong>
+                            <label class="col-md-2">Fecha final:</label>
+                            <div class="col-md-8">
+                                <input type="date" id="fechaFin" name="fechaFin" class="form-control" />
+                                <p class="text-danger" id="errorFechaFin"></p>
+                            </div>
+                        </div>
+
+                        
+                        <div class="modal-footer justify-content-end">
+                            
+                            <p class="tooltip--left" data-tooltip="Abre una nueva ventana mostrando el reporte">
+                                <input id="btnAceptar" type="submit" disabled formtarget="_blank" value="Generar Reporte" class="btn btn-success" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+
+
 }
 
 
-@Html.ActionLink("Mostrar Reporte Prueba",
-    "MostrarReporteUsuariosIngresados",
-    "Reporte", new { fechaInicio = "fechaInicio", fechaFin = "fechaFin" },
-    new { target = "_blank" })
 
 
 @section scripts {
 
-    @Scripts.Render("~/bundles/jqueryajax")
-    @Scripts.Render("~/bundles/datatable")
-
 
     <script>
-        var onBeginResult = function (msg) {
 
+        $('#fechaInicio').on('change', function () {
+            validar();
+        })
+        $('#fechaFin').on('change', function () {
+            validar();
+        })
+        
+        function validar() {
+            var inicio = $('#fechaInicio').val();
+            var fin = $('#fechaFin').val();
+            $('#errorFechaInicio').text('');
+            $('#errorFechaFin').text('');
+
+            if (inicio == '') {
+                $('#errorFechaInicio').text('Debe ingresar la fecha inicial');
+                $('#fechaInicio').focus();
+                $("#btnAceptar").prop('disabled', true);
+                return;
+            }
+
+            if (fin == '') {
+                $('#errorFechaFin').text('Debe ingresar la fecha final');
+                $('#fechaFin').focus();
+                $("#btnAceptar").prop('disabled', true);
+                return;
+            }
+
+            if (Date.parse(inicio) > Date.parse(fin)) {
+                $('#errorFechaFin').text('La fecha final no puede ser anterior a la fecha inicial');
+                $('#fechaFin').focus();
+                $("#btnAceptar").prop('disabled', true);
+                return;
+            }
+
+
+            $("#btnAceptar").prop('disabled', false);
+            
+ 
         }
-    </script>
-
-    <script>
-        var onFailureResult = function (err) {
-            //$("#Mensaje").show("slow").delay(1000).hide("slow");
-        };
-    </script>
-
-    <!-- SE EJECUTA SI TODO FUE BIEN -->
-    <script>
-        var onSuccessResult = function (data) {
-
-
-        };
-    </script>
-
-
-    <script>
-
-        function Descargar() {
-            window.open("/Reporte/MostrarReporteUsuariosIngresados");
-        }
-
-        function Mostrar() {
-
-            $("#frmReporte")
-                .attr("src", "/Reporte/MostrarReporteUsuariosIngresados")
-                .load();
-        }
-
-
-
-        $(document).ready(function () {
-
-        });
-
 
 
     </script>
@@ -126,79 +126,11 @@
     <script>
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
-            $("#mantenimientos").addClass('active');
-            $("#menucategorias").addClass('active');
+            $("#informes").addClass('active');
+            $("#reporteusuarios").addClass('active');
 
         });
-
-
-
-
     </script>
-
-
-
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-                },
-                dom: 'Bfrtip',
-                //poner clase notexport a la columnas que no queremos en las exportaciones
-                buttons: [
-                    {
-                        extend: 'copy',
-                        text: 'Copiar',
-                        className: 'btn btn-default',
-                        exportOptions: {
-                            columns: ':not(.notexport)'
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: 'CSV',
-                        className: 'btn btn-default',
-                        exportOptions: {
-                            columns: ':not(.notexport)'
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: 'Excel',
-                        className: 'btn btn-default',
-                        exportOptions: {
-                            columns: ':not(.notexport)'
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: 'PDF',
-                        className: 'btn btn-default',
-                        exportOptions: {
-                            columns: ':not(.notexport)'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Imprimir',
-                        className: 'btn btn-default',
-                        exportOptions: {
-                            columns: ':not(.notexport)'
-                        }
-                    }
-
-                ],
-
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-
-
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-        });
-
-    </script>
-
 
 }
 

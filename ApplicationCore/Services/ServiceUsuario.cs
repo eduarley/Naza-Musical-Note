@@ -11,10 +11,10 @@ namespace ApplicationCore.Services
 {
     public class ServiceUsuario : IServiceUsuario
     {
-        public List<Usuario> GetIntegrantesActivos()
+        public List<Usuario> GetUsuariosActivos()
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-            return repository.GetIntegrantesActivos();
+            return repository.GetUsuariosActivos();
         }
 
         public Usuario Save(Usuario usuario)

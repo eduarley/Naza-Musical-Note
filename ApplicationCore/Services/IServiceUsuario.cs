@@ -9,7 +9,7 @@ namespace ApplicationCore.Services
 {
     public interface IServiceUsuario
     {
-        List<Usuario> GetIntegrantesActivos();
+        List<Usuario> GetUsuariosActivos();
         Usuario GetUsuario(string id, string password);
         Usuario Save(Usuario usuario);
         Rol GetRolByUsuario(int idRolUsuario);

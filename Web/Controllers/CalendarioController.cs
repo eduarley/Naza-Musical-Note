@@ -31,7 +31,7 @@ namespace Web.Controllers
             IServiceCategoria serviceCategoria = new ServiceCategoria();
             try
             {
-                participantes = serviceUsuario.GetIntegrantesActivos();
+                participantes = serviceUsuario.GetUsuariosActivos();
                 participantes.Insert(0, new Usuario() { Id = null, Nombre = "Sin Asignar" });
                 canciones = serviceCancion.GetCancionesActivas();
                 puestos = servicePuesto.GetPuestosActivos();

@@ -168,6 +168,12 @@
       <DependentUpon>ReporteAccesos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ReporteServicios.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteServicios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReporteUsuariosIngresados.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +188,7 @@
     <Compile Include="Viewmodels\ViewModelEnviarCorreo.cs" />
     <Compile Include="Viewmodels\ViewModelLogin.cs" />
     <Compile Include="Viewmodels\ViewModelPassNewUser.cs" />
+    <Compile Include="Viewmodels\ViewModelReporteServicio.cs" />
     <Compile Include="Viewmodels\ViewModelReporteSesion.cs" />
     <Compile Include="Viewmodels\ViewModelReporteUsuario.cs" />
   </ItemGroup>
@@ -2257,7 +2264,7 @@
     <Content Include="Views\Shared\_MenuLogOut.cshtml" />
     <Content Include="Views\Reporte\ReporteSesion.cshtml" />
     <Content Include="Views\Reporte\ReporteUsuariosIngresados.cshtml" />
-    <Content Include="Views\Reporte\_DetalleReporteUsuarios.cshtml" />
+    <Content Include="Views\Reporte\ReporteServicios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2290,6 +2297,10 @@
     <EmbeddedResource Include="Reports\ReporteAccesos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReporteAccesos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReporteServicios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteServicios.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReporteUsuariosIngresados.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
