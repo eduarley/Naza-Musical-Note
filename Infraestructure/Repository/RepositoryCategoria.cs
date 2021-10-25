@@ -136,6 +136,13 @@ namespace Infraestructure.Repository
                             }
                             ctx.Database.ExecuteSqlCommand("update puesto set estado = 0 where IdCategoria =" + oCategoria.Id);
                         }
+                        /*else
+                        {
+                            foreach (var item in oCategoria.Puesto)
+                            {
+                                ctx.Database.ExecuteSqlCommand("update Puesto set estado = 1 where Id =" + item.Id);
+                            }
+                        }*/
                         ctx.Entry(categoria).State = EntityState.Modified;
                     }
                         

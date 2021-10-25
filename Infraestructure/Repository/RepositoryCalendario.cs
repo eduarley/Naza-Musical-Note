@@ -166,7 +166,8 @@ namespace Infraestructure.Repository
             {
                 using (MyContext ctx = new MyContext())
                 {
-                    cat = ctx.Categoria.FirstOrDefault();
+                    cat = ctx.Categoria.Where(p => p.Estado).FirstOrDefault();
+                    
                 }
                 if (cat != null)
                     return cat.Id;

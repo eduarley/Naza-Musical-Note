@@ -160,7 +160,7 @@
                             else
                             {
                 <br />
-                                <span class="right badge badge-danger" id="alertaCancion" data-info="error">Aún no hay canciones.</span>}
+                                <span class="right badge badge-danger" id="alertaCancion" data-info="error-categoria">Aún no hay canciones.</span>}
                                             <br />
 
                                         </div>
@@ -206,22 +206,21 @@
 
 
                                 <div class=" d-flex p-0">
-                                    <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
-                                        @if (categorias != null)
-                                        {
-                                            foreach (var cat in categorias)
-                                            {
 
-                            <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li> }
+                                    @if (categorias != null)
+                                    {
+                                        foreach (var cat in categorias)
+                                        {
+                                            <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
+                                                <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
+                                            </ul>
+
                                         }
-                                        else
-                                        {
-                            <li>
-                                <span class="right badge badge-danger">Aún no hay categorías.</span>
-                            </li>}
-
-
-                                    </ul>
+                                    }
+                                    else
+                                    {
+                                        <span class="right badge badge-danger ml-auto p-2" data-info="error-categoria">Aún no hay categorías.</span>
+                                    }
                                 </div>
 
 
@@ -426,6 +425,7 @@
             //FIN VALIDACION
 
             stepper.next(); //MUESTRA EL SIGUIENTE TAB
+            $('#nav-puestos li:first a').click(); //AQUI MUESTRA LOS PUESTOS DE LA PRIMERA CATEGORIA
             $('#nav-puestos li a').each(function () { //PARA QUE NO HAYAN 2 'LI' ACTIVOS
                 $(this).removeClass("active");
             });
@@ -434,7 +434,7 @@
 
         }
 
-
+        /*
         //PARA MOSTRAR LOS PUESTOS LA PRIMERA VEZ AUTOMATICAMENTE
         window.onload = function () {
             $.ajax({
@@ -447,7 +447,7 @@
                 }
             });
         }
-
+        */
 
 
 
@@ -545,6 +545,14 @@
 
             $('#btnSave').click(function () {
 
+
+
+
+                var count = $("#nav-puestos").children().length;
+                if (count == 0) {
+                    mensaje('error', 'No se puede guardar el registro debido a que no existen categorías disponibles', false);
+                    return;
+                }
                 //aqui se agregan los elementos seleccionados de los dropdown a las listas correspondientes
                 var listausuarios = [];
                 var listapuestos = [];
@@ -607,12 +615,12 @@
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 3000,
+                    timer: 4000,
                 });
             } else {
                 var Toast = Swal.mixin({
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 4000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)

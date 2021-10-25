@@ -14,5 +14,6 @@ namespace ApplicationCore.Services
         Categoria GetCategoriaByID(int id);
         bool DeteteCategoria(int id);
         Categoria Save(Categoria categoria);
+        List<Categoria> GetCategoriasActivasConPuestos();
     }
 }

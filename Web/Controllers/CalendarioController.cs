@@ -35,7 +35,7 @@ namespace Web.Controllers
                 participantes.Insert(0, new Usuario() { Id = null, Nombre = "Sin Asignar" });
                 canciones = serviceCancion.GetCancionesActivas();
                 puestos = servicePuesto.GetPuestosActivos();
-                categorias = serviceCategoria.GetCategoriasActivas();
+                categorias = serviceCategoria.GetCategoriasActivasConPuestos();
                 var usuarioQuery = participantes.Select(p => new { p.Id, DisplayText = p.NombreCompleto });
                 ViewBag.Usuarios = usuarioQuery;
                 if (canciones.Count > 0)
@@ -126,7 +126,7 @@ namespace Web.Controllers
             return new JsonResult { Data = new { status = status } };
         }
 
-
+        /*
         public int GetPrimeraCategoria()
         {
             int id = -1;
@@ -149,7 +149,7 @@ namespace Web.Controllers
             }
             return id;
         }
-
+        */
         public ActionResult GetPuestosPorCategoria(int id)
         {
             List<Puesto> lista = new List<Puesto>();

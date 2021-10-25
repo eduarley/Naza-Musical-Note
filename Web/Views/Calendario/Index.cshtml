@@ -3,6 +3,7 @@
     ViewBag.Title = "Calendario";
     List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
 
+
     List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos;
 }
 @section Styles{
@@ -195,32 +196,30 @@
 
 
                                         <div class=" d-flex p-0">
-                                            <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
-                                                @if (categorias != null)
-                                                {
-                                                    foreach (var cat in categorias)
-                                                    {
 
+                                            @if (categorias != null)
+                                            {
+                                                foreach (var cat in categorias)
+                                                {
+                                                    <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
                                                         <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    <li>
-                                                        <span class="right badge badge-danger">Aún no hay categorías.</span>
-                                                    </li>
-                                                }
+                                                    </ul>
 
-
-                                            </ul>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span class="right badge badge-danger ml-auto p-2" data-info="error-categoria">Aún no hay categorías.</span>
+                                            }
                                         </div>
 
 
 
                                         <ul class="tab-content" style="height: 13em; overflow-y:scroll">
 
-
-                                            @foreach (var item in puestos)
+                                        @if (puestos != null)
+                                        {
+                                            foreach (var item in puestos)
                                             {
                                                 var idP = puestos;
                                                 <li id='puesto_@item.IdCategoria' hidden>
@@ -231,6 +230,8 @@
                                                 </li>
 
                                             }
+                                        }
+                                            
 
                                         </ul>
                                     </div>
@@ -350,6 +351,7 @@
             })
 
         });
+
     </script>
 
 
@@ -435,9 +437,13 @@
                     return;
                 }
             }
+           
+            
+
             //FIN VALIDACION
 
             stepper.next(); //MUESTRA EL SIGUIENTE TAB
+            $('#nav-puestos li:first a').click(); //AQUI MUESTRA LOS PUESTOS DE LA PRIMERA CATEGORIA
             $('#nav-puestos li a').each(function () { //PARA QUE NO HAYAN 2 'LI' ACTIVOS
                 $(this).removeClass("active");
             });
@@ -445,6 +451,8 @@
             $('#nav-puestos li a').eq(0).addClass('active');
 
         }
+
+        /*
 
         //PARA MOSTRAR LOS PUESTOS LA PRIMERA VEZ AUTOMATICAMENTE
         $('#myModalSave').on('shown.bs.modal', function () {
@@ -454,12 +462,15 @@
                 type: "GET",
                 url: "/Calendario/GetPrimeraCategoria",
                 success: function (data) {
-
+                    
                     mostrarPuestos(data);
 
                 }
             });
         })
+
+    */
+
 
         //MUESTRA LOS PUESTOS AL HACER CLICK A CADA PESTAÑA
         function mostrarPuestos(id) {
@@ -695,6 +706,17 @@
 
             $('#btnSave').click(function () {
 
+
+                var count = $("#nav-puestos").children().length;
+                if (count == 0) {
+                    mensaje('error', 'No se puede guardar el registro debido a que no existen categorías disponibles', false);
+                    return;
+                }
+                
+
+
+
+
                 //aqui se agregan los elementos seleccionados de los dropdown a las listas correspondientes
                 var listausuarios = [];
                 var listapuestos = [];
@@ -763,7 +785,7 @@
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 3000,
+                    timer: 4000,
                     /*
                     timerProgressBar: true,
                     didOpen: (toast) => {
@@ -775,7 +797,7 @@
             } else {
                 var Toast = Swal.mixin({
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 4000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)

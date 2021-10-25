@@ -32,6 +32,25 @@ namespace ApplicationCore.Services
             return repository.GetCategoriasActivas();
         }
 
+        public List<Categoria> GetCategoriasActivasConPuestos()
+        {
+            List<Categoria> lista = repository.GetCategoriasActivas();
+            List<Categoria> listaCategoriasConPuestos = new List<Categoria>();
+            foreach (var item in lista)
+            {
+
+                var estado = item.Puesto.Select(p => p.Estado);
+
+                foreach (var status in estado)
+                {
+                    if(status)
+                        listaCategoriasConPuestos.Add(item);
+                }
+                
+            }
+            return listaCategoriasConPuestos.Distinct().ToList();
+        }
+
         public Categoria Save(Categoria categoria)
         {
             return repository.Save(categoria);
