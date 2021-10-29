@@ -53,6 +53,7 @@ C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestruct
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.pdb
+C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\Infraestructure.dll.config
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\Infraestructure.dll
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\Infraestructure.pdb
@@ -62,9 +63,7 @@ C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\log4net.dll
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\EntityFramework.xml
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\EntityFramework.SqlServer.xml
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\bin\Debug\log4net.xml
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.dll
 C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.pdb
-C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache

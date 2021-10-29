@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in</title>
+    <title>Iniciar sesión</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,15 +19,15 @@
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
     <div class="login-box">
         <div class="login-logo">
 
-            <a href="#"><b>Naza</b> Musical Note</a>
+            <a style="color:white; text-shadow:4px 4px 3px black" href="#"><b style="color:white; text-shadow:4px 4px 3px black">Naza</b> Musical Note</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -38,24 +38,24 @@
                 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <div class="input-group mb-3">
-                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", placeholder = "Cédula" } })
-                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
+            <div class="input-group mb-3">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", placeholder = "Cédula" } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
                     </div>
-                    <div class="input-group mb-3">
-                        @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña" })
-                        @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>                
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña" })
+                @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>                
                     <div class="row">
 
                         <!-- /.col -->
@@ -68,7 +68,7 @@
 
                 <p class="mb-1 mt-4">
 
-                    <a href="@Url.Action("Index","Recuperacion")">¿Olvidó su contraseña?</a>
+                    <a href="@Url.Action("Prueba","Recuperacion")">¿Olvidó su contraseña?</a>
                 </p>
 
             </div>

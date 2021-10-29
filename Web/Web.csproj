@@ -2266,6 +2266,7 @@
     <Content Include="Views\Reporte\ReporteUsuariosIngresados.cshtml" />
     <Content Include="Views\Reporte\ReporteServicios.cshtml" />
     <Content Include="Views\Login\Prueba.cshtml" />
+    <Content Include="Views\Recuperacion\Prueba.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
