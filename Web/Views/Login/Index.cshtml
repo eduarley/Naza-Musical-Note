@@ -1,97 +1,104 @@
 ﻿@model Web.Viewmodels.ViewModelLogin
 
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
-@{
-    ViewBag.Title = "Inicio de sesión";
-}
+@{ ViewBag.Title = "Inicio de sesión"; }
 
-@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión</title>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Iniciar sesión</title>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-        <link href="~/Content/dist/css/login/loginstyle.css" rel="stylesheet" />
-
-
-        <!-- SweetAlert2 -->
-        <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-
-
-    </head>
-    <body>
-        <div id="container">
-            <div id="inviteContainer">
-                <div class="logoContainer">
-                    <img src="~/Content/dist/img/logo nazareno full primary.png" />
-                    <h2 class="logo" style="color: #0069D9">Naza Musical Note</h2>
-                </div>
-                <div class="acceptContainer">
-                    <form>
-                        <h1>¡Bienvenido a Naza Musical Note!</h1>
-                        <div class="formContainer">
-                           
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="formDiv" style="transition-delay: 0.2s">
-
-                                <p>CÉDULA</p>
-                                <!--<input type="text" />-->
-                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "disennoinputs" } })
-                                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="formDiv" style="transition-delay: 0.4s">
-                                <!--required=""-->
-                                <p>CONTRASEÑA</p>
-                                <!--<input type="password" /><a class="forgotPas" href="#">¿OLVIDÓ SU CONTRASEÑA?</a>-->
-                                @Html.PasswordFor(model => model.Clave, new { @class = "disennoinputs" })
-                                @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
-                                <a class="forgotPas" href="../Recuperacion/Index">¿OLVIDÓ SU CONTRASEÑA?</a>
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/login/Login.css" />
+</head>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="login-logo">
+                <img src="~/Content/dist/img/logo nazareno full primary.png" width="35%" height="35%" />
+                <br />
+                <b style="color:#0094ff">Naza  Musical Note</b>
+            </div>
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Ingrese sus credenciales</p>
 
 
-                            </div>
-                            <div class="formDiv" style="transition-delay: 0.6s">
-                                <!--
-        <button class="acceptBtn" type="submit">Ingresar</button><span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>
-        -->
-                                <button class="acceptBtn" type="submit">
-                                    Ingresar
-                                </button>
-
-                                <!--<span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>-->
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula" } )
+                        
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
-                    </form>
-                </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña" })
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="acceptBtn">Ingresar</button><!--class="btn btn-primary btn-block"-->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                }
+
+                <p class="mb-1 mt-4">
+
+                    <a href="@Url.Action("Index","Recuperacion")">¿Olvidó su contraseña?</a>
+                </p>
+
             </div>
+            <!-- /.login-card-body -->
         </div>
-        <!-- partial -->
-        <script src="~/Content/dist/js/login/script.js"></script>
-        <script>
-            function redireccionar() {
-                window.location.href = "../home/index";
-            }
-        </script>
-    </body>
-</html>
-}
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src=".~/Content/dist/js/adminlte.min.js"></script>
 
-@Scripts.Render("~/bundles/jqueryval")
 
-<script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
 
-<script>
-    
+
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+
 
     $(document).ready(function () {
 
@@ -106,7 +113,8 @@
             Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "error");
             }
     });
-</script>
+    </script>
 
 
-
+</body>
+</html>

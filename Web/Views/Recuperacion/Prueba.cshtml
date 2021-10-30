@@ -22,15 +22,16 @@
     <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/recupera2/Recovery.css"/>
 </head>
 <body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
     <div class="login-box">
-        <div class="login-logo">
-
-            <a href="#" style="color:white; text-shadow:4px 4px 3px black"><b style="color:white; text-shadow:4px 4px 3px black">Recuperación</b> de contraseña</a>
-        </div>
+        
         <!-- /.login-logo -->
         <div class="card">
+            <div class="login-logo">
+                <b style="color:#0094ff">Recuperación de contraseña</b>
+            </div>
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Por favor ingrese su número de cédula y el correo electrónico asociado a su cuenta para enviarle el enlace de recuperación.</p>
 
@@ -39,7 +40,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="input-group mb-3">
-                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", placeholder = "Cédula" } })
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula" } )
                         @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -60,7 +61,7 @@
 
                         <!-- /.col -->
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                            <button type="submit" class="acceptBtn">Enviar</button>
                         </div>
                         <!-- /.col -->
                     </div>

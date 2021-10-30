@@ -1,220 +1,235 @@
 ﻿@model Web.Viewmodels.ViewModelChangePass
 
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
-@{
-    ViewBag.Title = "Recuperación Contraseña";
-}
+@{ ViewBag.Title = "Recuperación Contraseña"; }
 
-@using (Html.BeginForm("RecoveryPass", "Recuperacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recuperación de contraseña</title>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Cambio de contraseña</title>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-        <link href="~/Content/dist/css/cambio/cambiostyle.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- partial:index.partial.html -->
-        <!-- NORMALIZED CSS INSTALLED-->
-        <!-- View settings for more info.-->
-        <div id="container">
-            <div id="inviteContainer">
-                <div class="acceptContainer">
-                    <form action="@Url.Content("~/Recuperacion/RecoveryPass")" method="post">
-                        <h1>Recuperación de contraseña</h1>
-                        <div class="formContainer">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="formDiv" style="transition-delay: 0.2s">
-                                <p style="margin-bottom:15px; text-align:justify">Recuerde que la contraseña debe coincidir en ambos campos. Además, debe contener al menos una letra minúscula y mayúscula, al menos un número y al menos un caracter especial.</p>
-                            </div>
-                            <div class="formDiv" style="transition-delay: 0.4s">
-                                @Html.HiddenFor(model => model.token)
-                                <p>INGRESE SU NUEVA CONTRASEÑA<a style="padding-left:40%" data-toggle="tooltip" data-placement="top" title="Presione aquí para mostrar u ocultar la contraseña" id="ojosMostrar"><img style="color:white" src="~/Content/dist/img/ojo.png" height="15px" width="15px" /></a></p> 
-                                <!--<input type="text" />-->
-                                @Html.PasswordFor(model => model.NewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
-                            
-                                <!--<input type="text" id="claveNueva"/>-->
-                                @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="formDiv" style="transition-delay: 0.4s">
-                                <p>CONFIRME SU NUEVA CONTRASEÑA</p>
-                                <!--<input type="text" />-->
-                                @Html.PasswordFor(model => model.ConfirmNewClave, new { htmlAttributes = new { @class = "disennoinputs" } })
-                                <!--<input type="text" id="claveNuevaConfirm" />-->
-                                @Html.ValidationMessageFor(model => model.ConfirmNewClave, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="formDiv" style="transition-delay: 0.6s">
-                                 <div style="text-align:center">
-                                        <button id="botonAceptar" class="acceptBtn" type="submit" >
-                                            Guardar cambio
-                                        </button>
-                                 </div>
-                                
-                                <!--<span class="register">Necesita una cuenta?<a href="#">Registrar</a></span>-->
-                            </div>
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/recupera2/Recovery.css"/>
 
-                        </div>
+</head>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+        
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="login-logo">
 
-                    </form>
-                </div>
+                <b style="color:#0094ff">Cambio de contraseña</b>
             </div>
+            <div class="card-body login-card-body">
+                <p class="login-box-msg" id="textoPrincipal">Recuerde que la contraseña debe coincidir en ambos campos. Además, debe contener al menos una letra minúscula y mayúscula, al menos un número y al menos un caracter especial.</p>
+
+
+                @using (Html.BeginForm("RecoveryPass", "Recuperacion", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(model => model.NewClave, new { @class = "form-control", placeholder = "Contraseña" } )
+                        
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(model => model.ConfirmNewClave, new { @class = "form-control", placeholder = "Confirmar contraseña" })
+                        
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.ConfirmNewClave, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button id="botonAceptar" type="submit" class="acceptBtn">Guardar cambio</button><!--acceptBtn-->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                }
+
+                <p class="mb-1 mt-4">
+
+                    <a id="ojosMostrar" title="Mostrar u ocultar las contraseñas"><img src="~/Content/dist/img/ojo primary.png" width="10%" height="10%"/></a>
+                </p>
+
+            </div>
+            <!-- /.login-card-body -->
         </div>
-        <!-- partial -->
-        <script src="~/Content/dist/js/cambio/script.js"></script>
-    </body>
-</html>
-}
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src=".~/Content/dist/js/adminlte.min.js"></script>
 
-<script type="text/javascript">
-    // Habilita los tooltips
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
 
-    $(document).ready(function () {
-        $('#NewClave').val('');
-        $("#botonAceptar").attr('disabled', 'disabled');
-        //$("#botonAceptar").addClass('btn-primary-disabled');
-        $("#botonAceptar").addClass('acceptBtnDisabled');
-    });
 
-    $("#NewClave").on("keyup paste", function () {
-        //alert("Hola mundo");
-        validarClave();
-        //$("#botonAceptar").removeAttr('disabled');
-        //$("#botonAceptar").removeClass('btn-primary-disabled');
-    });
 
-    $("#ConfirmNewClave").on("keyup paste", function () {
-        //alert('Hola mundo');
-        validarClave();
-        //$("#botonAceptar").removeAttr('disabled');
-        //$("#botonAceptar").removeClass('btn-success-disabled');
-    });
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
 
-    //$("#claveNuevaConfirm").keyup(function (e) {
-    //    validarClave();
-    //});
-
-    $('#ojosMostrar').on('click', function () {
-        $('#NewClave').attr('type', function (index, attr) {
-            return attr == 'text' ? 'password' : 'text';
+    <script type="text/javascript">
+        // Habilita los tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
         })
-        $('#ConfirmNewClave').attr('type', function (index, attr) {
-            return attr == 'text' ? 'password' : 'text';
-        })
-    })
 
-    function validarClave() {
-
-
-        //var claveNueva = $("#claveNueva").val();
-        //var claveNuevaConfirm = $("#claveNuevaConfirm").val();
-        var claveNueva = $("#NewClave").val();
-        var claveNuevaConfirm = $("#ConfirmNewClave").val();
-        //alert(claveNueva2 + claveNueva3);
-        var longitudValidada = false;
-        var minusculasValidada = false;
-        var mayusculasValidada = false;
-        var numerosValidada = false;
-        var simbolosValidada = false;
-
-
-        //Tamaño de la clave entre 9 y 25
-        let tamanno = (claveNueva.length >= 9 && claveNueva.length <= 25 && claveNuevaConfirm.length >= 9 && claveNuevaConfirm.length <= 25);
-        if (tamanno) {
-            longitudValidada = true;
-        } else {
-            longitudValidada = false;
-        }
-
-
-
-        //debugger;
-        //let regexLetraMinuscula = new RegExp(/(?=.*[a-z]).{1,}$/);^
-        let regexLetraMinuscula = /(?=.*[a-z]).{1,}$/;
-        let letraMinuscula1 = regexLetraMinuscula.test(claveNueva);
-        let letraMinuscula2 = regexLetraMinuscula.test(claveNuevaConfirm);
-        if (letraMinuscula1 == true && letraMinuscula2 == true) {
-            minusculasValidada = true;
-        }
-
-        if (letraMinuscula1 == false && letraMinuscula2 == false || letraMinuscula1 == true && letraMinuscula2 == false || letraMinuscula1 == false && letraMinuscula2 == true) {
-            minusculasValidada = false;
-        }
-
-
-        //let regexLetraMayuscula = new RegExp(/(?=.*[A-Z]).{1,}$/);
-        let regexLetraMayuscula = /(?=.*[A-Z]).{1,}$/;
-        let letraMayuscula1 = regexLetraMayuscula.test(claveNueva);
-        let letraMayuscula2 = regexLetraMayuscula.test(claveNuevaConfirm);
-        if (letraMayuscula1 == true && letraMayuscula2 == true) {
-            mayusculasValidada = true;
-        }
-
-        if (letraMayuscula1 == false && letraMayuscula2 == false || letraMayuscula1 == true && letraMayuscula2 == false || letraMayuscula1 == false && letraMayuscula2 == true) {
-            mayusculasValidada = false;
-        }
-
-
-        //let regexNumero = new RegExp(/(?=.*[0-9]).{1,}$/);
-        let regexNumero = /(?=.*[0-9]).{1,}$/;
-        let numero1 = regexNumero.test(claveNueva);
-        let numero2 = regexNumero.test(claveNuevaConfirm);
-        if (numero1 == true && numero2 == true) {
-            numerosValidada = true;
-        }
-
-        if (numero1 == false && numero2 == false || numero1 == true && numero2 == false || numero1 == false && numero2 == true) {
-            numerosValidada = false;
-        }
-
-
-        //let regexEspeciales = new RegExp(/(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/);
-        let regexEspeciales = /(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/;
-        let especiales1 = regexEspeciales.test(claveNueva);
-        let especiales2 = regexEspeciales.test(claveNuevaConfirm);
-        if (especiales1 == true && especiales2 == true) {
-            simbolosValidada = true;
-        }
-
-        if (especiales1 == false && especiales2 == false || especiales1 == true && especiales2 == false || especiales1 == false && especiales2 == true) {
-            simbolosValidada = false;
-        }
-        //debugger;
-        //$("#botonAceptar").prop('disabled', claveValidada);
-        if (longitudValidada == true && minusculasValidada == true && mayusculasValidada == true && numerosValidada == true && simbolosValidada == true) {
-            $("#botonAceptar").removeAttr('disabled');
-            //$("#botonAceptar").removeClass('btn-primary-disabled');
-            $("#botonAceptar").removeClass('acceptBtnDisabled');
-            //$("#botonAceptar").addClass('acceptBtn:hover');
-        } else {
+        $(document).ready(function () {
+            $('#NewClave').val('');
             $("#botonAceptar").attr('disabled', 'disabled');
             //$("#botonAceptar").addClass('btn-primary-disabled');
             $("#botonAceptar").addClass('acceptBtnDisabled');
-            //$("#botonAceptar").removeClass('acceptBtn:hover');
+        });
+
+        $("#NewClave").on("keyup paste", function () {
+            //alert("Hola mundo");
+            validarClave();
+            //$("#botonAceptar").removeAttr('disabled');
+            //$("#botonAceptar").removeClass('btn-primary-disabled');
+        });
+
+        $("#ConfirmNewClave").on("keyup paste", function () {
+            //alert('Hola mundo');
+            validarClave();
+            //$("#botonAceptar").removeAttr('disabled');
+            //$("#botonAceptar").removeClass('btn-success-disabled');
+        });
+
+        //$("#claveNuevaConfirm").keyup(function (e) {
+        //    validarClave();
+        //});
+
+        $('#ojosMostrar').on('click', function () {
+            $('#NewClave').attr('type', function (index, attr) {
+                return attr == 'text' ? 'password' : 'text';
+            })
+            $('#ConfirmNewClave').attr('type', function (index, attr) {
+                return attr == 'text' ? 'password' : 'text';
+            })
+        })
+
+        function validarClave() {
+
+
+            //var claveNueva = $("#claveNueva").val();
+            //var claveNuevaConfirm = $("#claveNuevaConfirm").val();
+            var claveNueva = $("#NewClave").val();
+            var claveNuevaConfirm = $("#ConfirmNewClave").val();
+            //alert(claveNueva2 + claveNueva3);
+            var longitudValidada = false;
+            var minusculasValidada = false;
+            var mayusculasValidada = false;
+            var numerosValidada = false;
+            var simbolosValidada = false;
+
+
+            //Tamaño de la clave entre 9 y 25
+            let tamanno = (claveNueva.length >= 9 && claveNueva.length <= 25 && claveNuevaConfirm.length >= 9 && claveNuevaConfirm.length <= 25);
+            if (tamanno) {
+                longitudValidada = true;
+            } else {
+                longitudValidada = false;
+            }
+
+
+
+            //debugger;
+            //let regexLetraMinuscula = new RegExp(/(?=.*[a-z]).{1,}$/);^
+            let regexLetraMinuscula = /(?=.*[a-z]).{1,}$/;
+            let letraMinuscula1 = regexLetraMinuscula.test(claveNueva);
+            let letraMinuscula2 = regexLetraMinuscula.test(claveNuevaConfirm);
+            if (letraMinuscula1 == true && letraMinuscula2 == true) {
+                minusculasValidada = true;
+            }
+
+            if (letraMinuscula1 == false && letraMinuscula2 == false || letraMinuscula1 == true && letraMinuscula2 == false || letraMinuscula1 == false && letraMinuscula2 == true) {
+                minusculasValidada = false;
+            }
+
+
+            //let regexLetraMayuscula = new RegExp(/(?=.*[A-Z]).{1,}$/);
+            let regexLetraMayuscula = /(?=.*[A-Z]).{1,}$/;
+            let letraMayuscula1 = regexLetraMayuscula.test(claveNueva);
+            let letraMayuscula2 = regexLetraMayuscula.test(claveNuevaConfirm);
+            if (letraMayuscula1 == true && letraMayuscula2 == true) {
+                mayusculasValidada = true;
+            }
+
+            if (letraMayuscula1 == false && letraMayuscula2 == false || letraMayuscula1 == true && letraMayuscula2 == false || letraMayuscula1 == false && letraMayuscula2 == true) {
+                mayusculasValidada = false;
+            }
+
+
+            //let regexNumero = new RegExp(/(?=.*[0-9]).{1,}$/);
+            let regexNumero = /(?=.*[0-9]).{1,}$/;
+            let numero1 = regexNumero.test(claveNueva);
+            let numero2 = regexNumero.test(claveNuevaConfirm);
+            if (numero1 == true && numero2 == true) {
+                numerosValidada = true;
+            }
+
+            if (numero1 == false && numero2 == false || numero1 == true && numero2 == false || numero1 == false && numero2 == true) {
+                numerosValidada = false;
+            }
+
+
+            //let regexEspeciales = new RegExp(/(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/);
+            let regexEspeciales = /(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/;
+            let especiales1 = regexEspeciales.test(claveNueva);
+            let especiales2 = regexEspeciales.test(claveNuevaConfirm);
+            if (especiales1 == true && especiales2 == true) {
+                simbolosValidada = true;
+            }
+
+            if (especiales1 == false && especiales2 == false || especiales1 == true && especiales2 == false || especiales1 == false && especiales2 == true) {
+                simbolosValidada = false;
+            }
+            //debugger;
+            //$("#botonAceptar").prop('disabled', claveValidada);
+            if (longitudValidada == true && minusculasValidada == true && mayusculasValidada == true && numerosValidada == true && simbolosValidada == true) {
+                $("#botonAceptar").removeAttr('disabled');
+                //$("#botonAceptar").removeClass('btn-primary-disabled');
+                $("#botonAceptar").removeClass('acceptBtnDisabled');
+                //$("#botonAceptar").addClass('acceptBtn:hover');
+            } else {
+                $("#botonAceptar").attr('disabled', 'disabled');
+                //$("#botonAceptar").addClass('btn-primary-disabled');
+                $("#botonAceptar").addClass('acceptBtnDisabled');
+                //$("#botonAceptar").removeClass('acceptBtn:hover');
+            }
         }
-    }
 
-</script>
-
+    </script>
 
 
-
-
-
-
-
-@Scripts.Render("~/bundles/jqueryval")
-
+</body>
+</html>

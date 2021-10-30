@@ -67,3 +67,4 @@ C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestruct
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Infraestructure\obj\Debug\Infraestructure.pdb
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache

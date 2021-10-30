@@ -22,15 +22,17 @@
     <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/login/Login.css"/>
 </head>
 <body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
     <div class="login-box">
-        <div class="login-logo">
-
-            <a style="color:white; text-shadow:4px 4px 3px black" href="#"><b style="color:white; text-shadow:4px 4px 3px black">Naza</b> Musical Note</a>
-        </div>
         <!-- /.login-logo -->
         <div class="card">
+            <div class="login-logo">
+                <img src="~/Content/dist/img/logo nazareno full primary.png" width="35%" height="35%"/>
+                <br />
+                <b style="color:#0094ff">Naza  Musical Note</b>
+            </div>
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Ingrese sus credenciales</p>
 
@@ -38,33 +40,33 @@
                 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-            <div class="input-group mb-3">
-                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", placeholder = "Cédula" } })
-                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula" } )
+                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="input-group mb-3">
-                @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña" })
-                @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña" })
+                        @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>                
                     <div class="row">
 
                         <!-- /.col -->
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                            <button type="submit" class="acceptBtn">Ingresar</button><!--class="btn btn-primary btn-block"-->
                         </div>
                         <!-- /.col -->
-                    </div>                               
-                 }
+                    </div>
+                }
 
                 <p class="mb-1 mt-4">
 

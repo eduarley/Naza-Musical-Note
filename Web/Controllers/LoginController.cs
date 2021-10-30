@@ -19,12 +19,6 @@ namespace Web.Controllers
         }
 
 
-        public ActionResult Prueba()
-        {
-            return View();
-        }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(Viewmodels.ViewModelLogin model)
@@ -85,7 +79,7 @@ namespace Web.Controllers
                     }
                 }
 
-                return View("Prueba");
+                return View("Index");
             }
             catch (Exception ex)
             {

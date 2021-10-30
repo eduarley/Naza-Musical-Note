@@ -1,48 +1,77 @@
-﻿@{
-    Layout = null;
-}
+﻿@*@model Web.Viewmodels.ViewModelChangePass*@
 
-@{
-    ViewBag.Title = "Cambio Completado";
-}
+@{ Layout = null; }
+
+@{ ViewBag.Title = "Cambio Completado"; }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recuperación de contraseña</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js" integrity="sha256-mkdmXjMvBcpAyyFNCVdbwg4v+ycJho65QLDwVE3ViDs=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link href="~/Content/dist/css/changecomplet/changecompletstyle.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/recupera2/Recovery.css" />
+
 </head>
-<body>
-    <!-- partial:index.partial.html -->
-    <!-- NORMALIZED CSS INSTALLED-->
-    <!-- View settings for more info.-->
-    <div id="container">
-        <div id="inviteContainer">
-            <div class="acceptContainer">
-                <form>
-                    <h1>¡La contraseña se ha cambiado exitosamente!</h1>
-                    <div class="formDiv" style="transition-delay: 0.2s">
-                        <p style="color: white">Ya puedes iniciar sesión con tu nueva contraseña.</p>
-                    </div>
-                    <div class="formDiv" style="transition-delay: 0.4s">
-                        <a id="etiquetaA" href="~/Login/Index">Iniciar sesión</a>
-                    </div>
-                </form>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+        @*<div class="login-logo">
+
+            <a href="#" style="color:white; text-shadow:4px 4px 3px black"><b style="color:white; text-shadow:4px 4px 3px black">Recuperación</b> de contraseña</a>
+        </div>*@
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <div class="login-logo">
+
+                    <b id="textoPrincipalCentrado" style="color:#0094ff">¡La contraseña se ha cambiado exitosamente!</b>
+                </div>
+                <p class="login-box-msg" id="textoPrincipalCentrado">Ya puedes iniciar sesión con tu nueva contraseña.</p>
+
+                <!-- /.col -->
+                <div class="col-12">
+                    <button onclick="redireccionar()" id="botonAceptar" class="acceptBtn">Iniciar sesión</button><!--acceptBtn-->
+                </div>
+                <!-- /.col -->
             </div>
+                
+
+                @*<p class="mb-1 mt-4">
+
+                        <a href="@Url.Action("Prueba","Login")">Volver</a>
+                    </p>*@
+
+            </div>
+            <!-- /.login-card-body -->
         </div>
-    </div>
-    <!-- partial -->
-    <script src="~/Content/dist/js/recupera/script.js"></script>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src=".~/Content/dist/js/adminlte.min.js"></script>
+
+
+
     <script>
-            function redireccionar() {
-                window.location.href = "../login/index";
-            }
+        function redireccionar() {
+            window.location.href = "../Login/Prueba";
+        }
     </script>
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
 </body>
 </html>

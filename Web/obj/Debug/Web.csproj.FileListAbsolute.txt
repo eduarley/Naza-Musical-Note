@@ -544,3 +544,16 @@ C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.csproj.CoreCompileIn
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.csproj.CopyComplete
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\Web\obj\Debug\Web.pdb
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\Web\bin\stdole.dll

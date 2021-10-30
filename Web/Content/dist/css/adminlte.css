@@ -35395,10 +35395,10 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 
 .login-logo,
 .register-logo {
-  font-size: 2.1rem;
-  font-weight: 300;
-  margin-bottom: .9rem;
-  text-align: center;
+    font-size: 2.1rem;
+    font-weight: 300;
+    margin-bottom: .9rem;
+    text-align: center;
 }
 
 .login-logo a,
@@ -35444,10 +35444,10 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 
 .login-card-body,
 .register-card-body {
-  background-color: #fff;
-  border-top: 0;
-  color: #666;
-  padding: 20px;
+    background-color: #fff;
+    border-top: 0;
+    color: #666;
+    padding: 20px;
 }
 
 .login-card-body .input-group .form-control,
@@ -35489,15 +35489,15 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   border-color: #dc3545;
 }
 
-.login-card-body .input-group .input-group-text,
-.register-card-body .input-group .input-group-text {
-  background-color: transparent;
-  border-bottom-right-radius: 0.25rem;
-  border-left: 0;
-  border-top-right-radius: 0.25rem;
-  color: #777;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+    .login-card-body .input-group .input-group-text,
+    .register-card-body .input-group .input-group-text {
+        background-color: transparent;
+        border-bottom-right-radius: 0.25rem;
+        border-left: 0;
+        border-top-right-radius: 0.25rem;
+        color: #777;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 
 .login-box-msg,
 .register-box-msg {
