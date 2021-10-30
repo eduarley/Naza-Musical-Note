@@ -112,6 +112,7 @@
     <Compile Include="Repository\IRepositoryCalendario.cs" />
     <Compile Include="Repository\IRepositoryCancion.cs" />
     <Compile Include="Repository\IRepositoryCategoria.cs" />
+    <Compile Include="Repository\IRepositoryGestionCancion.cs" />
     <Compile Include="Repository\IRepositoryPuesto.cs" />
     <Compile Include="Repository\IRepositoryRol.cs" />
     <Compile Include="Repository\IRepositoryRolServicio.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Repository\RepositoryCalendario.cs" />
     <Compile Include="Repository\RepositoryCancion.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
+    <Compile Include="Repository\RepositoryGestionCancion.cs" />
     <Compile Include="Repository\RepositoryPuesto.cs" />
     <Compile Include="Repository\RepositoryRol.cs" />
     <Compile Include="Repository\RepositoryRolServicio.cs" />

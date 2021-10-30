@@ -81,24 +81,7 @@
 
 
 
-            <div class="row">
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Url_version, htmlAttributes: new { @class = "control-label" })
-                        <p  class="tooltip--right" data-tooltip="Copiar un enlace de YouTube para mostrar el video de la versión">
-                            <span style="color: Highlight" class="fas fa-info-circle"></span>
-                        </p>
-                        
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Url_version, "", new { @class = "text-danger" })
-                            <a href="https://www.youtube.com/?hl=es" target="_blank">Abrir YouTube</a>
-                        </div>
-                    </div>
-                </div>
-              
-            </div>
+          
 
 
 

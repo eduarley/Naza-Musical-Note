@@ -46,6 +46,7 @@
     <Compile Include="Services\IServiceCalendario.cs" />
     <Compile Include="Services\IServiceCancion.cs" />
     <Compile Include="Services\IServiceCategoria.cs" />
+    <Compile Include="Services\IServiceGestionCancion.cs" />
     <Compile Include="Services\IServicePuesto.cs" />
     <Compile Include="Services\IServiceReporte.cs" />
     <Compile Include="Services\IServiceRol.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Services\ServiceCalendario.cs" />
     <Compile Include="Services\ServiceCancion.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
+    <Compile Include="Services\ServiceGestionCancion.cs" />
     <Compile Include="Services\ServicePuesto.cs" />
     <Compile Include="Services\ServiceReporte.cs" />
     <Compile Include="Services\ServiceRol.cs" />

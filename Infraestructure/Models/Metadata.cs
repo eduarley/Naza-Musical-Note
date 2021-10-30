@@ -72,7 +72,7 @@ namespace Infraestructure.Models
         public string Genero { get; set; }
 
         [Display(Name = "Enlace para la versión")]
-        [RegularExpression(@"https:\/\/youtu.be[^' '\n\r]+", ErrorMessage = "Formato no permitido. Ejemplo de formato: https://youtu.be/......")]
+        //[RegularExpression(@"https:\/\/youtu.be[^' '\n\r]+", ErrorMessage = "Formato no permitido. Ejemplo de formato: https://youtu.be/......")]
         public string Url_version { get; set; }
     }
 

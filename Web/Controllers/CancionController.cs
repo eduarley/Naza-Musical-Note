@@ -55,6 +55,7 @@ namespace Web.Controllers
         public ActionResult Details(int id)
         {
             IServiceCancion serviceCancion = new ServiceCancion();
+            IServiceGestionCancion serviceGestionCancion = new ServiceGestionCancion();
             Cancion cancion = null;
             ViewBag.UrlFormat = null;
             try
@@ -72,7 +73,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    ViewBag.UrlFormat = serviceCancion.FormatURL(cancion.Url_version);
+                    ViewBag.UrlFormat = serviceGestionCancion.FormatURL(cancion.Url_version);
                 }
             }
             catch (Exception ex)

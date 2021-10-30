@@ -45,7 +45,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Bitacora_Sesion.Include("Usuario").ToList();
+                    lista = ctx.Bitacora_Sesion.Include("Usuario").OrderByDescending(x => x.Fecha).ToList();
                 }
             }
             catch (DbUpdateException dbEx)

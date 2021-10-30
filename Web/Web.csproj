@@ -2267,6 +2267,7 @@
     <Content Include="Views\Reporte\ReporteServicios.cshtml" />
     <Content Include="Views\Login\Prueba.cshtml" />
     <Content Include="Views\Recuperacion\Prueba.cshtml" />
+    <Content Include="Views\GestionCancion\_PartialVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
