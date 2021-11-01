@@ -42,7 +42,7 @@
 
                 <!-- /.col -->
                 <div class="col-12">
-                    <button onclick="redireccionar()" id="botonAceptar" class="acceptBtn">Iniciar sesión</button><!--acceptBtn-->
+                    <a href="@Url.Action("Index","Login")"  id="botonAceptar" class="btn btn-primary acceptBtn">Iniciar sesión</a><!--acceptBtn-->
                 </div>
                 <!-- /.col -->
             </div>
@@ -66,11 +66,7 @@
 
 
 
-    <script>
-        function redireccionar() {
-            window.location.href = "../Login/Prueba";
-        }
-    </script>
+   
     <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 </body>

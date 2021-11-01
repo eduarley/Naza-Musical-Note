@@ -26,10 +26,10 @@ namespace ApplicationCore.Services
             }
             return lista;
         }
-        public bool DeleteEvent(int id)
+        public bool DeleteEvent(int id, Usuario usuario)
         {
             IRepositoryCalendario repository = new RepositoryCalendario();
-            return repository.DeleteEvent(id);
+            return repository.DeleteEvent(id, usuario);
         }
 
         public List<RolServicio> GetEvents()
@@ -50,10 +50,10 @@ namespace ApplicationCore.Services
             return repository.GetPuestosPorCategoria(id);
         }
 
-        public RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados)
+        public RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados, Usuario usuario)
         {
             IRepositoryCalendario repository = new RepositoryCalendario();
-            return repository.SaveEvent(rs, puestosAsignados);
+            return repository.SaveEvent(rs, puestosAsignados, usuario);
         }
     }
 }

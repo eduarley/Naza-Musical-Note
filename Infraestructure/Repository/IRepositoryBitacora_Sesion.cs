@@ -12,5 +12,7 @@ namespace Infraestructure.Repository
         List<Bitacora_Sesion> GetBitacorasSesion();
         bool DeleteBitacorasSesion();
         bool Save(Usuario usuario);
+
+        
     }
 }

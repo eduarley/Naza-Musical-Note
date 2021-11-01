@@ -5,14 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NazaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Bitacora_General">
+        <EntityType Name="Bitacora_RolServicio">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdUsuario" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" />
+          <Property Name="Fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Fecha_modificacion" Type="datetime" Nullable="false" />
+          <Property Name="NombreUsuarioModifica" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdUsuarioModifica" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Accion" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Bitacora_Sesion">
           <Key>
@@ -129,30 +139,6 @@
           <Property Name="IdPuesto" Type="int" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Bitacora_General_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Bitacora_General" Type="Self.Bitacora_General" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bitacora_General">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bitacora_Sesion_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Bitacora_Sesion" Type="Self.Bitacora_Sesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bitacora_Sesion">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cancion_RolServicio_Cancion">
           <End Role="Cancion" Type="Self.Cancion" Multiplicity="1" />
           <End Role="Cancion_RolServicio" Type="Self.Cancion_RolServicio" Multiplicity="*" />
@@ -250,7 +236,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="NazaDBModelStoreContainer">
-          <EntitySet Name="Bitacora_General" EntityType="Self.Bitacora_General" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bitacora_RolServicio" EntityType="Self.Bitacora_RolServicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bitacora_Sesion" EntityType="Self.Bitacora_Sesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cancion" EntityType="Self.Cancion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cancion_RolServicio" EntityType="Self.Cancion_RolServicio" Schema="dbo" store:Type="Tables" />
@@ -262,14 +248,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario_RolServicio" EntityType="Self.Usuario_RolServicio" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Bitacora_General_Usuario" Association="Self.FK_Bitacora_General_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Bitacora_General" EntitySet="Bitacora_General" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bitacora_Sesion_Usuario" Association="Self.FK_Bitacora_Sesion_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Bitacora_Sesion" EntitySet="Bitacora_Sesion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Cancion_RolServicio_Cancion" Association="Self.FK_Cancion_RolServicio_Cancion">
             <End Role="Cancion" EntitySet="Cancion" />
             <End Role="Cancion_RolServicio" EntitySet="Cancion_RolServicio" />
@@ -308,6 +286,8 @@
     <edmx:ConceptualModels>
       <Schema Namespace="NazaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MyContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bitacora_RolServicio" EntityType="NazaDBModel.Bitacora_RolServicio" />
+          <EntitySet Name="Bitacora_Sesion" EntityType="NazaDBModel.Bitacora_Sesion" />
           <EntitySet Name="Cancion" EntityType="NazaDBModel.Cancion" />
           <EntitySet Name="Categoria" EntityType="NazaDBModel.Categoria" />
           <EntitySet Name="CorreoEmisor" EntityType="NazaDBModel.CorreoEmisor" />
@@ -345,17 +325,35 @@
             <End Role="Cancion" EntitySet="Cancion" />
             <End Role="RolServicio" EntitySet="RolServicio" />
           </AssociationSet>
-          <EntitySet Name="Bitacora_General" EntityType="NazaDBModel.Bitacora_General" />
-          <EntitySet Name="Bitacora_Sesion" EntityType="NazaDBModel.Bitacora_Sesion" />
-          <AssociationSet Name="FK_Bitacora_General_Usuario" Association="NazaDBModel.FK_Bitacora_General_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Bitacora_General" EntitySet="Bitacora_General" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bitacora_Sesion_Usuario" Association="NazaDBModel.FK_Bitacora_Sesion_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Bitacora_Sesion" EntitySet="Bitacora_Sesion" />
-          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Bitacora_RolServicio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario_Propietario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NombreUsuarioModifica" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioModifica" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Accion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Bitacora_Sesion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="Cancion">
           <Key>
             <PropertyRef Name="Id" />
@@ -454,8 +452,6 @@
           <NavigationProperty Name="Rol" Relationship="NazaDBModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
           <NavigationProperty Name="RolServicio" Relationship="NazaDBModel.FK_RolServicio_Usuario" FromRole="Usuario" ToRole="RolServicio" />
           <NavigationProperty Name="Usuario_RolServicio" Relationship="NazaDBModel.FK_Usuario_RolServicio_Usuario" FromRole="Usuario" ToRole="Usuario_RolServicio" />
-          <NavigationProperty Name="Bitacora_General" Relationship="NazaDBModel.FK_Bitacora_General_Usuario" FromRole="Usuario" ToRole="Bitacora_General" />
-          <NavigationProperty Name="Bitacora_Sesion" Relationship="NazaDBModel.FK_Bitacora_Sesion_Usuario" FromRole="Usuario" ToRole="Bitacora_Sesion" />
         </EntityType>
         <EntityType Name="Usuario_RolServicio">
           <Key>
@@ -546,56 +542,42 @@
           <End Type="NazaDBModel.Cancion" Role="Cancion" Multiplicity="*" />
           <End Type="NazaDBModel.RolServicio" Role="RolServicio" Multiplicity="*" />
         </Association>
-        <EntityType Name="Bitacora_General">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Usuario" Relationship="NazaDBModel.FK_Bitacora_General_Usuario" FromRole="Bitacora_General" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Bitacora_Sesion">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Usuario" Relationship="NazaDBModel.FK_Bitacora_Sesion_Usuario" FromRole="Bitacora_Sesion" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Bitacora_General_Usuario">
-          <End Type="NazaDBModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="NazaDBModel.Bitacora_General" Role="Bitacora_General" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bitacora_General">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bitacora_Sesion_Usuario">
-          <End Type="NazaDBModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="NazaDBModel.Bitacora_Sesion" Role="Bitacora_Sesion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bitacora_Sesion">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NazaDBModelStoreContainer" CdmEntityContainer="MyContext">
+          <EntitySetMapping Name="Bitacora_RolServicio">
+            <EntityTypeMapping TypeName="NazaDBModel.Bitacora_RolServicio">
+              <MappingFragment StoreEntitySet="Bitacora_RolServicio">
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="IdUsuarioModifica" ColumnName="IdUsuarioModifica" />
+                <ScalarProperty Name="NombreUsuarioModifica" ColumnName="NombreUsuarioModifica" />
+                <ScalarProperty Name="Fecha_modificacion" ColumnName="Fecha_modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bitacora_Sesion">
+            <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Sesion">
+              <MappingFragment StoreEntitySet="Bitacora_Sesion">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Cancion">
             <EntityTypeMapping TypeName="NazaDBModel.Cancion">
               <MappingFragment StoreEntitySet="Cancion">
@@ -710,26 +692,6 @@
               <ScalarProperty Name="Id" ColumnName="IdCancion" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Bitacora_General">
-            <EntityTypeMapping TypeName="NazaDBModel.Bitacora_General">
-              <MappingFragment StoreEntitySet="Bitacora_General">
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bitacora_Sesion">
-            <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Sesion">
-              <MappingFragment StoreEntitySet="Bitacora_Sesion">
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

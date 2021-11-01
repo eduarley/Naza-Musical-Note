@@ -111,15 +111,11 @@
                     <li class="list-group-item">
                         <b>@Html.DisplayNameFor(model => model.Telefono)</b> <a class="float-right">@Html.DisplayFor(model => model.Telefono)</a>
                     </li>
-                    <li class="list-group-item">
-                        <b>@Html.DisplayNameFor(model => model.Correo)</b> <a class="float-right">@Html.DisplayFor(model => model.Correo)</a>
-                    </li>
+
                     <li class="list-group-item">
                         <b>@Html.DisplayNameFor(model => model.Id)</b> <a class="float-right">@Html.DisplayFor(model => model.Id)</a>
                     </li>
-                    <li class="list-group-item">
-                        <b>@Html.DisplayNameFor(model => model.Fecha_creacion)</b> <a class="float-right">@Html.DisplayFor(model => model.Fecha_creacion)</a>
-                    </li>
+
                     <li class="list-group-item">
                         <b>@Html.DisplayNameFor(model => model.Estado)</b>
                         @if (Model.Estado)
@@ -130,6 +126,12 @@
                         {
                             <a class="float-right">Inactivo</a>
                         }
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Correo)</b> <a class="float-right">@Html.DisplayFor(model => model.Correo)</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>@Html.DisplayNameFor(model => model.Fecha_creacion)</b> <a class="float-right">@Html.DisplayFor(model => model.Fecha_creacion)</a>
                     </li>
                 </ul>
 

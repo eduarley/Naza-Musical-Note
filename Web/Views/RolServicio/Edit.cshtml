@@ -198,32 +198,27 @@
 
                     <div class="col-md-12">
                         <div class="row">
-
-
-
                             <div class="col-12">
-                                <!-- Custom Tabs -->
-
-
                                 <div class=" d-flex p-0">
-
-                                    @if (categorias != null)
-                                    {
-                                        foreach (var cat in categorias)
+                                    <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
+                                        @if (categorias != null)
                                         {
-                                            <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
+                                            foreach (var cat in categorias)
+                                            {
+
                                                 <li class="nav-item"><a class="nav-link" href="#@cat.Id" onclick="mostrarPuestos(@cat.Id)" data-toggle="tab">@cat.Descripcion</a></li>
-                                            </ul>
-
+                                            }
                                         }
-                                    }
-                                    else
-                                    {
-                                        <span class="right badge badge-danger ml-auto p-2" data-info="error-categoria">Aún no hay categorías.</span>
-                                    }
+                                        else
+                                        {
+                                            <li>
+                                                <span id="errorCategoria" class="right badge badge-danger" data-info="error-categoria">Aún no hay categorías.</span>
+                                            </li>
+                                        }
+
+
+                                    </ul>
                                 </div>
-
-
 
                                 <ul class="tab-content" style="height: 13em; overflow-y:scroll">
 
@@ -238,14 +233,10 @@
                                                 <input id="hiddenID" type="hidden" value="@item.Id" />
                                                 <br />
                                             </li>
+
                                         }
-                                    }
-                                    else
-                                    {
-                                        <span class="right badge badge-pill badge-warning" data-info="error">No existen puestos o todos se han desactivado.</span>
-                                    }
 
-
+                                    }
                                 </ul>
                             </div>
                             <!-- /.col -->
@@ -432,6 +423,11 @@
 
             $('#nav-puestos li a').eq(0).addClass('active');
 
+
+
+            //Validar si no hay categorias ni puestos disponibles
+            if ($('#errorCategoria').is(':visible'))
+                $('#btnSave').attr('disabled', true);
         }
 
         /*

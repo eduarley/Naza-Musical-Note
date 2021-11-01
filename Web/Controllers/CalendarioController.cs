@@ -108,8 +108,15 @@ namespace Web.Controllers
             IServiceCalendario serviceCalendario = new ServiceCalendario();
             try
             {
-                if (serviceCalendario.DeleteEvent(eventID))
-                    status = true;
+                Usuario usuario = null;
+                if (Session["User"] != null)
+                {
+                    usuario = Session["User"] as Usuario;
+                    if (serviceCalendario.DeleteEvent(eventID, usuario))
+                        status = true;
+
+                }
+               
             }
             catch (Exception ex)
             {
@@ -202,6 +209,7 @@ namespace Web.Controllers
             {
                 IServiceCancion serviceCancion = new ServiceCancion();
                 IServiceCalendario serviceCalendario = new ServiceCalendario();
+                IServiceBitacora serviceBitacora = new ServiceBitacora();
                 Usuario usuario = null;
                 if (Session["User"] != null)
                 {
@@ -220,8 +228,12 @@ namespace Web.Controllers
                 List<Usuario_RolServicio> PuestosAsignados = serviceCalendario.Generar_Lista_Usuario_RolServicio(IdPuestos, IdUsuarios);
                 
 
-                if (serviceCalendario.SaveEvent(rs, PuestosAsignados) != null)
+                if (serviceCalendario.SaveEvent(rs, PuestosAsignados, usuario) != null)
+                {
                     status = true;
+                    
+                }
+                    
 
             }
             catch (Exception ex)

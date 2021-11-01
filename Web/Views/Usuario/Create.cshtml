@@ -36,10 +36,14 @@
                 <div class="form-group">
                     <strong class="text-danger">*</strong>
                     @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-                    </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                    @if(TempData["CustomError"] != null)
+                    {
+                        <p class="text-danger">@TempData["CustomError"]</p>
+                    }
+                </div>
                 </div>
                 <div class="form-group">
                     <strong class="text-danger">*</strong>
@@ -108,5 +112,17 @@
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
             $("#menuusuarios").addClass('active');
-        });</script>
+        });
+    </script>
+
+
+    <script>
+        var error = T'@TempData["CustomError"]';
+        var txtId = $('#Id');
+        if (error = ! "") {
+            debugger;
+            txtId.focus();
+        };
+
+    </script>
 }

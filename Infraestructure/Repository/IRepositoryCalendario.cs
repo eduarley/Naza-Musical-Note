@@ -10,8 +10,8 @@ namespace Infraestructure.Repository
     public interface IRepositoryCalendario
     {
         List<RolServicio> GetEvents();
-        RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados);
-        bool DeleteEvent(int id);
+        RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados, Usuario usuario);
+        bool DeleteEvent(int id, Usuario usuario);
         List<Puesto> GetPuestosPorCategoria(int id);
         int GetPrimerIDCategoria();
     }

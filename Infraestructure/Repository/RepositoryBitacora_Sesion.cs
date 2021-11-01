@@ -37,6 +37,8 @@ namespace Infraestructure.Repository
             return estado;
         }
 
+       
+
         public List<Bitacora_Sesion> GetBitacorasSesion()
         {
             List<Bitacora_Sesion> lista = null;

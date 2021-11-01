@@ -219,20 +219,29 @@ namespace Web.Controllers
             var status = false;
             try
             {
-                if (serviceCalendario.DeleteEvent(eventID))
+                Usuario usuario = null;
+                if (Session["User"] != null)
                 {
-                    status = true;
-                    TempData["Action"] = "D";
-                    TempData.Keep();
+                    usuario = Session["User"] as Usuario;
 
-                }
-                else
-                {
-                    TempData["Message"] = "Error al procesar los datos! ";
-                    @TempData["Action"] = "E";
-                    TempData.Keep();
+                    if (serviceCalendario.DeleteEvent(eventID, usuario))
+                    {
+                        status = true;
+                        TempData["Action"] = "D";
+                        TempData.Keep();
 
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Error al procesar los datos! ";
+                        @TempData["Action"] = "E";
+                        TempData.Keep();
+
+                    }
                 }
+
+
+                
             }
             catch (Exception ex)
             {
@@ -281,7 +290,8 @@ namespace Web.Controllers
                 List<Usuario_RolServicio> PuestosAsignados = serviceCalendario.Generar_Lista_Usuario_RolServicio(IdPuestos, IdUsuarios);
 
 
-                if (serviceCalendario.SaveEvent(rs, PuestosAsignados) != null)
+
+                if (serviceCalendario.SaveEvent(rs, PuestosAsignados, usuario) != null)
                 {
                     status = true;
                     TempData["Action"] = "S";

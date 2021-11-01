@@ -26,10 +26,6 @@ public partial class Bitacora_Sesion
 
     public System.DateTime Fecha { get; set; }
 
-
-
-    public virtual Usuario Usuario { get; set; }
-
 }
 
 }

@@ -121,6 +121,13 @@ namespace Web.Controllers
                 usuario.Primer_ingreso = true;
                 if (ModelState.IsValid)
                 {
+                    if (serviceUsuario.ExisteId(usuario.Id))
+                    {
+                        //ModelState.AddModelError("CustomError", "Ya existe un usuario con la misma cédula");
+                        TempData["CustomError"] = "Ya existe un usuario con la cédula " + usuario.Id;
+                        return RedirectToAction("Create");
+                    }
+
                     if (serviceUsuario.Save(usuario) != null)
                     {
                         if (EnviarCorreo(usuario))

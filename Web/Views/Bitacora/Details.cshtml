@@ -1,0 +1,167 @@
+﻿@model Infraestructure.Models.Bitacora_RolServicio
+@{ViewBag.Title = "Detalles Bitácora";}
+@{Infraestructure.Models.RolServicio rolServicio = ViewBag.rolServicio;}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>CONSULTA BITÁCORA</h3>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Bitacora")">Bitácoras de rol de servicio</a></li>
+                    <li class="breadcrumb-item active">Detalles</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header text-center">
+            <h4>Versiones</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.Accion == "Modificado")
+            {
+            <div class="col-md-12 row">
+
+
+
+                <div class="col-md-6">
+                    <div class="info-box bg-light">
+                        <div class="info-box-content">
+                            <center><h5>Actual</h5></center>
+                            <div id="infoActual" class="text-muted">
+                                <p class="text-sm d-block">
+                                    @Html.DisplayName("Título"):
+                                    <b>@rolServicio.Titulo</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayName("Descripcion"):
+                                    <b id="descripcionActual">@rolServicio.Descripcion</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayName("Inicia"):
+                                    <b>@rolServicio.FechaInicio</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayName("Finaliza"):
+                                    <b>@rolServicio.FechaFin</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayName("Estado"):
+                                    @if (rolServicio.Estado)
+                                    {
+                                        <b>Activo</b>
+                                    }
+                                    else
+                                    {
+                                        <b>Inactivo</b>
+                                    }
+
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayName("Propietario"):
+                                    <b>@rolServicio.Usuario.NombreCompleto</b>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="info-box bg-light">
+                        <div class="info-box-content">
+                            <center><h5>Anterior</h5></center>
+                            <div id="infoAnterior" class="text-muted">
+
+                                <p class="text-sm d-block">
+                                    @Html.DisplayNameFor(model => model.Titulo):
+                                    <b>@Html.DisplayFor(model => model.Titulo)</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayNameFor(model => model.Descripcion):
+                                    <b>@Html.DisplayFor(model => model.Descripcion)</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayNameFor(model => model.FechaInicio):
+                                    <b>@Html.DisplayFor(model => model.FechaInicio)</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayNameFor(model => model.FechaFin):
+                                    <b>@Html.DisplayFor(model => model.FechaFin)</b>
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayNameFor(model => model.Estado):
+                                    @if (Model.Estado)
+                                    {
+                                        <b>Activo</b>
+                                    }
+                                    else
+                                    {
+                                        <b>Inactivo</b>
+                                    }
+
+                                </p>
+                                <p class="text-sm d-block">
+                                    @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
+                                    <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+            }
+            else
+            {
+
+            }
+
+            <div class="card-footer">
+                <button style="float:right" class="btn btn-primary">Restablecer al anterior</button>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            //$('#infoAnterior  p').each(function () {
+                //$(this).addClass("text-danger");
+            //});
+
+            //$('#infoAnterior  p b').addClass('text-danger');
+            
+        })
+
+    </script>
+
+}

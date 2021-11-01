@@ -134,5 +134,20 @@ namespace ApplicationCore.Services
             IRepositoryUsuario repository = new RepositoryUsuario();
             return repository.DeleteImagen(id);
         }
+
+        public bool ExisteId(string id)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            var lista = repository.GetUsuarios();
+            if(lista != null)
+            {
+                foreach (var item in lista)
+                {
+                    if (item.Id == id)
+                        return true;
+                }
+            }
+            return false;
+        }
     }
 }

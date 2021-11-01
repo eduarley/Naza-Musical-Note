@@ -1,6 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="NazaDBModelStoreContainer" CdmEntityContainer="MyContext">
+    <EntitySetMapping Name="Bitacora_RolServicio">
+      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_RolServicio">
+        <MappingFragment StoreEntitySet="Bitacora_RolServicio">
+          <ScalarProperty Name="Accion" ColumnName="Accion" />
+          <ScalarProperty Name="IdUsuarioModifica" ColumnName="IdUsuarioModifica" />
+          <ScalarProperty Name="NombreUsuarioModifica" ColumnName="NombreUsuarioModifica" />
+          <ScalarProperty Name="Fecha_modificacion" ColumnName="Fecha_modificacion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bitacora_Sesion">
+      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Sesion">
+        <MappingFragment StoreEntitySet="Bitacora_Sesion">
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Cancion">
       <EntityTypeMapping TypeName="NazaDBModel.Cancion">
         <MappingFragment StoreEntitySet="Cancion">
@@ -115,25 +145,5 @@
         <ScalarProperty Name="Id" ColumnName="IdCancion" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="Bitacora_General">
-      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_General">
-        <MappingFragment StoreEntitySet="Bitacora_General">
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Bitacora_Sesion">
-      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Sesion">
-        <MappingFragment StoreEntitySet="Bitacora_Sesion">
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

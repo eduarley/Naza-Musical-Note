@@ -32,6 +32,10 @@ public partial class MyContext : DbContext
     }
 
 
+    public virtual DbSet<Bitacora_RolServicio> Bitacora_RolServicio { get; set; }
+
+    public virtual DbSet<Bitacora_Sesion> Bitacora_Sesion { get; set; }
+
     public virtual DbSet<Cancion> Cancion { get; set; }
 
     public virtual DbSet<Categoria> Categoria { get; set; }
@@ -49,10 +53,6 @@ public partial class MyContext : DbContext
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     public virtual DbSet<Usuario_RolServicio> Usuario_RolServicio { get; set; }
-
-    public virtual DbSet<Bitacora_General> Bitacora_General { get; set; }
-
-    public virtual DbSet<Bitacora_Sesion> Bitacora_Sesion { get; set; }
 
 }
 

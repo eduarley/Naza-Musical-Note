@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BitacoraController.cs" />
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CancionController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
@@ -2271,6 +2272,8 @@
     <Content Include="Views\Login\Prueba.cshtml" />
     <Content Include="Views\Recuperacion\Prueba.cshtml" />
     <Content Include="Views\GestionCancion\_PartialVideo.cshtml" />
+    <Content Include="Views\Bitacora\Index.cshtml" />
+    <Content Include="Views\Bitacora\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

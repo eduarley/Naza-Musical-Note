@@ -33,14 +33,16 @@ namespace Infraestructure.Repository
             return lista;
         }
 
-        public RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados)
+        public RolServicio SaveEvent(RolServicio rs, List<Usuario_RolServicio> puestosAsignados, Usuario usuario)
         {
+            IRepositoryBitacora repositoryBitacora = new RepositoryBitacora();
             RolServicio oRolServicio = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
+
                     List<Cancion> canciones = new List<Cancion>();
 
                     foreach (var item in rs.Cancion)
@@ -70,6 +72,7 @@ namespace Infraestructure.Repository
                         var v = ctx.RolServicio.Include("Cancion").Include("Usuario").Where(a => a.Id == rs.Id).FirstOrDefault();
                         if (v != null)
                         {
+                            repositoryBitacora.Save(v, usuario, "Modificado");
                             v.Titulo = rs.Titulo;
                             v.FechaInicio = rs.FechaInicio;
                             v.FechaFin = rs.FechaFin;
@@ -84,7 +87,7 @@ namespace Infraestructure.Repository
                         }
                         //Para al actualizar, no choquen las PK
                         ctx.Database.ExecuteSqlCommand("delete from usuario_rolservicio where IdRolServicio = " + rs.Id);
-
+                        
                     }
                     else
                     {
@@ -108,22 +111,35 @@ namespace Infraestructure.Repository
         }
 
 
-        public bool DeleteEvent(int id)
+        public bool DeleteEvent(int id, Usuario usuario)
         {
+            IRepositoryBitacora repositoryBitacora = new RepositoryBitacora();
             bool estado = false;
             try
             {                
                 using (MyContext ctx = new MyContext())
                 {
-                    var rs = ctx.RolServicio.Where(a => a.Id == id).FirstOrDefault();
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    RolServicio rs = ctx.RolServicio.Include("Usuario").Where(a => a.Id == id).FirstOrDefault();
+
+
+                    List <RolServicio> prueba = ctx.RolServicio.Include("Usuario").ToList();
+
                     if (rs != null)
                     {
                         ctx.Database.ExecuteSqlCommand("delete from usuario_rolservicio where IdRolServicio =" + rs.Id);
                         ctx.Database.ExecuteSqlCommand("delete from cancion_rolservicio where IdRolServicio =" + rs.Id);
+                        repositoryBitacora.Save(rs, usuario, "Eliminado");
                         ctx.RolServicio.Remove(rs);
 
+
+
                         if (ctx.SaveChanges() >= 0)
+                        {
                             estado = true;
+
+                        }
+                            
                     }
                 }
             }
@@ -182,7 +198,7 @@ namespace Infraestructure.Repository
             }
         }
 
-
+        
 
     }
 }

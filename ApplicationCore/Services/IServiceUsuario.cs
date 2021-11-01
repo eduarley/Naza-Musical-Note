@@ -25,5 +25,6 @@ namespace ApplicationCore.Services
         Usuario SaveGuardarToken(Usuario usuario);
         string GetEncryptedPass(string password);
         bool DeleteImagen(string id);
+        bool ExisteId(string id);
     }
 }
