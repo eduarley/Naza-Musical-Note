@@ -2,7 +2,10 @@
 
 @{ ViewBag.Title = "Perfil"; }
 
-@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"];
+    var correoUsuario = UsuarioLogueado.Correo;
+
+    }
 
 
 
@@ -131,7 +134,7 @@
                         <b>@Html.DisplayNameFor(model => model.Correo)</b> <a class="float-right">@Html.DisplayFor(model => model.Correo)</a>
                     </li>
                     <li class="list-group-item">
-                        <b>@Html.DisplayNameFor(model => model.Fecha_creacion)</b> <a class="float-right">@Html.DisplayFor(model => model.Fecha_creacion)</a>
+                        <b>@Html.DisplayNameFor(model => model.Fecha_creacion)</b> <a class="float-right" mailto="@correoUsuario">@correoUsuario</a>
                     </li>
                 </ul>
 
@@ -294,6 +297,9 @@
     <script>
 
         $(document).ready(function () {
+            function etiqueta() {
+                $('#etiquetaA a').addClass('float-right');
+            }
 
         // Recibe los parámetros del Controller
         var option = '@TempData["Action"]'

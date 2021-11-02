@@ -40,20 +40,6 @@ C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore.dll
 C:\PROYECTO GRADUA\NUEVO NUEVO OFICIAL\ApplicationCore\obj\Debug\ApplicationCore.pdb
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\ApplicationCore.dll
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\ApplicationCore.pdb
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\Infraestructure.dll
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\log4net.dll
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\EntityFramework.dll
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\Infraestructure.pdb
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\Infraestructure.dll.config
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\log4net.xml
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\EntityFramework.xml
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.dll
-C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.pdb
 C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\ApplicationCore.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\ApplicationCore.pdb
 C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\bin\Debug\Infraestructure.dll
@@ -68,3 +54,17 @@ C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationC
 C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
 C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.dll
 C:\Users\EQUIPO\Desktop\Naza Musical Note\ApplicationCore\obj\Debug\ApplicationCore.pdb
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\ApplicationCore.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\ApplicationCore.pdb
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\Infraestructure.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\log4net.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\EntityFramework.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\Infraestructure.pdb
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\Infraestructure.dll.config
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\log4net.xml
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\bin\Debug\EntityFramework.xml
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.csproj.CopyComplete
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.dll
+C:\PROYECTO GRADUA\OFICIAL OFICIAAAAL\ApplicationCore\obj\Debug\ApplicationCore.pdb

@@ -43,12 +43,13 @@
                 @using (Html.BeginForm("CambioClave", "Usuario", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.IdUsuario)
                     <div class="input-group mb-3">
-                        @Html.PasswordFor(model => model.NewClave, new { @class = "form-control", placeholder = "Contraseña" } )
-                        
+                        @Html.PasswordFor(model => model.NewClave, new { @class = "form-control", placeholder = "Contraseña" })
+
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-user"></span>
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
                         <div class="input-group mb-3">
@@ -57,10 +58,10 @@
                     </div>
                     <div class="input-group mb-3">
                         @Html.PasswordFor(model => model.ConfirmNewClave, new { @class = "form-control", placeholder = "Confirmar contraseña" })
-                        
+
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
                         <div class="input-group mb-3">
@@ -79,7 +80,7 @@
 
                 <p class="mb-1 mt-4">
 
-                    <a id="ojosMostrar" title="Mostrar u ocultar las contraseñas"><img src="~/Content/dist/img/ojo primary.png" width="10%" height="10%"/></a>
+                    <a id="ojosMostrar" title="Mostrar u ocultar las contraseñas"><img src="~/Content/dist/img/ojo primary.png" width="10%" height="10%" /></a>
                 </p>
 
             </div>

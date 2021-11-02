@@ -1,6 +1,9 @@
 ﻿using Infraestructure.Models;
+using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +14,49 @@ namespace Infraestructure.Repository
     {
         public CorreoEmisor Edit(CorreoEmisor correo)
         {
-            throw new NotImplementedException();
+            CorreoEmisor oCorreo = null;
+            int retorno = 0;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //oCorreo = correo;
+                        ctx.Entry(correo).State = EntityState.Modified;
+
+                    retorno = ctx.SaveChanges();
+                }
+
+                return oCorreo;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
         }
 
         public CorreoEmisor GetCorreo()
         {
-            throw new NotImplementedException();
+            CorreoEmisor correo = new CorreoEmisor();
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                        //Permite traer las canciones que de una lista de Id
+                        correo = ctx.CorreoEmisor.FirstOrDefault();
+
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+            return correo;
         }
     }
 }
