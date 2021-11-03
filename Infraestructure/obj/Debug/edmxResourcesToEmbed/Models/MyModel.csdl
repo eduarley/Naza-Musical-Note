@@ -5,7 +5,6 @@
     <EntitySet Name="Bitacora_Sesion" EntityType="NazaDBModel.Bitacora_Sesion" />
     <EntitySet Name="Cancion" EntityType="NazaDBModel.Cancion" />
     <EntitySet Name="Categoria" EntityType="NazaDBModel.Categoria" />
-    <EntitySet Name="CorreoEmisor" EntityType="NazaDBModel.CorreoEmisor" />
     <EntitySet Name="Puesto" EntityType="NazaDBModel.Puesto" />
     <EntitySet Name="Rol" EntityType="NazaDBModel.Rol" />
     <EntitySet Name="RolServicio" EntityType="NazaDBModel.RolServicio" />
@@ -40,6 +39,7 @@
       <End Role="Cancion" EntitySet="Cancion" />
       <End Role="RolServicio" EntitySet="RolServicio" />
     </AssociationSet>
+    <EntitySet Name="CorreoEmisor" EntityType="NazaDBModel.CorreoEmisor" />
   </EntityContainer>
   <EntityType Name="Bitacora_RolServicio">
     <Key>
@@ -91,14 +91,6 @@
     <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Estado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Puesto" Relationship="NazaDBModel.FK_Puesto_Categoria" FromRole="Categoria" ToRole="Puesto" />
-  </EntityType>
-  <EntityType Name="CorreoEmisor">
-    <Key>
-      <PropertyRef Name="Correo" />
-    </Key>
-    <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Clave" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Estado" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Puesto">
     <Key>
@@ -257,4 +249,13 @@
     <End Type="NazaDBModel.Cancion" Role="Cancion" Multiplicity="*" />
     <End Type="NazaDBModel.RolServicio" Role="RolServicio" Multiplicity="*" />
   </Association>
+  <EntityType Name="CorreoEmisor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clave" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

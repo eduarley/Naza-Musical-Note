@@ -59,8 +59,9 @@
   </EntityType>
   <EntityType Name="CorreoEmisor">
     <Key>
-      <PropertyRef Name="Correo" />
+      <PropertyRef Name="Id" />
     </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Clave" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Estado" Type="bit" Nullable="false" />

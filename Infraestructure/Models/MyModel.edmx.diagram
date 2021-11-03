@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="NazaDBModel.Bitacora_Sesion" Width="1.5" PointX="7.75" PointY="5.75" />
         <EntityTypeShape EntityType="NazaDBModel.Cancion" Width="1.5" PointX="3" PointY="6.75" />
         <EntityTypeShape EntityType="NazaDBModel.Categoria" Width="1.5" PointX="3" PointY="11.125" />
-        <EntityTypeShape EntityType="NazaDBModel.CorreoEmisor" Width="1.5" PointX="7.75" PointY="8.75" />
         <EntityTypeShape EntityType="NazaDBModel.Puesto" Width="1.5" PointX="5.25" PointY="11" />
         <EntityTypeShape EntityType="NazaDBModel.Rol" Width="1.5" PointX="0.75" PointY="2.25" />
         <EntityTypeShape EntityType="NazaDBModel.RolServicio" Width="1.5" PointX="5.25" PointY="1.375" />
@@ -23,6 +22,7 @@
         <AssociationConnector Association="NazaDBModel.FK_Usuario_RolServicio_RolServicio" />
         <AssociationConnector Association="NazaDBModel.FK_Usuario_RolServicio_Usuario" />
         <AssociationConnector Association="NazaDBModel.Cancion_RolServicio" />
+        <EntityTypeShape EntityType="NazaDBModel.CorreoEmisor" Width="1.5" PointX="8.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

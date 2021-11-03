@@ -44,8 +44,11 @@ namespace Infraestructure.Repository
             {
                 using (MyContext ctx = new MyContext())
                 {
-                        //Permite traer las canciones que de una lista de Id
-                        correo = ctx.CorreoEmisor.FirstOrDefault();
+                    //Permite traer las canciones que de una lista de Id
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    correo = ctx.CorreoEmisor.
+                        Where(p => p.Id == 1)
+                        .FirstOrDefault<CorreoEmisor>();
 
                 }
             }

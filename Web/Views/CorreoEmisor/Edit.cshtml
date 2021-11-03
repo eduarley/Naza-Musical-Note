@@ -1,0 +1,112 @@
+﻿@model Infraestructure.Models.CorreoEmisor
+
+@{ ViewBag.Title = "Editar Correo"; }
+
+@*@{ string idValor = Convert.ToString(ViewBag.ElId);}*@
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>EDITAR CORREO ELECTRÓNICO</h3>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Correo")">Correo electrónico</a></li>
+                    <li class="breadcrumb-item active">Editar</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+
+<center>
+    <div class="card card-default mt-3 col-md-8">
+        <div class="card-body p-3 col-md-12">
+            <div class="card-header text-danger text-left border-bottom-0">
+                <p>* Campos requeridos</p>
+            </div>
+            <div>
+                @using (Html.BeginForm("Edit", "CorreoEmisor", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <form>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="row text-left">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <strong class="text-danger">*</strong>
+                                    @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <strong class="text-danger">*</strong>
+                                    @Html.LabelFor(model => model.Clave, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                @*@if (Model.Estado)
+                                    {*@
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                        @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "custom-control-input", id = "customSwitch3", @type = "checkbox" } })
+                                        <label class="custom-control-label" for="customSwitch3">Estado</label>
+                                    </div>
+                                </div>
+                                @*}
+                                    else
+                                    {
+                                        <span class="right badge-pill badge-warning">La categoría de este puesto está desactivada.</span>
+                                    }*@
+                                <div class="modal-footer justify-content-end">
+                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</center>
+
+
+
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#menupuestos").addClass('active');
+            $("#elCombo").ready(function () {
+                document.getElementById("elCombo").setAttribute()
+            });
+        });</script>
+
+    <script>
+        $('#checkEstado').change(function () {
+            var estado = $('#checkEstado').val();
+            debugger;
+            if (estado)
+                $('#indicaEstado').html = 'Activo'
+            else
+                $('#indicaEstado').text = 'Inactivo'
+        })
+    </script>
+}

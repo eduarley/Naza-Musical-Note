@@ -76,6 +76,25 @@ namespace Infraestructure.Models
         public string Url_version { get; set; }
     }
 
+    internal partial class CorreoEmisorMetadata
+    {
+        [Display(Name = "Id")]
+        public int Id { get; set; }
+
+        [Display(Name = "Correo electrónico")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene un formato válido.")]
+        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        public string Correo { get; set; }
+
+        [Display(Name = "Contraseña")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        public string Clave { get; set; }
+
+        [Display(Name = "Estado")]
+        public bool Estado { get; set; }
+    }
+
     internal partial class PuestoMetadata
     {
 

@@ -34,6 +34,8 @@ namespace Web.Controllers
                 if (!ModelState.IsValid)
                 {
                     IServiceUsuario service = new ServiceUsuario();
+                    IServiceCorreo serviceCorreo = new ServiceCorreo();
+                    CorreoEmisor correo = serviceCorreo.GetCorreo();
                     string token = service.GetSha256(Guid.NewGuid().ToString());
 
                     oUsuario = service.UsuarioARecuperar(usuario.Id, usuario.Correo);
@@ -55,11 +57,13 @@ namespace Web.Controllers
                         mmsg.Body = "<p>Saludos!</p><br><br><p>Adjuntamos su enlace de recuperación de contraseña:</p><br><br><a href='" + url + "'>Ingrese aquí para recuperar su contraseña</a><br><br><p>¡Gracias por usar nuestro sistema!</p><br><br><img src=\"https://www.whdl.org/sites/default/files/ES_logotipo.jpg\" width =\"40%\" height=\"10%\"/>";
                         mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                         mmsg.IsBodyHtml = true;
-                        mmsg.From = new System.Net.Mail.MailAddress("nazamusicalnote@gmail.com");
+                        //mmsg.From = new System.Net.Mail.MailAddress("nazamusicalnote@gmail.com");
+                        mmsg.From = new System.Net.Mail.MailAddress(correo.Correo);
                         //mmsg.Priority = MailPriority.Normal;
 
                         System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
-                        smtp.Credentials = new System.Net.NetworkCredential("nazamusicalnote@gmail.com", "132413242021");
+                        //smtp.Credentials = new System.Net.NetworkCredential("nazamusicalnote@gmail.com", "132413242021");
+                        smtp.Credentials = new System.Net.NetworkCredential(correo.Correo, correo.Clave);
 
                         smtp.Port = 587;
                         smtp.EnableSsl = true;

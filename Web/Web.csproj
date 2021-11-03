@@ -150,6 +150,7 @@
     <Compile Include="Controllers\CancionController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\CorreoController.cs" />
+    <Compile Include="Controllers\CorreoEmisorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GestionCancionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2277,6 +2278,9 @@
     <Content Include="Views\Bitacora\Details.cshtml" />
     <Content Include="Views\Correo\Index.cshtml" />
     <Content Include="Views\Correo\Edit.cshtml" />
+    <Content Include="Views\Correo\Edit2.cshtml" />
+    <Content Include="Views\CorreoEmisor\Edit.cshtml" />
+    <Content Include="Views\CorreoEmisor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

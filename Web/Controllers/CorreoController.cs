@@ -22,7 +22,7 @@ namespace Web.Controllers
         }
 
         [CustomAuthorize((int)Roles.Lider)]
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
 
             CorreoEmisor correo = null;
@@ -59,11 +59,11 @@ namespace Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorize((int)Roles.Lider)]
-        public ActionResult Save(CorreoEmisor correo)
+        public ActionResult Save([Bind(Include = "Id,Correo,Clave,Estado")] CorreoEmisor correo)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     IServiceCorreo serviceCorreo = new ServiceCorreo();
                     serviceCorreo.Edit(correo);

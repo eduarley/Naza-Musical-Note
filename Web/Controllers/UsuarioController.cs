@@ -343,6 +343,8 @@ namespace Web.Controllers
 
             try
             {
+                IServiceCorreo serviceCorreo = new ServiceCorreo();
+                CorreoEmisor correo = serviceCorreo.GetCorreo();
                 var request = HttpContext.Request;
                 //string url = request.Url.Scheme + "://" + request.UserHostAddress + ":" +request.Url.Port+ "/Recuperacion/Recovery?token=" + token;
                 string url = urlDomain + request.Url.Port + "/" + "Login/Index";
@@ -356,11 +358,13 @@ namespace Web.Controllers
                 mmsg.Body = "<p>¡Hola " + usuario.Nombre + ", bienvenid@ a Naza Musical Note!</p><br><br><p>Su registro ha sido correcto. Se le asigó la contraseña: </p><p style='font-weight: bold'>" + ClaveTemp + "</p><br><br><p>Para iniciar sesión </p><a href='" + url + "'>presione aquí</a><br><br><p>Recuerde que cuando ingrese se le solicitará realizar un cambio de contraseña para brindar una mayor seguridad a su cuenta.</p><br><br><p>¡Gracias por usar nuestro sistema!</p><br><br><img src=\"https://www.whdl.org/sites/default/files/ES_logotipo.jpg\" width =\"40%\" height=\"10%\"/>";
                 mmsg.BodyEncoding = System.Text.Encoding.UTF8;
                 mmsg.IsBodyHtml = true;
-                mmsg.From = new MailAddress("nazamusicalnote@gmail.com");
+                //mmsg.From = new MailAddress("nazamusicalnote@gmail.com");
+                mmsg.From = new MailAddress(correo.Correo);
                 //mmsg.Priority = MailPriority.Normal;
 
                 SmtpClient smtp = new SmtpClient();
-                smtp.Credentials = new NetworkCredential("nazamusicalnote@gmail.com", "132413242021");
+                //smtp.Credentials = new NetworkCredential("nazamusicalnote@gmail.com", "132413242021");
+                smtp.Credentials = new NetworkCredential(correo.Correo, correo.Clave);
 
                 smtp.Port = 587;
                 smtp.EnableSsl = true;

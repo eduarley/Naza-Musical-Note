@@ -54,15 +54,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CorreoEmisor">
-      <EntityTypeMapping TypeName="NazaDBModel.CorreoEmisor">
-        <MappingFragment StoreEntitySet="CorreoEmisor">
-          <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="Clave" ColumnName="Clave" />
-          <ScalarProperty Name="Correo" ColumnName="Correo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Puesto">
       <EntityTypeMapping TypeName="NazaDBModel.Puesto">
         <MappingFragment StoreEntitySet="Puesto">
@@ -145,5 +136,15 @@
         <ScalarProperty Name="Id" ColumnName="IdCancion" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="CorreoEmisor">
+      <EntityTypeMapping TypeName="NazaDBModel.CorreoEmisor">
+        <MappingFragment StoreEntitySet="CorreoEmisor">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
