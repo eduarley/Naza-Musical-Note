@@ -80,5 +80,81 @@ namespace Web.Controllers
             }
         }
 
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var status = false;
+            try
+            {
+                IServiceBitacora serviceBitacora = new ServiceBitacora();
+                if (serviceBitacora.DeleteBitacora_RolServicioById(id))
+                {
+                    status = true;
+                    TempData["Action"] = "D";
+                    TempData.Keep();
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "No existe la bitácora indicada";
+                    TempData.Keep();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult DeleteAll()
+        {
+            var status = false;
+            try
+            {
+                IServiceBitacora serviceBitacora = new ServiceBitacora();
+                if (serviceBitacora.DeleteAllBitacora_RolServicio())
+                {
+                    status = true;
+                    TempData["Action"] = "D";
+                    TempData.Keep();
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    TempData["Action"] = "E";
+                    TempData["Message"] = "Hubo un error al eliminar";
+                    TempData.Keep();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
     }
 }

@@ -27,10 +27,10 @@
 
 
 <p class="tooltip--right" data-tooltip="Elimina todos los registros permanentemente">
-    <a class="btn btn-danger"  href="@Url.Action("DeleteAll", "Bitacora")">
+    <button type="button" id="deleteAll" class="btn btn-danger">
         <i class="fa fa-trash mr-2"></i>
         Eliminar todo
-    </a>
+    </button>
 </p>
 
 <!-- Main content -->
@@ -281,7 +281,34 @@
 
 
 
+        $('#deleteAll').on("click", function () {
+            Swal.fire({
+                title: 'Deseas borrar todas las bitácoras?',
+                text: "No podrás revertirlo!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, bórralas!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Bitacora/DeleteAll',
+                        success: function (data) {
 
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            location.reload();
+                        }
+                    })
+
+
+                }
+            })
+        });
 
 
     </script>

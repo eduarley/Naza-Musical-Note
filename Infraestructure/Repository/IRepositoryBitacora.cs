@@ -12,5 +12,8 @@ namespace Infraestructure.Repository
         List<Bitacora_RolServicio> GetBitacora_RolServicios();
         Bitacora_RolServicio Save(int idBitacora, Usuario usuarioModifica, string accion);
         Bitacora_RolServicio GetBitacora_RolServicioById(int id);
+        bool DeleteBitacora_RolServicioById(int id);
+        bool DeleteAllBitacora_RolServicio();
+        //Bitacora_RolServicio RecuperarBitacora_RolServicio(Bitacora_RolServicio bitacora);
     }
 }

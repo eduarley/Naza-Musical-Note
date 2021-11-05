@@ -173,7 +173,63 @@ namespace Infraestructure.Repository
             }
         }
 
-        
-       
+        public bool DeleteBitacora_RolServicioById(int id)
+        {
+            bool estado = false;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Database.ExecuteSqlCommand("delete from Bitacora_Usuario_RolServicio where IdBitacora = " + id);
+                    ctx.Database.ExecuteSqlCommand("delete from Bitacora_Cancion_RolServicio where IdBitacora = " + id);
+                    ctx.Database.ExecuteSqlCommand("delete from Bitacora_RolServicio where IdBitacora = "+ id);
+                    if (ctx.SaveChanges() >= 0)
+                        estado = true;
+
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+            return estado;
+        }
+
+        public bool DeleteAllBitacora_RolServicio()
+        {
+            bool estado = false;
+            try
+            {
+                List<Bitacora_RolServicio> lista = new List<Bitacora_RolServicio>();
+
+                lista = GetBitacora_RolServicios();
+
+                using (MyContext ctx = new MyContext())
+                {
+                    foreach (var item in lista)
+                    {
+                        ctx.Database.ExecuteSqlCommand("delete from Bitacora_Usuario_RolServicio where IdBitacora = " + item.IdBitacora);
+                        ctx.Database.ExecuteSqlCommand("delete from Bitacora_Cancion_RolServicio where IdBitacora = " + item.IdBitacora);
+                        ctx.Database.ExecuteSqlCommand("delete from Bitacora_RolServicio where IdBitacora = " + item.IdBitacora);
+
+                    }
+                    
+                    if (ctx.SaveChanges() >= 0)
+                        estado = true;
+
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+
+            return estado;
+        }
     }
 }

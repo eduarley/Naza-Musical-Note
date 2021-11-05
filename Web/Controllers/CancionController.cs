@@ -145,7 +145,7 @@ namespace Web.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
                     TempData["Action"] = "E";
-                    TempData["Message"] = "No existe esa canción";
+                    TempData["Message"] = "No existe la canción indicada";
                     TempData.Keep();
                 }
             }

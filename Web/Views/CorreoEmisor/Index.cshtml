@@ -5,13 +5,14 @@
 }
 
 
-<h2>CORREO ELECTRÓNICO</h2>
+
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+                <h3>CORREO ELECTRÓNICO</h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -29,40 +30,89 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Credenciales utilizadas para los servicios de correo electrónico de Naza Musical Note:</h3>
+
+
+            <div style="float: right; cursor: pointer">
+                <h2>
+                    <i class="fa fa-info-circle text-primary"></i>
+                </h2>
+            </div>
+
             <br />
 
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                    @*<h3 class="text-primary">@Html.DisplayName("Categoría")</h3>*@
-                    @*<p>@Html.DisplayFor(model => model.Categoria.Descripcion)</p>*@
+
+
+            <div class="col-md-12">
+
+
+                <div class="row" style="padding-left: 10%; padding-right: 10%">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <strong class="text-danger">*</strong>
+                            @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <strong class="text-danger">*</strong>
+                            @Html.LabelFor(model => model.Clave, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
+                <div class="row" style=" display: grid; justify-content:center; align-content: center">
+                    <div class="text-center">
+                        <div class="form-group">
+                            <p class="text-sm">
+                                @Html.DisplayName("Estado: ")
+                                @if (Model.Estado)
+                                {
+                                    <b class="d-block">Activo</b> }
+                                else
+                                {
+                                    <b class="d-block">Inactivo</b>}
 
-                    <div class="text-muted">
-                        <p class="text-sm">
-                            @Html.DisplayName("Correo: ")
-                            <b class="d-block">@Html.DisplayFor(model => model.Correo)</b>
-                        </p>
-                        <p class="text-sm">
-                            @Html.DisplayName("Clave: ")
-                            <b class="d-block">@Html.DisplayFor(model => model.Clave)</b>
-                        </p>
-                        <p class="text-sm">
-                            @Html.DisplayName("Estado: ")
-                            @if (Model.Estado)
-                            {
-                                <b class="d-block">Activo</b> }
-                            else
-                            {
-                                <b class="d-block">Inactivo</b>}
-
-                        </p>
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                @*
+                            <div class="text-muted">
+            <p class="text-sm">
+                @Html.DisplayName("Correo: ")
+                <b class="d-block">@Html.DisplayFor(model => model.Correo)</b>
+            </p>
+            <p class="text-sm">
+                @Html.DisplayName("Clave: ")
+                <b class="d-block">@Html.DisplayFor(model => model.Clave)</b>
+            </p>
+            <p class="text-sm">
+                @Html.DisplayName("Estado: ")
+                @if (Model.Estado)
+                {
+                    <b class="d-block">Activo</b> }
+                else
+                {
+                    <b class="d-block">Inactivo</b>}
+
+            </p>
+        </div>
+                *@
+
             </div>
+            <div class="col-md-6">
+
+            </div>
+
             <div class="card-footer">
                 <div class="float-right">
                     <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","CorreoEmisor" , new { id = Model.Id })">

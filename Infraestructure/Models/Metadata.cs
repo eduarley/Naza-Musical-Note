@@ -178,4 +178,57 @@ namespace Infraestructure.Models
         public string Descripcion { get; set; }
     }
 
+
+
+    public partial class Bitacora_RolservicioMetadata
+    {
+
+        [Display(Name = "Propietario ID")]
+        public string IdUsuario_Propietario { get; set; }
+
+
+        [Display(Name = "Título")]
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "Título debe ser menor a 200 caracteres")]
+        public string Titulo { get; set; }
+
+
+        [Display(Name = "Descripción")]
+        [DataType(DataType.MultilineText)]
+        public string Descripcion { get; set; }
+
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha de inicio")]
+        public System.DateTime FechaInicio { get; set; }
+
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha de cierre")]
+        public Nullable<System.DateTime> FechaFin { get; set; }
+
+
+        [Display(Name = "Fecha de creación")]
+        public System.DateTime Fecha_creacion { get; set; }
+
+
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha modificación")]
+        public System.DateTime Fecha_modificacion { get; set; }
+
+
+        [Display(Name = "Usuario editor")]
+        public System.DateTime NombreUsuarioModifica { get; set; }
+
+
+        [Display(Name = "Cédula editor")]
+        public System.DateTime IdUsuarioModifica { get; set; }
+
+
+        [Display(Name = "Acción")]
+        public System.DateTime Accion { get; set; }
+
+    }
 }

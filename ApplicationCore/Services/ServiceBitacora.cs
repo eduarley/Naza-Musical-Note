@@ -12,6 +12,16 @@ namespace ApplicationCore.Services
     {
         IRepositoryBitacora repositoryBitacora = new RepositoryBitacora();
 
+        public bool DeleteAllBitacora_RolServicio()
+        {
+            return repositoryBitacora.DeleteAllBitacora_RolServicio();
+        }
+
+        public bool DeleteBitacora_RolServicioById(int id)
+        {
+            return repositoryBitacora.DeleteBitacora_RolServicioById(id);
+        }
+
         public Bitacora_RolServicio GetBitacora_RolServicioById(int id)
         {
             return repositoryBitacora.GetBitacora_RolServicioById(id);
