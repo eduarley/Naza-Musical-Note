@@ -25,126 +25,352 @@
 
 <section class="content">
 
-    <!-- Default box -->
-    <div class="card">
-        <div class="card-header text-center">
-            <h4>Versiones</h4>
-        </div>
-        <div class="card-body">
-            @if (Model.Accion == "Modificado")
-            {
-            <div class="col-md-12 row">
+
+    @if (Model.Accion == "Modificado")
+    {
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header text-center">
+                <h4>Versiones</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 row">
+                    <div class="col-md-6">
+                        @if (rolServicio != null)
+                        {
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
+
+                                    <center>
+                                        <h4>Reciente</h4>
+                                        <h5>Fecha de creación</h5>
+                                        <h6>@rolServicio.Fecha_creacion</h6>
+                                    </center>
+                                    <div id="infoActual" class="text-muted">
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Título"):
+                                            <b>@rolServicio.Titulo</b>
+                                        </p>
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Descripción"):
+                                            <b id="descripcionActual">@rolServicio.Descripcion</b>
+                                        </p>
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Inicia"):
+                                            <b>@rolServicio.FechaInicio</b>
+                                        </p>
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Finaliza"):
+                                            <b>@rolServicio.FechaFin</b>
+                                        </p>
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Estado"):
+                                            @if (rolServicio.Estado)
+                                            {
+                                                <b>Activo</b>
+                                            }
+                                            else
+                                            {
+                                                <b>Inactivo</b>
+                                            }
+
+                                        </p>
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Propietario"):
+                                            <b>@rolServicio.Usuario.NombreCompleto</b>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h3 class="text-primary"> Puestos</h3>
+                                            <div class="post" style="height: 200px; overflow-y: scroll">
 
 
 
-                <div class="col-md-6">
-                    <div class="info-box bg-light">
-                        <div class="info-box-content">
-                            <center><h5>Actual</h5></center>
-                            <div id="infoActual" class="text-muted">
-                                <p class="text-sm d-block">
-                                    @Html.DisplayName("Título"):
-                                    <b>@rolServicio.Titulo</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayName("Descripcion"):
-                                    <b id="descripcionActual">@rolServicio.Descripcion</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayName("Inicia"):
-                                    <b>@rolServicio.FechaInicio</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayName("Finaliza"):
-                                    <b>@rolServicio.FechaFin</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayName("Estado"):
-                                    @if (rolServicio.Estado)
-                                    {
-                                        <b>Activo</b>
-                                    }
-                                    else
-                                    {
-                                        <b>Inactivo</b>
-                                    }
 
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayName("Propietario"):
-                                    <b>@rolServicio.Usuario.NombreCompleto</b>
-                                </p>
+                                                @foreach (var item in rolServicio.Usuario_RolServicio)
+                                                {
+                                                    <ul class="list-unstyled">
+                                                        <li>
+                                                            @if (item.Usuario != null)
+                                                            {
+                                                                <p>@item.Puesto.Descripcion : <b>@item.Usuario.NombreCompleto</b></p> }
+                                                            else
+                                                            {
+                                                                <p>@item.Puesto.Descripcion : <span class="right badge badge-warning">Sin asignar</span></p>}
+
+                                                        </li>
+                                                    </ul>}
+
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="text-primary"> Canciones</h3>
+                                            <div class="post" style="height: 200px; overflow-y: scroll">
+
+                                                @foreach (var item in rolServicio.Cancion)
+                                                {
+                                                    <ul class="list-unstyled">
+                                                        <li>
+                                                            <p><b>@item.Nombre</b></p>
+                                                        </li>
+                                                    </ul>
+                                                }
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div>
+                                <div class="text-center">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1680/1680012.png" height="50px" alt="warning-icon" />
+                                    <h5>El rol de servicio actual ha sido eliminado</h5>
+                                    <p>No existe el elemento actual en la lista de roles de servicio</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="info-box bg-light">
+                            <div class="info-box-content">
+                                <center>
+                                    <h4>Antiguo</h4>
+                                    <h5>Fecha de creación</h5>
+                                    <h6>@Model.Fecha_creacion</h6>
+                                </center>
+                                <div id="infoAnterior" class="text-muted">
+
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Titulo):
+                                        <b>@Html.DisplayFor(model => model.Titulo)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Descripcion):
+                                        <b>@Html.DisplayFor(model => model.Descripcion)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.FechaInicio):
+                                        <b>@Html.DisplayFor(model => model.FechaInicio)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.FechaFin):
+                                        <b>@Html.DisplayFor(model => model.FechaFin)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Estado):
+                                        @if (Model.Estado)
+                                        {
+                                            <b>Activo</b>
+                                        }
+                                        else
+                                        {
+                                            <b>Inactivo</b>
+                                        }
+
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
+                                        <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
+                                    </p>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="text-primary"> Puestos</h3>
+                                        <div class="post" style="height: 200px; overflow-y: scroll">
+                                            @foreach (var item in Model.Bitacora_Usuario_RolServicio)
+                                            {
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        @if (item.IdUsuario != null)
+                                                        {
+                                                            <p>@item.Nombre_puesto : <b>@item.Nombre_usuario</b></p> }
+                                                        else
+                                                        {
+                                                            <p>@item.Nombre_puesto : <span class="right badge badge-warning">Sin asignar</span></p>}
+
+                                                    </li>
+                                                </ul>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 class="text-primary"> Canciones</h3>
+                                        <div class="post" style="height: 200px; overflow-y: scroll">
+                                            @foreach (var item in Model.Bitacora_Cancion_RolServicio)
+                                            {
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <p><b>@item.Nombre_cancion</b></p>
+                                                    </li>
+                                                </ul>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-12 col-sm-6">
+
+                    </div>
+                    <div class="col-12 col-sm-6">
 
                     </div>
                 </div>
 
-
-                <div class="col-md-6">
+                <div class="card-footer">
+                    <button style="float:right" class="btn btn-primary">Restablecer a versión antigua</button>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    }
+    else
+    {
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header text-center">
+                <h4>Elemento eliminado</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 row">
                     <div class="info-box bg-light">
                         <div class="info-box-content">
-                            <center><h5>Anterior</h5></center>
-                            <div id="infoAnterior" class="text-muted">
+                            <center>
+                                <h5>Fecha de borrado</h5>
+                                <h6>@Model.Fecha_creacion</h6>
+                            </center>
+                            <div class="row">
+                                <div class="text-muted col-md-4">
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Titulo):
+                                        <b>@Html.DisplayFor(model => model.Titulo)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Descripcion):
+                                        <b>@Html.DisplayFor(model => model.Descripcion)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.FechaInicio):
+                                        <b>@Html.DisplayFor(model => model.FechaInicio)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.FechaFin):
+                                        <b>@Html.DisplayFor(model => model.FechaFin)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Estado):
+                                        @if (Model.Estado)
+                                        {
+                                            <b>Activo</b>
+                                        }
+                                        else
+                                        {
+                                            <b>Inactivo</b>
+                                        }
 
-                                <p class="text-sm d-block">
-                                    @Html.DisplayNameFor(model => model.Titulo):
-                                    <b>@Html.DisplayFor(model => model.Titulo)</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayNameFor(model => model.Descripcion):
-                                    <b>@Html.DisplayFor(model => model.Descripcion)</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayNameFor(model => model.FechaInicio):
-                                    <b>@Html.DisplayFor(model => model.FechaInicio)</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayNameFor(model => model.FechaFin):
-                                    <b>@Html.DisplayFor(model => model.FechaFin)</b>
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayNameFor(model => model.Estado):
-                                    @if (Model.Estado)
-                                    {
-                                        <b>Activo</b>
-                                    }
-                                    else
-                                    {
-                                        <b>Inactivo</b>
-                                    }
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
+                                        <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="text-primary"> Puestos</h3>
+                                    <div class="post" style="height: 200px; overflow-y: scroll">
+                                        @foreach (var item in Model.Bitacora_Usuario_RolServicio)
+                                        {
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    @if (item.IdUsuario != null)
+                                                    {
+                                                        <p>@item.Nombre_puesto : <b>@item.Nombre_usuario</b></p> }
+                                                    else
+                                                    {
+                                                        <p>@item.Nombre_puesto : <span class="right badge badge-warning">Sin asignar</span></p>}
 
-                                </p>
-                                <p class="text-sm d-block">
-                                    @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
-                                    <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
-                                </p>
+                                                </li>
+                                            </ul>
+                                        }
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="text-primary"> Canciones</h3>
+                                    <div class="post" style="height: 200px; overflow-y: scroll">
+                                        @foreach (var item in Model.Bitacora_Cancion_RolServicio)
+                                        {
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <p><b>@item.Nombre_cancion</b></p>
+                                                </li>
+                                            </ul>
+                                        }
+
+
+                                    </div>
+                                </div>
                             </div>
+
+
+
+
+
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-12 col-sm-6">
+
+                    </div>
+                    <div class="col-12 col-sm-6">
 
                     </div>
                 </div>
 
-
-
-
-
-
-
+                <div class="card-footer">
+                    <button style="float:right" class="btn btn-primary">Recuperar</button>
+                </div>
             </div>
-            }
-            else
-            {
-
-            }
-
-            <div class="card-footer">
-                <button style="float:right" class="btn btn-primary">Restablecer al anterior</button>
-            </div>
+            <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
+        <!-- /.card -->
+    }
+
 
 </section>
 
@@ -155,11 +381,11 @@
         $(document).ready(function () {
 
             //$('#infoAnterior  p').each(function () {
-                //$(this).addClass("text-danger");
+            //$(this).addClass("text-danger");
             //});
 
             //$('#infoAnterior  p b').addClass('text-danger');
-            
+
         })
 
     </script>

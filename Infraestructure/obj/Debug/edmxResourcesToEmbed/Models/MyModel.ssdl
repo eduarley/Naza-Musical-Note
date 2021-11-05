@@ -1,10 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="NazaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bitacora_Cancion_RolServicio">
+    <Key>
+      <PropertyRef Name="IdBitacora" />
+      <PropertyRef Name="IdCancion" />
+    </Key>
+    <Property Name="IdBitacora" Type="int" Nullable="false" />
+    <Property Name="IdCancion" Type="int" Nullable="false" />
+    <Property Name="Nombre_cancion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Bitacora_RolServicio">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="IdBitacora" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdBitacora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRolServicio" Type="int" Nullable="false" />
     <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="200" />
@@ -27,6 +37,18 @@
     <Property Name="IdUsuario" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="200" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bitacora_Usuario_RolServicio">
+    <Key>
+      <PropertyRef Name="IdBitacora" />
+      <PropertyRef Name="IdPuesto" />
+    </Key>
+    <Property Name="IdBitacora" Type="int" Nullable="false" />
+    <Property Name="IdPuesto" Type="int" Nullable="false" />
+    <Property Name="Nombre_puesto" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdUsuario" Type="varchar" MaxLength="15" />
+    <Property Name="Nombre_usuario" Type="varchar" MaxLength="200" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Cancion">
     <Key>
@@ -135,6 +157,30 @@
     <Property Name="IdPuesto" Type="int" Nullable="false" />
     <Property Name="Estado" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Bitacora_Cancion_RolServicio_Bitacora_RolServicio">
+    <End Role="Bitacora_RolServicio" Type="Self.Bitacora_RolServicio" Multiplicity="1" />
+    <End Role="Bitacora_Cancion_RolServicio" Type="Self.Bitacora_Cancion_RolServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bitacora_RolServicio">
+        <PropertyRef Name="IdBitacora" />
+      </Principal>
+      <Dependent Role="Bitacora_Cancion_RolServicio">
+        <PropertyRef Name="IdBitacora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bitacora_Usuario_RolServicio_Bitacora_RolServicio">
+    <End Role="Bitacora_RolServicio" Type="Self.Bitacora_RolServicio" Multiplicity="1" />
+    <End Role="Bitacora_Usuario_RolServicio" Type="Self.Bitacora_Usuario_RolServicio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bitacora_RolServicio">
+        <PropertyRef Name="IdBitacora" />
+      </Principal>
+      <Dependent Role="Bitacora_Usuario_RolServicio">
+        <PropertyRef Name="IdBitacora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Cancion_RolServicio_Cancion">
     <End Role="Cancion" Type="Self.Cancion" Multiplicity="1" />
     <End Role="Cancion_RolServicio" Type="Self.Cancion_RolServicio" Multiplicity="*" />
@@ -232,8 +278,10 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="NazaDBModelStoreContainer">
+    <EntitySet Name="Bitacora_Cancion_RolServicio" EntityType="Self.Bitacora_Cancion_RolServicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bitacora_RolServicio" EntityType="Self.Bitacora_RolServicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bitacora_Sesion" EntityType="Self.Bitacora_Sesion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bitacora_Usuario_RolServicio" EntityType="Self.Bitacora_Usuario_RolServicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cancion" EntityType="Self.Cancion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cancion_RolServicio" EntityType="Self.Cancion_RolServicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
@@ -244,6 +292,14 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario_RolServicio" EntityType="Self.Usuario_RolServicio" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bitacora_Cancion_RolServicio_Bitacora_RolServicio" Association="Self.FK_Bitacora_Cancion_RolServicio_Bitacora_RolServicio">
+      <End Role="Bitacora_RolServicio" EntitySet="Bitacora_RolServicio" />
+      <End Role="Bitacora_Cancion_RolServicio" EntitySet="Bitacora_Cancion_RolServicio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bitacora_Usuario_RolServicio_Bitacora_RolServicio" Association="Self.FK_Bitacora_Usuario_RolServicio_Bitacora_RolServicio">
+      <End Role="Bitacora_RolServicio" EntitySet="Bitacora_RolServicio" />
+      <End Role="Bitacora_Usuario_RolServicio" EntitySet="Bitacora_Usuario_RolServicio" />
+    </AssociationSet>
     <AssociationSet Name="FK_Cancion_RolServicio_Cancion" Association="Self.FK_Cancion_RolServicio_Cancion">
       <End Role="Cancion" EntitySet="Cancion" />
       <End Role="Cancion_RolServicio" EntitySet="Cancion_RolServicio" />

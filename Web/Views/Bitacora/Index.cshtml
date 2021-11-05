@@ -86,7 +86,7 @@
                                             <ul style="display:flex; list-style:none">
                                                 <li>
                                                     <p class="tooltip--triangle" data-tooltip="Ver detalles de la bitácora">
-                                                        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Bitacora", new { id = item.Id })">
+                                                        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Bitacora", new { id = item.IdBitacora })">
                                                             <i class="fas fa-eye">
                                                             </i>
                                                         </a>
@@ -95,7 +95,7 @@
                                                 </li>
                                                 <li>
                                                     <p class="tooltip--triangle" data-tooltip="Eliminar permanentemente la bitácora">
-                                                        <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
+                                                        <a class="btn btn-danger btn-sm" onclick="eliminar(@item.IdBitacora)">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                         </a>
@@ -224,6 +224,10 @@
 
                 ],
 
+
+                //NO ORDENAR AL INICIAR
+                "aaSorting": [],
+
                 "responsive": true, "lengthChange": false, "autoWidth": false,
 
 
@@ -235,8 +239,7 @@
     <script>
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
-            $("#mantenimientos").addClass('active');
-            $("#menucancion").addClass('active');
+            $("#menubitacora").addClass('active');
 
         });
 

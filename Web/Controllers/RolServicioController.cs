@@ -289,7 +289,7 @@ namespace Web.Controllers
                 rs.Cancion = serviceCancion.GetListaCancionesByID(cancion);
                 List<Usuario_RolServicio> PuestosAsignados = serviceCalendario.Generar_Lista_Usuario_RolServicio(IdPuestos, IdUsuarios);
 
-
+                //rs.Usuario_RolServicio = PuestosAsignados;
 
                 if (serviceCalendario.SaveEvent(rs, PuestosAsignados, usuario) != null)
                 {

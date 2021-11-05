@@ -10,7 +10,7 @@ namespace Infraestructure.Repository
     public interface IRepositoryBitacora
     {
         List<Bitacora_RolServicio> GetBitacora_RolServicios();
-        Bitacora_RolServicio Save(RolServicio rs, Usuario usuarioModifica, string accion);
+        Bitacora_RolServicio Save(int idBitacora, Usuario usuarioModifica, string accion);
         Bitacora_RolServicio GetBitacora_RolServicioById(int id);
     }
 }

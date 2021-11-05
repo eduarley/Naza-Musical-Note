@@ -13,6 +13,8 @@ namespace ApplicationCore.Services
 
         public List<Usuario_RolServicio> Generar_Lista_Usuario_RolServicio(List<int> IdPuestos, List<string> IdUsuarios)
         {
+            IRepositoryPuesto repositoryPuesto = new RepositoryPuesto();
+            IRepositoryUsuario repositoryUsuario = new RepositoryUsuario();
             List<Usuario_RolServicio> lista = new List<Usuario_RolServicio>();
             var prueba = IdPuestos.Zip(IdUsuarios, (primero, segundo) => primero + ";" + segundo);
             string[] separado;
@@ -22,6 +24,8 @@ namespace ApplicationCore.Services
                 separado = item.Split(';');
                 urs.IdPuesto = Convert.ToInt32(separado[0]);
                 urs.IdUsuario = separado[1];
+                urs.Puesto = repositoryPuesto.GetPuestoById(urs.IdPuesto);
+                urs.Usuario = repositoryUsuario.GetUsuarioByID(urs.IdUsuario);
                 lista.Add(urs);
             }
             return lista;

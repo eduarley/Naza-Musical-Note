@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="NazaDBModelStoreContainer" CdmEntityContainer="MyContext">
+    <EntitySetMapping Name="Bitacora_Cancion_RolServicio">
+      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Cancion_RolServicio">
+        <MappingFragment StoreEntitySet="Bitacora_Cancion_RolServicio">
+          <ScalarProperty Name="Nombre_cancion" ColumnName="Nombre_cancion" />
+          <ScalarProperty Name="IdCancion" ColumnName="IdCancion" />
+          <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Bitacora_RolServicio">
       <EntityTypeMapping TypeName="NazaDBModel.Bitacora_RolServicio">
         <MappingFragment StoreEntitySet="Bitacora_RolServicio">
@@ -17,7 +26,8 @@
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdRolServicio" ColumnName="IdRolServicio" />
+          <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -28,6 +38,18 @@
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bitacora_Usuario_RolServicio">
+      <EntityTypeMapping TypeName="NazaDBModel.Bitacora_Usuario_RolServicio">
+        <MappingFragment StoreEntitySet="Bitacora_Usuario_RolServicio">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Nombre_usuario" ColumnName="Nombre_usuario" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Nombre_puesto" ColumnName="Nombre_puesto" />
+          <ScalarProperty Name="IdPuesto" ColumnName="IdPuesto" />
+          <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -50,6 +72,16 @@
         <MappingFragment StoreEntitySet="Categoria">
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CorreoEmisor">
+      <EntityTypeMapping TypeName="NazaDBModel.CorreoEmisor">
+        <MappingFragment StoreEntitySet="CorreoEmisor">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -136,15 +168,5 @@
         <ScalarProperty Name="Id" ColumnName="IdCancion" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="CorreoEmisor">
-      <EntityTypeMapping TypeName="NazaDBModel.CorreoEmisor">
-        <MappingFragment StoreEntitySet="CorreoEmisor">
-          <ScalarProperty Name="Estado" ColumnName="Estado" />
-          <ScalarProperty Name="Clave" ColumnName="Clave" />
-          <ScalarProperty Name="Correo" ColumnName="Correo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

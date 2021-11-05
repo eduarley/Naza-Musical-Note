@@ -47,9 +47,22 @@ namespace Web.Controllers
                 IServiceBitacora serviceBitacora = new ServiceBitacora();
                 IServiceRolServicio serviceRolServicio = new ServiceRolServicio();
 
+                
+                
                 Bitacora_RolServicio bitacora_RolServicio = serviceBitacora.GetBitacora_RolServicioById(id);
-                ViewBag.rolServicio = serviceRolServicio.GetRolServicioPorID(id);
+                if(bitacora_RolServicio != null)
+                {
+                    ViewBag.rolServicio = serviceRolServicio.GetRolServicioPorID(bitacora_RolServicio.IdRolServicio);
 
+                }
+                else
+                {
+                    TempData["Message"] = "No existe la bitácora a consultar";
+                    ViewBag.Message = TempData["Message"];
+                    @TempData["Action"] = "E";
+                    TempData.Keep();
+                    return RedirectToAction("Index");
+                }
 
                 return View(bitacora_RolServicio);
 

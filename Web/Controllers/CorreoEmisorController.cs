@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using ApplicationCore.Services;
 using Infraestructure.Models;
+using Web.Security;
 
 namespace Web.Controllers
 {
+    [CustomAuthorize((int)Roles.Lider)]
     public class CorreoEmisorController : Controller
     {
         //private MyContext db = new MyContext();

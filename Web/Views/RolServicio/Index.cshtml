@@ -262,13 +262,17 @@
 
                 ],
 
+
+                //NO ORDENAR AL INICIAR
+                "aaSorting": [],
+
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 //aqui se ajusta la anchura de las columnas con el indice indicado en el target
                 'columnDefs': [
                     { 'width': '100px', 'targets': 1 },
                     { 'width': '500px', 'targets': 2 }
                 ],
-                "order": [[0, "desc"]] //orden de fechas descendiente
+                
 
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 

@@ -48,7 +48,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    rs = ctx.RolServicio.Include("Usuario").ToList();
+                    rs = ctx.RolServicio.Include("Usuario").OrderByDescending(x => x.FechaInicio).ToList();
                 }
             }
             catch (DbUpdateException dbEx)
