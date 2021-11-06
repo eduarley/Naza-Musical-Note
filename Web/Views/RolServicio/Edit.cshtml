@@ -1,8 +1,8 @@
 ﻿@model Infraestructure.Models.RolServicio
 @{ ViewBag.Title = "Editar Rol de Servicio";
-                List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
+    List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
 
-                List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos; }
+    List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos; }
 @section Styles{
     <link rel="stylesheet" href="~/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
     <!-- Select2 -->
@@ -82,6 +82,7 @@
                                             <strong class="text-danger">*</strong>
                                             <label>Título</label>
                                             <input type="text" id="txtSubject" class="form-control" name="titulo" />
+                                            <p id="errorTitulo" class="text-danger"></p>
                                             <!--
                                                 <p id="errorTitulo" hidden class="text-danger">Debe ingresar el título.</p>
                                             -->
@@ -98,6 +99,7 @@
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div>
                                             </div>
+                                            <p id="errorFecha" class="text-danger"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -119,6 +121,7 @@
                                                     <div class="input-group-text"><i class="far fa-clock"></i></div>
                                                 </div>
                                             </div>
+                                            <p id="errorHoraInicio" class="text-danger"></p>
                                             <!-- /.input group -->
                                         </div>
                                         <!-- /.form group -->
@@ -135,6 +138,7 @@
                                                     <div class="input-group-text"><i class="far fa-clock"></i></div>
                                                 </div>
                                             </div>
+                                            <p id="errorHoraFin" class="text-danger"></p>
                                             <!-- /.input group -->
                                         </div>
                                         <!-- /.form group -->
@@ -156,12 +160,13 @@
 
                                             @if (ViewBag.Canciones != null)
                                             {
-                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" }) }
-                            else
-                            {
-                <br />
-                                <span class="right badge badge-danger" id="alertaCancion" data-info="error-categoria">Aún no hay canciones.</span>}
-                                            <br />
+                                                @Html.DropDownList("canciones", new SelectList(ViewBag.Canciones, "Id", "Nombre"), new { @class = "canciones col-md-12", @multiple = "multiple" }) }
+                                            else
+                                            {
+                                                <br />
+                                                <span class="right badge badge-danger" id="alertaCancion" data-info="error-categoria">Aún no hay canciones.</span>
+                                            }
+                                        <p id="errorCancion" class="text-danger"></p>
 
                                         </div>
                                     </div>
@@ -171,6 +176,7 @@
                                         <div class="form-group">
                                             <label>Descripción</label>
                                             <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                                            <p id="errorDescripcion" class="text-danger"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -351,28 +357,43 @@
             $('input').each(function () {
                 $(this).removeClass('is-invalid');
             })
+
+            $('#txtDescription').removeClass('is-invalid');
+            $('#errorTitulo').text("");
+            $('#errorFecha').text("");
+            $('#errorHoraInicio').text("");
+            $('#errorHoraFin').text("");
+            $('#errorHoraInicio').text("");
+            $('#errorCancion').text("");
+            $('#errorDescripcion').text("");
+
             $('#txtDescription').removeClass('is-invalid');
             if ($('#txtSubject').val().trim() == "") {
-                mensaje('warning', 'Debe ingresar un título', true);
+                //mensaje('warning', 'Debe ingresar un título', true);
+                $('#errorTitulo').text("Debe ingresar un título");
                 $('#txtSubject').addClass('is-invalid');
                 $('#txtSubject').focus();
                 return;
             }
             if ($('#txtSubject').val().length > 200) {
-                mensaje('warning', 'El título debe ser menor a 200 caracteres', true);
+                //mensaje('warning', 'El título debe ser menor a 200 caracteres', true);
+                $('#errorTitulo').text("El título debe ser menor a 200 caracteres");
                 $('#txtSubject').addClass('is-invalid');
                 $('#txtSubject').focus();
                 return;
             }
 
             if ($('#txtDescription').val().length > 600) {
-                mensaje('warning', 'La descripción debe ser menor a 600 caracteres', true);
+                //mensaje('warning', 'La descripción debe ser menor a 600 caracteres', true);
+                $('#errorDescripcion').text("La descripción debe ser menor a 600 caracteres");
                 $('#txtDescription').addClass('is-invalid');
                 $('#txtDescription').focus();
                 return;
             }
+
             if ($('#canciones').select2("val") == "") {
-                mensaje('warning', 'Debe ingresar al menos una canción', true);
+                //mensaje('warning', 'Debe ingresar al menos una canción', true);
+                $('#errorCancion').text("Debe ingresar al menos una canción");
                 $('#canciones').focus();
                 return;
             }
@@ -383,21 +404,27 @@
             }
 
             if ($('#txtStart').val().trim() == "") {
-                mensaje('warning', 'Debe seleccionar una fecha', true);
+                //mensaje('warning', 'Debe seleccionar una fecha', true);
+                $('#errorFecha').text("Debe seleccionar una fecha");
                 $('#txtStart').addClass('is-invalid');
                 $('#txtStart').focus();
                 return;
             }
 
+
+
+
             if ($('#horafin').val().trim() == "") {
-                mensaje('warning', 'Debe seleccionar hora final', true);
+                //mensaje('warning', 'Debe seleccionar hora final', true);
+                $('#errorHoraFin').text("Debe seleccionar una hora final");
                 $('#horafin').addClass('is-invalid');
                 $('#horafin').focus();
                 return;
             }
 
             if ($('#horainicio').val().trim() == "") {
-                mensaje('warning', 'Debe seleccionar hora de inicio', true);
+                //mensaje('warning', 'Debe seleccionar hora de inicio', true);
+                $('#errorHoraInicio').text("Debe seleccionar una hora inicial");
                 $('#horainicio').addClass('is-invalid');
                 $('#horainicio').focus();
                 return;
@@ -407,7 +434,8 @@
                 var endHour = moment($('#horafin').val(), "HH:mm A").toDate();
 
                 if (endHour <= startHour) {
-                    mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
+                    //mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
+                    $('#errorHoraFin').text("Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre");
                     $('#horafin').addClass('is-invalid');
                     $('#horafin').focus();
                     return;

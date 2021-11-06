@@ -33,9 +33,13 @@
 
 
             <div style="float: right; cursor: pointer">
-                <h2>
-                    <i class="fa fa-info-circle text-primary"></i>
-                </h2>
+                <button class="btn"
+                        data-toggle="tooltip" 
+                        data-placement="left" 
+                        data-original-title="Estas credenciales se utilizarán para enviar correos a los nuevos integrantes del sistema" 
+                        aria-describedby="tooltip">
+                    <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                </button>
             </div>
 
             <br />
@@ -159,6 +163,11 @@
         });
 
 
+
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ trigger: 'click' });
+        });
 
     </script>
 }
