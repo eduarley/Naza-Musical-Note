@@ -149,7 +149,6 @@
     <Compile Include="Controllers\CalendarioController.cs" />
     <Compile Include="Controllers\CancionController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
-    <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\CorreoEmisorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GestionCancionController.cs" />
@@ -2276,9 +2275,6 @@
     <Content Include="Views\GestionCancion\_PartialVideo.cshtml" />
     <Content Include="Views\Bitacora\Index.cshtml" />
     <Content Include="Views\Bitacora\Details.cshtml" />
-    <Content Include="Views\Correo\Index.cshtml" />
-    <Content Include="Views\Correo\Edit.cshtml" />
-    <Content Include="Views\Correo\Edit2.cshtml" />
     <Content Include="Views\CorreoEmisor\Edit.cshtml" />
     <Content Include="Views\CorreoEmisor\Index.cshtml" />
   </ItemGroup>
