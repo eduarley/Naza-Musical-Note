@@ -86,7 +86,7 @@
                                             <ul style="display:flex; list-style:none">
                                                 <li>
                                                     <p class="tooltip--triangle" data-tooltip="Ver detalles de la bitácora">
-                                                        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Details","Bitacora", new { id = item.IdBitacora })">
+                                                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details","Bitacora", new { id = item.IdBitacora })">
                                                             <i class="fas fa-eye">
                                                             </i>
                                                         </a>
@@ -155,7 +155,11 @@
                          'success');
                 }
 
-
+            if (option == 'D-all') {
+                Swal.fire('Éxito!',
+                    'Todos los registros fueron eliminados de manera exitosa.',
+                    'success');
+            }
             if (option == 'E') {
                 Swal.fire('Error!',
                     'Se ha producido un error: '+message,

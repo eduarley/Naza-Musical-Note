@@ -41,13 +41,13 @@
                     }
                     else
                     {
-                        <img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:200px; width: 200px"/>
+                        <img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height:200px; width: 200px" />
                     }
 
 
                 </div>
                 <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
-                    
+
 
                     <div class="text-muted">
                         <p class="text-sm">
@@ -57,8 +57,8 @@
                         <p class="text-sm">
                             @if (Model.Telefono != null)
                             {
-                    @Html.DisplayNameFor(model => model.Telefono)
-                                    <b class="d-block">@Html.DisplayFor(model => model.Telefono)</b>}
+                                @Html.DisplayNameFor(model => model.Telefono)
+                                <b class="d-block">@Html.DisplayFor(model => model.Telefono)</b>}
 
                         </p>
                         <p class="text-sm">
@@ -87,14 +87,14 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="float-right">
-                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Usuario", new { id = Model.Id })">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Editar
-                    </a>
-                </div>
+            <div style="float:right">
+
+                <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Usuario", new { id = Model.Id })">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Editar
+                </a>
+
             </div>
         </div>
     </div>
@@ -103,7 +103,8 @@
 </section>
 
 @section scripts {
-    <script>//AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+    <script>
+    //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
             $("#menuusuarios").addClass('active');
         });</script>

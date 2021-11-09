@@ -69,17 +69,17 @@
                                 <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Usuario_RolServicio)</h3>
                                 @foreach (var item in Model.Usuario_RolServicio)
                                 {
-                    <ul class="list-unstyled">
-                        <li>
-                            @if (item.Usuario != null)
-                            {
-            <p>@item.Puesto.Descripcion : <b>@item.Usuario.NombreCompleto</b></p> }
-                            else
-                            {
-            <p>@item.Puesto.Descripcion : <span class="right badge badge-warning">Sin asignar</span></p>}
+                            <ul class="list-unstyled">
+                                <li>
+                                    @if (item.Usuario != null)
+                                    {
+                            <p>@item.Puesto.Descripcion : <b>@item.Usuario.NombreCompleto</b></p> }
+                        else
+                        {
+                            <p>@item.Puesto.Descripcion : <span class="right badge badge-warning">Sin asignar</span></p>}
 
-                        </li>
-                    </ul>}
+                                </li>
+                            </ul>}
 
                             </div>
                         </div>
@@ -88,17 +88,17 @@
                                 <h3 class="text-primary"> @Html.DisplayNameFor(model => model.Cancion)</h3>
                                 @foreach (var item in Model.Cancion)
                                 {
-                    <ul class="list-unstyled">
-                        <li>
-                            <p>
-                                <b>@item.Nombre</b>
-                                <a href="#" onclick="enlaceCancion(@item.Id)">
-                                    <i class="fas fa-external-link-alt ml-3"></i>
-                                </a>
-                            </p>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <p>
+                                        <b>@item.Nombre</b>
+                                        <a target="_blank" href="@Url.Action("Details","Cancion", new { id = item.Id })">
+                                            <i class="fas fa-external-link-alt ml-3"></i>
+                                        </a>
+                                    </p>
 
-                        </li>
-                    </ul>}
+                                </li>
+                            </ul>}
 
                             </div>
                         </div>
@@ -123,10 +123,10 @@
                             @Html.DisplayNameFor(model => model.Estado)
                             @if (Model.Estado)
                             {
-                <b class="d-block">Activo</b> }
-                            else
-                            {
-                <b class="d-block">Inactivo</b>}
+                        <b class="d-block">Activo</b> }
+                    else
+                    {
+                        <b class="d-block">Inactivo</b>}
 
                         </p>
                     </div>
@@ -137,14 +137,13 @@
             <div class="card-footer">
                 @if (UsuarioLogueado.IdRol == 1)
                 {
-                    <div class="float-right">
-                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = Model.Id })">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Editar
-                        </a>
-                    </div>
-                }
+    <div class="float-right">
+        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","RolServicio", new { id = Model.Id })">
+            <i class="fas fa-pencil-alt">
+            </i>
+            Editar
+        </a>
+    </div>}
 
 
             </div>
@@ -160,10 +159,16 @@
 
 @section scripts {
 
+
+
+
     <script>
-        function enlaceCancion(id) {
-            url = "../../Cancion/Details/" + id;
-            window.open(url, '_blank').focus();
-        }
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#rolServicio").addClass('active');
+
+        });
+
     </script>
 }

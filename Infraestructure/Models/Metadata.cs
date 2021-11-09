@@ -62,6 +62,8 @@ namespace Infraestructure.Models
 
     internal partial class CancionMetadata
     {
+
+        [Display(Name = "Fecha creación")]
         [DataType(DataType.Date)]
         public System.DateTime Fecha_creacion { get; set; }
 

@@ -39,7 +39,7 @@
 <section class="content">
 
     <!-- Default box -->
-    <div class="card">
+    <div class="card card-default">
         <div class="card-header">
             <h3 class="card-title">@Html.DisplayNameFor(model => model.Nombre)</h3>
             <br />
@@ -50,25 +50,23 @@
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
 
-                @if (ViewBag.UrlFormat != "")
-                 {    
-                        <div class="iframe-container">
-                            <iframe width="560"
-                                    height="315"
-                                    src="@ViewBag.UrlFormat"
-                                    frameborder="0">
-                                Hubo un problema al cargar el video.
-                            </iframe>
-                            <p>Video de la versión.</p>
-                        </div> 
-                }
-                else
-                {
-                    <span class="right badge badge-warning">No se ha ingresado un enlace para la versión.</span>
-                    <br />
-                    <br />
-                    <a href="@Url.Action("Gestion","GestionCancion", Model)">Agregar versión <i class="fas fa-external-link-alt ml-3"></i></a>
-                }
+                    @if (ViewBag.UrlFormat != "")
+                    {
+        <div class="iframe-container">
+            <iframe width="560"
+                    height="315"
+                    src="@ViewBag.UrlFormat"
+                    frameborder="0">
+                Hubo un problema al cargar el video.
+            </iframe>
+            <p>Video de la versión.</p>
+        </div> }
+    else
+    {
+<span class="right badge badge-warning">No se ha ingresado un enlace para la versión.</span>
+                <br />
+                                <br />
+                                                <a href="@Url.Action("Gestion","GestionCancion", Model)">Agregar versión <i class="fas fa-external-link-alt ml-3"></i></a>}
 
 
 
@@ -97,9 +95,9 @@
                             @if (Model.Estado)
                             {
                 <b class="d-block">Activo</b> }
-                            else
-                            {
-                <b class="d-block">Inactivo</b>}
+            else
+            {
+<b class="d-block">Inactivo</b>}
 
                         </p>
                     </div>
@@ -107,20 +105,20 @@
 
                 </div>
             </div>
-            <div class="card-footer">
                 @if (UsuarioLogueado.IdRol == 1)
                 {
-                    <div class="float-right">
-                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = Model.Id })">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Editar
-                        </a>
-                    </div>
-                }
+    <div class="float-right">
+        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = Model.Id })">
+            <i class="fas fa-pencil-alt">
+            </i>
+            Editar
+        </a>
+    </div>
+    
+    }
 
 
-            </div>
+        
         </div>
         <!-- /.card-body -->
     </div>
@@ -128,3 +126,15 @@
 
 </section>
 <!-- /.content -->
+@section scripts {
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#menucancion").addClass('active');
+
+        });
+
+    </script>
+}

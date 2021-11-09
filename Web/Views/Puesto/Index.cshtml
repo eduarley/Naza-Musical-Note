@@ -175,7 +175,7 @@
 
                 if (option == 'S') {
                     Swal.fire('Éxito!',
-                        'El registro fue creado correctamente.',
+                        'El registro fue salvado correctamente.',
                         'success');
                 }
 
@@ -275,13 +275,13 @@
     <script>
         function eliminar(id) {
             Swal.fire({
-                title: 'Estás seguro?',
+                title: '¿Estás seguro?',
                 text: "Se desactivará este puesto.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, desactívalo!',
+                confirmButtonText: 'Sí, ¡desactívalo!',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {

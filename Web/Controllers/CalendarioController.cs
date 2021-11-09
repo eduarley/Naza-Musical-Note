@@ -113,7 +113,18 @@ namespace Web.Controllers
                 {
                     usuario = Session["User"] as Usuario;
                     if (serviceCalendario.DeleteEvent(eventID, usuario))
+                    {
                         status = true;
+                        TempData["Action"] = "D";
+                        TempData.Keep();
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Error al procesar los datos! ";
+                        @TempData["Action"] = "E";
+                        TempData.Keep();
+                    }
+
 
                 }
                
@@ -231,9 +242,16 @@ namespace Web.Controllers
                 if (serviceCalendario.SaveEvent(rs, PuestosAsignados, usuario) != null)
                 {
                     status = true;
-                    
+                    TempData["Action"] = "S";
+                    TempData.Keep();
                 }
-                    
+                else
+                {
+                    TempData["Message"] = "Error al procesar los datos! ";
+                    @TempData["Action"] = "E";
+                    TempData.Keep();
+                }
+
 
             }
             catch (Exception ex)

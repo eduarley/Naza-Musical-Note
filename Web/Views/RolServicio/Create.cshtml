@@ -195,8 +195,8 @@
 
 
                     </div>
-                    <div class="modal-footer justify-content-end">
-                        <button type="button" class="btn btn-primary"
+                    <div style="float:right">
+                        <button type="button" class="btn btn-secondary"
                                 onclick="siguiente()">
                             Siguiente
                         </button>
@@ -256,15 +256,16 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-primary"
+                    <div style="float:left">
+                        <button type="button" class="btn btn-secondary"
                                 onclick="stepper.previous()">
                             Anterior
                         </button>
+                    </div>
+                    <div style="float: right">
                         <button type="button" class="btn btn-success" id="btnSave">
                             Guardar
                         </button>
-
                     </div>
 
 
@@ -365,10 +366,9 @@
             });
         });
 
-        //HACE LAS VALIDACIONES Y MUESTRA EL SIGUIENTE TAB
-        function siguiente() {
 
-            //VALIDACION/
+
+        function limpiarErrores() {
             $('input').each(function () {
                 $(this).removeClass('is-invalid');
             })
@@ -381,12 +381,60 @@
             $('#errorHoraInicio').text("");
             $('#errorCancion').text("");
             $('#errorDescripcion').text("");
+        }
+
+
+
+
+
+        //HACE LAS VALIDACIONES Y MUESTRA EL SIGUIENTE TAB
+        function siguiente() {
+
+            //VALIDACION/
+            limpiarErrores();
 
             if ($('#txtSubject').val().trim() == "") {
                 //mensaje('warning', 'Debe ingresar un título', true);
                 $('#errorTitulo').text("Debe ingresar un título");
                 $('#txtSubject').addClass('is-invalid');
                 $('#txtSubject').focus();
+                return;
+            }
+            if ($('#txtStart').val().trim() == "") {
+                //mensaje('warning', 'Debe seleccionar una fecha', true);
+                $('#errorFecha').text("Debe seleccionar una fecha");
+                $('#txtStart').addClass('is-invalid');
+                $('#txtStart').focus();
+                return;
+            }
+            if ($('#horainicio').val().trim() == "") {
+                //mensaje('warning', 'Debe seleccionar hora de inicio', true);
+                $('#errorHoraInicio').text("Debe seleccionar una hora inicial");
+                $('#horainicio').addClass('is-invalid');
+                $('#horainicio').focus();
+                return;
+            }
+            else {
+                var startHour = moment($('#horainicio').val(), "HH:mm A").toDate();
+                var endHour = moment($('#horafin').val(), "HH:mm A").toDate();
+
+                if (endHour <= startHour) {
+                    //mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
+                    $('#errorHoraFin').text("Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre");
+                    $('#horafin').addClass('is-invalid');
+                    $('#horafin').focus();
+                    return;
+                }
+            }
+            if ($('#horafin').val().trim() == "") {
+                //mensaje('warning', 'Debe seleccionar hora final', true);
+                $('#errorHoraFin').text("Debe seleccionar una hora final");
+                $('#horafin').addClass('is-invalid');
+                $('#horafin').focus();
+                return;
+            }
+            if ($('#alertaCancion').attr("data-info") == "error") {
+                mensaje('warning', 'No hay canciones, por favor agregue al menos una canción antes de continuar', true);
                 return;
             }
             if ($('#txtSubject').val().length > 200) {
@@ -411,51 +459,8 @@
                 $('#canciones').focus();
                 return;
             }
-
-            if ($('#alertaCancion').attr("data-info") == "error") {
-                mensaje('warning', 'No hay canciones, por favor agregue al menos una canción antes de continuar', true);
-                return;
-            }
-
-            if ($('#txtStart').val().trim() == "") {
-                //mensaje('warning', 'Debe seleccionar una fecha', true);
-                $('#errorFecha').text("Debe seleccionar una fecha");
-                $('#txtStart').addClass('is-invalid');
-                $('#txtStart').focus();
-                return;
-            }
-
-
-
-
-            if ($('#horafin').val().trim() == "") {
-                //mensaje('warning', 'Debe seleccionar hora final', true);
-                $('#errorHoraFin').text("Debe seleccionar una hora final");
-                $('#horafin').addClass('is-invalid');
-                $('#horafin').focus();
-                return;
-            }
-
-            if ($('#horainicio').val().trim() == "") {
-                //mensaje('warning', 'Debe seleccionar hora de inicio', true);
-                $('#errorHoraInicio').text("Debe seleccionar una hora inicial");
-                $('#horainicio').addClass('is-invalid');
-                $('#horainicio').focus();
-                return;
-            }
-            else {
-                var startHour = moment($('#horainicio').val(), "HH:mm A").toDate();
-                var endHour = moment($('#horafin').val(), "HH:mm A").toDate();
-
-                if (endHour <= startHour) {
-                    //mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
-                    $('#errorHoraFin').text("Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre");
-                    $('#horafin').addClass('is-invalid');
-                    $('#horafin').focus();
-                    return;
-                }
-            }
             //FIN VALIDACION
+
 
             stepper.next(); //MUESTRA EL SIGUIENTE TAB
             $('#nav-puestos li:first a').click(); //AQUI MUESTRA LOS PUESTOS DE LA PRIMERA CATEGORIA

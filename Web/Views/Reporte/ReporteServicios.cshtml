@@ -43,10 +43,10 @@
                         </div>
 
 
-                        <div class="modal-footer justify-content-end">
+                        <div style="float:right">
 
                             <p class="tooltip--left" data-tooltip="Abre una nueva ventana mostrando el reporte">
-                                <input id="btnAceptar" type="submit" formtarget="_blank" value="Generar Reporte" class="btn btn-success" />
+                                <input id="btnAceptar" type="submit" formtarget="_blank" value="Generar Reporte" class="btn btn-info" />
                             </p>
                         </div>
                     </div>
@@ -58,3 +58,18 @@
 
 
 }
+
+
+@section scripts {
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#informes").addClass('active');
+            $("#reporteservicios").addClass('active');
+
+        });
+
+    </script>
+}
+

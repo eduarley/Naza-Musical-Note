@@ -54,29 +54,29 @@
                             @Html.DisplayNameFor(model => model.Estado)
                             @if (Model.Estado)
                             {
-                <b class="d-block">Activo</b> }
+                                <b class="d-block">Activo</b> }
                             else
                             {
-                <b class="d-block">Inactivo</b>}
+                                <b class="d-block">Inactivo</b>}
 
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                @if (UsuarioLogueado.Rol.Id == 1)
-                {
-                    <div class="float-right">
-                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Puesto", new { id = Model.Id })">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Editar
-                        </a>
-                    </div>
-                }
+
+            @if (UsuarioLogueado.Rol.Id == 1)
+            {
+                <div class="float-right">
+                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Puesto", new { id = Model.Id })">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                </div>
+            }
 
 
-            </div>
+
         </div>
         <!-- /.card-body -->
     </div>
@@ -85,5 +85,15 @@
 </section>
 <!-- /.content -->
 
+@section scripts{
+    <script>
 
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#menupuestos").addClass('active');
+            $("#mantenimientos").addClass('active');
+        });
+
+    </script>
+}
 

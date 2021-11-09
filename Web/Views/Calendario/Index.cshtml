@@ -85,9 +85,7 @@
                                                 <div class="form-group">
                                                     <label>Título</label>
                                                     <input type="text" id="txtSubject" class="form-control" name="titulo" />
-                                                    <!--
-                                                        <p id="errorTitulo" hidden class="text-danger">Debe ingresar el título.</p>
-                                                    -->
+                                                    <p id="errorTitulo" class="text-danger"></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -100,6 +98,7 @@
                                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                         </div>
                                                     </div>
+                                                    <p id="errorFecha" class="text-danger"></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,6 +119,7 @@
                                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                                                         </div>
                                                     </div>
+                                                    <p id="errorHoraInicio" class="text-danger"></p>
                                                     <!-- /.input group -->
                                                 </div>
                                                 <!-- /.form group -->
@@ -135,6 +135,7 @@
                                                             <div class="input-group-text"><i class="far fa-clock"></i></div>
                                                         </div>
                                                     </div>
+                                                    <p id="errorHoraFin" class="text-danger"></p>
                                                     <!-- /.input group -->
                                                 </div>
                                                 <!-- /.form group -->
@@ -156,15 +157,16 @@
                                         else
                                         {
                                             <br />
-                                            <span class="right badge badge-danger" id="alertaCancion" data-info="error" >Aún no hay canciones.</span>
+                                            <span class="right badge badge-danger" id="alertaCancion" data-info="error">Aún no hay canciones.</span>
                                         }
-                                        <br />
+                                        <p id="errorCancion" class="text-danger"></p>
 
 
 
                                         <div class="form-group">
                                             <label>Descripción</label>
                                             <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                                            <p id="errorDescripcion" class="text-danger"></p>
                                         </div>
                                     </div>
 
@@ -173,8 +175,8 @@
 
 
                             </div>
-                            <div class="modal-footer justify-content-end">
-                                <button type="button" class="btn btn-primary"
+                            <div style="float: right">
+                                <button type="button" class="btn btn-secondary"
                                         onclick="siguiente()">
                                     Siguiente
                                 </button>
@@ -192,7 +194,7 @@
 
 
                                     <div class="col-12">
-                                         <div class=" d-flex p-0">
+                                        <div class=" d-flex p-0">
                                             <ul class="nav nav-pills ml-auto p-2" id="nav-puestos">
                                                 @if (categorias != null)
                                                 {
@@ -215,36 +217,37 @@
 
                                         <ul class="tab-content" style="height: 13em; overflow-y:scroll">
 
-                                        @if(puestos != null)
-                                        {
-                                            foreach (var item in puestos)
+                                            @if (puestos != null)
                                             {
-                                                var idP = puestos;
-                                                <li id='puesto_@item.IdCategoria' hidden>
-                                                    <label>@item.Descripcion</label>
-                                                    @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
-                                                    <input id="hiddenID" type="hidden" value="@item.Id" />
-                                                    <br />
-                                                </li>
+                                                foreach (var item in puestos)
+                                                {
+                                                    var idP = puestos;
+                                                    <li id='puesto_@item.IdCategoria' hidden>
+                                                        <label>@item.Descripcion</label>
+                                                        @Html.DropDownList("usuarioId", new SelectList(ViewBag.Usuarios, "Id", "DisplayText"), new { @class = "col-md-6 form-control puestoId", @puesto = item.Id })
+                                                        <input id="hiddenID" type="hidden" value="@item.Id" />
+                                                        <br />
+                                                    </li>
+
+                                                }
 
                                             }
-
-                                        }
                                         </ul>
                                     </div>
                                     <!-- /.col -->
                                 </div>
 
                             </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-primary"
+                            <div style="float:left">
+                                <button type="button" class="btn btn-secondary"
                                         onclick="stepper.previous()">
                                     Anterior
                                 </button>
+                            </div>
+                            <div style="float:right">
                                 <button type="button" class="btn btn-success" id="btnSave">
                                     Guardar
                                 </button>
-
                             </div>
 
 
@@ -281,7 +284,7 @@
                 <button id="btnDelete" class="btn btn-danger btn-sm ">
                     <span class="glyphicon glyphicon-remove"></span> Eliminar
                 </button>
-                <button id="btnEdit" class="btn btn-success btn-sm " style="margin-right:5px;">
+                <button id="btnEdit" class="btn btn-primary btn-sm " style="margin-right:5px;">
                     <span class="glyphicon glyphicon-pencil"></span> Editar
                 </button>
             </div>
@@ -321,6 +324,17 @@
 
 
 
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#menuagenda").addClass('active');
+        });
+
+    </script>
+
+
+
+
     <!-- INICIALIZACION -->
     <script>
 
@@ -354,6 +368,57 @@
 
 
 
+    <script>
+
+        $(document).ready(function () {
+
+
+                // Recibe los parámetros del Controller
+                var option = '@TempData["Action"]'
+                var message = '@TempData["Message"]'
+
+
+
+                if (option == 'S') {
+                    Swal.fire('Éxito!',
+                        'El registro fue salvado correctamente.',
+                        'success');
+                }
+
+
+                 if (option == 'D') {
+                     Swal.fire('Éxito!',
+                         'El registro fue borrado correctamente.',
+                         'success');
+                }
+
+
+                 if (option == 'U') {
+                     Swal.fire('Éxito!',
+                         'El registro fue actualizado correctamente.',
+                         'success');
+                }
+
+            if (option == 'E') {
+                Swal.fire('Error!',
+                    'Se ha producido un error: '+message,
+                    'error');
+            }
+        });
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
     <!-- BS-STEPPER PARA LAS PESTAÑAS -->
     <script>
         // BS-Stepper Init
@@ -365,60 +430,49 @@
             });
         });
 
+        $('#myModalSave').on('show.bs.modal', function () {
+            limpiarErrores();
+        })
+
+        function limpiarErrores() {
+            $('input').each(function () {
+                $(this).removeClass('is-invalid');
+            })
+
+            $('#txtDescription').removeClass('is-invalid');
+            $('#errorTitulo').text("");
+            $('#errorFecha').text("");
+            $('#errorHoraInicio').text("");
+            $('#errorHoraFin').text("");
+            $('#errorHoraInicio').text("");
+            $('#errorCancion').text("");
+            $('#errorDescripcion').text("");
+        }
+
         //HACE LAS VALIDACIONES Y MUESTRA EL SIGUIENTE TAB
         function siguiente() {
 
             //VALIDACION/
-            $('input').each(function () {
-                $(this).removeClass('is-invalid');
-            })
-            $('#txtDescription').removeClass('is-invalid');
+
+            limpiarErrores();
+
             if ($('#txtSubject').val().trim() == "") {
-                mensaje('warning', 'Debe ingresar un título', true);
+                //mensaje('warning', 'Debe ingresar un título', true);
+                $('#errorTitulo').text("Debe ingresar un título");
                 $('#txtSubject').addClass('is-invalid');
                 $('#txtSubject').focus();
                 return;
             }
-            if ($('#txtSubject').val().length > 200) {
-                mensaje('warning', 'El título debe ser menor a 200 caracteres', true);
-                $('#txtSubject').addClass('is-invalid');
-                $('#txtSubject').focus();
-                return;
-            }
-
-            if ($('#txtDescription').val().length > 600) {
-                mensaje('warning', 'La descripción debe ser menor a 600 caracteres', true);
-                $('#txtDescription').addClass('is-invalid');
-                $('#txtDescription').focus();
-                return;
-            }
-            if ($('#canciones').select2("val") == "") {
-                mensaje('warning', 'Debe ingresar al menos una canción', true);
-                $('#canciones').focus();
-                return;
-            }
-
-            if ($('#alertaCancion').attr("data-info")=="error") {
-                mensaje('warning', 'No hay canciones, por favor agregue al menos una canción antes de continuar', true);
-                return;
-            }
-
             if ($('#txtStart').val().trim() == "") {
-                mensaje('warning', 'Debe seleccionar una fecha', true);
+                //mensaje('warning', 'Debe seleccionar una fecha', true);
+                $('#errorFecha').text("Debe seleccionar una fecha");
                 $('#txtStart').addClass('is-invalid');
                 $('#txtStart').focus();
                 return;
             }
-
-            if ($('#horafin').val().trim() == "") {
-                mensaje('warning', 'Debe seleccionar hora final', true);
-                $('#horafin').addClass('is-invalid');
-                $('#horafin').focus();
-                return;
-            }
-
             if ($('#horainicio').val().trim() == "") {
-                mensaje('warning', 'Debe seleccionar hora de inicio', true);
+                //mensaje('warning', 'Debe seleccionar hora de inicio', true);
+                $('#errorHoraInicio').text("Debe seleccionar una hora inicial");
                 $('#horainicio').addClass('is-invalid');
                 $('#horainicio').focus();
                 return;
@@ -428,16 +482,51 @@
                 var endHour = moment($('#horafin').val(), "HH:mm A").toDate();
 
                 if (endHour <= startHour) {
-                    mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
+                    //mensaje('warning', 'Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre', true);
+                    $('#errorHoraFin').text("Fecha inválida, la hora de inicio debe ser mayor a la hora de cierre");
                     $('#horafin').addClass('is-invalid');
                     $('#horafin').focus();
                     return;
                 }
             }
-           
-            
+            if ($('#horafin').val().trim() == "") {
+                //mensaje('warning', 'Debe seleccionar hora final', true);
+                $('#errorHoraFin').text("Debe seleccionar una hora final");
+                $('#horafin').addClass('is-invalid');
+                $('#horafin').focus();
+                return;
+            }
+            if ($('#alertaCancion').attr("data-info") == "error") {
+                mensaje('warning', 'No hay canciones, por favor agregue al menos una canción antes de continuar', true);
+                return;
+            }
+            if ($('#txtSubject').val().length > 200) {
+                //mensaje('warning', 'El título debe ser menor a 200 caracteres', true);
+                $('#errorTitulo').text("El título debe ser menor a 200 caracteres");
+                $('#txtSubject').addClass('is-invalid');
+                $('#txtSubject').focus();
+                return;
+            }
 
+            if ($('#txtDescription').val().length > 600) {
+                //mensaje('warning', 'La descripción debe ser menor a 600 caracteres', true);
+                $('#errorDescripcion').text("La descripción debe ser menor a 600 caracteres");
+                $('#txtDescription').addClass('is-invalid');
+                $('#txtDescription').focus();
+                return;
+            }
+
+            if ($('#canciones').select2("val") == "") {
+                //mensaje('warning', 'Debe ingresar al menos una canción', true);
+                $('#errorCancion').text("Debe ingresar al menos una canción");
+                $('#canciones').focus();
+                return;
+            }
             //FIN VALIDACION
+
+
+
+
 
             stepper.next(); //MUESTRA EL SIGUIENTE TAB
             $('#nav-puestos li:first a').click(); //AQUI MUESTRA LOS PUESTOS DE LA PRIMERA CATEGORIA
@@ -463,14 +552,14 @@
                 type: "GET",
                 url: "/Calendario/GetPrimeraCategoria",
                 success: function (data) {
-                    
+
                     mostrarPuestos(data);
 
                 }
             });
         })
 
-    */
+*/
 
 
         //MUESTRA LOS PUESTOS AL HACER CLICK A CADA PESTAÑA
@@ -578,7 +667,8 @@
                         else
                             $description.append($('<p/>').html('<b>Descripción: </b> Sin descripción' + '<br/>'));
                         $description.append($('<p/>').html('<b>Canciones:   </b>' + calEvent.canciones.map(function (data) { return data.Nombre }) + '<br/>'));
-                        $description.append('<a href='+"../RolServicio/Details/"+calEvent.eventID+'>Más detalles</a>');
+                        $description.append('<a class="badge badge-info"'+
+                            ' href=' + "../RolServicio/Details/" + calEvent.eventID + '>Más detalles</a>');
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
@@ -613,13 +703,13 @@
             })
             $('#btnDelete').click(function () {
                 Swal.fire({
-                    title: 'Estás seguro?',
-                    text: "No podrás revertirlo!",
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertirlo!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, bórralo!',
+                    confirmButtonText: 'Sí, ¡bórralo!',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (selectedEvent != null && result.isConfirmed) {
@@ -628,23 +718,11 @@
                             url: '/Calendario/DeleteEvent',
                             data: { 'eventID': selectedEvent.eventID },
                             success: function (data) {
-                                if (data.status) {
-                                    //refrescar el calendario
-                                    FetchEventAndRenderCalendar();
-                                    Swal.fire(
-                                        'Éxito al borrar!',
-                                        'Su evento evento ha sido borrado.',
-                                        'success'
-                                    )
-                                    $('#myModal').modal('hide');
-                                }
+                                location.reload();
                             },
-                            statusCode: {
-                                //404: function (content) { alert('No se encuentra el recurso.'); },
-                                //500: function (content) { alert('Error interno del servidor.'); }
-                            },
+
                             error: function (xhr, status, error) {
-                                mensaje('error', 'Hubo un error al borrar, vuélvalo a intentar. ' + "Error: " + error + ", No Error: " + xhr.status, true);
+                                location.reload();
                             }
                         })
 
@@ -713,7 +791,7 @@
                     mensaje('error', 'No se puede guardar el registro debido a que no existen categorías disponibles', false);
                     return;
                 }
-                
+
 
 
 
@@ -762,17 +840,15 @@
 
                     data: data,
                     success: function (data) {
-                        if (data.status) {
-                            //Refresca el calendario
-                            FetchEventAndRenderCalendar();
-                            $('#myModalSave').modal('hide');
-                            mensaje('success', 'Éxito al guardar el evento.', false);
-                        } else {
-                            mensaje('error', 'Error al guardar, vuelva a intentarlo.', false);
-                        }
+
+
+                        //Refresca el calendario
+                        //FetchEventAndRenderCalendar();
+                        location.reload();
+
                     },
                     error: function (xhr, status, error) {
-                        mensaje('error', 'Hubo un error al guardar, vuélvalo a intentar. ' + "Error: " + error + ", No Error: " + xhr.status, true);
+                        location.reload();
                     }
                 })
             }

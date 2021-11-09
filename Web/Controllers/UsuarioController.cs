@@ -270,20 +270,30 @@ namespace Web.Controllers
             {
                 Usuario oUser = (Usuario)Session["User"];
                 Usuario usuario = serviceUsuario.GetUsuarioByID(id);
-                if (oUser.Id != usuario.Id)
+                if(usuario != null)
                 {
-                    usuario.Estado = false;
-                    serviceUsuario.Save(usuario);
-                    @TempData["Action"] = "D";
-                    TempData.Keep();
-                    status = true;
+                    if (oUser.Id != usuario.Id)
+                    {
+                        usuario.Estado = false;
+                        serviceUsuario.Save(usuario);
+                        @TempData["Action"] = "D";
+                        TempData.Keep();
+                        status = true;
+                    }
+                    else
+                    {
+                        @TempData["Action"] = "E";
+                        TempData["Message"] = "No puedes desactivar tu propio usuario!";
+                        TempData.Keep();
+                    }
                 }
                 else
                 {
                     @TempData["Action"] = "E";
-                    TempData["Message"] = "No puedes desactivar tu propio usuario!";
+                    TempData["Message"] = "No existe el usuario!";
                     TempData.Keep();
                 }
+                
             }
             catch (Exception ex)
             {

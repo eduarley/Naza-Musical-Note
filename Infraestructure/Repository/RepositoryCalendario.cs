@@ -42,6 +42,7 @@ namespace Infraestructure.Repository
 
             try
             {
+
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
@@ -81,7 +82,7 @@ namespace Infraestructure.Repository
                         var v = ctx.RolServicio.Include("Cancion").Include("Usuario").Where(a => a.Id == rs.Id).FirstOrDefault();
                         if (v != null)
                         {
-                            v.IdUsuario_Propietario = rs.IdUsuario_Propietario;
+                            //v.IdUsuario_Propietario = rs.IdUsuario_Propietario;
                             v.Usuario_RolServicio = rs.Usuario_RolServicio;
                             //GUARDA LA BITACORA AL ACTUALIZAR
                             repositoryBitacora.Save(v.Id, usuario, "Modificado");
@@ -96,8 +97,11 @@ namespace Infraestructure.Repository
                             v.Fecha_creacion = rs.Fecha_creacion;
                             v.Estado = rs.Estado;
                             v.Cancion = rs.Cancion;
-
+                            
                         }
+
+                        rs.Usuario = v.Usuario;
+                        rs.IdUsuario_Propietario = v.IdUsuario_Propietario;
                         //Para al actualizar, no choquen las PK
                         ctx.Database.ExecuteSqlCommand("delete from usuario_rolservicio where IdRolServicio = " + rs.Id);
 

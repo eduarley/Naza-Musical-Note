@@ -43,7 +43,7 @@
                             <ul>
                                 <li> <p>@item.Descripcion</p></li>
                             </ul>
-                           
+
                         }
 
                     }
@@ -53,7 +53,7 @@
                     }
                 </div>
                 <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
-                   
+
                     <div class="text-muted">
                         <p class="text-sm">
                             @Html.DisplayName("Id: ")
@@ -74,16 +74,15 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="float-right">
-                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","Categoria", new { id = Model.Id })">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Editar
-                    </a>
-                </div>
 
+            <div class="float-right">
+                <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Categoria", new { id = Model.Id })">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Editar
+                </a>
             </div>
+
         </div>
         <!-- /.card-body -->
     </div>
@@ -91,3 +90,15 @@
 
 </section>
 <!-- /.content -->
+
+@section scripts{
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#mantenimientos").addClass('active');
+            $("#menucategorias").addClass('active');
+
+        });
+
+    </script>
+}

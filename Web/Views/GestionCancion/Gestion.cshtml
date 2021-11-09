@@ -94,29 +94,28 @@
             <div class="col-md-6">
                 @if (Model.Url_version != "")
                 {<!--Imagen de progreso -->
-                    <div id="imgloader" style="display:none;position:absolute;top:45%;left:45%;padding:2px;">
-                        <img height="50px" src="~/Content/dist/img/loader.gif" />
-                    </div>
-                                        <div id="resultado"></div>}
+                                        <div id="imgloader" style="display:none;position:absolute;top:45%;left:45%;padding:2px;">
+                                            <img height="50px" src="~/Content/dist/img/loader.gif" />
+                                        </div>
+                                                            <div id="resultado"></div>}
                 @if (Model.Url_version != null)
                 {
 
-                    <div class="iframe-container">
-                        <iframe width="560"
-                                height="315"
-                                src="@Model.Url_version"
-                                frameborder="0">
-                            Hubo un problema al cargar el video.
-                        </iframe>
-                    </div>
+<div class="iframe-container">
+    <iframe width="560"
+            height="315"
+            src="@Model.Url_version"
+            frameborder="0">
+        Hubo un problema al cargar el video.
+    </iframe>
+</div>
 
                     <button type="button"
                             class="btn btn-danger mt-2"
                             style="float: right;"
                             onclick="eliminar(@Model.Id)">
                         Eliminar video <i class="fas fa-trash"></i>
-                    </button>       
-                 }
+                    </button>}
 
             </div>
         </div>
@@ -131,7 +130,13 @@
     @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/jqueryval")
 
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#menuversion").addClass('active');
+        });
 
+    </script>
 
     <script>
 

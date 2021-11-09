@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Infraestructure.Models.Cancion>
 
-@{
-    ViewBag.Title = "Gestión de canciones";
-}
+@{ ViewBag.Title = "Gestión de canciones"; }
 
 @section Styles{
     @Styles.Render("~/Content/datatable")
@@ -14,7 +12,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h3>GESTION DE VERSIONES</h3>
+                <h3>GESTION DE VERSIONES</h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -44,7 +42,7 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Autor)
                                     </th>
-                             
+
                                     <th>
                                         @Html.DisplayName("Video versión")
                                     </th>
@@ -55,34 +53,32 @@
                                 @foreach (var item in Model)
                                 {
 
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Nombre)
-                                        </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Autor)
-                                        </td>
-                                   
-                                        <td class="text-center">
-                                            @if (item.Url_version != null)
-                                            {
-                                                <a href="@item.Url_version" style="width:720px;height:450px" target="_blank">Ver video <i class="fas fa-external-link-alt"></i></a>
-                                            }
-                                        </td>
-                                        <td class="text-center ">
-                                            <ul style="display:flex; list-style:none">
-                                                <li>
-                                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Gestion","GestionCancion", new { id = item.Id })">
-                                                        <i class="fas fa-code-branch">
-                                                        </i>
-                                                        Versión
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Autor)
+                        </td>
+
+                        <td class="text-center">
+                            @if (item.Url_version != null)
+                            {
+            <a href="@item.Url_version" style="width:720px;height:450px" target="_blank">Ver video <i class="fas fa-external-link-alt"></i></a>}
+                        </td>
+                        <td class="text-center ">
+                            <ul style="display:flex; list-style:none">
+                                <li>
+                                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Gestion","GestionCancion", new { id = item.Id })">
+                                        <i class="fas fa-code-branch">
+                                        </i>
+                                        Versión
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>}
                             </tbody>
                         </table>
 
@@ -164,7 +160,7 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
                 },
-                
+
 
                 "responsive": true, "lengthChange": false, "autoWidth": false,
 
@@ -177,9 +173,7 @@
     <script>
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
-            //$("#mantenimientos").addClass('active');
-            //$("#menucancion").addClass('active');
-
+            $("#menuversion").addClass('active');
         });
 
     </script>

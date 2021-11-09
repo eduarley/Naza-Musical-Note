@@ -130,7 +130,7 @@ namespace Web.Controllers
                 if (serviceBitacora.DeleteAllBitacora_RolServicio())
                 {
                     status = true;
-                    TempData["Action"] = "D";
+                    TempData["Action"] = "D-all";
                     TempData.Keep();
                 }
                 else

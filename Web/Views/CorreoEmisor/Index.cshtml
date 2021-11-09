@@ -34,9 +34,9 @@
 
             <div style="float: right; cursor: pointer">
                 <button class="btn"
-                        data-toggle="tooltip" 
-                        data-placement="left" 
-                        data-original-title="Estas credenciales se utilizarán para enviar correos a los nuevos integrantes del sistema" 
+                        data-toggle="tooltip"
+                        data-placement="left"
+                        data-original-title="Estas credenciales se utilizarán para enviar correos a la hora de crear nuevos integrantes del sistema"
                         aria-describedby="tooltip">
                     <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
                 </button>
@@ -72,62 +72,35 @@
                     </div>
 
                 </div>
-                @*<div class="row" style=" display: grid; justify-content:center; align-content: center">
-                    <div class="text-center">
-                        <div class="form-group">
-                            <p class="text-sm">
-                                @Html.DisplayName("Estado: ")
-                                @if (Model.Estado)
-                                {
-                                    <b class="d-block">Activo</b> }
-                                else
-                                {
-                                    <b class="d-block">Inactivo</b>}
 
-                            </p>
-                        </div>
-                    </div>
-                </div>*@
 
-                @*
-                            <div class="text-muted">
-            <p class="text-sm">
-                @Html.DisplayName("Correo: ")
-                <b class="d-block">@Html.DisplayFor(model => model.Correo)</b>
-            </p>
-            <p class="text-sm">
-                @Html.DisplayName("Clave: ")
-                <b class="d-block">@Html.DisplayFor(model => model.Clave)</b>
-            </p>
-            <p class="text-sm">
-                @Html.DisplayName("Estado: ")
-                @if (Model.Estado)
-                {
-                    <b class="d-block">Activo</b> }
-                else
-                {
-                    <b class="d-block">Inactivo</b>}
 
-            </p>
-        </div>
-                *@
+
+                <div class="callout callout-warning">
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Aviso!</h5>
+                    <p>El correo electrónico que se utiliza, debe tener activado el acceso de aplicaciones menos seguras.</p>
+                    <br />
+                    <p>Para más información, <a target="_blank" href="https://support.google.com/accounts/answer/6010255?hl=es-419">Haz click aquí</a></p>
+                </div>
+
+
 
             </div>
             <div class="col-md-6">
 
             </div>
 
-            <div class="card-footer">
-                <div class="float-right">
-                    <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Edit","CorreoEmisor" , new { id = Model.Id })">
+            
+            <div style="float: right">
+                <p class="tooltip--left" data-tooltip="Editar las credenciales del correo del sistema">
+                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","CorreoEmisor" , new { id = Model.Id })">
                         <i class="fas fa-pencil-alt">
                         </i>
                         Editar
                     </a>
-                </div>
-
-
+                </p>
             </div>
+           
         </div>
         <!-- /.card-body -->
     </div>
@@ -167,6 +140,14 @@
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ trigger: 'click' });
+        });
+
+    </script>
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#menucorreo").addClass('active');
         });
 
     </script>
