@@ -59,7 +59,7 @@
 
         </div>
 
-        <div class="col-md-12 row mt-5">
+        <div class="col-md-12 row  mt-5">
             <div class="col-md-6">
 
                 <div>
@@ -84,43 +84,59 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary mb-5" id="verificarEnlace" style="float: right;">Verificar enlace</button>
-                </div>
+
+                @if (Model.Url_version == null)
+                {
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mb-5" id="verificarEnlace" style="position: absolute; right:0; bottom: 0">Verificar enlace</button>
+                    </div>
+                }
+
 
 
 
             </div>
             <div class="col-md-6">
-                @if (Model.Url_version != "")
+                @if (Model.Url_version == null)
                 {<!--Imagen de progreso -->
-                                        <div id="imgloader" style="display:none;position:absolute;top:45%;left:45%;padding:2px;">
-                                            <img height="50px" src="~/Content/dist/img/loader.gif" />
-                                        </div>
-                                                            <div id="resultado"></div>}
-                @if (Model.Url_version != null)
+                <div class="card card-outline card-info" style="height: 100%">
+                    <div class="card-body">
+                        <div id="imgloader" style="display:none;position:absolute;top:45%;left:45%;padding:2px;">
+                            <img height="50px" src="~/Content/dist/img/loader.gif" />
+                        </div>
+                        <div id="resultado"></div>
+                    </div>
+                </div>         
+                }
+                else
                 {
-
-<div class="iframe-container">
-    <iframe width="560"
-            height="315"
-            src="@Model.Url_version"
-            frameborder="0">
-        Hubo un problema al cargar el video.
-    </iframe>
-</div>
-
-                    <button type="button"
-                            class="btn btn-danger mt-2"
-                            style="float: right;"
-                            onclick="eliminar(@Model.Id)">
-                        Eliminar video <i class="fas fa-trash"></i>
-                    </button>}
+                <div class="card card-outline card-info" style="height: 100%">
+                    <div class="card-body">
+                        <div class="iframe-container">
+                            <iframe width="560"
+                                    height="315"
+                                    src="@Model.Url_version"
+                                    frameborder="0">
+                                Hubo un problema al cargar el video.
+                            </iframe>
+                        </div>
+                        <button type="button"
+                                class="btn btn-danger mt-2"
+                                style="float: right;"
+                                onclick="eliminar(@Model.Id)">
+                            Eliminar video <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div> 
+                
+                                
+                 }
 
             </div>
         </div>
     </div>
-</div>}
+</div>
+}
 
 
 

@@ -1,7 +1,7 @@
 ﻿@model Infraestructure.Models.CorreoEmisor
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Correo";
 }
 
 
@@ -31,18 +31,12 @@
     <div class="card">
         <div class="card-header">
 
-
             <div style="float: right; cursor: pointer">
-                <button class="btn"
-                        data-toggle="tooltip"
-                        data-placement="left"
-                        data-original-title="Estas credenciales se utilizarán para enviar correos a la hora de crear nuevos integrantes del sistema"
-                        aria-describedby="tooltip">
+                <button class="btn" id="btnTooltip">
                     <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
                 </button>
             </div>
 
-            <br />
 
         </div>
         <div class="card-body">
@@ -77,10 +71,12 @@
 
 
                 <div class="callout callout-warning">
-                    <h5><i class="icon fas fa-exclamation-triangle"></i> Aviso!</h5>
-                    <p>El correo electrónico que se utiliza, debe tener activado el acceso de aplicaciones menos seguras.</p>
-                    <br />
-                    <p>Para más información, <a target="_blank" href="https://support.google.com/accounts/answer/6010255?hl=es-419">Haz click aquí</a></p>
+                    <div>
+                        <h5><i class="icon fas fa-exclamation-triangle"></i> Aviso!</h5>
+                        <p>El correo electrónico que se utiliza, debe tener activado el acceso de aplicaciones menos seguras.</p>
+                        <br />
+                        <p>Para más información, <a target="_blank" href="https://support.google.com/accounts/answer/6010255?hl=es-419">Haz click aquí</a></p>
+                    </div>
                 </div>
 
 
@@ -90,7 +86,7 @@
 
             </div>
 
-            
+
             <div style="float: right">
                 <p class="tooltip--left" data-tooltip="Editar las credenciales del correo del sistema">
                     <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","CorreoEmisor" , new { id = Model.Id })">
@@ -100,7 +96,7 @@
                     </a>
                 </p>
             </div>
-           
+
         </div>
         <!-- /.card-body -->
     </div>
@@ -111,6 +107,27 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+
+
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltip', {
+            content: 'Estas credenciales se utilizarán para enviar correos a la hora de crear nuevos integrantes del sistema.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+    </script>
+
 
     <script>
 
@@ -133,13 +150,6 @@
                     'Se ha producido un error: '+message,
                     'error');
             }
-        });
-
-
-
-
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip({ trigger: 'click' });
         });
 
     </script>

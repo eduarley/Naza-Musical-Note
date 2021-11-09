@@ -10,6 +10,7 @@ namespace Infraestructure.Models
 {
     internal partial class RolServicioMetadata
     {
+        [Display(Name = "Código")]
         public int Id { get; set; }
         [Display(Name = "Propietario ID")]
         public string IdUsuario_Propietario { get; set; }
@@ -62,6 +63,8 @@ namespace Infraestructure.Models
 
     internal partial class CancionMetadata
     {
+        [Display(Name = "Código")]
+        public int Id { get; set; }
 
         [Display(Name = "Fecha creación")]
         [DataType(DataType.Date)]
@@ -100,7 +103,7 @@ namespace Infraestructure.Models
     internal partial class PuestoMetadata
     {
 
-        [Required(ErrorMessage = "{0} es requerido.")]
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "{0} es requerida.")]
@@ -167,6 +170,9 @@ namespace Infraestructure.Models
 
     public partial class CategoriaMetadata
     {
+        [Display(Name = "Código")]
+        public int Id { get; set; }
+
         [Display(Name = "Descripción")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
         public string Descripcion { get; set; }
@@ -175,6 +181,8 @@ namespace Infraestructure.Models
 
     public partial class RolMetadata
     {
+        [Display(Name = "Código")]
+        public int Id { get; set; }
         [Display(Name = "Descripción")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
         public string Descripcion { get; set; }

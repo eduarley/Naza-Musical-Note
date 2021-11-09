@@ -99,6 +99,12 @@ namespace Web
             //SweetAlert css
             bundles.Add(new StyleBundle("~/Content/sweetalert").Include(
                       "~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"));
+
+
+
+
+
+
         }
     }
 }

@@ -28,14 +28,14 @@
 </div>
 
 
-@if(UsuarioLogueado.IdRol == 1)
+@if (UsuarioLogueado.IdRol == 1)
 {
-<p class="tooltip--right" data-tooltip="Crea una nueva canción">
-    <a class="btn btn-primary" href="@Url.Action("Create", "Cancion")">
-        <i class="fa fa-plus mr-2"></i>
-        Nueva canción
-    </a>
-</p>
+    <p class="tooltip--right" data-tooltip="Crea una nueva canción">
+        <a class="btn btn-primary" href="@Url.Action("Create", "Cancion")">
+            <i class="fa fa-plus mr-2"></i>
+            Nueva canción
+        </a>
+    </p>
 }
 
 
@@ -49,6 +49,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div style="float: right; cursor: pointer">
+                            <button class="btn" id="btnTooltip">
+                                <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                            </button>
+                        </div>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -71,64 +76,65 @@
                                 @foreach (var item in Model)
                                 {
 
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Autor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tonalidad)
-                        </td>
-                        <td class="text-center">
-                            @if (item.Estado)
-                            {
-            <h5><span class="right badge badge-pill badge-success">Activo</span></h5> }
-                            else
-                            {
-            <h5><span class="right badge badge-pill badge-danger">Inactivo</span></h5>}
-                        </td>
-                        <td class="text-center ">
-                            <ul style="display:flex; list-style:none">
-                                <li>
-                                    <p class="tooltip--triangle" data-tooltip="Ver detalles de la canción">
-                                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details","Cancion", new { id = item.Id })">
-                                            <i class="fas fa-eye">
-                                            </i>
-                                        </a>
-                                    </p>
-                                    
-                                </li>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Autor)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tonalidad)
+                                        </td>
+                                        <td class="text-center">
+                                            @if (item.Estado)
+                                            {
+                                                <h5><span class="right badge badge-pill badge-success">Activo</span></h5> }
+                                            else
+                                            {
+                                                <h5><span class="right badge badge-pill badge-danger">Inactivo</span></h5>}
+                                        </td>
+                                        <td class="text-center ">
+                                            <ul style="display:flex; list-style:none">
+                                                <li>
+                                                    <p class="tooltip--triangle" data-tooltip="Ver detalles de la canción">
+                                                        <a class="btn btn-info btn-sm mr-1" href="@Url.Action("Details","Cancion", new { id = item.Id })">
+                                                            <i class="fas fa-eye">
+                                                            </i>
+                                                        </a>
+                                                    </p>
 
-                                @if (UsuarioLogueado.Rol.Id == 1)
-                                {
-                                    <li>
-                                        <p class="tooltip--triangle" data-tooltip="Editar la canción">
-                                            <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = item.Id })">
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
-                                            </a>
-                                        </p>
-                                        
-                                    </li>
-                                    <li>
-                                        <p class="tooltip--triangle" data-tooltip="Eliminar permanentemente la canción">
-                                            <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
-                                                <i class="fas fa-trash">
-                                                </i>
-                                            </a>
-                                        </p>
-                                        
-                                    </li>
+                                                </li>
+
+                                                @if (UsuarioLogueado.Rol.Id == 1)
+                                                {
+                                                    <li>
+                                                        <p class="tooltip--triangle" data-tooltip="Editar la canción">
+                                                            <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = item.Id })">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                            </a>
+                                                        </p>
+
+                                                    </li>
+                                                    <li>
+                                                        <p class="tooltip--triangle" data-tooltip="Eliminar permanentemente la canción">
+                                                            <a class="btn btn-danger btn-sm" onclick="eliminar(@item.Id)">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                            </a>
+                                                        </p>
+
+                                                    </li>
+                                                }
+
+
+
+                                            </ul>
+                                        </td>
+                                    </tr>
                                 }
-
-
-
-                            </ul>
-                        </td>
-                    </tr>}
                             </tbody>
                         </table>
 
@@ -160,6 +166,24 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/datatable")
 
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+
+
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltip', {
+            content: 'Aquí se muestran las canciones que han sido creadas. ' +
+                'Puedes crear, consultar, editar y eliminar canciones desde sus respectivos botones.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+    </script>
 
 
     <script>
@@ -207,12 +231,6 @@
 
 
 
-    <script>
-        // Habilita los tooltips
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
 
 
 

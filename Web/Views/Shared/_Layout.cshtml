@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
 
+
+    
+
     @RenderSection("styles", required: false)
     @Styles.Render("~/Content/adminlte")
     @Styles.Render("~/Content/sweetalert")
@@ -33,8 +36,19 @@
         @Html.Partial("_Footer")
     </div>
 
+
+    @section scripts{
+        <!-- Tippy JS para tooltips-->
+        <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+        <script src="https://unpkg.com/tippy.js@6"></script>
+    }
+
+
     @Scripts.Render("~/bundles/adminlte")
     @Scripts.Render("~/bundles/sweetalert")
     @RenderSection("scripts", required: false)
+
+
+
 </body>
 </html>

@@ -40,6 +40,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+
+                        <div style="float: right; cursor: pointer">
+                            <button class="btn" id="btnTooltip">
+                                <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                            </button>
+                        </div>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -138,7 +144,24 @@
     @Scripts.Render("~/bundles/datatable")
 
 
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
 
+
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltip', {
+            content: 'Estos registros se crean cada vez que se modifica o elimina un rol de servicio. ' +
+                'Puedes consultar y eliminar uno o todos los registros desde sus respectivos botones',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+    </script>
     <script>
 
         $(document).ready(function () {
