@@ -47,7 +47,7 @@
     //OnBegin = "onBeginResult",
     //OnFailure = "onFailureResult",
     LoadingElementId = "imgloader",
-    LoadingElementDuration = 2000,
+    LoadingElementDuration = 1000,
     InsertionMode = InsertionMode.Replace
 
 }, new { id = "AjaxForm" }))
@@ -55,42 +55,60 @@
 <div class="card card-default mt-3">
     <div class="card-body">
         <div class="card-header">
+            <div style="float: right; cursor: pointer">
+                <button class="btn" id="btnTooltipPrincipal" type="button">
+                    <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                </button>
+            </div>
             <h4> @Html.DisplayFor(model => model.Nombre)</h4>
-
         </div>
 
         <div class="col-md-12 row  mt-5">
             <div class="col-md-6">
 
-                <div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Url_version, htmlAttributes: new { @class = "control-label" })
-                        <p class="tooltip--right" data-tooltip="Copiar un enlace de YouTube para mostrar el video de la versión">
-                            <span style="color: Highlight" class="fas fa-info-circle"></span>
-                        </p>
-                        <div class="col-md-12">
+   
+                <div class="card card-outline card-gray elevation-3" style="height: 100%">
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Url_version, htmlAttributes: new { @class = "control-label" })
 
-                            <div class="row">
-                                @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control col-md-8" } })
+                            <div class="col-md-12">
+
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Url_version, new { htmlAttributes = new { @class = "form-control col-10" } })
+                                    <div class="">
+                                        <button class="btn" id="btnTooltipEnlace" type="button" >
+                                            <span style="color: Highlight; font-size: x-large;" class="fas fa-question-circle"></span>
+                                        </button>
+                                    </div>
+                                    <p id="error" class="text-danger"></p>
+                                </div>
+
 
 
                             </div>
-
-                            <p id="error" class="text-danger"></p>
-
+                            <div class="mt-4">
+                                <a href="https://www.youtube.com/?hl=es" target="_blank">Abrir YouTube  <i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
-                        <div class="mt-4">
-                            <a href="https://www.youtube.com/?hl=es" target="_blank">Abrir YouTube  <i class="fas fa-external-link-alt"></i></a>
+
+
+                        <div class="callout callout-warning">
+                            <div>
+                                <h5><i class="icon fas fa-exclamation-triangle"></i> Aviso!</h5>
+                                <p>Algunos videos poseen contenido de LatinAutor - UMPG, el cual no se puede reproducir desde nuesta app.</p>
+                                <p>Sin embargo, es posible reproducirlo desde la página de YouTube.</p>
+                            </div>
                         </div>
+
+                        @if (Model.Url_version == null)
+                        {
+                            <div class="form-group mt-5 float-right">
+                                <button type="submit" class="btn btn-primary mb-5" id="verificarEnlace">Verificar enlace</button>
+                            </div>                
+                        }
                     </div>
                 </div>
-
-                @if (Model.Url_version == null)
-                {
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary mb-5" id="verificarEnlace" style="position: absolute; right:0; bottom: 0">Verificar enlace</button>
-                    </div>
-                }
 
 
 
@@ -99,7 +117,7 @@
             <div class="col-md-6">
                 @if (Model.Url_version == null)
                 {<!--Imagen de progreso -->
-                <div class="card card-outline card-info" style="height: 100%">
+                <div class="card card-outline card-info elevation-3" style="height: 100%">
                     <div class="card-body">
                         <div id="imgloader" style="display:none;position:absolute;top:45%;left:45%;padding:2px;">
                             <img height="50px" src="~/Content/dist/img/loader.gif" />
@@ -110,7 +128,7 @@
                 }
                 else
                 {
-                <div class="card card-outline card-info" style="height: 100%">
+                <div class="card card-outline card-info elevation-3" style="height: 100%">
                     <div class="card-body">
                         <div class="iframe-container">
                             <iframe width="560"
@@ -145,6 +163,45 @@
 
     @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+
+
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltipPrincipal', {
+            content: 'Aquí puedes buscar un enlace de YouTube para vincularlo con la canción actual y así indicar la versión.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+
+        tippy('#btnTooltipEnlace', {
+            content: 'Debes abrir YouTube, seleccionar el video que desees, presionar compartir y copiar el link del video. ' +
+            'Para saber cómo copiar un enlace en YouTube, <a target="_blank" href="https://support.voxfeed.com/hc/es-419/articles/115009030468-C%C3%B3mo-copiar-el-link-de-tu-publicaci%C3%B3n-en-Youtube"><strong>haz click aquí.<strong/></a>',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+            interactive: true,
+            allowHTML: true,
+        });
+    </script>
+
+
+
+
+
+
+
+
+
 
     <script>
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
