@@ -318,7 +318,8 @@
     <script src="~/Content/plugins/bs-stepper/js/bs-stepper.min.js"></script>
     <!-- SweetAlert2 -->
     <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
-
+    <!-- JQuery UI TOUCH-->
+    <script src="~/Content/dist/js/jquery.ui.touch.js"></script>
 
 
 
@@ -591,10 +592,14 @@
 
         //OBTIENE LOS EVENTOS
         $(document).ready(function () {
+
+
+
             var events = [];
             var selectedEvent = null;
             FetchEventAndRenderCalendar();
             function FetchEventAndRenderCalendar() {
+
                 events = [];
                 $.ajax({
                     type: "GET",
@@ -625,6 +630,8 @@
                 })
             }
 
+
+            
 
             //PARA GENERAR EL CALENDARIO
             function GenerateCalender(events) {
@@ -667,7 +674,7 @@
                         else
                             $description.append($('<p/>').html('<b>Descripción: </b> Sin descripción' + '<br/>'));
                         $description.append($('<p/>').html('<b>Canciones:   </b>' + calEvent.canciones.map(function (data) { return data.Nombre }) + '<br/>'));
-                        $description.append('<a class="badge badge-info"'+
+                        $description.append('<a class="badge badge-info"' +
                             ' href=' + "../RolServicio/Details/" + calEvent.eventID + '>Más detalles</a>');
                         $('#myModal #pDetails').empty().html($description);
 
@@ -695,6 +702,10 @@
 
 
             }
+
+
+            //CON EL JQUERY.UI.TOUCH PARA PERMITIR EL TOUCH EN EL CALENDARIO
+            $('#calender').addTouch();
 
 
             $('#btnEdit').click(function () {

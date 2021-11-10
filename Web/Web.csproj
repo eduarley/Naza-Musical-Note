@@ -240,6 +240,7 @@
     <Content Include="Content\dist\js\adminlte.min.js" />
     <Content Include="Content\dist\js\cambio\script.js" />
     <Content Include="Content\dist\js\demo.js" />
+    <Content Include="Content\dist\js\jquery.ui.touch.js" />
     <Content Include="Content\dist\js\login\script.js" />
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
