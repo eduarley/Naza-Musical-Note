@@ -278,7 +278,7 @@ namespace Web.Controllers
                     usuario = Session["User"] as Usuario;
                     rs.IdUsuario_Propietario = usuario.Id;
                 }
-                rs.Fecha_creacion = DateTime.Now;
+                //rs.Fecha_creacion = DateTime.Now;
                 rs.Color = "green";
                 rs.Estado = true;
                 rs.IsFullDay = false;

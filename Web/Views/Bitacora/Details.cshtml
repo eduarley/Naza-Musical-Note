@@ -42,9 +42,9 @@
                                 <div class="info-box-content">
 
                                     <center>
-                                        <h4>Reciente</h4>
+                                        <h4>Actual</h4>
                                         <h5>Fecha de modificación</h5>
-                                        <h6>@rolServicio.Fecha_creacion</h6>
+                                        <h6>@Model.Fecha_modificacion</h6>
                                     </center>
                                     <div id="infoActual" class="text-muted">
                                         <p class="text-sm d-block">
@@ -75,10 +75,15 @@
                                             }
 
                                         </p>
+
+
                                         <p class="text-sm d-block">
-                                            @Html.DisplayName("Propietario"):
-                                            <b>@rolServicio.Usuario.NombreCompleto</b>
+                                            @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
+                                            <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
                                         </p>
+
+
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -184,11 +189,21 @@
                                         }
 
                                     </p>
-        
-                                    <p class="text-sm d-block">
-                                        @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
-                                        <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
-                                    </p>
+                                    @if (rolServicio != null)
+                                    {
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Propietario"):
+                                            <b>@rolServicio.Usuario.NombreCompleto</b>
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-sm d-block">
+                                            @Html.DisplayName("Cédula propietario"):
+                                            <b>@Model.IdUsuario_Propietario</b>
+                                        </p>
+                                    }
+
                                 </div>
 
 
@@ -272,7 +287,7 @@
                         <div class="info-box-content">
                             <center>
                                 <h5>Fecha de borrado</h5>
-                                <h6>@Model.Fecha_creacion</h6>
+                                <h6>@Model.Fecha_modificacion</h6>
                             </center>
                             <div class="row">
                                 <div class="text-muted col-md-4">
@@ -305,8 +320,12 @@
 
                                     </p>
                                     <p class="text-sm d-block">
-                                        @Html.DisplayNameFor(model => model.NombreUsuarioModifica):
+                                            @Html.DisplayName("Responsable"):
                                         <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
+                                    </p>
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayNameFor(model => model.Fecha_creacion):
+                                        <b>@Html.DisplayFor(model => model.Fecha_creacion)</b>
                                     </p>
                                 </div>
                                 <div class="col-md-4">

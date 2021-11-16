@@ -94,7 +94,7 @@ namespace Infraestructure.Repository
                             v.IsFullDay = rs.IsFullDay;
                             v.Color = rs.Color;
                            
-                            v.Fecha_creacion = rs.Fecha_creacion;
+                            //v.Fecha_creacion = rs.Fecha_creacion;
                             v.Estado = rs.Estado;
                             v.Cancion = rs.Cancion;
                             
@@ -102,6 +102,7 @@ namespace Infraestructure.Repository
 
                         rs.Usuario = v.Usuario;
                         rs.IdUsuario_Propietario = v.IdUsuario_Propietario;
+                        rs.Fecha_creacion = v.Fecha_creacion;
                         //Para al actualizar, no choquen las PK
                         ctx.Database.ExecuteSqlCommand("delete from usuario_rolservicio where IdRolServicio = " + rs.Id);
 
@@ -125,7 +126,7 @@ namespace Infraestructure.Repository
                             item.Puesto = null;
                             item.Usuario = null;
                         }
-
+                        rs.Fecha_creacion = DateTime.Now;
                         ctx.RolServicio.Add(rs);
                     }
 
