@@ -189,20 +189,12 @@
                                         }
 
                                     </p>
-                                    @if (rolServicio != null)
-                                    {
-                                        <p class="text-sm d-block">
-                                            @Html.DisplayName("Propietario"):
-                                            <b>@rolServicio.Usuario.NombreCompleto</b>
-                                        </p>
-                                    }
-                                    else
-                                    {
-                                        <p class="text-sm d-block">
-                                            @Html.DisplayName("Cédula propietario"):
-                                            <b>@Model.IdUsuario_Propietario</b>
-                                        </p>
-                                    }
+
+                                    <p class="text-sm d-block">
+                                        @Html.DisplayName("Propietario"):
+                                        <b>@Model.Nombre_Usuario_Propietario</b>
+                                    </p>
+
 
                                 </div>
 
@@ -264,10 +256,10 @@
                     </div>
                 </div>
                 <!--
-                        <div class="card-footer">
-        <button style="float:right" class="btn btn-primary">Restablecer a versión antigua</button>
-    </div>
-    -->
+                                    <div class="card-footer">
+                    <button style="float:right" class="btn btn-primary">Restablecer a versión antigua</button>
+                </div>
+                -->
 
             </div>
             <!-- /.card-body -->
@@ -320,7 +312,7 @@
 
                                     </p>
                                     <p class="text-sm d-block">
-                                            @Html.DisplayName("Responsable"):
+                                        @Html.DisplayName("Responsable"):
                                         <b>@Html.DisplayFor(model => model.NombreUsuarioModifica)</b>
                                     </p>
                                     <p class="text-sm d-block">
@@ -385,7 +377,12 @@
                 </div>
 
                 <div class="card-footer">
-                    <button style="float:right" class="btn btn-primary">Recuperar</button>
+                    
+                        @*<button style="float:right" class="btn btn-primary" onclick="recuperar(@Model.IdBitacora)">Recuperar</button>*@
+                   
+
+
+
                 </div>
             </div>
             <!-- /.card-body -->
@@ -399,17 +396,44 @@
 @section Scripts{
 
     <script>
-
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
         $(document).ready(function () {
+            $("#menubitacora").addClass('active');
 
-            //$('#infoAnterior  p').each(function () {
-            //$(this).addClass("text-danger");
-            //});
-
-            //$('#infoAnterior  p b').addClass('text-danger');
-
-        })
+        });
 
     </script>
 
+
+    <script>
+        function recuperar(idBitacora) {
+            Swal.fire({
+                title: '¿Deseas volver a crear este rol de servicio?',
+                text: "¡Esta bitácora será eliminada!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, ¡restáuralo!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Bitacora/Recuperar',
+                        data: { 'idBitacora': idBitacora },
+                        success: function (data) {
+
+                            window.location.href = '@Url.Action("Index","Bitacora")'
+                        },
+                        error: function (xhr, status, error) {
+                            window.location.href = '@Url.Action("Index","Bitacora")'
+                        }
+                    })
+
+
+                }
+            })
+        }
+    </script>
 }

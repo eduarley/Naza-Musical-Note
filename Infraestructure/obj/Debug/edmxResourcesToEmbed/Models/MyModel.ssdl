@@ -16,6 +16,7 @@
     <Property Name="IdBitacora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdRolServicio" Type="int" Nullable="false" />
     <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Nombre_Usuario_Propietario" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="200" />
     <Property Name="FechaInicio" Type="datetime" Nullable="false" />

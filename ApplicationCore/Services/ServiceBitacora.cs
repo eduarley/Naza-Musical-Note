@@ -32,6 +32,9 @@ namespace ApplicationCore.Services
             return repositoryBitacora.GetBitacora_RolServicios();
         }
 
-        
+        public bool Recuperar(int idBitacora)
+        {
+            return repositoryBitacora.Recuperar(idBitacora);
+        }
     }
 }

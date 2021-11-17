@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="22a3e25602e04249889ead11b341d5f9" Name="Diagram1" ZoomLevel="14">
-        <EntityTypeShape EntityType="NazaDBModel.Bitacora_Cancion_RolServicio" Width="1.5" PointX="10" PointY="6.125" />
-        <EntityTypeShape EntityType="NazaDBModel.Bitacora_RolServicio" Width="1.5" PointX="7.75" PointY="6.375" />
+        <EntityTypeShape EntityType="NazaDBModel.Bitacora_Cancion_RolServicio" Width="1.5" PointX="10" PointY="9.125" />
+        <EntityTypeShape EntityType="NazaDBModel.Bitacora_RolServicio" Width="1.5" PointX="7.75" PointY="6.25" />
         <EntityTypeShape EntityType="NazaDBModel.Bitacora_Sesion" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="NazaDBModel.Bitacora_Usuario_RolServicio" Width="1.5" PointX="10" PointY="8.625" />
+        <EntityTypeShape EntityType="NazaDBModel.Bitacora_Usuario_RolServicio" Width="1.5" PointX="10" PointY="6.125" />
         <EntityTypeShape EntityType="NazaDBModel.Cancion" Width="1.5" PointX="3" PointY="6.75" />
         <EntityTypeShape EntityType="NazaDBModel.Categoria" Width="1.5" PointX="3" PointY="11.125" />
         <EntityTypeShape EntityType="NazaDBModel.CorreoEmisor" Width="1.5" PointX="11.75" PointY="0.75" />

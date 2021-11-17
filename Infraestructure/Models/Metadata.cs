@@ -193,8 +193,8 @@ namespace Infraestructure.Models
     public partial class Bitacora_RolservicioMetadata
     {
 
-        [Display(Name = "Propietario ID")]
-        public string IdUsuario_Propietario { get; set; }
+        //[Display(Name = "Propietario ID")]
+        //public string IdUsuario_Propietario { get; set; }
 
 
         [Display(Name = "Título")]

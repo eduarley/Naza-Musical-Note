@@ -51,9 +51,6 @@ namespace Infraestructure.Models
 
         public bool Estado { get; set; }
 
-
-
-
         public String HoraInicioSt
         {
             get { return FechaInicio.ToString("hh:mm tt"); }
@@ -66,11 +63,6 @@ namespace Infraestructure.Models
         {
             get { return FechaInicio.ToString("dd/MM/yyyy"); }
         }
-
-
-
-
-
 
         public virtual Usuario Usuario { get; set; }
 

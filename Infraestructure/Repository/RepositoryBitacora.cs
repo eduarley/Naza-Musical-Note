@@ -87,6 +87,7 @@ namespace Infraestructure.Repository
                     bitacora.FechaFin = rs.FechaFin;
                     bitacora.Color = rs.Color;
                     bitacora.IdUsuario_Propietario = rs.IdUsuario_Propietario;
+                    bitacora.Nombre_Usuario_Propietario = rs.Usuario.NombreCompleto;
                     bitacora.IsFullDay = rs.IsFullDay;
                     bitacora.Fecha_creacion = rs.Fecha_creacion;
                     bitacora.Estado = rs.Estado;
@@ -229,6 +230,100 @@ namespace Infraestructure.Repository
                 throw new Exception(mensaje);
             }
 
+            return estado;
+        }
+
+        public bool Recuperar(int idBitacora)
+        {
+            bool estado = false;
+            IRepositoryBitacora repositoryBitacora = new RepositoryBitacora();
+            IRepositoryRolServicio repositoryRolServicio = new RepositoryRolServicio();
+            IRepositoryCancion repositoryCancion = new RepositoryCancion();
+            IRepositoryUsuario repositoryUsuario = new RepositoryUsuario();
+            IRepositoryPuesto repositoryPuesto = new RepositoryPuesto();
+            
+
+            try
+            {
+
+                Bitacora_RolServicio bitacora = repositoryBitacora.GetBitacora_RolServicioById(idBitacora);
+                
+                if(bitacora != null)
+                {
+                    RolServicio rs = repositoryRolServicio.GetRolServicioPorID(bitacora.IdRolServicio);
+                    if(rs == null) //Si no existe RS, crearlo
+                    {
+                        rs = new RolServicio();
+
+                        List<Cancion> canciones = new List<Cancion>();
+                        List<Usuario_RolServicio> puestos = new List<Usuario_RolServicio>();
+
+                        foreach (var item in bitacora.Bitacora_Cancion_RolServicio)
+                        {
+                            var c = repositoryCancion.GetCancionByID(item.IdCancion);
+                            if (c != null)
+                                canciones.Add(c);
+                        }
+
+                        foreach (var item in bitacora.Bitacora_Usuario_RolServicio)
+                        {
+                            var u = repositoryUsuario.GetUsuarioByID(item.IdUsuario);
+                            var p = repositoryPuesto.GetPuestoById(item.IdPuesto);
+
+                            if (u != null && p != null)
+                            {
+                                Usuario_RolServicio usuario_RolServicio = new Usuario_RolServicio()
+                                {
+                                    IdPuesto = p.Id,
+                                    //Puesto = p,
+                                    IdUsuario = u.Id,
+                                    //Usuario = u,
+                                    Estado = true,
+                                    RolServicio = rs,
+                                    IdRolServicio = rs.Id
+                                };
+                                puestos.Add(usuario_RolServicio);
+                            }
+
+                        }
+
+                        //rs.Id =
+                        //rs.Usuario = repositoryUsuario.GetUsuarioByID(bitacora.IdUsuario_Propietario);
+                        rs.IdUsuario_Propietario = bitacora.IdUsuario_Propietario;
+                        rs.Color = bitacora.Color;
+                        rs.Descripcion = bitacora.Descripcion;
+                        rs.Estado = bitacora.Estado;
+                        rs.FechaFin = bitacora.FechaFin;
+                        rs.FechaInicio = bitacora.FechaInicio;
+                        rs.Fecha_creacion = bitacora.Fecha_creacion;
+                        rs.Titulo = bitacora.Titulo;
+                        rs.IsFullDay = bitacora.IsFullDay;
+                        rs.Cancion = canciones;
+                        rs.Usuario_RolServicio = puestos;
+
+                        using(MyContext ctx = new MyContext())
+                        {
+                            ctx.RolServicio.Add(rs);
+                            //AQUI SE DUPLICAN LAS CANCIONES
+                            ctx.Database.ExecuteSqlCommand("delete from Bitacora_Usuario_RolServicio where IdBitacora = " + bitacora.IdBitacora);
+                            ctx.Database.ExecuteSqlCommand("delete from Bitacora_Cancion_RolServicio where IdBitacora = " + bitacora.IdBitacora);
+                            ctx.Database.ExecuteSqlCommand("delete from Bitacora_RolServicio where IdBitacora = " + bitacora.IdBitacora);
+                            if (ctx.SaveChanges() >= 0)
+                                estado = true;
+                        }
+
+                    }
+                   
+                }
+
+                
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
             return estado;
         }
     }

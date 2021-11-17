@@ -14,5 +14,6 @@ namespace ApplicationCore.Services
         Bitacora_RolServicio GetBitacora_RolServicioById(int id);
         bool DeleteBitacora_RolServicioById(int id);
         bool DeleteAllBitacora_RolServicio();
+        bool Recuperar(int idBitacora);
     }
 }

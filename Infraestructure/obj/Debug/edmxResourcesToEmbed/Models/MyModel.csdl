@@ -68,6 +68,7 @@
     <Property Name="IdBitacora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdRolServicio" Type="Int32" Nullable="false" />
     <Property Name="IdUsuario_Propietario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre_Usuario_Propietario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />

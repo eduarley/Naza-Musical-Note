@@ -15,5 +15,6 @@ namespace Infraestructure.Repository
         bool DeleteBitacora_RolServicioById(int id);
         bool DeleteAllBitacora_RolServicio();
         //Bitacora_RolServicio RecuperarBitacora_RolServicio(Bitacora_RolServicio bitacora);
+        bool Recuperar(int idBitacora);
     }
 }

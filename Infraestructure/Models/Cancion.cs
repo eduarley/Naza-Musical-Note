@@ -18,39 +18,39 @@ namespace Infraestructure.Models
 
     [MetadataType(typeof(CancionMetadata))]
     public partial class Cancion
-{
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Cancion()
     {
 
-        this.RolServicio = new HashSet<RolServicio>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cancion()
+        {
+
+            this.RolServicio = new HashSet<RolServicio>();
+
+        }
+
+
+        public int Id { get; set; }
+
+        public string Nombre { get; set; }
+
+        public string Autor { get; set; }
+
+        public string Genero { get; set; }
+
+        public string Url_version { get; set; }
+
+        public string Tonalidad { get; set; }
+
+        public System.DateTime Fecha_creacion { get; set; }
+
+        public bool Estado { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        public virtual ICollection<RolServicio> RolServicio { get; set; }
 
     }
-
-
-    public int Id { get; set; }
-
-    public string Nombre { get; set; }
-
-    public string Autor { get; set; }
-
-    public string Genero { get; set; }
-
-    public string Url_version { get; set; }
-
-    public string Tonalidad { get; set; }
-
-    public System.DateTime Fecha_creacion { get; set; }
-
-    public bool Estado { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<RolServicio> RolServicio { get; set; }
-
-}
 
 }

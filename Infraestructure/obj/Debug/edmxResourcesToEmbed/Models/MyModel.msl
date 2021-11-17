@@ -25,6 +25,7 @@
           <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Nombre_Usuario_Propietario" ColumnName="Nombre_Usuario_Propietario" />
           <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
           <ScalarProperty Name="IdRolServicio" ColumnName="IdRolServicio" />
           <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />

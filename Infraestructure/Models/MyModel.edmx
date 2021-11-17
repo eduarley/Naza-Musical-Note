@@ -21,6 +21,7 @@
           <Property Name="IdBitacora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRolServicio" Type="int" Nullable="false" />
           <Property Name="IdUsuario_Propietario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nombre_Usuario_Propietario" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="200" />
           <Property Name="FechaInicio" Type="datetime" Nullable="false" />
@@ -410,6 +411,7 @@
           <Property Name="IdBitacora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdRolServicio" Type="Int32" Nullable="false" />
           <Property Name="IdUsuario_Propietario" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Usuario_Propietario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
@@ -690,6 +692,7 @@
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Nombre_Usuario_Propietario" ColumnName="Nombre_Usuario_Propietario" />
                 <ScalarProperty Name="IdUsuario_Propietario" ColumnName="IdUsuario_Propietario" />
                 <ScalarProperty Name="IdRolServicio" ColumnName="IdRolServicio" />
                 <ScalarProperty Name="IdBitacora" ColumnName="IdBitacora" />

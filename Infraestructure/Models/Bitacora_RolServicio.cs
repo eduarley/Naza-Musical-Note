@@ -37,6 +37,8 @@ namespace Infraestructure.Models
 
         public string IdUsuario_Propietario { get; set; }
 
+        public string Nombre_Usuario_Propietario { get; set; }
+
         public string Titulo { get; set; }
 
         public string Descripcion { get; set; }
