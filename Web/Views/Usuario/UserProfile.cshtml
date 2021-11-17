@@ -5,7 +5,7 @@
 @{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"];
     var correoUsuario = UsuarioLogueado.Correo;
 
-    }
+}
 
 
 
@@ -83,11 +83,11 @@
 
 
                         @*
-                   <img src="data:image/jpeg;charset=utf-8;base64,
-                @Convert.ToBase64String(Model.Foto)"
-                    id="ImagenUsuario"
-                    class="profile-user-img img-fluid img-circle"
-                    style="height: 200px; width:200px" />
+                               <img src="data:image/jpeg;charset=utf-8;base64,
+                            @Convert.ToBase64String(Model.Foto)"
+                                id="ImagenUsuario"
+                                class="profile-user-img img-fluid img-circle"
+                                style="height: 200px; width:200px" />
                         *@
 
 
@@ -131,7 +131,7 @@
                         }
                     </li>
                     <li class="list-group-item" id="mail">
-                        <b>@Html.DisplayNameFor(model => model.Correo)</b><a class="float-right" mailto="@correoUsuario">@correoUsuario</a> 
+                        <b>@Html.DisplayNameFor(model => model.Correo)</b><a class="float-right" mailto="@correoUsuario">@correoUsuario</a>
                     </li>
                     <li class="list-group-item">
                         <b>@Html.DisplayNameFor(model => model.Fecha_creacion)</b> <a class="float-right">@Html.DisplayFor(model => model.Fecha_creacion)</a>
@@ -144,15 +144,26 @@
         <!-- /.card -->
         <!-- /.card -->
     </div>
+
+
+
+
     <!-- /.col -->
     <div class="col-md-9">
         <div class="card card-green card-outline">
             <div class="card-header p-2">
+                <div style="float: right; cursor: pointer">
+                    <button class="btn" id="btnTooltip">
+                        <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                    </button>
+                </div>
                 <a class="nav-link" href="#">Editar</a>
+
             </div><!-- /.card-header -->
             <div class="card-body">
+
                 <div>
-                    @using (Html.BeginForm("UpdateUSerProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("UpdateUserProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="card-body p-3 col-md-12">
@@ -176,7 +187,7 @@
                                     @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                        <p id="errorNombre" class="text-danger"></p>
                                     </div>
                                 </div>
 
@@ -184,7 +195,7 @@
                                     @Html.LabelFor(model => model.Apellido_paterno, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Apellido_paterno, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Apellido_paterno, "", new { @class = "text-danger" })
+                                        <p id="errorApellido1" class="text-danger"></p>
                                     </div>
                                 </div>
 
@@ -192,7 +203,7 @@
                                     @Html.LabelFor(model => model.Apellido_materno, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Apellido_materno, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Apellido_materno, "", new { @class = "text-danger" })
+
                                     </div>
                                 </div>
 
@@ -202,7 +213,7 @@
                                     @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                        <p id="errorTelefono" class="text-danger"></p>
                                     </div>
                                 </div>
 
@@ -210,7 +221,7 @@
                                     @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                                        <p id="errorCorreo" class="text-danger"></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -220,13 +231,13 @@
                                     </div>
                                 </div>
                                 <p class="tooltip--triangle" data-tooltip="Editar la contraseña con la que inicias sesión">
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Cambiar Clave</button>
+                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal"><i class="fas fa-lock"></i> Cambiar Clave</button>
                                 </p>
 
                             </div>
                         </div>
                         <div class="modal-footer justify-content-end">
-                            <button type="submit" class="btn btn-success">Guardar</button>
+                            <button id="btnGuardar" type="button" class="btn btn-success">Guardar</button>
                         </div>
 
                     }
@@ -246,7 +257,13 @@
         <div class="modal-content">
 
             <div class="modal-header">
+
                 <h4 class="modal-title">Editar clave</h4>
+                <div style="float: right; cursor: pointer">
+                    <button class="btn" id="btnTooltipClave">
+                        <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                    </button>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -267,13 +284,7 @@
                         <p class="text-danger" id="errorConfirmPass"></p>
                     </div>
                 </div>
-                <ul>
-                    <li>Entre 9 y 25 caracteres.</li>
-                    <li>Al menos una mayúscula.</li>
-                    <li>Al menos una minúscula.</li>
-                    <li>Al menos un caracter especial.</li>
-                    <li>Al menos un número.</li>
-                </ul>
+               
             </div>
             <div class="modal-footer justify-content-end">
 
@@ -294,12 +305,42 @@
 
 
 @section scripts {
+
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltip', {
+            content: 'Aquí puedes editar directamente tu información personal',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+        tippy('#btnTooltipClave', {
+            content:    '<ul>'+
+                        '<li>Entre 9 y 25 caracteres.</li>' +
+                        '<li>Al menos una mayúscula.</li>'+
+                        '<li>Al menos una minúscula.</li>'+
+                        '<li>Al menos un caracter especial.</li>'+
+                        '<li>Al menos un número.</li>'+
+                        '</ul>',
+
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+            interactive: true,
+            allowHTML: true,
+        });
+    </script>
+
     <script>
 
         $(document).ready(function () {
-            function etiqueta() {
-                $('#mail a').addClass('float-right');
-            }
+
 
         // Recibe los parámetros del Controller
         var option = '@TempData["Action"]'
@@ -337,7 +378,7 @@
     <script>
 
 
-      
+
 
         $("#pass").on("keyup paste", function () {
             limpiarErrores();
@@ -412,13 +453,75 @@
         }
 
 
+
+        function validarCampos() {
+            limpiarErrores();
+
+            var nombre = $('#Nombre');
+            var apellido1 = $('#Apellido_paterno');
+            var telefono = $('#Telefono');
+            var correo = $('#Correo');
+
+
+            if (nombre.val().trim() == "") {
+                $('#errorNombre').text('El campo nombre no puede estar vacío');
+                nombre.focus();
+                return;
+            }
+            if (apellido1.val().trim() == "") {
+                $('#errorApellido1').text('El campo primer apellido no puede estar vacío');
+                apellido1.focus();
+                return;
+            }
+            if (correo.val().trim() == "") {
+                $('#errorCorreo').text('El campo correo no puede estar vacío');
+                correo.focus();
+                return;
+            }
+
+            if (telefono.val().trim() != '') {
+                let telefonoRegEx = new RegExp('^[0-9]{8,8}$');
+                debugger;
+                if (!telefonoRegEx.test(telefono.val().trim())) {
+                    $('#errorTelefono').text('El campo teléfono solo debe incluir 8 números sin espacios ni guiones');
+                    telefono.focus();
+                    return;
+                }
+            }
+
+            let correoRegEx = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+            if (!correoRegEx.test(correo.val().trim())) {
+                $('#errorCorreo').text('El campo correo no posee un formato correcto');
+                correo.focus();
+                return;
+            }
+
+            //Hacer submit si pasa las validaciones
+            $('#form').submit();
+
+
+        }
+
+
+
+
+
         function limpiarErrores() {
             $('#errorPass').text('');
             $('#errorConfirmPass').text('');
+            $('#errorNombre').text('');
+            $('#errorApellido1').text('');
+            $('#errorTelefono').text('');
+            $('#errorCorreo').text('');
             //$('#errorPass').removeClass('is-invalid');
             //$('#errorConfirmPass').removeClass('is-invalid');
         }
 
+
+
+        $('#btnGuardar').click(function () {
+            validarCampos();
+        });
 
 
         $('#btnCambiarClave').click(function () {
@@ -447,7 +550,22 @@
     </script>
 
 
+    <script>
+        function actualizarPerfil(data) {
+            $.ajax({
+                type: "POST",
+                url: '/Usuario/UpdateUserProfile',
 
+                data: data,
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    location.reload();
+                }
+            })
+        }
+    </script>
 
     <script>
         function CambiarClave(data) {
@@ -498,7 +616,7 @@
                 }
             })
         }
-        
+
     </script>
 }
 
