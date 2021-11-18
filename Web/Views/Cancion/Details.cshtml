@@ -52,21 +52,25 @@
 
                     @if (ViewBag.UrlFormat != "")
                     {
-        <div class="iframe-container">
-            <iframe width="560"
-                    height="315"
-                    src="@ViewBag.UrlFormat"
-                    frameborder="0">
-                Hubo un problema al cargar el video.
-            </iframe>
-            <p>Video de la versión.</p>
-        </div> }
-    else
-    {
-<span class="right badge badge-warning">No se ha ingresado un enlace para la versión.</span>
-                <br />
+                <div class="iframe-container">
+                    <iframe width="560"
+                            height="315"
+                            src="@ViewBag.UrlFormat"
+                            frameborder="0">
+                        Hubo un problema al cargar el video.
+                    </iframe>
+                    <p>Video de la versión.</p>
+                </div> }
+            else
+            {
+                <span class="right badge badge-warning">No se ha ingresado un enlace para la versión.</span>
                                 <br />
-                                                <a href="@Url.Action("Gestion","GestionCancion", Model)">Agregar versión <i class="fas fa-external-link-alt ml-3"></i></a>}
+                                                <br /> if (UsuarioLogueado.IdRol == 1)
+                                                                {
+                                                                    <a href="@Url.Action("Gestion","GestionCancion", Model)">Agregar versión <i class="fas fa-external-link-alt ml-3"></i></a>
+                                                                }
+
+                                                            }
 
 
 
@@ -105,20 +109,18 @@
 
                 </div>
             </div>
-                @if (UsuarioLogueado.IdRol == 1)
-                {
-    <div class="float-right">
-        <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = Model.Id })">
-            <i class="fas fa-pencil-alt">
-            </i>
-            Editar
-        </a>
-    </div>
-    
-    }
+            @if (UsuarioLogueado.IdRol == 1)
+            {
+<div class="float-right">
+    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Cancion", new { id = Model.Id })">
+        <i class="fas fa-pencil-alt">
+        </i>
+        Editar
+    </a>
+</div>}
 
 
-        
+
         </div>
         <!-- /.card-body -->
     </div>

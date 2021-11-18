@@ -4,7 +4,18 @@
     ViewBag.Title = "Correo";
 }
 
-
+<style>
+    body .input-eye-icon {
+        float: right;
+        margin-right: 0.6rem;
+        margin-top: -1.7rem;
+        position: relative;
+        z-index: 2;
+    }
+    body .input-eye-icon:hover{
+        cursor:pointer;
+    }
+</style>
 
 
 <!-- Content Header (Page header) -->
@@ -45,9 +56,9 @@
             <div class="col-md-12">
 
 
-                <div class="row" style="padding-left: 10%; padding-right: 10%">
+                <div class="" >
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group row">
                             @*<strong class="text-danger">*</strong>*@
                             @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-12">
@@ -56,11 +67,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group row">
                             @*<strong class="text-danger">*</strong>*@
                             @Html.LabelFor(model => model.Clave, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-12">
                                 @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                                <small><i id="eyePass" class="far fa-eye input-eye-icon"></i></small>
                             </div>
                         </div>
                     </div>
@@ -129,10 +141,28 @@
     </script>
 
 
+
+    <script>
+        //Ver contrasena Clave
+        $("#eyePass").click(function () {
+            var password = document.getElementById("Clave");
+            if (password.type === "password") {
+                password.type = "text";
+                $("#eyePass").toggleClass("fa-eye fa-eye-slash");
+            } else {
+                password.type = "password";
+                $("#eyePass").toggleClass("fa-eye-slash fa-eye");
+            }
+        });
+    </script>
+
     <script>
 
         $(document).ready(function () {
 
+            //ocultar clave al abrir
+            var password = document.getElementById("Clave");
+            password.type = "password";
 
                 // Recibe los parámetros del Controller
                 var option = '@TempData["Action"]'

@@ -93,6 +93,7 @@ namespace Infraestructure.Models
         public string Correo { get; set; }
 
         [Display(Name = "Contraseña")]
+        //[DataType(DataType.Password)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
         public string Clave { get; set; }
 
