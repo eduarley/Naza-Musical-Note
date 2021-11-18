@@ -215,6 +215,8 @@
     <Content Include="Content\dist\css\changecomplet\changecompletstyle.css" />
     <Content Include="Content\dist\css\login\Login.css" />
     <Content Include="Content\dist\css\login\loginstyle.css" />
+    <Content Include="Content\dist\css\PasswordValidatorMeter.css" />
+    <Content Include="Content\dist\js\PasswordValidatorMeter.js" />
     <Content Include="Content\dist\css\recupera2\Recovery.css" />
     <Content Include="Content\dist\css\recupera2\recuperastyle.css" />
     <Content Include="Content\dist\css\tooltip.css" />

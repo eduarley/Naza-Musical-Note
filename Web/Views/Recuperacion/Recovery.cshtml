@@ -43,7 +43,7 @@
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.token)
                     <div class="input-group mb-3">
-                        @Html.PasswordFor(model => model.NewClave, new { @class = "form-control", placeholder = "Contraseña" })
+                        @Html.PasswordFor(model => model.NewClave, new { @class = "form-control", placeholder = "Contraseña", @autocomplete= "new-password" })
 
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -105,7 +105,7 @@
         })
 
         $(document).ready(function () {
-            $('#NewClave').val('');
+            
             $("#botonAceptar").attr('disabled', 'disabled');
             //$("#botonAceptar").addClass('btn-primary-disabled');
             $("#botonAceptar").addClass('acceptBtnDisabled');

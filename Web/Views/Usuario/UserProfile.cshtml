@@ -6,7 +6,7 @@
     var correoUsuario = UsuarioLogueado.Correo;
 
 }
-
+<link rel="stylesheet" href="~/Content/dist/css/PasswordValidatorMeter.css" />
 
 
 
@@ -253,38 +253,94 @@
 <!-- /.row -->
 <!--MODAL CAMBIO CLAVE-->
 <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div class="modal-header">
 
-                <h4 class="modal-title">Editar clave</h4>
-                <div style="float: right; cursor: pointer">
-                    <button class="btn" id="btnTooltipClave">
-                        <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
-                    </button>
-                </div>
+                <h4 class="modal-title">Cambio de contraseña</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group row">
-                    <label class="col-sm-2 control-label col-md-2">Clave</label>
-                    <div class="col-md-10">
+                @*
+                        <div class="form-group row">
+                        <label class="col-sm-2 control-label col-md-2">Clave</label>
+                        <div class="col-md-10">
 
-                        <input id="pass" type="password" class="form-control" />
-                        <p class="text-danger" id="errorPass"></p>
+                            <input id="pass" type="password" class="form-control" />
+                            <p class="text-danger" id="errorPass"></p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label col-md-2">Confirmar</label>
+                        <div class="col-md-10">
+                            <input id="confirmPass" type="password" class="form-control" />
+                            <p class="text-danger" id="errorConfirmPass"></p>
+                        </div>
+                    </div>
+                *@
+
+
+
+
+                <div class="col-md-12 row">
+                    <div class="col-md-6 mt-5">
+
+
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input class="form-control"
+                                   id="password"
+                                   name="password"
+                                   required="required"
+                                   autocomplete="new-password"
+                                   type="password"
+                                   pattern="(?=.*[!#$&])(?=.*[a-z])(?=.*[A-Z]).{6,12}"
+                                   title="La contraseña debe contener al menos uno de los siguientes caracteres !,/,$,#,&,*,
+                                          un número, una letra mayúscula, una minúscula y debe tener entre 9 y 25 caracteres." 
+                                   />
+                            <small><i id="eyePass" class="far fa-eye input-eye-icon"></i></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar contraseña</label>
+                            <input class="form-control"
+                                   id="confirmPassword"
+                                   name="confirmPassword"
+                                   required="required"
+                                   type="password"
+                                   pattern="(?=.*[!#$&])(?=.*[a-z])(?=.*[A-Z]).{6,12}"
+                                   title="Ambas contraseñas deben coincidir." />
+                            <small><i id="eyeConfirm" class="far fa-eye input-eye-icon"></i></small>
+                            <p id="errorConfirm" class="text-danger"></p>
+                        </div>
+
+                        <div id="meter-strength">
+                            <meter value="0" min="0" max="100" id="password-meter"></meter>
+                            <p id="password-pecentage"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="message">
+                            <h4>Debe contener:</h4>
+                            <ul class="list-unstyled">
+                                <li><p id="letter" class="invalid">Una <b>letra minúscula</b></p></li>
+                                <li><p id="capital" class="invalid">Una <b>letra maýuscula</b></p></li>
+                                <li><p id="number" class="invalid">Un <b>número</b></p></li>
+                                <li><p id="character" class="invalid">Un <b>caracter especial</b></p></li>
+                                <li><p id="min-length" class="invalid length">Mínimo <b>9 caracteres</b></p></li>
+                                <li><p id="max-length" class="invalid length">Máximo <b>25 caracteres</b></p></li>
+                            </ul>
+                                
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 control-label col-md-2">Confirmar</label>
-                    <div class="col-md-10">
-                        <input id="confirmPass" type="password" class="form-control" />
-                        <p class="text-danger" id="errorConfirmPass"></p>
-                    </div>
-                </div>
-               
+
+
+
+
             </div>
             <div class="modal-footer justify-content-end">
 
@@ -311,30 +367,22 @@
     <script src="https://unpkg.com/tippy.js@6"></script>
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
 
+
+
+    <script src="~/Content/dist/js/PasswordValidatorMeter.js"></script>
+
+
+
     <script>
         // With the above scripts loaded, you can call `tippy()` with a CSS
         // selector and a `content` prop:
         tippy('#btnTooltip', {
-            content: 'Aquí puedes editar directamente tu información personal',
+            content: 'Aquí puedes editar directamente tu información personal.',
             arrow: true,
             animation: 'scale',
             trigger: 'click',
         });
-        tippy('#btnTooltipClave', {
-            content:    '<ul>'+
-                        '<li>Entre 9 y 25 caracteres.</li>' +
-                        '<li>Al menos una mayúscula.</li>'+
-                        '<li>Al menos una minúscula.</li>'+
-                        '<li>Al menos un caracter especial.</li>'+
-                        '<li>Al menos un número.</li>'+
-                        '</ul>',
-
-            arrow: true,
-            animation: 'scale',
-            trigger: 'click',
-            interactive: true,
-            allowHTML: true,
-        });
+        
     </script>
 
     <script>
@@ -370,7 +418,7 @@
 
 
         $('#myModal').on('shown.bs.modal', function () {
-            $('#pass').val('');
+           // $('#password').val('');
         })
     </script>
 
@@ -378,83 +426,7 @@
     <script>
 
 
-
-
-        $("#pass").on("keyup paste", function () {
-            limpiarErrores();
-            validarClave();
-        });
-        $("#confirmPass").on("keyup paste", function () {
-            limpiarErrores();
-            validarClave();
-        });
-
-
-
-        function validarClave() {
-
-            let hasNumber = new RegExp('[0-9]+');
-            let hasUpperChar = new RegExp('[A-Z]+');
-            let hasMiniMaxChars = new RegExp('.{9,25}');
-            let hasLowerChar = new RegExp('[a-z]+');
-            let hasSymbols = /(?=.*[!#$%&'()*+,-./:;<=>?[\]^_{|}~]).{1,}$/;
-
-            var pswd = $('#pass').val();
-            var cpswd = $('#confirmPass').val();
-
-
-            if (pswd.trim() == "") {
-                $('#errorPass').text('El campo clave no puede estar en blanco.');
-                //$('#pass').addClass('is-invalid');
-                $('#pass').focus();
-                return;
-            }
-
-            if (!hasMiniMaxChars.test(pswd)) {
-                $('#errorPass').text('La clave debe ser entre 9 y 25 caracteres.');
-                //$('#pass').addClass('is-invalid');
-                $('#pass').focus();
-                return;
-            }
-
-            if (!hasNumber.test(pswd)) {
-                $('#errorPass').text('La clave debe contener al menos un número.');
-                //$('#pass').addClass('is-invalid');
-                $('#pass').focus();
-                return;
-            }
-
-            if (!hasUpperChar.test(pswd)) {
-                $('#errorPass').text('La clave debe contener al menos una letra mayúscula.');
-                //$('#pass').addClass('is-invalid');
-                $('#pass').focus();
-                return;
-            }
-
-            if (!hasLowerChar.test(pswd)) {
-                $('#errorPass').text('La clave debe contener al menos una letra minúscula.');
-                //$('#pass').addClass('is-invalid');
-                $('#pass').focus();
-                return;
-            }
-            if (!hasSymbols.test(pswd)) {
-                $('#errorPass').text('La clave debe contener al menos un caracter especial.');
-                //$('#pass').addClass('is-invalid');
-                $('#pass').focus();
-                return;
-            }
-
-            if (pswd.trim() != cpswd.trim()) {
-                $('#errorConfirmPass').text('Ambos campos no coinciden.');
-                //$('#confirmPass').addClass('is-invalid');
-                $('#confirmPass').focus();
-                return;
-            }
-        }
-
-
-
-        function validarCampos() {
+        function validarCamposYGuardar() {
             limpiarErrores();
 
             var nombre = $('#Nombre');
@@ -507,42 +479,24 @@
 
 
         function limpiarErrores() {
-            $('#errorPass').text('');
-            $('#errorConfirmPass').text('');
             $('#errorNombre').text('');
             $('#errorApellido1').text('');
             $('#errorTelefono').text('');
             $('#errorCorreo').text('');
-            //$('#errorPass').removeClass('is-invalid');
-            //$('#errorConfirmPass').removeClass('is-invalid');
         }
 
 
 
         $('#btnGuardar').click(function () {
-            validarCampos();
+            validarCamposYGuardar();
         });
 
 
         $('#btnCambiarClave').click(function () {
-            var pswd = $('#pass').val();
-            var cpswd = $('#confirmPass').val();
-            if (pswd.trim() == "") {
-                $('#errorPass').text('El campo clave no puede estar en blanco.');
-                $('#pass').focus();
-                return;
-            }
-            if (pswd.trim() != cpswd.trim()) {
-                $('#errorConfirmPass').text('Ambos campos no coinciden.');
-                //$('#confirmPass').addClass('is-invalid');
-                $('#confirmPass').focus();
-                return;
-            }
-
             var data = {
                 id: '@UsuarioLogueado.Id',
-                pass: $('#pass').val().trim(),
-                confirmPass: $('#confirmPass').val().trim(),
+                pass: $('#password').val().trim(),
+                confirmPass: $('#confirmPassword').val().trim(),
             }
             CambiarClave(data);
         });
