@@ -2274,7 +2274,6 @@
     <Content Include="Views\Reporte\ReporteUsuariosIngresados.cshtml" />
     <Content Include="Views\Reporte\ReporteServicios.cshtml" />
     <Content Include="Views\Login\Prueba.cshtml" />
-    <Content Include="Views\Recuperacion\Prueba.cshtml" />
     <Content Include="Views\GestionCancion\_PartialVideo.cshtml" />
     <Content Include="Views\Bitacora\Index.cshtml" />
     <Content Include="Views\Bitacora\Details.cshtml" />

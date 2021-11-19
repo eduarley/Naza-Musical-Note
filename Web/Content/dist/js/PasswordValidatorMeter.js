@@ -66,7 +66,7 @@ userInput.onkeyup = function () {
   }
 
   // Validate special characters
-  const specialCharacters = /[!@#$&*/]/g;
+    const specialCharacters = /[!#$%&'()*+,-./:;<=>?[\]^_{|}~]/g;
   if (userInput.value.match(specialCharacters)) {
     character.classList.remove("invalid");
     character.classList.add("valid");
