@@ -11,5 +11,6 @@ namespace Infraestructure.Repository
     {
         List<Usuario> GetUsuariosIngresadosByFechas(DateTime fechaInicio, DateTime fechaFin);
         List<Usuario_RolServicio> GetServiciosByUsuario(string id);
+        int GetTotalRegistrosSesiones();
     }
 }

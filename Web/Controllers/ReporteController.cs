@@ -23,7 +23,25 @@ namespace Web.Controllers
         // GET: Reporte
         public ActionResult ReporteSesion()
         {
-            return View();
+            try
+            {
+                IServiceReporte serviceReporte = new ServiceReporte();
+                ViewBag.Total = serviceReporte.GetTotalRegistrosSesiones();
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                ViewBag.Message = TempData["Message"];
+                @TempData["Action"] = "E";
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+            
         }
 
         public ActionResult DescargarReporteSesion()

@@ -35,7 +35,7 @@
 <div class="modal fade" id="myModalSave">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-
+            
             <div class="modal-body">
                 <div class="bs-stepper">
                     <div class="bs-stepper-header modal-header" style="border-bottom:hidden;" role="tablist">
@@ -68,6 +68,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+
                     </div>
                     <form id="formularioSave" class="bs-stepper-content">
                         <!-- your steps content here -->
@@ -83,6 +84,7 @@
                                             <div class="col-md-6">
                                                 <input type="hidden" id="hdEventID" value="0" />
                                                 <div class="form-group">
+                                                    <strong class="text-danger">*</strong>
                                                     <label>Título</label>
                                                     <input type="text" id="txtSubject" class="form-control" name="titulo" />
                                                     <p id="errorTitulo" class="text-danger"></p>
@@ -91,6 +93,7 @@
                                             <div class="col-md-6">
                                                 <!-- Date -->
                                                 <div class="form-group">
+                                                    <strong class="text-danger">*</strong>
                                                     <label>Fecha:</label>
                                                     <div class="input-group date" id="fecha" data-target-input="nearest">
                                                         <input type="text" class="form-control datetimepicker-input" data-target="#fecha" id="txtStart" />
@@ -111,8 +114,8 @@
                                             <!-- HORA INICIO -->
                                             <div class="bootstrap-timepicker col-md-6">
                                                 <div class="form-group">
+                                                    <strong class="text-danger">*</strong>
                                                     <label>Hora inicio:</label>
-
                                                     <div class="input-group date" data-target-input="nearest">
                                                         <input type="text" class="form-control datetimepicker-input" data-target="#horainicio" id="horainicio" />
                                                         <div class="input-group-append" data-target="#horainicio" data-toggle="datetimepicker">
@@ -127,8 +130,8 @@
                                             <!-- HORA FIN -->
                                             <div class="bootstrap-timepicker col-md-6">
                                                 <div class="form-group">
+                                                    <strong class="text-danger">*</strong>
                                                     <label>Hora fin:</label>
-
                                                     <div class="input-group date" data-target-input="nearest">
                                                         <input type="text" class="form-control datetimepicker-input" data-target="#horafin" id="horafin" />
                                                         <div class="input-group-append" data-target="#horafin" data-toggle="datetimepicker">
@@ -148,6 +151,7 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
+                                        <strong class="text-danger">*</strong>
                                         <label>Canciones</label>
 
                                         @if (ViewBag.Canciones != null)
@@ -254,6 +258,7 @@
                         </div>
                     </form>
                 </div>
+                <p class="text-danger">* Campos requeridos</p>
             </div>
 
         </div>

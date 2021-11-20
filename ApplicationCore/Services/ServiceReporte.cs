@@ -28,6 +28,11 @@ namespace ApplicationCore.Services
 
         }
 
+        public int GetTotalRegistrosSesiones()
+        {
+            return repository.GetTotalRegistrosSesiones();
+        }
+
         public List<Usuario> GetUsuariosIngresadosByFechas(DateTime fechaInicio, DateTime fechaFin)
         {
             return repository.GetUsuariosIngresadosByFechas(fechaInicio, fechaFin);
