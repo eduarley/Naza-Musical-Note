@@ -30,9 +30,6 @@
     <center>
         <div class="card card-default mt-3 col-md-8">
             <div class="card-body p-3 col-md-12">
-                <div class="card-header text-danger text-left border-bottom-0">
-                    <p>* Campos requeridos</p>
-                </div>
                 <div>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
@@ -55,7 +52,7 @@
                                     @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                  
+
                             @if (Model.Categoria.Estado)
                             {
                                 <div class="form-group">
@@ -69,10 +66,14 @@
                             {
                                 <span class="right badge-pill badge-warning">La categoría de este puesto está desactivada.</span>
                             }
-                            <div style="float:right">
-                                <button type="submit" class="btn btn-success">Guardar</button>
-                            </div>
+                            
                         </div>
+                    </div>
+                </div>
+                <div class="card-footer text-danger text-left border-bottom-0">
+                    <p>* Campos requeridos</p>
+                    <div style="float:right">
+                        <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
             </div>

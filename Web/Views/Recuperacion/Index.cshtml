@@ -2,7 +2,7 @@
 
 @{ Layout = null; }
 
-@{ ViewBag.Title = "Inicio de sesión"; }
+@{ ViewBag.Title = "Recuperación de contraseña"; }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,8 +40,8 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="input-group mb-3">
-                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula" } )
-                        
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula", maxlength = 12 })
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="input-group mb-3">
                         @Html.TextBoxFor(model => model.Correo, new { @class = "form-control", placeholder = "Correo" })
-                        
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>

@@ -121,7 +121,7 @@ namespace Infraestructure.Models
         //FORMATO A CEDULA, 9 DIGITOS, UNICAMENTE DIGITOS
         [Display(Name = "Cédula")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
-        [RegularExpression(@"[0-9]{9,12}", ErrorMessage = "Debe contener mínimo 9 y máximo 12 dígitos. Ejemplo: 101110111")]
+        [RegularExpression(@"[0-9]{9,12}", ErrorMessage = "Debe contener mínimo 9 y máximo 12 dígitos numéricos sin guiones. Ejemplo: 101110111")]
         public string Id { get; set; }
 
 
@@ -143,15 +143,16 @@ namespace Infraestructure.Models
         [DataType(DataType.Password)]
         public string Clave { get; set; }
 
-        [Display(Name = "Teléfono")]
         //[DataType(DataType.PhoneNumber, ErrorMessage = "El {0} no tiene un formato válido.")]
+        [Display(Name = "Teléfono")]
+        [RegularExpression(@"^[0-9]{8,8}$", ErrorMessage = "El campo teléfono solo debe incluir 8 números sin espacios ni guiones")]
         public string Telefono { get; set; }
 
-
+        //[DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene un formato válido.")]
+        //[EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
         [Display(Name = "Correo electrónico")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene un formato válido.")]
-        [EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
+        [RegularExpression(@"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", ErrorMessage = "Formato de correo inválido")]
         public string Correo { get; set; }
 
 

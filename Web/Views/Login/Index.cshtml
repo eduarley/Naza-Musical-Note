@@ -41,29 +41,30 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="input-group mb-3">
-                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula" } )
-                        
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula", maxlength= 12})
+
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+
                         <div class="input-group mb-3">
                             @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña" })
+                        @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña", id= "campoClave" })
 
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span id="ojoMostrar" class="far fa-eye" onclick="mostrarOcularCaracteres()"></span>
                             </div>
                         </div>
                         <div class="input-group mb-3">
                             @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
                         </div>
-                        
+
                     </div>
                     <div class="row">
 
@@ -97,22 +98,36 @@
 
     <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
 
+    <script type="text/javascript">
+        function mostrarOcularCaracteres() {
+            var password = document.getElementById("campoClave");
+            if (password.type === "password") {
+                password.type = "text";
+                $("#ojoMostrar").toggleClass("fa-eye fa-eye-slash");
+            } else {
+                password.type = "password";
+                $("#ojoMostrar").toggleClass("fa-eye-slash fa-eye");
+            }
+        }
+    </script>
+
     <script>
 
+        $(document).ready(function () {
 
-    $(document).ready(function () {
+            var option = '@TempData["Action"]'
 
-        var option = '@TempData["Action"]'
+            if (option == 'I') {
+                if (option == 'I') {
+                    //alert("Hola")
+                    Swal.fire("Disculpe", "¡Datos incorrectos!", "error");
+                }
 
-        if (option == 'I') {
-            //alert("Hola")
-            Swal.fire("Disculpe", "¡Datos incorrectos!", "error");
+                if (option == 'E') {
+                    Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "error");
+                }
             }
-
-        if (option == 'E') {
-            Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "error");
-            }
-    });
+        });
     </script>
 
 

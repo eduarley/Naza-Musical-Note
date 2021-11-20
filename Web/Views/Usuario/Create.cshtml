@@ -25,9 +25,7 @@
 {
 @Html.AntiForgeryToken()
 <div class="card card-default mt-3">
-    <div class="card-header text-danger border-bottom-0">
-        <p>* Campos requeridos</p>
-    </div>
+
     <div class="card-body p-3 col-md-12">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Clave, new { Value = "P@ssw0rd*" })
@@ -48,19 +46,21 @@
                 <div class="form-group">
                     <strong class="text-danger">*</strong>
                     @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                    </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                    <p id="errorNombre" class="text-danger"></p>
+                </div>
                 </div>
 
                 <div class="form-group">
                     <strong class="text-danger">*</strong>
                     @Html.LabelFor(model => model.Apellido_paterno, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Apellido_paterno, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Apellido_paterno, "", new { @class = "text-danger" })
-                    </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Apellido_paterno, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Apellido_paterno, "", new { @class = "text-danger" })
+                    <p id="errorApellido1" class="text-danger"></p>
+                </div>
                 </div>
 
                 <div class="form-group">
@@ -76,16 +76,18 @@
                 <div class="form-group">
                     <strong class="text-danger">*</strong>
                     @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
-                    </div>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control", id="campoCorreo" } })
+                    @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                    <p id="errorCorreo" class="text-danger"></p>
+                </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label" })
                     <div class="col-md-8">
                         @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                        <p id="errorTelefono" class="text-danger"></p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -99,11 +101,16 @@
 
             </div>
         </div>
+        
+    </div>
+    <div class="card-footer text-danger border-bottom-0">
+        <p>* Campos requeridos</p>
         <div style="float:right">
-            <button type="submit" class="btn btn-success">Guardar</button>
+            @*<button id="btnGuardar" type="submit" class="btn btn-success">Guardar</button>*@
+            <button id="btnGuardar" class="btn btn-success">Guardar</button>
         </div>
     </div>
-    
+
 </div>
  }
 
@@ -114,7 +121,20 @@
         $(document).ready(function () {
             $("#menuusuarios").addClass('active');
         });
+
+        
+
     </script>
+
+    @*<script type="text/javascript">
+        $("#campoCorreo").keyup(function () {
+            var correo = $("#campoCorreo").val();
+            
+            correo.replace(" ", "")
+            //correo.split(" ").join(""); 
+            $("#campoCorreo").val(correo);
+        });
+    </script>*@
 
 
     <script>
