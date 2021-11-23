@@ -436,17 +436,17 @@
 
 
             if (nombre.val().trim() == "") {
-                $('#errorNombre').text('El campo nombre no puede estar vacío');
+                $('#errorNombre').text('El campo nombre no puede estar vacío.');
                 nombre.focus();
                 return;
             }
             if (apellido1.val().trim() == "") {
-                $('#errorApellido1').text('El campo primer apellido no puede estar vacío');
+                $('#errorApellido1').text('El campo primer apellido no puede estar vacío.');
                 apellido1.focus();
                 return;
             }
             if (correo.val().trim() == "") {
-                $('#errorCorreo').text('El campo correo no puede estar vacío');
+                $('#errorCorreo').text('El campo correo no puede estar vacío.');
                 correo.focus();
                 return;
             }
@@ -455,7 +455,7 @@
                 let telefonoRegEx = new RegExp('^[0-9]{8,8}$');
                 debugger;
                 if (!telefonoRegEx.test(telefono.val().trim())) {
-                    $('#errorTelefono').text('El campo teléfono solo debe incluir 8 números sin espacios ni guiones');
+                    $('#errorTelefono').text('El campo teléfono solo debe incluir 8 números sin espacios ni guiones.');
                     telefono.focus();
                     return;
                 }
@@ -463,7 +463,7 @@
 
             let correoRegEx = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
             if (!correoRegEx.test(correo.val().trim())) {
-                $('#errorCorreo').text('El campo correo no posee un formato correcto');
+                $('#errorCorreo').text('El campo correo no posee un formato correcto.');
                 correo.focus();
                 return;
             }

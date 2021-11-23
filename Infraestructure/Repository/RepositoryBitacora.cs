@@ -74,10 +74,17 @@ namespace Infraestructure.Repository
             int retorno = 0;
             try
             {
+
+
                 RolServicio rs = repositoryRolServicio.GetRolServicioPorID(idBitacora);
 
                 if(rs != null)
                 {
+                    //si no hay cambios, no guarde la bitacora
+                    //if (!IsDifferent(rs))
+                        //return null;
+
+
                     bitacora = new Bitacora_RolServicio();
                     bitacora = new Bitacora_RolServicio();
                     bitacora.IdRolServicio = rs.Id;
@@ -325,6 +332,31 @@ namespace Infraestructure.Repository
                 throw new Exception(mensaje);
             }
             return estado;
+        }
+
+        private bool IsDifferent(RolServicio rs)
+        {
+            var status = false;
+            try
+            {
+                IRepositoryRolServicio repositoryRolServicio = new RepositoryRolServicio();
+
+                RolServicio rsDataBase = repositoryRolServicio.GetRolServicioPorID(rs.Id);
+                if(rsDataBase.Equals(rs))
+                {
+                    if (rsDataBase != rs)
+                        status = true;
+                }
+                    
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+                
+            }
+            return status;
         }
     }
 }

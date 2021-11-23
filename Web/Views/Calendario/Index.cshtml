@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Calendario";
     List<Infraestructure.Models.Categoria> categorias = ViewBag.CategoriasPuestos;
-
+    Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"];
 
     List<Infraestructure.Models.Puesto> puestos = ViewBag.Puestos;
 }
@@ -25,6 +25,11 @@
 <!--CALENDARIO-->
 <div class="card card-default mt-3">
     <div class="card-body p-3">
+        <div style="float: right; cursor: pointer">
+            <button class="btn" id="btnTooltip">
+                <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+            </button>
+        </div>
         <div id="calender"></div>
     </div>
 </div>
@@ -35,7 +40,7 @@
 <div class="modal fade" id="myModalSave">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            
+
             <div class="modal-body">
                 <div class="bs-stepper">
                     <div class="bs-stepper-header modal-header" style="border-bottom:hidden;" role="tablist">
@@ -285,13 +290,16 @@
 
             </div>
             <div class="modal-footer justify-content-end">
+                @if (UsuarioLogueado.IdRol == 1)
+                {
+                    <button id="btnDelete" class="btn btn-danger btn-sm ">
+                        <span class="glyphicon glyphicon-remove"></span> Eliminar
+                    </button>
+                    <button id="btnEdit" class="btn btn-primary btn-sm " style="margin-right:5px;">
+                        <span class="glyphicon glyphicon-pencil"></span> Editar
+                    </button>
+                }
 
-                <button id="btnDelete" class="btn btn-danger btn-sm ">
-                    <span class="glyphicon glyphicon-remove"></span> Eliminar
-                </button>
-                <button id="btnEdit" class="btn btn-primary btn-sm " style="margin-right:5px;">
-                    <span class="glyphicon glyphicon-pencil"></span> Editar
-                </button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -328,7 +336,25 @@
 
 
 
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
 
+
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltip', {
+            content: 'Aquí puedes visualizar los servicios previamente creados. '+
+                'Además puedes crear uno nuevo presionando click en el día indicado. '+
+                'Si estás en un dispositivo móvil, deberás dejar presionado el día para que muestre el formulario.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+    </script>
 
     <script>
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
@@ -536,7 +562,7 @@
 
             stepper.next(); //MUESTRA EL SIGUIENTE TAB
             $('#nav-puestos li:first a').click(); //AQUI MUESTRA LOS PUESTOS DE LA PRIMERA CATEGORIA
-            $('#nav-puestos li a').each(function () { //PARA QUE NO HAYAN 2 'LI' ACTIVOS
+            $('#nav-puestos li a').each(function () { //PARA QUE UsuarioLogueadoLIdRolRologueadoLogueadoLogueadoarioLogueadoUsuarioLogueadoarioLogueadoarioLogueadoarioLogueadosuarioLogueadoHAYAN 2 'LI' ACTIVOS
                 $(this).removeClass("active");
             });
 
@@ -636,7 +662,7 @@
             }
 
 
-            
+
 
             //PARA GENERAR EL CALENDARIO
             function GenerateCalender(events) {
@@ -749,50 +775,56 @@
 
 
             function openAddEditForm() {
-                //debugger;
-                if (selectedEvent != null) {
-                    $('#hdEventID').val(selectedEvent.eventID);
-                    $('#txtSubject').val(selectedEvent.title);
-                    $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY'));
-                    $('#txtDescription').val(selectedEvent.description);
-                    $('#canciones').val(null).trigger('change'); //limpiar al abrir
-                    $('#horainicio').val(selectedEvent.start.format('hh:mm A'));
-                    $('#horafin').val(selectedEvent.end.format('hh:mm A'));
+                var idRol = '@UsuarioLogueado.IdRol';
 
-                    $('.tab-content li > select').each(function (i, item) { //Limpiar los dropdown al abrir
-                        $(this).val('');
-                    });
+                //valida que sea rol lider
+                if (idRol == 1) {
+                    if (selectedEvent != null) {
+                        $('#hdEventID').val(selectedEvent.eventID);
+                        $('#txtSubject').val(selectedEvent.title);
+                        $('#txtStart').val(selectedEvent.start.format('DD/MM/YYYY'));
+                        $('#txtDescription').val(selectedEvent.description);
+                        $('#canciones').val(null).trigger('change'); //limpiar al abrir
+                        $('#horainicio').val(selectedEvent.start.format('hh:mm A'));
+                        $('#horafin').val(selectedEvent.end.format('hh:mm A'));
 
-                    stepper.previous();
-
-                    //cargar las canciones del evento
-                    $("#canciones").each(function () {
-                        $('#canciones').val($.map(selectedEvent.canciones, function (data) {
-                            return data.Id;
-                        })).trigger("change");
-
-                    });
-
-
-
-
-
-                    //cargar los puestos seleccionados del puesto
-                    for (x of selectedEvent.usuario_rolServicio) {
-                        $('.tab-content li > select').each(function (i, item) {
-                            //IMPORTANTE AGREGAR UN ATRIBUTO PUESTO AL SELECT CON RAZOR
-                            if ($(this).attr('puesto') == x.IdPuesto) {
-                                $(this).val(x.IdUsuario);
-                            }
+                        $('.tab-content li > select').each(function (i, item) { //Limpiar los dropdown al abrir
+                            $(this).val('');
                         });
+
+                        stepper.previous();
+
+                        //cargar las canciones del evento
+                        $("#canciones").each(function () {
+                            $('#canciones').val($.map(selectedEvent.canciones, function (data) {
+                                return data.Id;
+                            })).trigger("change");
+
+                        });
+
+
+
+
+
+                        //cargar los puestos seleccionados del puesto
+                        for (x of selectedEvent.usuario_rolServicio) {
+                            $('.tab-content li > select').each(function (i, item) {
+                                //IMPORTANTE AGREGAR UN ATRIBUTO PUESTO AL SELECT CON RAZOR
+                                if ($(this).attr('puesto') == x.IdPuesto) {
+                                    $(this).val(x.IdUsuario);
+                                }
+                            });
+                        }
+
+
                     }
 
 
+                    $('#myModal').modal('hide');
+                    $('#myModalSave').modal();
                 }
 
 
-                $('#myModal').modal('hide');
-                $('#myModalSave').modal();
             }
 
 

@@ -70,11 +70,21 @@ namespace Infraestructure.Models
         [DataType(DataType.Date)]
         public System.DateTime Fecha_creacion { get; set; }
 
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
         public string Nombre { get; set; }
 
+
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
+        public string Autor { get; set; }
+
+
         [Display(Name = "Género")]
+        [StringLength(15, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         public string Genero { get; set; }
+
+        [StringLength(15, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
+        public string Tonalidad { get; set; }
 
         [Display(Name = "Enlace para la versión")]
         //[RegularExpression(@"https:\/\/youtu.be[^' '\n\r]+", ErrorMessage = "Formato no permitido. Ejemplo de formato: https://youtu.be/......")]
@@ -111,6 +121,7 @@ namespace Infraestructure.Models
         [Display(Name = "Categoría")]
         public int IdCategoria { get; set; }
 
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
@@ -121,11 +132,12 @@ namespace Infraestructure.Models
         //FORMATO A CEDULA, 9 DIGITOS, UNICAMENTE DIGITOS
         [Display(Name = "Cédula")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
-        [RegularExpression(@"[0-9]{9,12}", ErrorMessage = "Debe contener mínimo 9 y máximo 12 dígitos numéricos sin guiones. Ejemplo: 101110111")]
+        [RegularExpression(@"[0-9]{9,12}", ErrorMessage = "Debe contener mínimo 9 y máximo 12 dígitos numéricos sin guiones. Ejemplo: 101110111.")]
         public string Id { get; set; }
 
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         public string Nombre { get; }
 
         [Display(Name = "Rol")]
@@ -134,9 +146,11 @@ namespace Infraestructure.Models
 
         [Display(Name = "Primer apellido")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         public string Apellido_paterno { get; set; }
 
         [Display(Name = "Segundo apellido")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         public string Apellido_materno { get; set; }
 
         //[PasswordValidation]
@@ -145,13 +159,14 @@ namespace Infraestructure.Models
 
         //[DataType(DataType.PhoneNumber, ErrorMessage = "El {0} no tiene un formato válido.")]
         [Display(Name = "Teléfono")]
-        [RegularExpression(@"^[0-9]{8,8}$", ErrorMessage = "El campo teléfono solo debe incluir 8 números sin espacios ni guiones")]
+        [RegularExpression(@"^[0-9]{8,8}$", ErrorMessage = "El campo teléfono solo debe incluir 8 números sin espacios ni guiones.")]
         public string Telefono { get; set; }
 
         //[DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene un formato válido.")]
         //[EmailAddress(ErrorMessage = "El correo no tiene un formato válido.")]
         [Display(Name = "Correo electrónico")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerido.")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         [RegularExpression(@"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", ErrorMessage = "Formato de correo inválido")]
         public string Correo { get; set; }
 
@@ -176,6 +191,7 @@ namespace Infraestructure.Models
         public int Id { get; set; }
 
         [Display(Name = "Descripción")]
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} debe ser menor a {1} caracteres.")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es requerida.")]
         public string Descripcion { get; set; }
     }
@@ -200,7 +216,7 @@ namespace Infraestructure.Models
 
 
         [Display(Name = "Título")]
-        [StringLength(200, MinimumLength = 0, ErrorMessage = "Título debe ser menor a 200 caracteres")]
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "Título debe ser menor a 200 caracteres.")]
         public string Titulo { get; set; }
 
 

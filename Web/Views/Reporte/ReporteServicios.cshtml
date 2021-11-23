@@ -27,13 +27,13 @@
     <center>
         <div class="card card-default mt-3 col-md-8">
             <div class="card-body p-3 col-md-12">
-                <div class="card-header text-danger text-left mb-5">
+                <div class="card-header border-bottom-0">
                     <div style="float: right; cursor: pointer">
                         <button class="btn" type="button" id="btnTooltip">
                             <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
                         </button>
                     </div>
-                    <p>* Campos requeridos</p>
+                    
                 </div>
                 <div class="row text-left">
                     <div class="col-md-12">
@@ -48,11 +48,13 @@
                         </div>
 
 
-                        <div style="float:right">
-
-                            <p class="tooltip--left" data-tooltip="Abre una nueva ventana mostrando el reporte">
-                                <input id="btnAceptar" type="submit" formtarget="_blank" value="Generar Reporte" class="btn btn-info" />
-                            </p>
+                        <div class="card-footer">
+                            <p class="text-danger">* Campos requeridos</p>
+                            <div style="float:right">
+                                <p class="tooltip--left" data-tooltip="Abre una nueva ventana mostrando el reporte">
+                                    <input id="btnAceptar" type="submit" formtarget="_blank" value="Generar Reporte" class="btn btn-info" />
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

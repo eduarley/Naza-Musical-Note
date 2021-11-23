@@ -2205,6 +2205,7 @@
     <Content Include="Content\plugins\summernote\summernote.js.map" />
     <Content Include="Content\plugins\summernote\summernote.min.js.map" />
     <Content Include="Content\plugins\toastr\toastr.js.map" />
+    <Content Include="Content\Manual\CV.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2278,7 +2279,6 @@
     <Content Include="Views\Bitacora\Details.cshtml" />
     <Content Include="Views\CorreoEmisor\Edit.cshtml" />
     <Content Include="Views\CorreoEmisor\Index.cshtml" />
-    <Content Include="Views\Usuario\Create - Copia.cshtml" />
     <Content Include="Views\Recuperacion\Index - Copia.cshtml" />
     <Content Include="Views\Recuperacion\Index.cshtml" />
   </ItemGroup>

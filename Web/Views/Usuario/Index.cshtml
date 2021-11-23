@@ -132,7 +132,7 @@
                                         @if (UsuarioLogueado.IdRol == 1)
                                         {
 
-                                            <td class="text-center ">
+                                            <td class="text-center">
                                                 @if (UsuarioLogueado.Id != item.Id)
                                                 {
                                                     <ul style="display:flex; list-style:none">
@@ -324,6 +324,9 @@
                     }
 
                 ],
+
+                //ordenar por nombre
+                "order": [[2, "asc"]],
 
                 "responsive": true, "lengthChange": false, "autoWidth": false,
 

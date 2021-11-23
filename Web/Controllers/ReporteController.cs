@@ -58,6 +58,7 @@ namespace Web.Controllers
                 rptH.Load();
                 rptH.SetDataSource(lista);
                 rptH.SetParameterValue("NombreUsuario", usuario.NombreCompleto);
+                rptH.SummaryInfo.ReportTitle = "Reporte de accesos";
                 Response.Buffer = false;
                 Response.ClearContent();
                 Response.ClearHeaders();
@@ -152,6 +153,7 @@ namespace Web.Controllers
                 rptH.SetParameterValue("NombreUsuario", usuario.NombreCompleto);
                 rptH.SetParameterValue("fechaInicio", fechaInicio);
                 rptH.SetParameterValue("fechaFin", fechaFin);
+                rptH.SummaryInfo.ReportTitle = "Reporte de usuarios ingresados";
                 Response.Buffer = false;
                 Response.ClearContent();
                 Response.ClearHeaders();
@@ -243,6 +245,7 @@ namespace Web.Controllers
                 rptH.SetParameterValue("UsuarioAConsultar", usuarioConsultar.NombreCompleto);
                 rptH.SetParameterValue("CedulaUsuarioAConsultar", usuarioConsultar.Id);
                 rptH.SetParameterValue("Apariciones", listaViewModel.Count());
+                rptH.SummaryInfo.ReportTitle = "Reporte de servicios";
                 Response.Buffer = false;
                 Response.ClearContent();
                 Response.ClearHeaders();
