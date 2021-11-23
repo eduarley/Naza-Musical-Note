@@ -11,6 +11,8 @@
 <head>
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+
 </head>
 
 <!-- Content Header (Page header) -->
@@ -87,7 +89,7 @@
                                 {
 
                                     <tr>
-                                        <td>
+                                        <td class="text-center">
                                             @if (UsuarioLogueado != null && item.Id == UsuarioLogueado.Id)
                                             {
                                                 <div class="notexport">
@@ -98,10 +100,10 @@
 
                                             @if (item.Foto != null)
                                             {
-                                                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle elevation-2" alt="User Image" style="height: 34px; width:34px"> }
+                                                <img  src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle elevation-2 image" alt="User Image" style="height: 34px; width:34px"> }
                                             else
                                             {
-                                                <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                                                <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2 image" alt="User Image">
                                             }
 
                                         </td>
@@ -204,9 +206,15 @@
 <input type="hidden" id="campoOculto" />
 
 
+
+
+
+
 @section scripts {
     @Scripts.Render("~/bundles/datatable")
 
+
+    
 
     <!-- Tippy JS para tooltips-->
     <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>

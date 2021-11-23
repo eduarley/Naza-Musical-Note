@@ -8,7 +8,7 @@
 }
 <link rel="stylesheet" href="~/Content/dist/css/PasswordValidatorMeter.css" />
 
-
+<link rel="stylesheet" href="~/Content/dist/css/img-modal.css" />
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -46,11 +46,9 @@
 
             #example .but1 a {
                 position: absolute;
-                color: white
-                /*
+                color: white;
                 top: 5px;
-                left: 5px;
-                */
+                left: 120px;
             }
 </style>
 
@@ -70,7 +68,8 @@
                         <div id="example">
                             <div class="but1">
                                 <!--Card image-->
-                                <img class="profile-user-img img-fluid img-circle"
+                                <img class="profile-user-img img-fluid img-circle image"
+                                     id="photo"
                                      src="data:image/jpeg;charset=utf-8;base64,
                                     @Convert.ToBase64String(Model.Foto)"
                                      alt="user image"
@@ -79,20 +78,6 @@
                                 <a href="#" onclick="quitarFoto()" class="badge-pill badge badge-secondary">Quitar imagen</a>
                             </div>
                         </div>
-
-
-
-                        @*
-                               <img src="data:image/jpeg;charset=utf-8;base64,
-                            @Convert.ToBase64String(Model.Foto)"
-                                id="ImagenUsuario"
-                                class="profile-user-img img-fluid img-circle"
-                                style="height: 200px; width:200px" />
-                        *@
-
-
-
-
 
                     }
                     else
@@ -251,6 +236,17 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
+
+
+
+<!-- Modal imagen -->
+<div id="imgModal" class="modal" >
+    <span class="close fas fa-times"></span>
+    <img class="modal-content" id="img01">
+    <div id="caption"><p>Imagen del usuario</p></div>
+</div>
+
+
 <!--MODAL CAMBIO CLAVE-->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
@@ -264,27 +260,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                @*
-                        <div class="form-group row">
-                        <label class="col-sm-2 control-label col-md-2">Clave</label>
-                        <div class="col-md-10">
-
-                            <input id="pass" type="password" class="form-control" />
-                            <p class="text-danger" id="errorPass"></p>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 control-label col-md-2">Confirmar</label>
-                        <div class="col-md-10">
-                            <input id="confirmPass" type="password" class="form-control" />
-                            <p class="text-danger" id="errorConfirmPass"></p>
-                        </div>
-                    </div>
-                *@
-
-
-
-
                 <div class="col-md-12 row">
                     <div class="col-md-6 mt-5">
 
@@ -299,8 +274,7 @@
                                    type="password"
                                    pattern="(?=.*[!#$&])(?=.*[a-z])(?=.*[A-Z]).{6,12}"
                                    title="La contraseña debe contener al menos uno de los siguientes caracteres !,/,$,#,&,*,
-                                          un número, una letra mayúscula, una minúscula y debe tener entre 9 y 25 caracteres." 
-                                   />
+                                          un número, una letra mayúscula, una minúscula y debe tener entre 9 y 25 caracteres." />
                             <small><i id="eyePass" class="far fa-eye input-eye-icon"></i></small>
                         </div>
 
@@ -333,7 +307,7 @@
                                 <li><p id="min-length" class="invalid length">Mínimo <b>9 caracteres</b></p></li>
                                 <li><p id="max-length" class="invalid length">Máximo <b>25 caracteres</b></p></li>
                             </ul>
-                                
+
                         </div>
                     </div>
                 </div>
@@ -360,6 +334,9 @@
 
 
 
+
+
+
 @section scripts {
 
     <!-- Tippy JS para tooltips-->
@@ -371,7 +348,7 @@
 
     <script src="~/Content/dist/js/PasswordValidatorMeter.js"></script>
 
-
+    <script src="~/Content/dist/js/img-modal.js"></script>
 
     <script>
         // With the above scripts loaded, you can call `tippy()` with a CSS
@@ -382,7 +359,7 @@
             animation: 'scale',
             trigger: 'click',
         });
-        
+
     </script>
 
     <script>
