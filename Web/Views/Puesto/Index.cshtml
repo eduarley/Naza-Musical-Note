@@ -56,9 +56,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div style="float: right; cursor: pointer">
-                            <button class="btn" id="btnTooltip">
-                                <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
-                            </button>
+                            @if (UsuarioLogueado.IdRol == 1)
+                            {
+                                <button class="btn" id="btnTooltipLider">
+                                    <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                                </button>
+                            }
+
+                            @if (UsuarioLogueado.IdRol == 2)
+                            {
+                                <button class="btn" id="btnTooltipIntegrante">
+                                    <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                                </button>
+                            }
                         </div>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -178,9 +188,17 @@
     <script>
         // With the above scripts loaded, you can call `tippy()` with a CSS
         // selector and a `content` prop:
-        tippy('#btnTooltip', {
+        tippy('#btnTooltipLider', {
             content: 'Aquí se muestran los puestos que han sido creados. ' +
                 'Puedes crear, consultar, editar y desactivar puestos desde sus respectivos botones.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+
+        tippy('#btnTooltipIntegrante', {
+            content: 'Aquí se muestran los puestos que han sido creados. ' +
+                'Puedes consultar los detalles de los puestos desde el ojo de consulta.',
             arrow: true,
             animation: 'scale',
             trigger: 'click',

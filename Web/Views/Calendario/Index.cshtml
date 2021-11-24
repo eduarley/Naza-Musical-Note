@@ -26,9 +26,20 @@
 <div class="card card-default mt-3">
     <div class="card-body p-3">
         <div style="float: right; cursor: pointer">
-            <button class="btn" id="btnTooltip">
-                <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
-            </button>
+            @if (UsuarioLogueado.IdRol == 1)
+            {
+                <button class="btn" id="btnTooltipLider">
+                    <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                </button>
+            }
+
+            @if (UsuarioLogueado.IdRol == 2)
+            {
+                <button class="btn" id="btnTooltipIntegrante">
+                    <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                </button>
+            }
+
         </div>
         <div id="calender"></div>
     </div>
@@ -346,10 +357,18 @@
     <script>
         // With the above scripts loaded, you can call `tippy()` with a CSS
         // selector and a `content` prop:
-        tippy('#btnTooltip', {
+        tippy('#btnTooltipLider', {
             content: 'Aquí puedes visualizar los servicios previamente creados. '+
                 'Además puedes crear uno nuevo presionando click en el día indicado. '+
                 'Si estás en un dispositivo móvil, deberás dejar presionado el día para que muestre el formulario.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+
+        tippy('#btnTooltipIntegrante', {
+            content: 'Aquí puedes visualizar los servicios previamente creados. ' +
+                'Si estás en un dispositivo móvil, deberás dejar presionado el día para que muestre la información referente al rol de servicio.',
             arrow: true,
             animation: 'scale',
             trigger: 'click',
