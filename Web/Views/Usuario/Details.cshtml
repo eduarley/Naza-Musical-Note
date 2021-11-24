@@ -4,14 +4,14 @@
 
 @{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
 
-<link rel="stylesheet" href="~/Content/dist/css/img-modal.css" />
+
 
 <style>
     .imagen {
         display: block;
         margin: 0 auto;
         max-width: 100%;
-        width: 80%;
+        width: 100%;
     }
 </style>
 
@@ -43,64 +43,72 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                    @if (Model.Foto != null)
-                    {
-                        <div class="col-md-8">
-                            <img class="imagen mt-3 mb-3 image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" id="photo" />
+                <div class="col-md-12 row">
+                    <div class="col-md-6">
+                        @if (Model.Foto != null)
+                        {
+                            <!--Ekko Lightbox-->
+                            <div class="col-md-8">
+                                <a href="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" data-toggle="lightbox" data-title="Imagen de perfil">
+                                    <!--Card image-->
+                                    <img class="imagen mt-3 mb-3"
+                                         src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)"
+                                         alt="user image">
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-8 text-center">
+                                <img src="https://via.placeholder.com/400/677585/FFFFFF.png?text=@Model.NombreCompleto"  class="imagen mt-3 mb-3" />
+                                <br />
+                                <span class="badge badge-secondary">Sin foto de perfil</span>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-md-6 text-justify">
+
+
+                        <div class="text-muted">
+                            <p class="text-sm">
+                                @Html.DisplayNameFor(model => model.Id)
+                                <b class="d-block">@Html.DisplayFor(model => model.Id)</b>
+                            </p>
+                            <p class="text-sm">
+                                @if (Model.Telefono != null)
+                                {
+                                    @Html.DisplayNameFor(model => model.Telefono)
+                                    <b class="d-block">@Html.DisplayFor(model => model.Telefono)</b>}
+
+                            </p>
+                            <p class="text-sm">
+                                @Html.DisplayNameFor(model => model.Correo)
+                                <b class="d-block">@Html.DisplayFor(model => model.Correo)</b>
+                            </p>
+                            <p class="text-sm">
+                                @Html.DisplayNameFor(model => model.Fecha_creacion)
+                                <b class="d-block">@Html.DisplayFor(model => model.Fecha_creacion)</b>
+                            </p>
+                            <p class="text-sm">
+                                @Html.DisplayNameFor(model => model.Estado)
+                                @if (Model.Estado)
+                                {
+                                    <b class="d-block">Activo</b>
+                                }
+                                else
+                                {
+                                    <b class="d-block">Inactivo</b>
+                                }
+                            </p>
+                            <p class="text-sm">
+                                @Html.DisplayName("Rol")
+                                <b class="d-block">@Html.DisplayFor(model => model.Rol.Descripcion)</b>
+                            </p>
                         </div>
-                    }
-                    else
-                    {
-                        <div class="text-center">
-                            <img src="~/Content/dist/img/avatar.png" id="ImagenUsuario" style="height: 150px; width: 150px; border-radius: 100px" />
-                            <br />
-                            <span class="badge badge-secondary">Sin foto de perfil</span>
-                        </div>
-                    }
-
-
-                </div>
-                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
-
-
-                    <div class="text-muted">
-                        <p class="text-sm">
-                            @Html.DisplayNameFor(model => model.Id)
-                            <b class="d-block">@Html.DisplayFor(model => model.Id)</b>
-                        </p>
-                        <p class="text-sm">
-                            @if (Model.Telefono != null)
-                            {
-                                @Html.DisplayNameFor(model => model.Telefono)
-                                <b class="d-block">@Html.DisplayFor(model => model.Telefono)</b>}
-
-                        </p>
-                        <p class="text-sm">
-                            @Html.DisplayNameFor(model => model.Correo)
-                            <b class="d-block">@Html.DisplayFor(model => model.Correo)</b>
-                        </p>
-                        <p class="text-sm">
-                            @Html.DisplayNameFor(model => model.Fecha_creacion)
-                            <b class="d-block">@Html.DisplayFor(model => model.Fecha_creacion)</b>
-                        </p>
-                        <p class="text-sm">
-                            @Html.DisplayNameFor(model => model.Estado)
-                            @if (Model.Estado)
-                            {
-                                <b class="d-block">Activo</b>
-                            }
-                            else
-                            {
-                                <b class="d-block">Inactivo</b>
-                            }
-                        </p>
-                        <p class="text-sm">
-                            @Html.DisplayName("Rol")
-                            <b class="d-block">@Html.DisplayFor(model => model.Rol.Descripcion)</b>
-                        </p>
                     </div>
                 </div>
+                
             </div>
             <div style="float:right">
 
@@ -114,12 +122,7 @@
 
         </div>
     </div>
-    <!-- Modal imagen -->
-    <div id="imgModal" class="modal">
-        <span class="close fas fa-times"></span>
-        <img class="modal-content" id="img01">
-        <div id="caption"><p>Imagen del usuario</p></div>
-    </div>
+
 
 </section>
 
@@ -129,8 +132,19 @@
 
 
 @section scripts {
-    <script src="~/Content/dist/js/img-modal.js"></script>
 
+    <!-- Ekko Lightbox para imagen al abrir -->
+    <script src="~/Content/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+        })
+    </script>
 
     <script>
         //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA

@@ -61,6 +61,10 @@ namespace Infraestructure.Models
         {
             get { return Nombre + " " + Apellido_paterno + " " + Apellido_materno; }
         }
+        public string InicialesNombre
+        {
+            get { return Nombre[0] + " " + Apellido_paterno[0]; }
+        }
 
         public virtual Rol Rol { get; set; }
 

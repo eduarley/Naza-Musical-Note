@@ -8,7 +8,6 @@
 }
 <link rel="stylesheet" href="~/Content/dist/css/PasswordValidatorMeter.css" />
 
-<link rel="stylesheet" href="~/Content/dist/css/img-modal.css" />
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -43,15 +42,8 @@
             position: relative;
             margin-bottom: 30px
         }
-
-            #example .but1 a {
-                position: absolute;
-                color: white;
-                top: 5px;
-                left: 120px;
-            }
+            
 </style>
-
 
 
 <div class="row">
@@ -67,13 +59,16 @@
 
                         <div id="example">
                             <div class="but1">
-                                <!--Card image-->
-                                <img class="profile-user-img img-fluid img-circle image"
-                                     id="photo"
-                                     src="data:image/jpeg;charset=utf-8;base64,
-                                    @Convert.ToBase64String(Model.Foto)"
-                                     alt="user image"
-                                     style="height: 200px; width:200px">
+
+                                <!--Ekko Lightbox-->
+                                <a href="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)" data-toggle="lightbox" data-title="Imagen de perfil">
+                                    <!--Card image-->
+                                    <img class="profile-user-img img-fluid img-circle image"
+                                         src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Foto)"
+                                         alt="user image"
+                                         style="height: 200px; width:200px">
+                                </a>
+                                <br />
                                 <!--/.Card image-->
                                 <a href="#" onclick="quitarFoto()" class="badge-pill badge badge-secondary">Quitar imagen</a>
                             </div>
@@ -236,17 +231,6 @@
     <!-- /.col -->
 </div>
 <!-- /.row -->
-
-
-
-<!-- Modal imagen -->
-<div id="imgModal" class="modal" >
-    <span class="close fas fa-times"></span>
-    <img class="modal-content" id="img01">
-    <div id="caption"><p>Imagen del usuario</p></div>
-</div>
-
-
 <!--MODAL CAMBIO CLAVE-->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
@@ -344,11 +328,23 @@
     <script src="https://unpkg.com/tippy.js@6"></script>
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
 
-
+    <!-- Ekko Lightbox para imagen al abrir -->
+    <script src="~/Content/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 
     <script src="~/Content/dist/js/PasswordValidatorMeter.js"></script>
 
-    <script src="~/Content/dist/js/img-modal.js"></script>
+
+
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+        })
+    </script>
 
     <script>
         // With the above scripts loaded, you can call `tippy()` with a CSS

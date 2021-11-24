@@ -111,10 +111,10 @@
 
                                             @if (item.Foto != null)
                                             {
-                                                <img  src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle elevation-2 image" alt="User Image" style="height: 34px; width:34px"> }
+                                                <img  src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Foto)" class="img-circle image" alt="User Image" style="height: 34px; width:34px"> }
                                             else
                                             {
-                                                <img src="~/Content/dist/img/avatar.png" class="img-circle elevation-2 image" alt="User Image">
+                                                <img src="https://via.placeholder.com/38/677585/FFFFFF.png?text=@item.InicialesNombre" class="img-circle image" alt="User Image">
                                             }
 
                                         </td>

@@ -213,13 +213,11 @@
     <Content Include="Content\dist\css\alt\adminlte.plugins.min.css" />
     <Content Include="Content\dist\css\cambio\cambiostyle.css" />
     <Content Include="Content\dist\css\changecomplet\changecompletstyle.css" />
-    <Content Include="Content\dist\css\img-modal.css" />
     <Content Include="Content\dist\css\login\Login.css" />
     <Content Include="Content\dist\css\login\loginstyle.css" />
     <Content Include="Content\dist\css\PasswordValidatorMeter.css" />
     <Content Include="Content\dist\img\EA.jpg" />
     <Content Include="Content\dist\img\JM.jpg" />
-    <Content Include="Content\dist\js\img-modal.js" />
     <Content Include="Content\dist\js\PasswordValidatorMeter.js" />
     <Content Include="Content\dist\css\recupera2\Recovery.css" />
     <Content Include="Content\dist\css\recupera2\recuperastyle.css" />
