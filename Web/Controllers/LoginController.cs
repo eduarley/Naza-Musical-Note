@@ -79,7 +79,7 @@ namespace Web.Controllers
                     }
                 }
 
-                return View("Index");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

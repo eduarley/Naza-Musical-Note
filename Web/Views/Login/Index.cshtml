@@ -91,7 +91,7 @@
     <!-- Bootstrap 4 -->
     <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src=".~/Content/dist/js/adminlte.min.js"></script>
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
 
 
 
@@ -114,19 +114,19 @@
     <script>
 
         $(document).ready(function () {
-
+            
             var option = '@TempData["Action"]'
 
-            if (option == 'I') {
                 if (option == 'I') {
                     //alert("Hola")
                     Swal.fire("Disculpe", "¡Datos incorrectos!", "error");
                 }
 
+                
+
                 if (option == 'E') {
-                    Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "error");
+                    Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "warning");
                 }
-            }
         });
     </script>
 
