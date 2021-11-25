@@ -1,0 +1,156 @@
+﻿<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="@Url.Action("Index","Home")" class="brand-link">
+        <img src="~/Content/dist/img/logo nazareno blanco.png" alt="logo" class="brand-image img-circle" style="opacity: .8">
+        <span class="brand-text font-weight-light"><b>NAZA </b>Musical Note</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-4">
+            <ul class="nav nav-pills nav-sidebar flex-column open" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                <li class="nav-item ">
+
+
+                    <a href="#" class="nav-link" id="mantenimientos">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Mantenimientos
+                            <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","RolServicio")" class="nav-link" id="rolServicio">
+                                <i class="far fa-calendar-plus nav-icon"></i>
+                                <p>Rol de Servicio</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Cancion")" class="nav-link" id="menucancion">
+                                <i class="fas fa-file-audio nav-icon"></i>
+                                <p>Canciones</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Puesto")" class="nav-link" id="menupuestos">
+                                <i class="fas fa-guitar nav-icon"></i>
+                                <p>Puestos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Categoria")" class="nav-link" id="menucategorias">
+                                <i class="fas fa-list-ul nav-icon"></i>
+                                <p>Categorías</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-header">PROCESOS</li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Calendario")" class="nav-link" id="menuagenda">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Gestión Agenda
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","GestionCancion")" class="nav-link" id="menuversion">
+                        <i class="nav-icon fa fa-music"></i>
+
+                        <p>
+                            Gestión Versiones
+                        </p>
+                    </a>
+                </li>
+
+
+
+                <li class="nav-header">REPORTES</li>
+                <li class="nav-item ">
+                    <a href="#" class="nav-link" id="informes">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>
+                            Lista de informes
+                            <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("ReporteSesion","Reporte")" class="nav-link pacientes" id="reportesesion">
+                                <i class="far fa-file-alt nav-icon"></i>
+                                <p>Reporte de accesos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("ReporteUsuariosIngresados","Reporte")" class="nav-link" id="reporteusuarios">
+                                <i class="far fa-file-alt nav-icon"></i>
+                                <p>Reporte de usuarios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("ReporteServicios","Reporte")" class="nav-link" id="reporteservicios">
+                                <i class="far fa-file-alt nav-icon"></i>
+                                <p>Reporte fechas de servicio</p>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+                <li class="nav-header">SEGURIDAD</li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Usuario")" class="nav-link" id="menuusuarios">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Usuarios
+                        </p>
+                    </a>
+                </li>
+                <!--
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-database"></i>
+                        <p>
+                            Base de datos
+                        </p>
+                    </a>
+                </li>
+                -->
+
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","CorreoEmisor")" class="nav-link" id="menucorreo">
+                        <i class="far fa-envelope nav-icon"></i>
+                        <p>Correo electrónico</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index","Bitacora")" class="nav-link" id="menubitacora">
+                        <i class="fas fa-clipboard-list nav-icon"></i>
+                        <p>Bitácora Rol Servicio</p>
+                    </a>
+                </li>
+
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

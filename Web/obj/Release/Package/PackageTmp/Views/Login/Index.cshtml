@@ -1,0 +1,135 @@
+﻿@model Web.Viewmodels.ViewModelLogin
+
+@{ Layout = null; }
+
+@{ ViewBag.Title = "Inicio de sesión"; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/login/Login.css" />
+</head>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="login-logo">
+                <img src="~/Content/dist/img/logo nazareno full primary.png" width="25%" height="55%" />
+                <br />
+                <b style="color:#0094ff">Naza  Musical Note</b>
+            </div>
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Ingrese sus credenciales</p>
+
+
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula", maxlength= 12})
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(model => model.Clave, new { @class = "form-control", placeholder = "Contraseña", id= "campoClave" })
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span id="ojoMostrar" class="far fa-eye" onclick="mostrarOcularCaracteres()"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="acceptBtn">Ingresar</button><!--class="btn btn-primary btn-block"-->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                }
+
+                <p class="mb-1 mt-4">
+
+                    <a href="@Url.Action("Index","Recuperacion")">¿Olvidó su contraseña?</a>
+                </p>
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src=".~/Content/dist/js/adminlte.min.js"></script>
+
+
+
+
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script type="text/javascript">
+        function mostrarOcularCaracteres() {
+            var password = document.getElementById("campoClave");
+            if (password.type === "password") {
+                password.type = "text";
+                $("#ojoMostrar").toggleClass("fa-eye fa-eye-slash");
+            } else {
+                password.type = "password";
+                $("#ojoMostrar").toggleClass("fa-eye-slash fa-eye");
+            }
+        }
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            var option = '@TempData["Action"]'
+
+            if (option == 'I') {
+                if (option == 'I') {
+                    //alert("Hola")
+                    Swal.fire("Disculpe", "¡Datos incorrectos!", "error");
+                }
+
+                if (option == 'E') {
+                    Swal.fire("Disculpe", "El usuario se encuentra inactivo en el sistema", "error");
+                }
+            }
+        });
+    </script>
+
+
+</body>
+</html>

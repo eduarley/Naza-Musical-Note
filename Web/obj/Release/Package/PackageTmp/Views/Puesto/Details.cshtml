@@ -1,0 +1,99 @@
+﻿@model Infraestructure.Models.Puesto
+
+@{
+    ViewBag.Title = "Detalles Puesto";
+}
+
+@{ Infraestructure.Models.Usuario UsuarioLogueado = (Infraestructure.Models.Usuario)Session["User"]; }
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>CONSULTAR PUESTO</h3>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Puesto")">Puestos</a></li>
+                    <li class="breadcrumb-item active">Detalles</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">@Html.DisplayNameFor(model => model.Descripcion)</h3>
+            <br />
+            <h3> @Html.DisplayFor(model => model.Descripcion)</h3>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                    <h3 class="text-primary">@Html.DisplayName("Categoría")</h3>
+                    <p>@Html.DisplayFor(model => model.Categoria.Descripcion)</p>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2 text-justify">
+
+                    <div class="text-muted">
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Id)
+                            <b class="d-block">@Html.DisplayFor(model => model.Id)</b>
+                        </p>
+                        <p class="text-sm">
+                            @Html.DisplayNameFor(model => model.Estado)
+                            @if (Model.Estado)
+                            {
+                                <b class="d-block">Activo</b> }
+                            else
+                            {
+                                <b class="d-block">Inactivo</b>}
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            @if (UsuarioLogueado.Rol.Id == 1)
+            {
+                <div class="float-right">
+                    <a class="btn btn-primary btn-sm mr-1" href="@Url.Action("Edit","Puesto", new { id = Model.Id })">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Editar
+                    </a>
+                </div>
+            }
+
+
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+
+@section scripts{
+    <script>
+
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#menupuestos").addClass('active');
+            $("#mantenimientos").addClass('active');
+        });
+
+    </script>
+}
+

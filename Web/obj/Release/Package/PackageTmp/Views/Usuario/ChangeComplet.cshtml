@@ -1,0 +1,77 @@
+﻿@*@model Web.Viewmodels.ViewModelChangePass*@
+
+@{ Layout = null; }
+
+@{ ViewBag.Title = "Cambio Completado"; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recuperación de contraseña</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/recupera2/Recovery.css" />
+
+</head>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+        @*<div class="login-logo">
+
+                <a href="#" style="color:white; text-shadow:4px 4px 3px black"><b style="color:white; text-shadow:4px 4px 3px black">Recuperación</b> de contraseña</a>
+            </div>*@
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <div class="login-logo">
+
+                    <b id="textoPrincipalCentrado" style="color:#0094ff">¡La contraseña se ha cambiado exitosamente!</b>
+                </div>
+                <p class="login-box-msg" id="textoPrincipalCentrado">Ya puedes iniciar sesión con tu nueva contraseña.</p>
+
+                <!-- /.col -->
+                <div class="col-12">
+                    <button onclick="redireccionar()" id="botonAceptar" class="acceptBtn">Iniciar sesión</button><!--acceptBtn-->
+                </div>
+                <!-- /.col -->
+            </div>
+
+
+            @*<p class="mb-1 mt-4">
+
+                    <a href="@Url.Action("Prueba","Login")">Volver</a>
+                </p>*@
+
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src=".~/Content/dist/js/adminlte.min.js"></script>
+
+
+
+    <script>
+        function redireccionar() {
+            window.location.href = "../Login/Index";
+        }
+    </script>
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+</body>
+</html>

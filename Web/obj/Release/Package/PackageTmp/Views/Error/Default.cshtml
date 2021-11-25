@@ -1,0 +1,53 @@
+﻿
+@{ ViewBag.Title = "Error"; }
+
+
+<br>
+
+
+
+
+@if (TempData["Message"] != null)
+{
+    String mensaje = "<div class=\"alert  alert-danger\" role=\"alert\">" + TempData["Message"] + " </div>";
+@Html.Raw(mensaje);
+}
+
+
+
+
+<section class="content">
+    <div class="error-page">
+        @*
+        <h2 class="headline text-danger"> 500</h2>
+        *@
+
+        <center>
+            <img height="100px" src="~/Content/dist/img/Error/computer.png" />
+        </center>
+        <div class="error-content">
+            <h3><i class="fas fa-exclamation-triangle text-danger"></i> Ups! Algo salió mal :(</h3>
+
+            <p>
+                El servidor tuvo algún problema al procesar tu solicitud.
+                Le pedimos nuestra más sinceras disculpas.
+            </p>
+            <br />
+            <br />
+
+            <a class="btn btn-secondary" onclick="goBack()">
+                <i class="fas fa-arrow-alt-circle-left">    Volver</i>
+            </a>
+
+        </div>
+        <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+</section>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

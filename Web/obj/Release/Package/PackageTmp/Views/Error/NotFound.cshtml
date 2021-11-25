@@ -1,0 +1,45 @@
+﻿@{ ViewBag.Title = "Error"; }
+
+
+
+
+
+<section class="content">
+    <div class="error-page">
+        @*
+        <h2 class="headline text-warning"> 404</h2>
+        *@
+
+        <center>
+            <img height="100px" src="~/Content/dist/img/Error/page-not-found.png" />
+        </center>
+        <div class="error-content">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Ups! No se encuentra el recurso.</h3>
+
+            <p>
+                La página que solicitas no existe o no está disponible.
+            </p>
+            <br />
+            <p>
+                Revisa el URL ingresado o ve al <a href="@Url.Action("Index","Home")">Inicio</a>.
+            </p>
+            <br />
+            <br />
+
+            <a class="btn btn-secondary" onclick="goBack()">
+                <i class="fas fa-arrow-alt-circle-left">    Volver</i>
+            </a>
+
+        </div>
+        <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+</section>
+
+
+
+
+
+<script>function goBack() {
+        window.history.back();
+    }</script>

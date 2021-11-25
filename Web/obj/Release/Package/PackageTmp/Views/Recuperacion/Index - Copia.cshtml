@@ -1,0 +1,124 @@
+﻿@model Web.Viewmodels.ViewModelEnviarCorreo
+
+@{ Layout = null; }
+
+@{ ViewBag.Title = "Recuperación de contraseña"; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recuperación de contraseña</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Content/dist/css/recupera2/Recovery.css" />
+</head>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="login-logo">
+                <b style="color:#0094ff">Recuperación de contraseña</b>
+            </div>
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Por favor ingrese su número de cédula y el correo electrónico asociado a su cuenta para enviarle el enlace de recuperación.</p>
+
+
+                @using (Html.BeginForm("Send", "Recuperacion", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", placeholder = "Cédula" } )
+                        
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(model => model.Correo, new { @class = "form-control", placeholder = "Correo" })
+                        
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="acceptBtn">Enviar</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                }
+
+                <p class="mb-1 mt-4">
+
+                    <a href="@Url.Action("Index","Login")">Volver</a>
+                </p>
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src=".~/Content/dist/js/adminlte.min.js"></script>
+
+
+
+
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+
+
+    $(document).ready(function () {
+
+        var option = '@TempData["Action"]'
+        var mensaje= '@TempData["Mensaje"]'
+
+        if (option == 'S') {
+            Swal.fire("¡Éxito!", "El correo de recuperación fue enviado correctamente. Recuerda revisar la bandeja de correo no deseado  en caso de no encontrar el correo de recuperación en la bandeja principal.", "success");
+        }
+
+
+
+        if (option == 'N') {
+            Swal.fire("Disculpe", "Los datos ingresados no corresponden a ningún usuario del sistema.", "warning");
+        }
+
+        if (option == 'E') {
+            Swal.fire("Error", mensaje, "error");
+        }
+    });
+    </script>
+
+
+</body>
+</html>

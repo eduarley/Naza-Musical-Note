@@ -1,0 +1,148 @@
+﻿@*@Scripts.Render("~/bundles/jqueryval")*@
+
+@model Web.Viewmodels.ViewModelPassNewUser
+
+@{ Layout = null; }
+
+@{ ViewBag.Title = "Cambio Contraseña"; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambio de contraseña</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="~/Content/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <link rel="stylesheet" href="~/Content/dist/css/recupera2/Recovery.css" />
+    <link rel="stylesheet" href="~/Content/dist/css/PasswordValidatorMeter.css" />
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+
+</head>
+<body class="hold-transition login-page" style="background-image:url(../../Content/dist/img/login/fondologinblur.png)">
+    <div class="login-box">
+
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="login-logo">
+                <b style="color:#0094ff">Cambio de contraseña</b>
+            </div>
+            <div class="card-body login-card-body">
+                @*<p class="login-box-msg" style="text-align:justify">Recuerde que la contraseña debe coincidir en ambos campos. Además, debe contener al menos una letra minúscula y mayúscula, al menos un número y al menos un caracter especial.</p>*@
+
+
+                <div class="col-md-12">
+                    <div>
+                        @using (Html.BeginForm("CambioClave", "Usuario", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.IdUsuario)
+                            <div class="input-group mb-3">
+                                @Html.PasswordFor(model => model.NewClave, new { @class = "form-control", placeholder = "Contraseña", @autocomplete = "new-password", id = "password", name = "password" })
+
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <small><i id="eyePass" class="far fa-eye"></i></small>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    @Html.ValidationMessageFor(model => model.NewClave, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                @Html.PasswordFor(model => model.ConfirmNewClave, new { @class = "form-control", placeholder = "Confirmar contraseña", id = "confirmPassword", name = "confirmPassword" })
+
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <small><i id="eyeConfirm" class="far fa-eye"></i></small>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    @*@Html.ValidationMessageFor(model => model.ConfirmNewClave, "", new { @class = "text-danger" })*@
+                                    <p id="errorConfirm" class="text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <!-- /.col -->
+                                <div class="col-12">
+                                    <button id="btnCambiarClave" type="submit" class="btn btn-info btn-block">Guardar cambio</button><!--acceptBtn-->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+
+                            <div class="mt-3" id="meter-strength">
+                                <meter value="0" min="0" max="100" id="password-meter"></meter>
+                                <p id="password-pecentage"></p>
+                            </div>
+
+
+
+                        }
+                    </div>
+
+
+
+                    @*<p class="mb-1 mt-4">
+
+                            <a id="ojosMostrar" title="Mostrar u ocultar las contraseñas"><img src="~/Content/dist/img/ojo primary.png" width="10%" height="10%" /></a>
+                        </p>*@
+
+                </div>
+                <div class="col-md-12">
+                    <div id="message">
+                        <h4>Debe contener:</h4>
+                        <ul class="list-unstyled">
+                            <li><p id="letter" class="invalid">Una <b>letra minúscula</b></p></li>
+                            <li><p id="capital" class="invalid">Una <b>letra maýuscula</b></p></li>
+                            <li><p id="number" class="invalid">Un <b>número</b></p></li>
+                            <li><p id="character" class="invalid">Un <b>caracter especial</b></p></li>
+                            <li><p id="min-length" class="invalid length">Mínimo <b>9 caracteres</b></p></li>
+                            <li><p id="max-length" class="invalid length">Máximo <b>25 caracteres</b></p></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- /.login-card-body -->
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    @*<script src="~/Content/dist/js/adminlte.min.js"></script>*@
+
+    <script src="~/Content/dist/js/PasswordValidatorMeter.js"></script>
+
+
+
+
+    <script src="~/Content/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script type="text/javascript">
+        // Habilita los tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+    </script>
+
+
+</body>
+</html>

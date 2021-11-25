@@ -1,0 +1,50 @@
+﻿
+@{ ViewBag.Title = "No Autorizado"; }
+
+@{ Layout = Layout = "~/Views/Shared/_Layout.cshtml"; ; }
+
+
+
+
+
+
+<section class="content">
+    <div class="error-page">
+        @*
+        <h2 class="headline text-warning"> 401</h2>
+        *@
+        <center>
+            <img height="100px" src="~/Content/dist/img/Error/unauthorized.png" />
+        </center>
+        
+
+        <div class="error-content col-sm-10">
+            <h3><i class="fas fa-exclamation-triangle text-warning"></i> Ups! Hubo un error.</h3>
+
+            <p>
+                No se encuentra autorizado para acceder a esta página.
+                Revisa tus permisos de acceso o si no, puedes <a href="@Url.Action("Index","Login")">Iniciar sesión</a> con un usuario autorizado.
+            </p>
+            <br />
+            <br />
+
+            <a class="btn btn-secondary" onclick="goBack()">
+                <i class="fas fa-arrow-alt-circle-left">    Volver</i>
+            </a>
+
+        </div>
+        <!-- /.error-content -->
+    </div>
+    <!-- /.error-page -->
+</section>
+
+
+
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+

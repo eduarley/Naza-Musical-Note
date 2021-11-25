@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Reporte Servicios";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h3>REPORTE SERVICIOS</h3>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="breadcrumb-item active">Reportes</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+@using (Html.BeginForm("MostrarReporteServicios", "Reporte", FormMethod.Post))
+{
+
+    <center>
+        <div class="card card-default mt-3 col-md-8">
+            <div class="card-body p-3 col-md-12">
+                <div class="card-header border-bottom-0">
+                    <div style="float: right; cursor: pointer">
+                        <button class="btn" type="button" id="btnTooltip">
+                            <i class="fa fa-info-circle text-primary" style="font-size: x-large"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="row text-left">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <strong class="text-danger">*</strong>
+                            <label class="col-md-2">Usuario</label>
+                            <div class="col-md-8">
+                                @Html.DropDownList("IdUsuario",
+                               new SelectList(ViewBag.Usuarios, "Id", "NombreCompleto"),
+                               htmlAttributes: new { @class = "form-control", id = "IdUsuario" })
+                            </div>
+                        </div>
+
+
+                        <div class="card-footer">
+                            <p class="text-danger">* Campos requeridos</p>
+                            <div style="float:right">
+                                <p class="tooltip--left" data-tooltip="Abre una nueva ventana mostrando el reporte">
+                                    <input id="btnAceptar" type="submit" formtarget="_blank" value="Generar Reporte" class="btn btn-info" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+
+
+
+}
+
+
+@section scripts {
+
+    <!-- Tippy JS para tooltips-->
+    <script src="@Html.Raw("https://unpkg.com/@popperjs/core@2")"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+
+
+    <script>
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy('#btnTooltip', {
+            content: 'Aquí puedes mostrar un reporte con los servicios realizados por el usuario a consultar.',
+            arrow: true,
+            animation: 'scale',
+            trigger: 'click',
+        });
+    </script>
+
+
+    <script>
+        //AQUI PARA PONER ACTIVO EL NAV-LINK, PONERSE EN CADA PAGINA
+        $(document).ready(function () {
+            $("#informes").addClass('active');
+            $("#reporteservicios").addClass('active');
+
+        });
+
+    </script>
+}
+

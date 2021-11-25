@@ -1,0 +1,24 @@
+﻿/*body {
+}*/
+
+.acceptBtn {
+    width: 100%;
+    box-sizing: border-box;
+    background: #2ca2c2;
+    border: none;
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .acceptBtn:hover {
+        background: #2a798e;
+        color: #c8c5c5;
+    }
