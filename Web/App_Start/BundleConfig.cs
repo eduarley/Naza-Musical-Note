@@ -82,7 +82,7 @@ namespace Web
 
             //AdminLTE css
             bundles.Add(new StyleBundle("~/Content/adminlte").Include(
-                      "~/Content/plugins/fontawesome-free/css/all.min.css",
+                      //"~/Content/plugins/fontawesome-free/css/all.min.css",
                       "~/Content/dist/css/adminlte.min.css",
                       "~/Content/",
                       "~/Content/",
